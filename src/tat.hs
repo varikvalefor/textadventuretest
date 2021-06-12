@@ -18,11 +18,16 @@ defChar = GameData {
 main :: IO ();
 main = introducePlayer defChar >>= getAndParseCommand >> return ();
 
+-- | For all 'GameData' k, introducePlayer k prints a short description
+-- of k to the terminal.
 introducePlayer :: GameData -> IO GameData;
 introducePlayer k =
   putStrLn ("You are " ++ (forename . playerName) k ++ " " ++ (surname . playerName) k ++ ", a.k.a. " ++ (nickname . playerName) k ++ ".") >>
   return k;
 
+-- | getAndParseCommand retrieves a command from the user and executes
+-- or rejects this command, depending upon whether or not the command is
+-- recognised as being an acceptable command.
 getAndParseCommand :: GameData -> IO GameData;
 getAndParseCommand godDamn
   | status godDamn == Dead = putStrLn "Aw, you dead." >> return godDamn
