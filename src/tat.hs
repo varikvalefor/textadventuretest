@@ -31,11 +31,8 @@ introducePlayer k =
 getAndParseCommand :: GameData -> IO GameData;
 getAndParseCommand godDamn
   | status godDamn == Dead = putStrLn "Aw, you dead." >> return godDamn
-  | True = putStrLn "What do you do?" >> getCommand >>= parseCommand
+  | True = putStrLn "What do you do?" >> getLine >>= parseCommand
   where
-  getCommand :: IO String
-  getCommand = getLine
-  --
   parseCommand :: String -> IO GameData
   parseCommand k
     | isSuicide k = putStrLn ("You spontaneously combust, " ++
