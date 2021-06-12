@@ -1,6 +1,8 @@
 import Data.Char (toUpper);
 import VVXtAdventure.Base;
 import TestAdventure.ConditionChecks;
+import Data.List.Split (splitOn);
+import Data.List (intersperse);
 
 -- | defChar is the default game data.
 defChar :: GameData;
@@ -13,7 +15,8 @@ defChar = GameData {
   inventory = [Item {itemName = "shitty-ass stick"}],
   questionYNExists = False,
   secretWordNums = 0,
-  status = Alive
+  status = Alive,
+  lrTableSmashed = False
 };
 
 main :: IO ();
@@ -49,6 +52,7 @@ getAndParseCommand godDamn
     | isSecretWord k = secretWordProcedure godDamn >>= getAndParseCommand
     | isCheckBag k = listInventory godDamn >>= getAndParseCommand
     | isObsSurround k = listSurroundings godDamn >>= getAndParseCommand
+    | isDemolish k = crush godDamn k >>= getAndParseCommand
     | otherwise = putStrLn "Eh?" >> getAndParseCommand godDamn;
 
 -- | secretWordProcedure contains the stuff which should be done iff the
@@ -81,3 +85,20 @@ listSurroundings k =
   putStrLn "You stand in the middle of a dingy living room." >>
   putStrLn "In front of you is a flimsy-looking card table." >>
   return k;
+
+crush :: GameData -> String -> IO GameData;
+crush y x
+  | k == "FLIMSY-LOOKING TABLE" = crushTable
+  where
+  k = foldr (++) [] $ intersperse " " $ drop 1 $ splitOn " " x
+  crushTable :: IO GameData
+  crushTable
+    | lrTableSmashed y = putStrLn ("You already smashed the table " ++
+      "some time ago.  Hell, the thing is still smoking.\n" ++
+      "Regardless of this fact, you shout and attempt to smash the " ++
+      "debris.  Determining whether or not this attempt is " ++
+      "successful is left as an exercise for the reader.") >> return y
+    | otherwise = putStrLn ("Shouting loudly, you smash the " ++
+      "flimsy-looking table a la WWE.\nFragments of the table now " ++
+      "litter the once-somewhat clean room.") >>
+      return y {lrTableSmashed = True};

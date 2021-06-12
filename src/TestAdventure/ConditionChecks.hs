@@ -1,5 +1,6 @@
 module TestAdventure.ConditionChecks where
 import Data.Char (toUpper);
+import Data.List.Split (splitOn);
 
 -- | For all 'String' k, isSuicide k iff k demands that the player
 -- character commits suicide.
@@ -23,3 +24,6 @@ isCheckBag k = map toUpper k `elem` ["LIST INVENTORY", "INVENTORY"];
 
 isObsSurround :: String -> Bool;
 isObsSurround = (`elem` ["LOOK AROUND YOU"]) . map toUpper;
+
+isDemolish :: String -> Bool;
+isDemolish = (`elem` ["SMASH"]) . (!! 0) . splitOn " " . map toUpper;

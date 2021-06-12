@@ -21,7 +21,9 @@ data GameData = GameData {
   -- character of k.  @status k == Alive@ iff the player character of
   -- k is alive.  @status k == Dead@ iff the player character of k is
   -- dead.
-  status :: State
+  status :: State,
+  -- | Is the table in the living room already smashed up?
+  lrTableSmashed :: Bool
 } deriving (Eq, Read, Show);
 
 -- | For all Item k, k is an inventory item of some sort.
