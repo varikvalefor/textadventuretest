@@ -58,6 +58,7 @@ secretWordProcedure gd
   | secretWordNums gd == 1 = putStrLn "Do it again, and it's harassment." >> increment
   | secretWordNums gd == 2 = putStrLn "I'm warning you, motherfucker." >> increment
   | secretWordNums gd == 3 = putStrLn "Run with the money, I pull the trigger and damage you.  Kaboom." >> return (killPlayer gd)
+  | otherwise = error "Aw, shit.  An error occurs.  secretWordNums is of some invalid value!"
   where
   increment :: IO GameData
   increment = return $ gd {secretWordNums = secretWordNums gd + 1};
