@@ -44,4 +44,6 @@ data CharName = CharName {
   nickname :: String
 } deriving (Eq, Read, Show);
 
+-- | State is used to indicate whether a particular character is dead or
+-- alive.
 data State = Dead | Alive deriving (Eq, Read, Show);
