@@ -76,21 +76,9 @@ secretWordProcedure gd
   | secretWordNums gd == 3 = putStrLn "Run with the money, I pull the trigger and damage you.  Kaboom." >> return (killPlayer gd)
   where
   increment :: IO GameData
-  increment = return $ GameData {
-    playerName = playerName gd,
-    inventory = inventory gd,
-    questionYNExists = questionYNExists gd,
-    secretWordNums = secretWordNums gd + 1,
-    status = status gd
-  };
+  increment = return $ gd {secretWordNums = secretWordNums gd + 1};
 
 -- | For all 'GameData' k, killPlayer k equals a version of k which is
 -- modified such that the player of k is dead.
 killPlayer :: GameData -> GameData;
-killPlayer k = GameData {
-  playerName = playerName k,
-  inventory = inventory k,
-  questionYNExists = questionYNExists k,
-  secretWordNums = secretWordNums k,
-  status = Dead
-};
+killPlayer k = k {status = Dead};
