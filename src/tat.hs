@@ -84,6 +84,7 @@ listSurroundings k =
 crush :: GameData -> String -> IO GameData;
 crush y x
   | k == "FLIMSY-LOOKING TABLE" = crushTable
+  | otherwise = putStrLn "Eh?" >> return y
   where
   k = foldr (++) [] $ intersperse " " $ drop 1 $ splitOn " " x
   crushTable :: IO GameData
