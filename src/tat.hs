@@ -82,7 +82,11 @@ listSurroundings k =
   putStrLn "In front of you is a flimsy-looking card table." >>
   return k;
 
-crush :: GameData -> String -> IO GameData;
+-- | crush is used to smash stuff, e.g., the flimsy-looking table.
+-- crush's output is modified such that the destruction is documented.
+crush :: GameData
+      -> String -- ^ The "SMASH SO-AND-SO" command
+      -> IO GameData;
 crush y x
   | k == "FLIMSY-LOOKING TABLE" = crushTable
   | otherwise = putStrLn "Eh?" >> return y
