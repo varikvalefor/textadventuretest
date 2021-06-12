@@ -1,5 +1,6 @@
 import Data.Char (toUpper);
 import VVXtAdventure.Base;
+import TestAdventure.ConditionChecks;
 
 -- | defChar is the default game data.
 defChar :: GameData;
@@ -49,21 +50,6 @@ getAndParseCommand godDamn
     | isCheckBag k = listInventory godDamn >>= getAndParseCommand
     | otherwise = putStrLn "Eh?" >> getAndParseCommand godDamn;
 
--- | For all 'String' k, isSuicide k iff k demands that the player
--- character commits suicide.
-isSuicide :: String -> Bool;
-isSuicide = (`elem` ["KILL SELF", "SUICIDE", "EXPLODE", "KABOOM", "DIVIDE BY ZERO"]) . map toUpper;
-
--- | For all 'String' k, isAffirmative k iff k is an affirmative
--- response.
-isAffirmative :: String -> Bool;
-isAffirmative k = or [k == "YES"];
-
--- | For all 'String' k, isSecretWord k iff k equals the secret word...
--- technically, the secret phrase.
-isSecretWord :: String -> Bool;
-isSecretWord = (== "HAM AND SWISS ON RYE");
-
 -- | secretWordProcedure contains the stuff which should be done iff the
 -- secret word is entered.
 secretWordProcedure :: GameData -> IO GameData;
@@ -80,11 +66,6 @@ secretWordProcedure gd
 -- modified such that the player of k is dead.
 killPlayer :: GameData -> GameData;
 killPlayer k = k {status = Dead};
-
--- | For all 'String' k, isCheckBag k iff k demands that the contents
--- of the player character's inventory are listed.
-isCheckBag :: String -> Bool;
-isCheckBag k = map toUpper k `elem` ["LIST INVENTORY", "INVENTORY"];
 
 -- | listInventory lists the contents of the player character's
 -- inventory.
