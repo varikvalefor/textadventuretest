@@ -66,6 +66,8 @@ isAffirmative k = or [k == "YES"];
 isSecretWord :: String -> Bool;
 isSecretWord = (== "HAM AND SWISS ON RYE");
 
+-- | secretWordProcedure contains the stuff which should be done iff the
+-- secret word is entered.
 secretWordProcedure :: GameData -> IO GameData;
 secretWordProcedure gd
   | secretWordNums gd == 0 = putStrLn "Eh?" >> increment
@@ -82,6 +84,8 @@ secretWordProcedure gd
     status = status gd
   };
 
+-- | For all 'GameData' k, killPlayer k equals a version of k which is
+-- modified such that the player of k is dead.
 killPlayer :: GameData -> GameData;
 killPlayer k = GameData {
   playerName = playerName k,
