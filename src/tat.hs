@@ -51,6 +51,8 @@ getAndParseCommand godDamn
     | isSecretWord k = secretWordProcedure godDamn >>= getAndParseCommand
     | otherwise = putStrLn "Eh?" >> getAndParseCommand godDamn;
 
+-- | For all 'String' k, isSuicide k iff k demands that the player
+-- character commits suicide.
 isSuicide :: String -> Bool;
 isSuicide = (`elem` ["KILL SELF", "SUICIDE", "EXPLODE", "KABOOM", "DIVIDE BY ZERO"]) . map toUpper;
 
