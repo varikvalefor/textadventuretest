@@ -48,6 +48,7 @@ getAndParseCommand godDamn
       "KERNIGHAN.") >> return godDamn
     | isSecretWord k = secretWordProcedure godDamn >>= getAndParseCommand
     | isCheckBag k = listInventory godDamn >>= getAndParseCommand
+    | isObsSurround k = listSurroundings godDamn >>= getAndParseCommand
     | otherwise = putStrLn "Eh?" >> getAndParseCommand godDamn;
 
 -- | secretWordProcedure contains the stuff which should be done iff the
@@ -74,3 +75,9 @@ listInventory gd =
   putStrLn "You have..." >>
   mapM_ (putStrLn . (\(x:xs) -> (toUpper x):xs) . itemName) (inventory gd) >>
   return gd;
+
+listSurroundings :: GameData -> IO GameData;
+listSurroundings k =
+  putStrLn "You stand in the middle of a dingy living room." >>
+  putStrLn "In front of you is a flimsy-looking card table." >>
+  return k;

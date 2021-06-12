@@ -21,3 +21,5 @@ isSecretWord = (== "HAM AND SWISS ON RYE");
 isCheckBag :: String -> Bool;
 isCheckBag k = map toUpper k `elem` ["LIST INVENTORY", "INVENTORY"];
 
+isObsSurround :: String -> Bool;
+isObsSurround = (`elem` ["LOOK AROUND YOU"]) . map toUpper;
