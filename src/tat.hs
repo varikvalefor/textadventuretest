@@ -3,6 +3,8 @@ import VVXtAdventure.Base;
 import TestAdventure.ConditionChecks;
 import Data.List.Split (splitOn);
 import Data.List (intersperse);
+import qualified TestAdventure.Messages.Death as MD;
+import qualified TestAdventure.Messages.Status as MS;
 
 -- | defChar is the default game data.
 defChar :: GameData;
@@ -39,16 +41,9 @@ getAndParseCommand godDamn
   where
   parseCommand :: String -> IO GameData
   parseCommand k
-    | isSuicide k = putStrLn ("You spontaneously combust, " ++
-      "thereby losing the game and making yourself look like a bit " ++
-      "of a jack-ass in the process.") >> return godDamn
+    | isSuicide k = putStrLn MD.spontComb >> return godDamn
     | isAffirmative k && (not . questionYNExists) godDamn =
-      putStrLn ("You answer no one in the affirmative.\nNo one " ++
-      "responds with a swift punch to the sternum.\n\"Gah!\"\nYou " ++
-      "collapse to the ground, slowly melting into cheese.\nJust " ++
-      "before dying, you awaken from your wack-ass dream and " ++
-      "remember that you are actually the great BRIAN W. " ++
-      "KERNIGHAN.") >> return godDamn
+      putStrLn MD.answerAff >> return godDamn
     | isSecretWord k = secretWordProcedure godDamn >>= getAndParseCommand
     | isCheckBag k = listInventory godDamn >>= getAndParseCommand
     | isObsSurround k = listSurroundings godDamn >>= getAndParseCommand
@@ -93,12 +88,6 @@ crush y x
   k = foldr (++) [] $ intersperse " " $ drop 1 $ splitOn " " x
   crushTable :: IO GameData
   crushTable
-    | lrTableSmashed y = putStrLn ("You already smashed the table " ++
-      "some time ago.  Hell, the thing is still smoking.\n" ++
-      "Regardless of this fact, you shout and attempt to smash the " ++
-      "debris.  Determining whether or not this attempt is " ++
-      "successful is left as an exercise for the reader.") >> return y
-    | otherwise = putStrLn ("Shouting loudly, you smash the " ++
-      "flimsy-looking table a la WWE.\nFragments of the table now " ++
-      "litter the once-somewhat clean room.") >>
+    | lrTableSmashed y = putStrLn MS.lrTableCrushed >> return y
+    | otherwise = putStrLn MS.lrTableCrush >>
       return y {lrTableSmashed = True};
