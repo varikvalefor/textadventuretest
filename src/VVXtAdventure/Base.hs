@@ -31,9 +31,16 @@ data Item = Item {
   itemName :: String
 } deriving (Eq, Read, Show);
 
+-- | For all CharName k, k is the name of a character.
 data CharName = CharName {
+  -- | For all 'CharName' k, forename k is the forename of a character,
+  -- e.g., "SPINACH".
   forename :: String,
+  -- | For all 'CharName' k, surname k is the surname of a character,
+  -- e.g., "GRAVYBOAT".
   surname :: String,
+  -- | For all 'CharName' k, nickname k is the nickname of a character,
+  -- e.g., "WARREN WESLEY JUNIOR VIII".
   nickname :: String
 } deriving (Eq, Read, Show);
 
