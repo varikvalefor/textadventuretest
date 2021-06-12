@@ -56,6 +56,8 @@ getAndParseCommand godDamn
 isSuicide :: String -> Bool;
 isSuicide = (`elem` ["KILL SELF", "SUICIDE", "EXPLODE", "KABOOM", "DIVIDE BY ZERO"]) . map toUpper;
 
+-- | For all 'String' k, isAffirmative k iff k is an affirmative
+-- response.
 isAffirmative :: String -> Bool;
 isAffirmative k = or [k == "YES"];
 
