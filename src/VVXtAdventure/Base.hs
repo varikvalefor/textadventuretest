@@ -23,7 +23,9 @@ data GameData = GameData {
   -- dead.
   status :: State,
   -- | Is the table in the living room already smashed up?
-  lrTableSmashed :: Bool
+  lrTableSmashed :: Bool,
+  -- | What is the player character's current location?
+  currentRoom :: Room
 } deriving (Eq, Read, Show);
 
 -- | For all Item k, k is an inventory item of some sort.
@@ -49,3 +51,6 @@ data CharName = CharName {
 -- | State is used to indicate whether a particular character is dead or
 -- alive.
 data State = Dead | Alive deriving (Eq, Read, Show);
+
+-- | Room is a room.  No shit.
+data Room = LivingRoom deriving (Eq, Read, Show);

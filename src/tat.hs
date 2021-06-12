@@ -18,6 +18,7 @@ defChar = GameData {
   questionYNExists = False,
   secretWordNums = 0,
   status = Alive,
+  currentRoom = LivingRoom,
   lrTableSmashed = False
 };
 
@@ -88,7 +89,7 @@ crush :: GameData
       -> String -- ^ The "SMASH SO-AND-SO" command
       -> IO GameData;
 crush y x
-  | k == "FLIMSY-LOOKING TABLE" = crushTable
+  | (k, theRoom) == ("FLIMSY-LOOKING TABLE", LivingRoom) = crushTable
   | otherwise = putStrLn "Eh?" >> return y
   where
   k = foldr (++) [] $ intersperse " " $ drop 1 $ splitOn " " x
@@ -96,4 +97,6 @@ crush y x
   crushTable
     | lrTableSmashed y = putStrLn MS.lrTableCrushed >> return y
     | otherwise = putStrLn MS.lrTableCrush >>
-      return y {lrTableSmashed = True};
+      return y {lrTableSmashed = True}
+  theRoom :: Room
+  theRoom = currentRoom y;
