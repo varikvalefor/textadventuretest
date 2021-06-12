@@ -24,7 +24,10 @@ data GameData = GameData {
   status :: State
 } deriving (Eq, Read, Show);
 
+-- | For all Item k, k is an inventory item of some sort.
 data Item = Item {
+  -- | For all 'Item' k, itemName k equals the human-readable name of
+  -- k, e.g., "a broken toilet".
   itemName :: String
 } deriving (Eq, Read, Show);
 
