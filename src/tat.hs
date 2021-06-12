@@ -46,6 +46,7 @@ getAndParseCommand godDamn
       "remember that you are actually the great BRIAN W. " ++
       "KERNIGHAN.") >> return godDamn
     | isSecretWord k = secretWordProcedure godDamn >>= getAndParseCommand
+    | isCheckBag k = listInventory godDamn >>= getAndParseCommand
     | otherwise = putStrLn "Eh?" >> getAndParseCommand godDamn;
 
 -- | For all 'String' k, isSuicide k iff k demands that the player
@@ -79,3 +80,16 @@ secretWordProcedure gd
 -- modified such that the player of k is dead.
 killPlayer :: GameData -> GameData;
 killPlayer k = k {status = Dead};
+
+-- | For all 'String' k, isCheckBag k iff k demands that the contents
+-- of the player character's inventory are listed.
+isCheckBag :: String -> Bool;
+isCheckBag k = map toUpper k `elem` ["LIST INVENTORY", "INVENTORY"];
+
+-- | listInventory lists the contents of the player character's
+-- inventory.
+listInventory :: GameData -> IO GameData;
+listInventory gd =
+  putStrLn "You have..." >>
+  mapM_ (putStrLn . (\(x:xs) -> (toUpper x):xs) . itemName) (inventory gd) >>
+  return gd;
