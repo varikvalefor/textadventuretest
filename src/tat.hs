@@ -61,6 +61,8 @@ isSuicide = (`elem` ["KILL SELF", "SUICIDE", "EXPLODE", "KABOOM", "DIVIDE BY ZER
 isAffirmative :: String -> Bool;
 isAffirmative k = or [k == "YES"];
 
+-- | For all 'String' k, isSecretWord k iff k equals the secret word...
+-- technically, the secret phrase.
 isSecretWord :: String -> Bool;
 isSecretWord = (== "HAM AND SWISS ON RYE");
 
