@@ -14,18 +14,20 @@ crush :: GameData
       -> String -- ^ The "SMASH SO-AND-SO" command
       -> IO GameData;
 crush y x
-  | (k, theRoom) == ("FLIMSY-LOOKING TABLE", LivingRoom) = crushTable
+  | (k, theRoom) == ("FLIMSY-LOOKING TABLE", LivingRoom) = crushTable y
   | otherwise = putStrLn "Eh?" >> return y
   where
   k = unwords $ drop 1 $ words x
-  crushTable :: IO GameData
-  crushTable
-    | lrTableSmashedness y > 0 = putStrLn MS.lrTableCrushed >> incr
-    | otherwise = putStrLn MS.lrTableCrush >> incr
   --
   theRoom :: Room
   theRoom = currentRoom y
-  --
+
+-- | crushTable crushes the table of the living room.
+crushTable :: GameData -> IO GameData
+crushTable y
+  | lrTableSmashedness y > 0 = putStrLn MS.lrTableCrushed >> incr
+  | otherwise = putStrLn MS.lrTableCrush >> incr
+  where
   incr :: IO GameData
   incr = return y {lrTableSmashedness = lrTableSmashedness y + 1};
 
