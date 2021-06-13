@@ -26,7 +26,7 @@ defChar = GameData {
 };
 
 main :: IO ();
-main = introducePlayer defChar >>= getAndParseCommand >> return ();
+main = introducePlayer defChar >>= getAndParseCommand >>= chooseCont;
 
 -- | For all 'GameData' k, introducePlayer k prints a short description
 -- of k to the terminal.
@@ -34,6 +34,11 @@ introducePlayer :: GameData -> IO GameData;
 introducePlayer k =
   putStrLn ("You are " ++ (forename . playerName) k ++ " " ++ (surname . playerName) k ++ ", a.k.a. " ++ (nickname . playerName) k ++ ".") >>
   return k;
+
+chooseCont :: GameData -> IO ();
+chooseCont k
+  | status k == Dead = return ()
+  | otherwise = getAndParseCommand k >>= chooseCont;
 
 -- | getAndParseCommand retrieves a command from the user and executes
 -- or rejects this command, depending upon whether or not the command is
@@ -45,16 +50,16 @@ getAndParseCommand godDamn
   where
   parseCommand :: String -> IO GameData
   parseCommand l
-    | isGo k = travel k godDamn >>= getAndParseCommand
+    | isGo k = travel k godDamn
     | isSuicide k = putStrLn MD.spontComb >> return godDamn
     | isAffirmative k && (not . questionYNExists) godDamn =
       putStrLn MD.answerAff >> return godDamn
-    | isSecretWord k = secretWordProcedure godDamn >>= getAndParseCommand
-    | isCheckBag k = listInventory godDamn >>= getAndParseCommand
-    | isObsSurround k = listSurroundings godDamn >>= getAndParseCommand
-    | isDemolish k = crush godDamn k >>= getAndParseCommand
-    | isFlip k = flipObj godDamn k >>= getAndParseCommand
-    | otherwise = putStrLn "Eh?" >> getAndParseCommand godDamn
+    | isSecretWord k = secretWordProcedure godDamn
+    | isCheckBag k = listInventory godDamn
+    | isObsSurround k = listSurroundings godDamn
+    | isDemolish k = crush godDamn k
+    | isFlip k = flipObj godDamn k
+    | otherwise = putStrLn "Eh?" >> return godDamn
     where
     k = foldr (++) [] $ intersperse " " $ filter (not . (`elem` ["TO", "THE", "A", "AN"])) $ words l
 
@@ -62,14 +67,17 @@ getAndParseCommand godDamn
 -- secret word is entered.
 secretWordProcedure :: GameData -> IO GameData;
 secretWordProcedure gd
-  | secretWordNums gd == 0 = putStrLn "Eh?" >> increment
-  | secretWordNums gd == 1 = putStrLn "Do it again, and it's harassment." >> increment
-  | secretWordNums gd == 2 = putStrLn "I'm warning you, motherfucker." >> increment
-  | secretWordNums gd == 3 = putStrLn "Run with the money, I pull the trigger and damage you.  Kaboom." >> return (killPlayer gd)
+  | time 0 = putStrLn "Eh?" >> increment
+  | time 1 = putStrLn "Do it again, and it's harassment." >> increment
+  | time 2 = putStrLn "I'm warning you, motherfucker." >> increment
+  | time 3 = putStrLn "Run with the money, I pull the trigger and damage you.  Kaboom." >> return (killPlayer gd)
   | otherwise = error "Aw, shit.  An error occurs.  secretWordNums is of some invalid value!"
   where
   increment :: IO GameData
-  increment = return $ gd {secretWordNums = secretWordNums gd + 1};
+  increment = return $ gd {secretWordNums = secretWordNums gd + 1}
+  --
+  time :: Integer -> Bool
+  time = (secretWordNums gd ==);
 
 -- | For all 'GameData' k, killPlayer k equals a version of k which is
 -- modified such that the player of k is dead.
