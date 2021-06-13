@@ -1,7 +1,6 @@
 module TestAdventure.Functions.Action where
 import VVXtAdventure.Base;
 import TestAdventure.ConditionChecks;
-import Data.List (intersperse);
 import qualified TestAdventure.Messages.Death as MD;
 import qualified TestAdventure.Messages.Status as MS;
 import qualified TestAdventure.Messages.Error as ME;
@@ -18,7 +17,7 @@ crush y x
   | (k, theRoom) == ("FLIMSY-LOOKING TABLE", LivingRoom) = crushTable
   | otherwise = putStrLn "Eh?" >> return y
   where
-  k = foldr (++) [] $ intersperse " " $ drop 1 $ words x
+  k = unwords $ drop 1 $ words x
   crushTable :: IO GameData
   crushTable
     | lrTableSmashed y = putStrLn MS.lrTableCrushed >> return y
@@ -43,7 +42,7 @@ travel com gd
   dest'
     | inputDest `elem` ["LIVING ROOM", "LIVINGROOM"] = Just LivingRoom
     | otherwise = Nothing
-    where inputDest = foldr (++) [] $ intersperse " " $ drop 1 $ words $ map toUpper com;
+    where inputDest = unwords $ drop 1 $ words $ map toUpper com;
 
 flipObj :: GameData -> String -> IO GameData;
 flipObj gd com
