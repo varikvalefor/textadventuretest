@@ -21,7 +21,7 @@ defChar = GameData {
   secretWordNums = 0,
   status = Alive,
   currentRoom = LivingRoom,
-  lrTableSmashed = False,
+  lrTableSmashedness = 0,
   lrTableFlipped = False
 };
 

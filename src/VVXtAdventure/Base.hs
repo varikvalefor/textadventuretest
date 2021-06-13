@@ -22,8 +22,8 @@ data GameData = GameData {
   -- k is alive.  @status k == Dead@ iff the player character of k is
   -- dead.
   status :: State,
-  -- | Is the table in the living room already smashed up?
-  lrTableSmashed :: Bool,
+  -- | To what extent is the living room table smashed up?
+  lrTableSmashedness :: Integer,
   -- | Is the table in the living room flipped upside-down?
   lrTableFlipped :: Bool,
   -- | What is the player character's current location?

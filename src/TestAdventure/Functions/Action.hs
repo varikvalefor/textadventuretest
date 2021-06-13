@@ -20,11 +20,14 @@ crush y x
   k = unwords $ drop 1 $ words x
   crushTable :: IO GameData
   crushTable
-    | lrTableSmashed y = putStrLn MS.lrTableCrushed >> return y
-    | otherwise = putStrLn MS.lrTableCrush >>
-      return y {lrTableSmashed = True}
+    | lrTableSmashedness y > 0 = putStrLn MS.lrTableCrushed >> incr
+    | otherwise = putStrLn MS.lrTableCrush >> incr
+  --
   theRoom :: Room
-  theRoom = currentRoom y;
+  theRoom = currentRoom y
+  --
+  incr :: IO GameData
+  incr = return y {lrTableSmashedness = lrTableSmashedness y + 1};
 
 -- | travel transports the player character to the specified room
 -- or complains about the player's having entered some useless
