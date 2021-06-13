@@ -27,3 +27,8 @@ isObsSurround = (`elem` ["LOOK AROUND YOU"]) . map toUpper;
 
 isDemolish :: String -> Bool;
 isDemolish = (`elem` ["SMASH"]) . (!! 0) . splitOn " " . map toUpper;
+
+-- For all 'String' k, @isGo k@ iff k demands that the player moves
+-- somewhere.  k need not actually be a followable instruction.
+isGo :: String -> Bool;
+isGo = (== "GO") . (!! 0) . words;

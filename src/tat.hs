@@ -3,8 +3,10 @@ import VVXtAdventure.Base;
 import TestAdventure.ConditionChecks;
 import Data.List.Split (splitOn);
 import Data.List (intersperse);
+import Data.Maybe;
 import qualified TestAdventure.Messages.Death as MD;
 import qualified TestAdventure.Messages.Status as MS;
+import qualified TestAdventure.Messages.Error as ME;
 
 -- | defChar is the default game data.
 defChar :: GameData;
@@ -41,7 +43,8 @@ getAndParseCommand godDamn
   | True = putStrLn "What do you do?" >> getLine >>= parseCommand
   where
   parseCommand :: String -> IO GameData
-  parseCommand k
+  parseCommand l
+    | isGo k = travel k godDamn >>= getAndParseCommand
     | isSuicide k = putStrLn MD.spontComb >> return godDamn
     | isAffirmative k && (not . questionYNExists) godDamn =
       putStrLn MD.answerAff >> return godDamn
@@ -49,7 +52,9 @@ getAndParseCommand godDamn
     | isCheckBag k = listInventory godDamn >>= getAndParseCommand
     | isObsSurround k = listSurroundings godDamn >>= getAndParseCommand
     | isDemolish k = crush godDamn k >>= getAndParseCommand
-    | otherwise = putStrLn "Eh?" >> getAndParseCommand godDamn;
+    | otherwise = putStrLn "Eh?" >> getAndParseCommand godDamn
+    where
+    k = foldr (++) [] $ intersperse " " $ filter (not . (`elem` ["TO", "THE", "A", "AN"])) $ words l
 
 -- | secretWordProcedure contains the stuff which should be done iff the
 -- secret word is entered.
@@ -100,3 +105,21 @@ crush y x
       return y {lrTableSmashed = True}
   theRoom :: Room
   theRoom = currentRoom y;
+
+-- | travel transports the player character to the specified room
+-- or complains about the player's having entered some useless
+-- information, where appropriate.
+travel :: String -> GameData -> IO GameData;
+travel com gd
+  | dest' == Nothing = putStrLn ME.invalidRoom >> return gd
+  | dest == currentRoom gd = putStrLn ME.travelCurRoom >> return gd
+  | otherwise = putStrLn MS.travelSuccess >> return gd {currentRoom = dest}
+  where
+  dest :: Room
+  dest = fromJust dest'
+  --
+  dest' :: Maybe Room
+  dest'
+    | inputDest `elem` ["LIVING ROOM", "LIVINGROOM"] = Just LivingRoom
+    | otherwise = Nothing
+    where inputDest = foldr (++) [] $ intersperse " " $ drop 1 $ splitOn " " $ map toUpper com;

@@ -10,3 +10,8 @@ lrTableCrush = "Shouting loudly, you smash the flimsy-looking table a la WWE.\nF
 -- smashed the living room table.
 lrTableCrushed :: String;
 lrTableCrushed = "You already smashed the table some time ago.  Hell, the thing is still smoking.\nRegardless of this fact, you shout and attempt to smash the deris.  Determijning whether or not this attempt is successful is left as an exercise for the reader.";
+
+-- | travelSuccess is output if the player character successfully
+-- travels to a player-specified destination.
+travelSuccess :: String;
+travelSuccess = "You travel successfully.";
