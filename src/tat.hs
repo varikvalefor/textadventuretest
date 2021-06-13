@@ -52,6 +52,8 @@ getAndParseCommand godDamn =
   where
   parseCommand :: String -> IO GameData
   parseCommand l
+    | l == [] = putStrLn "The silent treatment won't work here." >>
+      return godDamn
     | isGo k = travel k godDamn
     | isSuicide k = putStrLn MD.spontComb >> return godDamn {status = Dead}
     | isAffirmative k && (not . questionYNExists) godDamn =
