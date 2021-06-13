@@ -26,3 +26,6 @@ tableFlippedUD = "You grab the card table and throw the thing into the air.  By 
 -- the table.
 tableFlippedUU :: String;
 tableFlippedUU = "You restore the table to the table's original position, i.e., you \"de-flip\" the table.";
+
+junkLRTableDebris :: String;
+junkLRTableDebris = "You successfully place the rubble into the bin.\nBecause the table is shattered into sharp shards, the bin bag tears a bit.";

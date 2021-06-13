@@ -25,11 +25,11 @@ crush y x
 -- | crushTable crushes the table of the living room.
 crushTable :: GameData -> IO GameData
 crushTable y
-  | lrTableSmashedness y > 0 = putStrLn MS.lrTableCrushed >> incr
-  | otherwise = putStrLn MS.lrTableCrush >> incr
+  | lrTableSmashedness y > 0 = putStrLn MS.lrTableCrushed >> return incr
+  | otherwise = putStrLn MS.lrTableCrush >> return incr {lrTableDebrisPresent = True}
   where
-  incr :: IO GameData
-  incr = return y {lrTableSmashedness = lrTableSmashedness y + 1};
+  incr :: GameData
+  incr = y {lrTableSmashedness = lrTableSmashedness y + 1};
 
 -- | travel transports the player character to the specified room
 -- or complains about the player's having entered some useless
@@ -63,3 +63,36 @@ flipTable gd
   where
   flipped :: GameData
   flipped = gd {lrTableFlipped = True};
+
+-- | cleanUp cleans up messes, e.g., the remains of the janky living
+-- room table.
+cleanUp :: GameData -> String -> IO GameData;
+cleanUp gd com
+  | target == "DEBRIS" = cleanUpLRTableDebris gd
+  | otherwise = putStrLn "The specified thing cannot be cleaned up!" >>
+    return gd
+  where
+  target = unwords $ drop 1 $ words $ map toUpper com;
+
+-- | cleanUpLRTableDebris cleans up the remains of the living room table
+-- if such a thing is possible.
+cleanUpLRTableDebris :: GameData -> IO GameData;
+cleanUpLRTableDebris gd
+  | tableIsBroken && tableDebrisPresent =
+    putStrLn MS.junkLRTableDebris >>
+    return gd {lrTableDebrisPresent = False}
+  | tableIsBroken =
+    putStrLn ME.lrTableDebrisAlreadyJunked >>
+    return gd
+  | tableDebrisPresent =
+    putStrLn ME.lrDebrisNotBroken >>
+    return gd
+  | otherwise =
+    putStrLn ME.lrTableNotJunk >>
+    return gd
+  where
+  tableIsBroken :: Bool
+  tableIsBroken = lrTableSmashedness gd /= 0
+  --
+  tableDebrisPresent :: Bool
+  tableDebrisPresent = lrTableDebrisPresent gd;

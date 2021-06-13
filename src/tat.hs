@@ -22,6 +22,7 @@ defChar = GameData {
   status = Alive,
   currentRoom = LivingRoom,
   lrTableSmashedness = 0,
+  lrTableDebrisPresent = False,
   lrTableFlipped = False
 };
 
@@ -63,6 +64,7 @@ getAndParseCommand godDamn =
     | isObsSurround k = listSurroundings godDamn
     | isDemolish k = crush godDamn k
     | isFlip k = flipObj godDamn k
+    | isClean k = cleanUp godDamn k
     | otherwise = putStrLn "Eh?" >> return godDamn
     where
     k = unwords $ filter (not . (`elem` ["TO", "THE", "A", "AN"])) $ words l

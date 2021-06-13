@@ -26,6 +26,9 @@ data GameData = GameData {
   lrTableSmashedness :: Integer,
   -- | Is the table in the living room flipped upside-down?
   lrTableFlipped :: Bool,
+  -- | Is any debris of the living room table on the floor of the
+  -- living room?
+  lrTableDebrisPresent :: Bool,
   -- | What is the player character's current location?
   currentRoom :: Room
 } deriving (Eq, Read, Show);

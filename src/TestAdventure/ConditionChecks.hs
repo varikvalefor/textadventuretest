@@ -35,3 +35,9 @@ isGo = (== "GO") . (!! 0) . words;
 
 isFlip :: String -> Bool;
 isFlip = (== "FLIP") . (!!0) . words;
+
+-- | For all 'String' k, @isClean k@ iff k demands that the player
+-- character cleans up some mess, e.g., the debris of the living
+-- room table.
+isClean :: String -> Bool;
+isClean = (== "CLEANUP") . (!! 0) . words;
