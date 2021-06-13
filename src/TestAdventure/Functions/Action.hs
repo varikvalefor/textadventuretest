@@ -44,3 +44,18 @@ travel com gd
     | inputDest `elem` ["LIVING ROOM", "LIVINGROOM"] = Just LivingRoom
     | otherwise = Nothing
     where inputDest = foldr (++) [] $ intersperse " " $ drop 1 $ words $ map toUpper com;
+
+flipObj :: GameData -> String -> IO GameData;
+flipObj gd com
+  | target == "FLIMSY-LOOKING TABLE" = flipTable gd
+  | otherwise = putStrLn ME.invalidFlipObject >> return gd
+  where
+  target = unwords $ drop 1 $ words com;
+
+flipTable :: GameData -> IO GameData;
+flipTable gd
+  | lrTableFlipped gd = putStrLn MS.tableFlippedUU >> return flipped
+  | otherwise = putStrLn MS.tableFlippedUD >> return flipped
+  where
+  flipped :: GameData
+  flipped = gd {lrTableFlipped = True};

@@ -7,3 +7,6 @@ invalidRoom = "You attempt to enter the specified room but quickly realise that 
 
 travelCurRoom :: String;
 travelCurRoom = "Damn, that's some fast travel.  You're already there!";
+
+invalidFlipObject :: String;
+invalidFlipObject = "You cannot flip objects which do not exist.";

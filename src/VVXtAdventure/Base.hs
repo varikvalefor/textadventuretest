@@ -24,6 +24,8 @@ data GameData = GameData {
   status :: State,
   -- | Is the table in the living room already smashed up?
   lrTableSmashed :: Bool,
+  -- | Is the table in the living room flipped upside-down?
+  lrTableFlipped :: Bool,
   -- | What is the player character's current location?
   currentRoom :: Room
 } deriving (Eq, Read, Show);

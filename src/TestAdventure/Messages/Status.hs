@@ -15,3 +15,12 @@ lrTableCrushed = "You already smashed the table some time ago.  Hell, the thing 
 -- travels to a player-specified destination.
 travelSuccess :: String;
 travelSuccess = "You travel successfully.";
+
+tableFlippedUD :: String;
+tableFlippedUD = "You grab the card table and throw the thing into the air.  By sheer coincidence, the table manages to land exactly as the table was a few moments ago, with the exception of being upside-down.";
+
+-- | tableFlippedUU is printed to the terminal if the player character
+-- restores the table to the table's original position, i.e., "de-flips"
+-- the table.
+tableFlippedUU :: String;
+tableFlippedUU = "You restore the table to the table's original position, i.e., you \"de-flip\" the table.";

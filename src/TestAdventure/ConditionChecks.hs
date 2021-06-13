@@ -32,3 +32,6 @@ isDemolish = (`elem` ["SMASH"]) . (!! 0) . splitOn " " . map toUpper;
 -- somewhere.  k need not actually be a followable instruction.
 isGo :: String -> Bool;
 isGo = (== "GO") . (!! 0) . words;
+
+isFlip :: String -> Bool;
+isFlip = (== "FLIP") . (!!0) . words;

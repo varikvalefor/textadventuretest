@@ -21,7 +21,8 @@ defChar = GameData {
   secretWordNums = 0,
   status = Alive,
   currentRoom = LivingRoom,
-  lrTableSmashed = False
+  lrTableSmashed = False,
+  lrTableFlipped = False
 };
 
 main :: IO ();
@@ -52,6 +53,7 @@ getAndParseCommand godDamn
     | isCheckBag k = listInventory godDamn >>= getAndParseCommand
     | isObsSurround k = listSurroundings godDamn >>= getAndParseCommand
     | isDemolish k = crush godDamn k >>= getAndParseCommand
+    | isFlip k = flipObj godDamn k >>= getAndParseCommand
     | otherwise = putStrLn "Eh?" >> getAndParseCommand godDamn
     where
     k = foldr (++) [] $ intersperse " " $ filter (not . (`elem` ["TO", "THE", "A", "AN"])) $ words l
