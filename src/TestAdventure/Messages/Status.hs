@@ -16,6 +16,8 @@ lrTableCrushed = "You already smashed the table some time ago.  Hell, the thing 
 travelSuccess :: String;
 travelSuccess = "You travel successfully.";
 
+-- | tableFlippedUD is printed to the terminal if the player character
+-- flips the living room table upside-down.
 tableFlippedUD :: String;
 tableFlippedUD = "You grab the card table and throw the thing into the air.  By sheer coincidence, the table manages to land exactly as the table was a few moments ago, with the exception of being upside-down.";
 
