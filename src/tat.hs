@@ -35,6 +35,8 @@ introducePlayer k =
   putStrLn ("You are " ++ (forename . playerName) k ++ " " ++ (surname . playerName) k ++ ", a.k.a. " ++ (nickname . playerName) k ++ ".") >>
   return k;
 
+-- | chooseCont determines whether or not the game should continue,
+-- based upon the status of the player character.
 chooseCont :: GameData -> IO ();
 chooseCont k
   | status k == Dead = return ()
