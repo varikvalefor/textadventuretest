@@ -39,23 +39,23 @@ introducePlayer k =
 -- based upon the status of the player character.
 chooseCont :: GameData -> IO ();
 chooseCont k
-  | status k == Dead = return ()
+  | status k == Dead = putStrLn "Aw, you dead."
+  | status k == Win = putStrLn MD.winMsg
   | otherwise = getAndParseCommand k >>= chooseCont;
 
 -- | getAndParseCommand retrieves a command from the user and executes
 -- or rejects this command, depending upon whether or not the command is
 -- recognised as being an acceptable command.
 getAndParseCommand :: GameData -> IO GameData;
-getAndParseCommand godDamn
-  | status godDamn == Dead = putStrLn "Aw, you dead." >> return godDamn
-  | True = putStrLn "What do you do?" >> getLine >>= parseCommand
+getAndParseCommand godDamn =
+  putStrLn "What do you do?" >> getLine >>= parseCommand
   where
   parseCommand :: String -> IO GameData
   parseCommand l
     | isGo k = travel k godDamn
-    | isSuicide k = putStrLn MD.spontComb >> return godDamn
+    | isSuicide k = putStrLn MD.spontComb >> return godDamn {status = Dead}
     | isAffirmative k && (not . questionYNExists) godDamn =
-      putStrLn MD.answerAff >> return godDamn
+      putStrLn MD.answerAff >> return godDamn {status = Win}
     | isSecretWord k = secretWordProcedure godDamn
     | isCheckBag k = listInventory godDamn
     | isObsSurround k = listSurroundings godDamn

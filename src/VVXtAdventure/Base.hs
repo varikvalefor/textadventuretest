@@ -52,7 +52,7 @@ data CharName = CharName {
 
 -- | State is used to indicate whether a particular character is dead or
 -- alive.
-data State = Dead | Alive deriving (Eq, Read, Show);
+data State = Dead | Alive | Win deriving (Eq, Read, Show);
 
 -- | Room is a room.  No shit.
 data Room = LivingRoom deriving (Eq, Read, Show);
