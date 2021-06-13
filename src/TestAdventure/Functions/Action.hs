@@ -1,0 +1,46 @@
+module TestAdventure.Functions.Action where
+import VVXtAdventure.Base;
+import TestAdventure.ConditionChecks;
+import Data.List (intersperse);
+import qualified TestAdventure.Messages.Death as MD;
+import qualified TestAdventure.Messages.Status as MS;
+import qualified TestAdventure.Messages.Error as ME;
+import Data.Maybe;
+import Text.Read;
+import Data.Char (toUpper);
+
+-- | crush is used to smash stuff, e.g., the flimsy-looking table.
+-- crush's output is modified such that the destruction is documented.
+crush :: GameData
+      -> String -- ^ The "SMASH SO-AND-SO" command
+      -> IO GameData;
+crush y x
+  | (k, theRoom) == ("FLIMSY-LOOKING TABLE", LivingRoom) = crushTable
+  | otherwise = putStrLn "Eh?" >> return y
+  where
+  k = foldr (++) [] $ intersperse " " $ drop 1 $ words x
+  crushTable :: IO GameData
+  crushTable
+    | lrTableSmashed y = putStrLn MS.lrTableCrushed >> return y
+    | otherwise = putStrLn MS.lrTableCrush >>
+      return y {lrTableSmashed = True}
+  theRoom :: Room
+  theRoom = currentRoom y;
+
+-- | travel transports the player character to the specified room
+-- or complains about the player's having entered some useless
+-- information, where appropriate.
+travel :: String -> GameData -> IO GameData;
+travel com gd
+  | dest' == Nothing = putStrLn ME.invalidRoom >> return gd
+  | dest == currentRoom gd = putStrLn ME.travelCurRoom >> return gd
+  | otherwise = putStrLn MS.travelSuccess >> return gd {currentRoom = dest}
+  where
+  dest :: Room
+  dest = fromJust dest'
+  --
+  dest' :: Maybe Room
+  dest'
+    | inputDest `elem` ["LIVING ROOM", "LIVINGROOM"] = Just LivingRoom
+    | otherwise = Nothing
+    where inputDest = foldr (++) [] $ intersperse " " $ drop 1 $ words $ map toUpper com;

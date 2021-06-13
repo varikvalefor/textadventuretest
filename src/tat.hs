@@ -1,12 +1,12 @@
 import Data.Char (toUpper);
 import VVXtAdventure.Base;
 import TestAdventure.ConditionChecks;
-import Data.List.Split (splitOn);
 import Data.List (intersperse);
-import Data.Maybe;
 import qualified TestAdventure.Messages.Death as MD;
 import qualified TestAdventure.Messages.Status as MS;
 import qualified TestAdventure.Messages.Error as ME;
+import TestAdventure.Functions.Interface;
+import TestAdventure.Functions.Action;
 
 -- | defChar is the default game data.
 defChar :: GameData;
@@ -73,53 +73,3 @@ secretWordProcedure gd
 -- modified such that the player of k is dead.
 killPlayer :: GameData -> GameData;
 killPlayer k = k {status = Dead};
-
--- | listInventory lists the contents of the player character's
--- inventory.
-listInventory :: GameData -> IO GameData;
-listInventory gd =
-  putStrLn "You have..." >>
-  mapM_ (putStrLn . (\(x:xs) -> (toUpper x):xs) . itemName) (inventory gd) >>
-  return gd;
-
-listSurroundings :: GameData -> IO GameData;
-listSurroundings k =
-  putStrLn "You stand in the middle of a dingy living room." >>
-  putStrLn "In front of you is a flimsy-looking card table." >>
-  return k;
-
--- | crush is used to smash stuff, e.g., the flimsy-looking table.
--- crush's output is modified such that the destruction is documented.
-crush :: GameData
-      -> String -- ^ The "SMASH SO-AND-SO" command
-      -> IO GameData;
-crush y x
-  | (k, theRoom) == ("FLIMSY-LOOKING TABLE", LivingRoom) = crushTable
-  | otherwise = putStrLn "Eh?" >> return y
-  where
-  k = foldr (++) [] $ intersperse " " $ drop 1 $ splitOn " " x
-  crushTable :: IO GameData
-  crushTable
-    | lrTableSmashed y = putStrLn MS.lrTableCrushed >> return y
-    | otherwise = putStrLn MS.lrTableCrush >>
-      return y {lrTableSmashed = True}
-  theRoom :: Room
-  theRoom = currentRoom y;
-
--- | travel transports the player character to the specified room
--- or complains about the player's having entered some useless
--- information, where appropriate.
-travel :: String -> GameData -> IO GameData;
-travel com gd
-  | dest' == Nothing = putStrLn ME.invalidRoom >> return gd
-  | dest == currentRoom gd = putStrLn ME.travelCurRoom >> return gd
-  | otherwise = putStrLn MS.travelSuccess >> return gd {currentRoom = dest}
-  where
-  dest :: Room
-  dest = fromJust dest'
-  --
-  dest' :: Maybe Room
-  dest'
-    | inputDest `elem` ["LIVING ROOM", "LIVINGROOM"] = Just LivingRoom
-    | otherwise = Nothing
-    where inputDest = foldr (++) [] $ intersperse " " $ drop 1 $ splitOn " " $ map toUpper com;
