@@ -22,9 +22,13 @@ isSecretWord = (== "HAM AND SWISS ON RYE");
 isCheckBag :: String -> Bool;
 isCheckBag k = map toUpper k `elem` ["LIST INVENTORY", "INVENTORY"];
 
+-- | For all 'String' k, @isObsSurround k@ iff k demands that the player
+-- character's surroundings are listed.
 isObsSurround :: String -> Bool;
 isObsSurround = (`elem` ["LOOK AROUND YOU"]) . map toUpper;
 
+-- | For all 'String' k, @isDemolish k@ iff k demands that the player
+-- character smashes up something.
 isDemolish :: String -> Bool;
 isDemolish = (`elem` ["SMASH"]) . (!! 0) . splitOn " " . map toUpper;
 
@@ -33,6 +37,8 @@ isDemolish = (`elem` ["SMASH"]) . (!! 0) . splitOn " " . map toUpper;
 isGo :: String -> Bool;
 isGo = (== "GO") . (!! 0) . words;
 
+-- | For all 'String' k, @isFlip k@ iff k demands that the player
+-- characterflips something, e.g., the crappy living room table.
 isFlip :: String -> Bool;
 isFlip = (== "FLIP") . (!!0) . words;
 
