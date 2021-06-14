@@ -49,6 +49,7 @@ travel com gd
     | otherwise = Nothing
     where inputDest = unwords $ drop 1 $ words $ map toUpper com;
 
+-- | flipObj is used to flip over miscellaneous objects.
 flipObj :: GameData -> String -> IO GameData;
 flipObj gd com
   | target == "FLIMSY-LOOKING TABLE" = flipTable gd
@@ -56,6 +57,8 @@ flipObj gd com
   where
   target = unwords $ drop 1 $ words com;
 
+-- | flipTable flips over the living room table if doing such a thing
+-- is actually feasible.
 flipTable :: GameData -> IO GameData;
 flipTable gd
   | lrTableFlipped gd = putStrLn MS.tableFlippedUU >> return flipped
