@@ -55,16 +55,20 @@ getAndParseCommand godDamn =
   parseCommand l
     | l == [] = putStrLn "The silent treatment won't work here." >>
       return godDamn
+      -- ACTIONS FOR PLAYER
+    | isClean k = cleanUp godDamn k
+    | isDemolish k = crush godDamn k
+    | isFlip k = flipObj godDamn k
     | isGo k = travel k godDamn
     | isSuicide k = putStrLn MD.spontComb >> return godDamn {status = Dead}
+    -- MISCELLANEOUS
     | isAffirmative k && (not . questionYNExists) godDamn =
       putStrLn MD.answerAff >> return godDamn {status = Win}
     | isSecretWord k = secretWordProcedure godDamn
+    -- INTERFACE
     | isCheckBag k = listInventory godDamn
     | isObsSurround k = listSurroundings godDamn
-    | isDemolish k = crush godDamn k
-    | isFlip k = flipObj godDamn k
-    | isClean k = cleanUp godDamn k
+    -- CATCH-ALL
     | otherwise = putStrLn "Eh?" >> return godDamn
     where
     k = unwords $ filter (not . (`elem` ["TO", "THE", "A", "AN"])) $ words l
