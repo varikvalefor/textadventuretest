@@ -12,3 +12,8 @@ answerAff ="You answer no one in the affirmative.\nNo one responds with a swift 
 
 winMsg :: String
 winMsg = "YOU HAVE ACCOMPLISHED\nTHE MISSION.\nYOU ARE THE VERY PREVAILER\nTHAT PROTECT RIGHT\nAND JUSTICE.\nI WOULD EXPRESS MY SINCERE.\nTHANKS TO YOU.\n\nTAKE GOOD REST !\n\n\tGENERAL KAWASAKI";
+
+-- | standard is printed to the terminal if the player dies for some
+-- lame-ass reason.
+standard :: String;
+standard = "Aw, you dead.";

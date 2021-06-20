@@ -46,7 +46,7 @@ introducePlayer k =
 -- based upon the status of the player character.
 chooseCont :: GameData -> IO ();
 chooseCont k
-  | status k == Dead = putStrLn "Aw, you dead."
+  | status k == Dead = putStrLn MD.standard
   | status k == Win = putStrLn MD.winMsg
   | otherwise = getAndParseCommand k >>= chooseCont;
 
