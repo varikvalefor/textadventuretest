@@ -11,6 +11,12 @@ lrTableCrush = "Shouting loudly, you smash the flimsy-looking table a la WWE.\nF
 lrTableCrushed :: String;
 lrTableCrushed = "You already smashed the table some time ago.  Hell, the thing is still smoking.\nRegardless of this fact, you shout and attempt to smash the deris.  Determining whether or not this attempt is successful is left as an exercise for the reader.";
 
+-- | lrTableTotesDestroyed is output to the terminal if the player
+-- character attempts to destroy the living room table... after having
+-- already completely trashed the thing.
+lrTableTotesDestroyed :: String;
+lrTableTotesDestroyed = "Stop!  Stop!  He's already dead!";
+
 -- | travelSuccess is output if the player character successfully
 -- travels to a player-specified destination.
 travelSuccess :: String;

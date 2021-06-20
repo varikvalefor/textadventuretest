@@ -26,6 +26,7 @@ crush y x
 -- | crushTable crushes the table of the living room.
 crushTable :: GameData -> IO GameData
 crushTable y
+  | lrTableSmashedness y > 5 = putStrLn MS.lrTableTotesDestroyed >> return incr
   | lrTableSmashedness y > 0 = putStrLn MS.lrTableCrushed >> return incr
   | otherwise = putStrLn MS.lrTableCrush >> return incr {lrTableDebrisPresent = True}
   where
