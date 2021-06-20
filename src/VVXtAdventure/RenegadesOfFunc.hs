@@ -13,3 +13,8 @@ daArgz = unwords . drop 1 . filter (not . isJunk) . words . map toUpper
   where
   isJunk :: String -> Bool
   isJunk = flip elem ["TO", "THE", "A", "AN"];
+
+-- | For all input commands @k@, @daComd k@ equals the command-based
+-- part of @k@.
+daComd :: String -> String;
+daComd = head . words . map toUpper;
