@@ -1,0 +1,102 @@
+.Dd $Mdocdate$
+.Dt tat 1
+.Os
+.Sh NAME
+.Nm tat
+.Nd a crap text adventure
+.Sh SYNOPSIS
+.Nm tat
+.Sh DESCRIPTION
+.Nm tat
+is a stupid, cheesy, and unfinished text adventure game.
+When launched,
+.Nm tat
+manifests as a command-line interface.
+.Sh COMMANDS
+Because
+.Nm tat
+is a text adventure, controller-based input is infeasible.  As such, the
+player character is controlled via English-based commands, which include
+.Nm LOOK ,
+.Nm SMASH ,
+and
+.Nm CLEAN .
+.Ss LOOK
+The command
+.Nm LOOK AROUND YOU
+lists the player's current surroundings.  For the most part, only stuff
+with which the player can interact is listed.
+.Ss SMASH
+For all
+.Ar OBJECT
+which is marked as being smashable,
+.Nm SMASH
+.Ar OBJECT
+smashes
+.Ar OBJECT
+into small piles of putrid debris.
+.Ss CLEAN
+The
+.Nm CLEAN
+command is used to clean up stuff, e.g., the debris of the
+flimsy-looking table in the living room.
+.Pp
+For all
+.Ar OBJECT
+which is marked as being cleanable,
+.Nm CLEAN
+.Ar OBJECT
+cleans up
+.Ar OBJECT .
+.Ss FLIP
+For all
+.Ar OBJECT
+which is marked as being flippable,
+.Nm FLIP
+.Ar OBJECT
+flips over
+.Ar OBJECT.
+.Ss ANSWERING
+.Nm ANSWERING
+is not a recognised command.  However, questions can be answered in the
+affirmative and in the negative.
+.Pp
+Acceptable affirmative answers include
+.Dq YES .
+.Pp
+Acceptable negative answers include... nothing.  Answering in the
+negative is currently unimplemented.
+.Ss SUICIDE
+The
+.Nm SUICIDE
+command is entered iff the player character commits suicide or suddenly
+dies in some other fashion.
+.Pp
+The synonyms of
+.Nm SUICIDE
+include but are not limited to
+.Nm KILL SELF ,
+.Nm EXPLODE ,
+and
+.Nm KABOOM .
+.Ss GO
+The
+.Nm GO
+command is used to enter locations.
+.Pp
+For all
+.Ar LOCATION
+which is marked as being
+.Dq enterable ,
+.Nm GO
+.Op TO
+.Ar LOCATION
+is entered iff the player character attempts to go to
+.Ar LOCATION .
+.Sh AUTHOR
+This stupid program is maintained by
+.An Varik
+.An Dq Hot Damn, I'm Great!
+.An Valefor
+.Aq varikvalefor@aol.com .
+Hate mail can be sent accordingly.
