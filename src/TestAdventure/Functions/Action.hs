@@ -66,7 +66,7 @@ flipTable gd
   | otherwise = putStrLn MS.tableFlippedUD >> return flipped
   where
   flipped :: GameData
-  flipped = gd {lrTableFlipped = True};
+  flipped = gd {lrTableFlipped = not $ lrTableFlipped gd};
 
 -- | cleanUp cleans up messes, e.g., the remains of the janky living
 -- room table.
