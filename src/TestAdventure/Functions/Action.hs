@@ -99,3 +99,11 @@ cleanUpLRTableDebris gd
   --
   tableDebrisPresent :: Bool
   tableDebrisPresent = lrTableDebrisPresent gd;
+
+-- | killSelf is called iff the player character suicides.
+killSelf :: GameData
+         -> String -- ^ Command used to kill, kill self
+         -> IO GameData;
+killSelf godDamn strcat =
+  putStrLn MD.spontComb >>
+  return godDamn {status = Dead};

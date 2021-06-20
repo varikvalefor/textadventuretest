@@ -65,7 +65,7 @@ getAndParseCommand godDamn =
     | isDemolish k = crush godDamn k
     | isFlip k = flipObj godDamn k
     | isGo k = travel k godDamn
-    | isSuicide k = putStrLn MD.spontComb >> return godDamn {status = Dead}
+    | isSuicide k = killSelf godDamn k
     -- MISCELLANEOUS
     | isAffirmative k && (not . questionYNExists) godDamn =
       putStrLn MD.answerAff >> return godDamn {status = Win}
