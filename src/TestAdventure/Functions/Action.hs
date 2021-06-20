@@ -1,5 +1,6 @@
 module TestAdventure.Functions.Action where
 import VVXtAdventure.Base;
+import VVXtAdventure.RenegadesOfFunc (daArgz);
 import TestAdventure.ConditionChecks;
 import qualified TestAdventure.Messages.Death as MD;
 import qualified TestAdventure.Messages.Status as MS;
@@ -17,7 +18,7 @@ crush y x
   | (k, theRoom) == ("FLIMSY-LOOKING TABLE", LivingRoom) = crushTable y
   | otherwise = putStrLn "Eh?" >> return y
   where
-  k = unwords $ drop 1 $ words x
+  k = daArgz x
   --
   theRoom :: Room
   theRoom = currentRoom y
@@ -47,7 +48,7 @@ travel com gd
   dest'
     | inputDest `elem` ["LIVING ROOM", "LIVINGROOM"] = Just LivingRoom
     | otherwise = Nothing
-    where inputDest = unwords $ drop 1 $ words $ map toUpper com;
+    where inputDest = daArgz com;
 
 -- | flipObj is used to flip over miscellaneous objects.
 flipObj :: GameData -> String -> IO GameData;
@@ -55,7 +56,7 @@ flipObj gd com
   | target == "FLIMSY-LOOKING TABLE" = flipTable gd
   | otherwise = putStrLn ME.invalidFlipObject >> return gd
   where
-  target = unwords $ drop 1 $ words com;
+  target = daArgz com;
 
 -- | flipTable flips over the living room table if doing such a thing
 -- is actually feasible.
@@ -75,7 +76,7 @@ cleanUp gd com
   | otherwise = putStrLn "The specified thing cannot be cleaned up!" >>
     return gd
   where
-  target = unwords $ drop 1 $ words $ map toUpper com;
+  target = daArgz com;
 
 -- | cleanUpLRTableDebris cleans up the remains of the living room table
 -- if such a thing is possible.
