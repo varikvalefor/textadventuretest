@@ -54,10 +54,11 @@ travel com gd
 -- | flipObj is used to flip over miscellaneous objects.
 flipObj :: GameData -> String -> IO GameData;
 flipObj gd com
-  | target == "FLIMSY-LOOKING TABLE" = flipTable gd
+  | target1 == "TABLE" && currentRoom gd == LivingRoom = flipTable gd
   | otherwise = putStrLn ME.invalidFlipObject >> return gd
   where
-  target = daArgz com;
+  target = daArgz com
+  target1 = unwords $ filter (not . flip elem ["CARD", "FLIMSY-LOOKING"]) $ words $ target;
 
 -- | flipTable flips over the living room table if doing such a thing
 -- is actually feasible.
