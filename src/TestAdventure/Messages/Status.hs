@@ -3,7 +3,7 @@ module TestAdventure.Messages.Status where
 -- | lrTableCrush is output to the terminal if the flimsy-looking living
 -- room table is demolished.
 lrTableCrush :: String;
-lrTableCrush = "Shouting loudly, you smash the flimsy-looking table a la WWE.\nFragments of the table now litter the room which was once somewhat clean.";
+lrTableCrush = "Shouting loudly, you smash the flimsy-looking table a la WWE.\nFragments of the table now litter the living room, which was once somewhat clean.";
 
 -- | lrTableCrushed is output to the terminal if the player attempts to
 -- smash the flimsy-looking living room table... after having already
