@@ -41,7 +41,6 @@ introducePlayer k =
   alias :: String
   alias = nickname $ playerName k
 
-
 -- | chooseCont determines whether or not the game should continue,
 -- based upon the status of the player character.
 chooseCont :: GameData -> IO ();
