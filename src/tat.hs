@@ -33,8 +33,14 @@ main = introducePlayer defChar >>= getAndParseCommand >>= chooseCont;
 -- of k to the terminal.
 introducePlayer :: GameData -> IO GameData;
 introducePlayer k =
-  putStrLn ("You are " ++ (forename . playerName) k ++ " " ++ (surname . playerName) k ++ ", a.k.a. " ++ (nickname . playerName) k ++ ".") >>
-  return k;
+  putStrLn ("You are " ++ name ++ ", a.k.a. " ++ alias ++ ".") >>
+  return k
+  where
+  name :: String
+  name = (forename $ playerName k) ++ " " ++ (surname $ playerName k)
+  alias :: String
+  alias = nickname $ playerName k
+
 
 -- | chooseCont determines whether or not the game should continue,
 -- based upon the status of the player character.
