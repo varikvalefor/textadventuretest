@@ -13,15 +13,31 @@ listInventory gd =
 -- | listSurroundings describes the player's environment.
 listSurroundings :: GameData -> IO GameData;
 listSurroundings k
-  | currentRoom k == LivingRoom = 
-    putStrLn "You stand in the middle of a dingy living room." >>
-    putStrLn "In front of you is a flimsy-looking card table." >>
-    return k
+  | currentRoom k == LivingRoom = listSurroundingsOfLivingRoom k
   | currentRoom k == BroomCloset = listSurroundingsOfBroomCloset k
   | otherwise = putStrLn ("Cleverly done, Mr. FREEMAN, but you're " ++
     "not supposed to be here -- as a matter of fact, you're not.  " ++
     "Get back where you belong and forget about all this until we " ++
     "meet again.") >> return k;
+
+listSurroundingsOfLivingRoom :: GameData -> IO GameData;
+listSurroundingsOfLivingRoom gd =
+  putStrLn "You stand in the middle of a dingy living room." >>
+  putStrLn tableDescription >>
+  putStrLn "North of this dingy living room is a broom closet." >>
+  return gd
+  where
+  tableDescription :: String
+  tableDescription
+    | lrTableSmashedness gd > 1 = "In the centre of the room is a " ++
+      "smashed-up card table."
+    | lrTableDebrisPresent gd = "In the centre of the room are the " ++
+      "remains of what probably could have been a table... or a " ++
+      "chair... or a fairly shitty cupboard."
+    | lrTableFlipped gd = "In the centre of the room is a table " ++
+      "which is flipped upside-down."
+    | otherwise = "In the centre of the room is a flimsy-looking " ++
+      "table."
 
 listSurroundingsOfBroomCloset :: GameData -> IO GameData;
 listSurroundingsOfBroomCloset gd =
