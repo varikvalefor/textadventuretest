@@ -16,14 +16,23 @@ defChar = GameData {
     surname  = "TUBMAN",
     nickname = "THE O.G. MEATBALL"
   },
-  inventory = [Item {itemName = "shitty-ass stick"}],
+  inventory =
+    [
+      Item {
+        itemName = "shitty-ass stick",
+        isWeapon = True
+      }
+    ],
   questionYNExists = False,
   secretWordNums = 0,
   status = Alive,
   currentRoom = LivingRoom,
   lrTableSmashedness = 0,
   lrTableDebrisPresent = False,
-  lrTableFlipped = False
+  lrTableFlipped = False,
+  broomSmashedness = 0,
+  mopSmashedness = 0,
+  wieldedWeapon = Nothing
 };
 
 main :: IO ();

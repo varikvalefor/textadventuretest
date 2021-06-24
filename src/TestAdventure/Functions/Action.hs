@@ -16,6 +16,8 @@ crush :: GameData
       -> IO GameData;
 crush y x
   | (k, theRoom) == ("FLIMSY-LOOKING TABLE", LivingRoom) = crushTable y
+  | (k, theRoom) == ("BROOM", BroomCloset) = crushBroom y
+  | (k, theRoom) == ("MOP", BroomCloset) = crushMop y
   | otherwise = putStrLn "Eh?" >> return y
   where
   k = daArgz x
@@ -33,6 +35,18 @@ crushTable y
   incr :: GameData
   incr = y {lrTableSmashedness = lrTableSmashedness y + 1};
 
+-- | crushBroom is used to BREAK THE BROOM!!!
+crushBroom :: GameData -> IO GameData;
+crushBroom gd
+  | broomSmashedness gd > 0 = putStrLn MS.broomAlreadySmashed >> return gd
+  | otherwise = putStrLn MS.broomSmashed >> return gd {broomSmashedness = 1};
+
+-- | crushMop is used to MUTILATE THE MOP!!!
+crushMop :: GameData -> IO GameData;
+crushMop gd
+  | mopSmashedness gd > 0 = putStrLn MS.mopAlreadySmashed >> return gd
+  | otherwise = putStrLn MS.mopSmashed >> return gd {mopSmashedness = 1};
+
 -- | travel transports the player character to the specified room
 -- or complains about the player's having entered some useless
 -- information, where appropriate.
@@ -48,6 +62,7 @@ travel com gd
   dest' :: Maybe Room
   dest'
     | inputDest `elem` ["LIVING ROOM", "LIVINGROOM"] = Just LivingRoom
+    | inputDest `elem` ["BROOM CLOSET", "BROOMCLOSET", "CLOSET"] = Just BroomCloset
     | otherwise = Nothing
     where inputDest = daArgz com;
 

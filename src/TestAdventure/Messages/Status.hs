@@ -35,3 +35,25 @@ tableFlippedUU = "You restore the table to the table's original position, i.e., 
 
 junkLRTableDebris :: String;
 junkLRTableDebris = "You successfully place the rubble into the bin.\nBecause the table is shattered into sharp shards, the bin bag tears a bit.";
+
+-- | broomSmashed is printed to the terminal if the player character
+-- smashes the broom.
+broomSmashed :: String;
+broomSmashed = "You smash the broom over your knee, barely avoiding getting some nasty splinters in the process.";
+
+-- | broomAlreadySmashed is printed to the terminal if the player
+-- character tries to smash the broom... after having already smashed
+-- the broom.
+broomAlreadySmashed :: String;
+broomAlreadySmashed = "The broom is smashed to atoms.";
+
+-- | mopSmashed is printed to the terminal if the player character
+-- mutilates the mop.
+mopSmashed :: String;
+mopSmashed = "You mutilate the mop.";
+
+-- | mopAlreadySmashed is output to the terminal if the player character
+-- attempts to mutilate the mop after having already destroyed the
+-- damned thing.
+mopAlreadySmashed :: String;
+mopAlreadySmashed = "The mop is already mutilated.";

@@ -30,14 +30,22 @@ data GameData = GameData {
   -- living room?
   lrTableDebrisPresent :: Bool,
   -- | What is the player character's current location?
-  currentRoom :: Room
+  currentRoom :: Room,
+  -- | How smashed is the map?
+  mopSmashedness :: Integer,
+  -- | How smashed is the broom?
+  broomSmashedness :: Integer,
+  -- | What, if anything, is the player holding?
+  wieldedWeapon :: Maybe Item
 } deriving (Eq, Read, Show);
 
 -- | For all Item k, k is an inventory item of some sort.
 data Item = Item {
   -- | For all 'Item' k, itemName k equals the human-readable name of
   -- k, e.g., "a broken toilet".
-  itemName :: String
+  itemName :: String,
+  -- | For all 'Item' k, @isWeapon k@ iff k is a weapon.
+  isWeapon :: Bool
 } deriving (Eq, Read, Show);
 
 -- | For all CharName k, k is the name of a character.
@@ -58,4 +66,4 @@ data CharName = CharName {
 data State = Dead | Alive | Win deriving (Eq, Read, Show);
 
 -- | Room is a room.  No shit.
-data Room = LivingRoom deriving (Eq, Read, Show);
+data Room = LivingRoom | BroomCloset deriving (Eq, Read, Show);
