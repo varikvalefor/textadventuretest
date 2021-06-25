@@ -41,6 +41,9 @@ listSurroundingsOfLivingRoom gd =
     | otherwise = "In the centre of the room is a flimsy-looking " ++
       "table."
 
+-- | For all 'GameData' @k@, @listSurroundingsOfBroomCloset k@ prints a
+-- description of the broom closet of @k@ to the terminal, then outputs
+-- @k@.
 listSurroundingsOfBroomCloset :: GameData -> IO GameData;
 listSurroundingsOfBroomCloset gd =
   putStrLn "You stand inside of a tiny broom closet." >>
