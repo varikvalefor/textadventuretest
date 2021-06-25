@@ -20,6 +20,8 @@ listSurroundings k
     "Get back where you belong and forget about all this until we " ++
     "meet again.") >> return k;
 
+-- | For all 'GameData' @k@, @listSurroundingsOfLivingRoom k@ prints a
+-- description of the living room to the terminal, then outputs @k@.
 listSurroundingsOfLivingRoom :: GameData -> IO GameData;
 listSurroundingsOfLivingRoom gd =
   putStrLn "You stand in the middle of a dingy living room." >>
