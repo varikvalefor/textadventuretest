@@ -7,7 +7,7 @@ import VVXtAdventure.Base;
 listInventory :: GameData -> IO GameData;
 listInventory gd =
   putStrLn "You have..." >>
-  mapM_ (putStrLn . (\(x:xs) -> (toUpper x):xs) . itemName) (inventory gd) >>
+  mapM_ (putStrLn . (\(x:xs) -> toUpper x:xs) . itemName) (inventory gd) >>
   return gd;
 
 -- | listSurroundings describes the player's environment.
