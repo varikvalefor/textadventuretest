@@ -12,7 +12,7 @@ import TestAdventure.Functions.Miscellaneous;
 defChar :: GameData;
 defChar = GameData {
   playerName = CharName {
-    forename = "HARRIETT",
+    forename = "HARRIET",
     surname  = "TUBMAN",
     nickname = "THE O.G. MEATBALL"
   },
