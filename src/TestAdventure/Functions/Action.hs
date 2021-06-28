@@ -125,3 +125,18 @@ killSelf :: GameData
 killSelf godDamn strcat =
   putStrLn MD.spontComb >>
   return godDamn {status = Dead};
+
+-- | @wieldWeapon a b@ makes the player character wield the weapon which
+-- is mentioned in @b@ if doing such a thing is feasible.
+wieldWeapon :: GameData -> String -> IO GameData;
+wieldWeapon gd k
+  | acceptableWeapons == [] = putStrLn ME.noSuchWeapon >> return gd
+  | length acceptableWeapons > 1 = putStrLn ME.multipleSuchWeapons >>
+    return gd
+  | otherwise = putStrLn MS.weaponWielded >>
+    return gd {wieldedWeapon = Just $ head acceptableWeapons}
+  where
+  acceptableWeapons :: [Item]
+  acceptableWeapons = filter isWeapon $ inventory gd
+  isWeapon :: Item -> Bool
+  isWeapon g = True -- ((map toUpper . itemName) g == daArgz k) && isWeapon g;

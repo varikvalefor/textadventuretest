@@ -47,3 +47,8 @@ isFlip = (== "FLIP") . (!!0) . words;
 -- room table.
 isClean :: String -> Bool;
 isClean = (== "CLEANUP") . (!! 0) . words;
+
+-- | For all @'String' k@, @isWieldWeapon k@ iff @k@ demands that the
+-- player character wields some weapon.
+isWieldWeapon :: String -> Bool;
+isWieldWeapon = (== "WIELD") . head . words;

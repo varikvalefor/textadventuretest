@@ -57,3 +57,8 @@ mopSmashed = "You mutilate the mop.";
 -- damned thing.
 mopAlreadySmashed :: String;
 mopAlreadySmashed = "The mop is already mutilated.";
+
+-- | @weaponWielded@ is printed to the terminal if the player
+-- successfully wields a weapon.
+weaponWielded :: String;
+weaponWielded = "You weld the weapon to your hand.\nYou do know that you could have just grabbed the weapon, no?";

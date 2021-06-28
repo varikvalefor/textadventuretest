@@ -30,3 +30,15 @@ lrDebrisNotBroken = "The table is somehow reduced to a pile of garbage without a
 -- non-broken living room table.
 lrTableNotJunk :: String;
 lrTableNotJunk = "Why in God's name would you junk a perfectly good -- actually a bit cheesy -- actually very cheesy, but still functional -- table?!  The thing still at least somewhat works, although slightly nudging the table can lead to spilled coffee.";
+
+-- | @noSuchWeapon@ is output to the terminal if the player character
+-- attempts to wield a weapon which the player character does not
+-- possess.
+noSuchWeapon :: String;
+noSuchWeapon = "You have no such weapon.  Maybe you should have stayed away from those pills.";
+
+-- | @multipleSuchWeapons@ is output to the terminal if the player
+-- character attempts to wield a weapon such that the player character
+-- possesses multiple copies of this weapon.
+multipleSuchWeapons :: String;
+multipleSuchWeapons = "tat does not currently support selecting weapons which have multiple copies.";

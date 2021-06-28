@@ -75,6 +75,7 @@ getAndParseCommand godDamn =
     | isFlip k = flipObj godDamn k
     | isGo k = travel k godDamn
     | isSuicide k = killSelf godDamn k
+    | isWieldWeapon k = wieldWeapon godDamn k
     -- MISCELLANEOUS
     | isAffirmative k && (not . questionYNExists) godDamn =
       putStrLn MD.answerAff >> return godDamn {status = Win}
