@@ -50,8 +50,8 @@ crushMop gd
 -- | travel transports the player character to the specified room
 -- or complains about the player's having entered some useless
 -- information, where appropriate.
-travel :: String -> GameData -> IO GameData;
-travel com gd
+travel :: GameData -> String -> IO GameData;
+travel gd com
   | dest' == Nothing = putStrLn ME.invalidRoom >> return gd
   | dest == currentRoom gd = putStrLn ME.travelCurRoom >> return gd
   | otherwise = putStrLn MS.travelSuccess >> return gd {currentRoom = dest}

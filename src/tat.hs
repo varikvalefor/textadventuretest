@@ -73,7 +73,7 @@ getAndParseCommand godDamn =
     | isClean k = cleanUp godDamn k
     | isDemolish k = crush godDamn k
     | isFlip k = flipObj godDamn k
-    | isGo k = travel k godDamn
+    | isGo k = travel godDamn k
     | isSuicide k = killSelf godDamn k
     | isWieldWeapon k = wieldWeapon godDamn k
     -- MISCELLANEOUS
