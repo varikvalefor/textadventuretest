@@ -1,6 +1,6 @@
 Cabal-version: 2.4
 
-Name:          matel
+Name:          vvx-textadventuretest
 Version:       0.1.0.0
 Synopsis:      Dumb text adventure game
 Description:   _Text Adventure Test_, otherwise known as "TAT", is a
@@ -14,7 +14,7 @@ Author:        Varik Valefor
 Maintainer:    varikvalefor@aol.com
 Copyright:     (c) Varik Valefor 2021.
 
-Category:      Chat
+Category:      Games
 
 Stability:     unstable
 
