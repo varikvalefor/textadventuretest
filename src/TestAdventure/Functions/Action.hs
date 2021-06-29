@@ -138,6 +138,6 @@ wieldWeapon gd k
     return gd {wieldedWeapon = Just $ head acceptableWeapons}
   where
   acceptableWeapons :: [Item]
-  acceptableWeapons = filter isWeapon $ inventory gd
-  isWeapon :: Item -> Bool
-  isWeapon g = True -- ((map toUpper . itemName) g == daArgz k) && isWeapon g;
+  acceptableWeapons = filter isWieldable $ inventory gd
+  isWieldable :: Item -> Bool
+  isWieldable g = ((map toUpper $ itemName g) == daArgz k) && isWeapon g;
