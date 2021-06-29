@@ -9,8 +9,8 @@ import Data.Maybe;
 import Text.Read;
 import Data.Char (toUpper);
 
--- | crush is used to smash stuff, e.g., the flimsy-looking table.
--- crush's output is modified such that the destruction is documented.
+-- | @crush@ is used to smash stuff, e.g., the flimsy-looking table.
+-- @crush@'s output is modified such that the destruction is documented.
 crush :: GameData
       -> String -- ^ The "SMASH SO-AND-SO" command
       -> IO GameData;
@@ -25,7 +25,7 @@ crush y x
   theRoom :: Room
   theRoom = currentRoom y
 
--- | crushTable crushes the table of the living room.
+-- | @crushTable@ crushes the table of the living room.
 crushTable :: GameData -> IO GameData
 crushTable y
   | lrTableSmashedness y > 5 = putStrLn MS.lrTableTotesDestroyed >> return incr
@@ -35,21 +35,21 @@ crushTable y
   incr :: GameData
   incr = y {lrTableSmashedness = lrTableSmashedness y + 1};
 
--- | crushBroom is used to BREAK THE BROOM!!!
+-- | @crushBroom@ is used to BREAK THE BROOM!!!
 crushBroom :: GameData -> IO GameData;
 crushBroom gd
   | broomSmashedness gd > 0 = putStrLn MS.broomAlreadySmashed >> return gd
   | otherwise = putStrLn MS.broomSmashed >> return gd {broomSmashedness = 1};
 
--- | crushMop is used to MUTILATE THE MOP!!!
+-- | @crushMop@ is used to MUTILATE THE MOP!!!
 crushMop :: GameData -> IO GameData;
 crushMop gd
   | mopSmashedness gd > 0 = putStrLn MS.mopAlreadySmashed >> return gd
   | otherwise = putStrLn MS.mopSmashed >> return gd {mopSmashedness = 1};
 
--- | travel transports the player character to the specified room
--- or complains about the player's having entered some useless
--- information, where appropriate.
+-- | @travel a b@ transports the player character to the room which is
+-- specified in @b@ or complains about the player's having entered some
+-- useless information, where appropriate.
 travel :: GameData -> String -> IO GameData;
 travel gd com
   | dest' == Nothing = putStrLn ME.invalidRoom >> return gd
@@ -66,7 +66,7 @@ travel gd com
     | otherwise = Nothing
     where inputDest = daArgz com;
 
--- | flipObj is used to flip over miscellaneous objects.
+-- | @flipObj@ is used to flip over miscellaneous objects.
 flipObj :: GameData -> String -> IO GameData;
 flipObj gd com
   | target1 == "TABLE" && currentRoom gd == LivingRoom = flipTable gd
@@ -75,7 +75,7 @@ flipObj gd com
   target = daArgz com
   target1 = unwords $ filter (not . flip elem ["CARD", "FLIMSY-LOOKING"]) $ words $ target;
 
--- | flipTable flips over the living room table if doing such a thing
+-- | @flipTable@ flips over the living room table if doing such a thing
 -- is actually feasible.
 flipTable :: GameData -> IO GameData;
 flipTable gd
@@ -85,7 +85,7 @@ flipTable gd
   flipped :: GameData
   flipped = gd {lrTableFlipped = not $ lrTableFlipped gd};
 
--- | cleanUp cleans up messes, e.g., the remains of the janky living
+-- | @cleanUp@ cleans up messes, e.g., the remains of the janky living
 -- room table.
 cleanUp :: GameData -> String -> IO GameData;
 cleanUp gd com
@@ -95,8 +95,8 @@ cleanUp gd com
   where
   target = daArgz com;
 
--- | cleanUpLRTableDebris cleans up the remains of the living room table
--- if such a thing is possible.
+-- | @cleanUpLRTableDebris@ cleans up the remains of the living room
+-- table if such a thing is possible.
 cleanUpLRTableDebris :: GameData -> IO GameData;
 cleanUpLRTableDebris gd
   | tableIsBroken && tableDebrisPresent =
@@ -118,7 +118,8 @@ cleanUpLRTableDebris gd
   tableDebrisPresent :: Bool
   tableDebrisPresent = lrTableDebrisPresent gd;
 
--- | killSelf is called iff the player character suicides.
+-- | @killSelf a b@ is called iff the player character suicides via the
+-- command @b@.
 killSelf :: GameData
          -> String -- ^ Command used to kill, kill self
          -> IO GameData;
