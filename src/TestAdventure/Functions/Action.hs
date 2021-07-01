@@ -2,6 +2,7 @@ module TestAdventure.Functions.Action where
 import VVXtAdventure.Base;
 import VVXtAdventure.RenegadesOfFunc (daArgz);
 import TestAdventure.ConditionChecks;
+import qualified TestAdventure.Functions.Action.Crush as Crush;
 import qualified TestAdventure.Messages.Death as MD;
 import qualified TestAdventure.Messages.Status as MS;
 import qualified TestAdventure.Messages.Error as ME;
@@ -15,37 +16,15 @@ crush :: GameData
       -> String -- ^ The "SMASH SO-AND-SO" command
       -> IO GameData;
 crush y x
-  | (k, theRoom) == ("FLIMSY-LOOKING TABLE", LivingRoom) = crushTable y
-  | (k, theRoom) == ("BROOM", BroomCloset) = crushBroom y
-  | (k, theRoom) == ("MOP", BroomCloset) = crushMop y
+  | (k, theRoom) == ("FLIMSY-LOOKING TABLE", LivingRoom) = Crush.table y
+  | (k, theRoom) == ("BROOM", BroomCloset) = Crush.broom y
+  | (k, theRoom) == ("MOP", BroomCloset) = Crush.mop y
   | otherwise = putStrLn "Eh?" >> return y
   where
   k = daArgz x
   --
   theRoom :: Room
   theRoom = currentRoom y
-
--- | @crushTable@ crushes the table of the living room.
-crushTable :: GameData -> IO GameData
-crushTable y
-  | lrTableSmashedness y > 5 = putStrLn MS.lrTableTotesDestroyed >> return incr
-  | lrTableSmashedness y > 0 = putStrLn MS.lrTableCrushed >> return incr
-  | otherwise = putStrLn MS.lrTableCrush >> return incr {lrTableDebrisPresent = True}
-  where
-  incr :: GameData
-  incr = y {lrTableSmashedness = lrTableSmashedness y + 1};
-
--- | @crushBroom@ is used to BREAK THE BROOM!!!
-crushBroom :: GameData -> IO GameData;
-crushBroom gd
-  | broomSmashedness gd > 0 = putStrLn MS.broomAlreadySmashed >> return gd
-  | otherwise = putStrLn MS.broomSmashed >> return gd {broomSmashedness = 1};
-
--- | @crushMop@ is used to MUTILATE THE MOP!!!
-crushMop :: GameData -> IO GameData;
-crushMop gd
-  | mopSmashedness gd > 0 = putStrLn MS.mopAlreadySmashed >> return gd
-  | otherwise = putStrLn MS.mopSmashed >> return gd {mopSmashedness = 1};
 
 -- | @travel a b@ transports the player character to the room which is
 -- specified in @b@ or complains about the player's having entered some

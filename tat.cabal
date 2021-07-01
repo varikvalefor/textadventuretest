@@ -30,10 +30,11 @@ executable tat
                     TestAdventure.Functions.Action,
                     TestAdventure.Functions.Interface,
                     TestAdventure.Functions.Miscellaneous,
+                    TestAdventure.Functions.Action.Crush,
                     TestAdventure.Messages.Death,
                     TestAdventure.Messages.Error,
                     TestAdventure.Messages.Status,
-                    VVXtAdventure.RenegadesOfFunc
+                    VVXtAdventure.RenegadesOfFunc,
                     VVXtAdventure.Base
 
   build-depends:    base ^>=4.14.1.0, split
