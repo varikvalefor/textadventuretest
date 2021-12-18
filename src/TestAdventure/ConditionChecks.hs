@@ -9,7 +9,7 @@ isSuicide = (`elem` ["KILL SELF", "SUICIDE", "EXPLODE", "KABOOM", "DIVIDE BY ZER
 -- | For all commands @k@, @isAffirmative k@ iff @k@ is an affirmative
 -- response.
 isAffirmative :: String -> Bool;
-isAffirmative k = or [k == "YES"];
+isAffirmative = (`elem` ["YES"]);
 
 -- | For all commands @k@, @isSecretWord k@ iff @k@ equals the secret
 -- word... technically, the secret phrase.
