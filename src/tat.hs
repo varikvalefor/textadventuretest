@@ -86,6 +86,8 @@ getAndParseCommand godDamn =
     -- CATCH-ALL
     | otherwise = putStrLn "Eh?" >> return godDamn
     where
+    -- \| @k@ is a version of the player's command which lacks some
+    -- @junkwords@.
     k = unwords $ filter (not . (`elem` junkwords)) $ words l
     -- \| @junkwords@ is a list of words which can be safely discarded.
     junkwords = ["TO", "THE", "A", "AN"]
