@@ -1,11 +1,10 @@
 module TestAdventure.ConditionChecks where
-import Data.Char (toUpper);
 import Data.List.Split (splitOn);
 
 -- | For all commands @k@, @isSuicide k@ iff @k@ demands that the player
 -- character commits suicide.
 isSuicide :: String -> Bool;
-isSuicide = (`elem` ["KILL SELF", "SUICIDE", "EXPLODE", "KABOOM", "DIVIDE BY ZERO"]) . map toUpper;
+isSuicide = (`elem` ["KILL SELF", "SUICIDE", "EXPLODE", "KABOOM", "DIVIDE BY ZERO"]);
 
 -- | For all commands @k@, @isAffirmative k@ iff @k@ is an affirmative
 -- response.
@@ -20,17 +19,17 @@ isSecretWord = (== "HAM AND SWISS ON RYE");
 -- | For all commands @k@, @isCheckBag k@ iff @k@ demands that the
 -- contents of the player character's inventory are listed.
 isCheckBag :: String -> Bool;
-isCheckBag = (`elem` ["LIST INVENTORY", "INVENTORY"]) . map toUpper;
+isCheckBag = (`elem` ["LIST INVENTORY", "INVENTORY"]);
 
 -- | For all commands @k@, @isObsSurround k@ iff @k@ demands that the
 -- player character's surroundings are listed.
 isObsSurround :: String -> Bool;
-isObsSurround = (`elem` ["LOOK AROUND YOU"]) . map toUpper;
+isObsSurround = (`elem` ["LOOK AROUND YOU"]);
 
 -- | For all commands @k@, @isDemolish k@ iff @k@ demands that the
 -- player character smashes up something.
 isDemolish :: String -> Bool;
-isDemolish = (`elem` ["SMASH"]) . (!! 0) . splitOn " " . map toUpper;
+isDemolish = (`elem` ["SMASH"]) . (!! 0) . splitOn " ";
 
 -- For all commands @k@, @isGo k@ iff @k@ demands that the player moves
 -- somewhere.  @k@ need not actually be a followable instruction.

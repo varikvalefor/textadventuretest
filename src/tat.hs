@@ -1,5 +1,6 @@
 import Data.Char (toUpper);
 import VVXtAdventure.Base;
+import Data.Char (toUpper);
 import TestAdventure.ConditionChecks;
 import qualified TestAdventure.Messages.Death as MD;
 import qualified TestAdventure.Messages.Status as MS;
@@ -90,6 +91,6 @@ getAndParseCommand godDamn =
     where
     -- \| @k@ is a version of the player's command which lacks some
     -- @junkwords@.
-    k = unwords $ filter (not . (`elem` junkwords)) $ words l
+    k = unwords $ filter (not . (`elem` junkwords)) $ words $ map toUpper l 
     -- \| @junkwords@ is a list of words which can be safely discarded.
     junkwords = ["TO", "THE", "A", "AN"]
