@@ -46,7 +46,7 @@ introducePlayer k =
   return k
   where
   name :: String
-  name = (forename $ playerName k) ++ " " ++ (surname $ playerName k)
+  name = forename (playerName k) ++ " " ++ surname (playerName k)
   alias :: String
   alias = nickname $ playerName k
 
