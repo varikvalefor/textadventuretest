@@ -86,4 +86,6 @@ getAndParseCommand godDamn =
     -- CATCH-ALL
     | otherwise = putStrLn "Eh?" >> return godDamn
     where
-    k = unwords $ filter (not . (`elem` ["TO", "THE", "A", "AN"])) $ words l
+    k = unwords $ filter (not . (`elem` junkwords)) $ words l
+    -- \| @junkwords@ is a list of words which can be safely discarded.
+    junkwords = ["TO", "THE", "A", "AN"]
