@@ -37,7 +37,7 @@ isGo :: String -> Bool;
 isGo = (== "GO") . head . words;
 
 -- | For all commands @k@, @isFlip k@ iff @k@ demands that the player
-- character flips something, e.g., the crappy living room table.
+-- character flips something, e.g., the crappy living room table.
 isFlip :: String -> Bool;
 isFlip = (== "FLIP") . head . words;
 
