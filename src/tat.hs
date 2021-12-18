@@ -52,6 +52,8 @@ introducePlayer k =
 
 -- | chooseCont determines whether or not the game should continue,
 -- based upon the status of the player character.
+--
+-- @chooseCont@ is the main game loop.
 chooseCont :: GameData -> IO ();
 chooseCont k
   | status k == Dead = putStrLn MD.standard
