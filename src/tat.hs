@@ -69,7 +69,7 @@ getAndParseCommand godDamn =
   parseCommand l
     | l == [] = putStrLn "The silent treatment won't work here." >>
       return godDamn
-      -- ACTIONS FOR PLAYER
+    -- ACTIONS FOR PLAYER
     | isClean k = cleanUp godDamn k
     | isDemolish k = crush godDamn k
     | isFlip k = flipObj godDamn k
