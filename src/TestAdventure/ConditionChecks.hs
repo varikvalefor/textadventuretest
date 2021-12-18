@@ -29,23 +29,23 @@ isObsSurround = (`elem` ["LOOK AROUND YOU"]);
 -- | For all commands @k@, @isDemolish k@ iff @k@ demands that the
 -- player character smashes up something.
 isDemolish :: String -> Bool;
-isDemolish = (`elem` ["SMASH"]) . (!! 0) . splitOn " ";
+isDemolish = (`elem` ["SMASH"]) . head . splitOn " ";
 
 -- For all commands @k@, @isGo k@ iff @k@ demands that the player moves
 -- somewhere.  @k@ need not actually be a followable instruction.
 isGo :: String -> Bool;
-isGo = (== "GO") . (!! 0) . words;
+isGo = (== "GO") . head . words;
 
 -- | For all commands @k@, @isFlip k@ iff @k@ demands that the player
 - character flips something, e.g., the crappy living room table.
 isFlip :: String -> Bool;
-isFlip = (== "FLIP") . (!!0) . words;
+isFlip = (== "FLIP") . head . words;
 
 -- | For all commands @k@, @isClean k@ iff @k@ demands that the player
 -- character cleans up some mess, e.g., the debris of the living room
 -- table.
 isClean :: String -> Bool;
-isClean = (== "CLEANUP") . (!! 0) . words;
+isClean = (== "CLEANUP") . head . words;
 
 -- | For all commands @k@, @isWieldWeapon k@ iff @k@ demands that the
 -- player character wields some weapon.
