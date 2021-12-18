@@ -39,7 +39,7 @@ main :: IO ();
 main = introducePlayer defChar >>= getAndParseCommand >>= chooseCont;
 
 -- | For all 'GameData' k, introducePlayer k prints a short description
--- of k to the terminal.
+-- of k to the standard output.
 introducePlayer :: GameData -> IO GameData;
 introducePlayer k =
   putStrLn ("You are " ++ name ++ ", a.k.a. " ++ alias ++ ".") >>
