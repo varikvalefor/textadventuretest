@@ -20,7 +20,7 @@ isSecretWord = (== "HAM AND SWISS ON RYE");
 -- | For all commands @k@, @isCheckBag k@ iff @k@ demands that the
 -- contents of the player character's inventory are listed.
 isCheckBag :: String -> Bool;
-isCheckBag k = map toUpper k `elem` ["LIST INVENTORY", "INVENTORY"];
+isCheckBag = (`elem` ["LIST INVENTORY", "INVENTORY"]) . map toUpper;
 
 -- | For all commands @k@, @isObsSurround k@ iff @k@ demands that the
 -- player character's surroundings are listed.
