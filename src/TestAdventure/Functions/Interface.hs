@@ -12,11 +12,11 @@ listInventory gd =
 
 -- | listSurroundings describes the player's environment.
 listSurroundings :: GameData -> IO GameData;
-listSurroundings k
-  | currentRoom k == LivingRoom = listSurroundingsOfLivingRoom k
-  | currentRoom k == BroomCloset = listSurroundingsOfBroomCloset k
-  | otherwise = putStrLn weirdAssRoom >> return k
-  were weirdAssRoom = "Cleverly done, Mr. FREEMAN, but you're  not \
+listSurroundings k = case currentRoom k of
+  LivingRoom  -> listSurroundingsOfLivingRoom k
+  BroomCloset -> listSurroundingsOfBroomCloset k
+  _           -> putStrLn weirdAssRoom >> return k
+  where weirdAssRoom = "Cleverly done, Mr. FREEMAN, but you're  not \
                       \not supposed to be here -- as a matter of \
                       \fact, you're not.  Get back where you belong \
                       \and forget about all this until we meet again."
