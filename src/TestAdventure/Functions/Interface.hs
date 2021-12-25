@@ -8,7 +8,7 @@ listInventory :: GameData -> IO GameData;
 listInventory gd = putStrLn "You have..." >> listTrinkets >> return gd
   where
   printName = putStrLn . (\(x:xs) -> toUpper x:xs) . itemName
-  listTrinkets = mapM_ printName $ inventory gd
+  listTrinkets = mapM_ printName $ inventory gd;
 
 -- | listSurroundings describes the player's environment.
 listSurroundings :: GameData -> IO GameData;
