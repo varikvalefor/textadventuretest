@@ -24,12 +24,14 @@ listSurroundings k = case currentRoom k of
 -- | For all 'GameData' @k@, @listSurroundingsOfLivingRoom k@ prints a
 -- description of the living room to the terminal, then outputs @k@.
 listSurroundingsOfLivingRoom :: GameData -> IO GameData;
-listSurroundingsOfLivingRoom gd =
-  putStrLn "You stand in the middle of a dingy living room." >>
-  putStrLn tableDescription >>
-  putStrLn "North of this dingy living room is a broom closet." >>
-  return gd
+listSurroundingsOfLivingRoom gd = displayCrap >> return gd
   where
+  displayCrap :: IO ()
+  displayCrap = mapM_ putStrLn ["You stand in the middle of a dingy \
+                                \living room.",
+                                tableDescription,
+                                "North of this dingy living room is \
+                                \a broom closet."]
   tableDescription :: String
   tableDescription
     | lrTableSmashedness gd > 1 = "You have smashed up the table such \
