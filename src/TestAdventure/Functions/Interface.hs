@@ -5,10 +5,10 @@ import VVXtAdventure.Base;
 -- | listInventory lists the contents of the player character's
 -- inventory.
 listInventory :: GameData -> IO GameData;
-listInventory gd =
-  putStrLn "You have..." >>
-  mapM_ (putStrLn . (\(x:xs) -> toUpper x:xs) . itemName) (inventory gd) >>
-  return gd;
+listInventory gd = putStrLn "You have..." >> listTrinkets >> return gd
+  where
+  printName = putStrLn . (\(x:xs) -> toUpper x:xs) . itemName
+  listTrinkets = mapM_ printName $ inventory gd
 
 -- | listSurroundings describes the player's environment.
 listSurroundings :: GameData -> IO GameData;
