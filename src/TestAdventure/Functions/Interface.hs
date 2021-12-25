@@ -49,17 +49,16 @@ listSurroundingsOfLivingRoom gd = displayCrap >> return gd
 -- description of the broom closet of @k@ to the terminal, then outputs
 -- @k@.
 listSurroundingsOfBroomCloset :: GameData -> IO GameData;
-listSurroundingsOfBroomCloset gd =
-  putStrLn "You stand inside of a tiny broom closet." >>
-  putStr broomStat >>
-  putStr mopStat >>
-  return gd
+listSurroundingsOfBroomCloset gd = describeStuff >> return gd
   where
+  describeStuff :: IO ()
+  describeStuff = mapM_ putStrLn ["You stand inside of a tiny broom \
+                                  \closet.", broomStat, mopStat]
   broomStat :: String
   broomStat
-    | broomSmashedness gd == 0 = "To your left is a wooden broom.\n"
-    | otherwise = "On the floor are the remains of a wooden broom.\n"
+    | broomSmashedness gd == 0 = "To your left is a wooden broom."
+    | otherwise = "On the floor are the remains of a wooden broom."
   mopStat :: String
   mopStat
-    | mopSmashedness gd == 0 = "To your right is a mop.\n"
-    | otherwise = "Strangely, no mop is here.\n";
+    | mopSmashedness gd == 0 = "To your right is a mop."
+    | otherwise = "Strangely, no mop is here.";
