@@ -31,8 +31,8 @@ listSurroundingsOfLivingRoom gd =
   where
   tableDescription :: String
   tableDescription
-    | lrTableSmashedness gd > 1 = "In the centre of the room is a " ++
-      "smashed-up card table."
+    | lrTableSmashedness gd > 1 = "You have smashed up the table " ++
+      "that the table is now all but entirely unrecognisable."
     | lrTableDebrisPresent gd = "In the centre of the room are the " ++
       "remains of what probably could have been a table... or a " ++
       "chair... or a fairly shitty cupboard."
