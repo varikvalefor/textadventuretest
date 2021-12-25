@@ -3,7 +3,7 @@ import Data.Char (toUpper);
 import VVXtAdventure.Base;
 
 -- | listInventory @g@ lists the contents of the player character's
--- inventory, according t @g@.
+-- inventory, according to @g@.
 listInventory :: GameData -> IO GameData;
 listInventory gd = putStrLn "You have..." >> listTrinkets >> return gd
   where
