@@ -10,21 +10,18 @@ import Data.Maybe;
 import Text.Read;
 import Data.Char (toUpper);
 
--- | @crush@ is used to smash stuff, e.g., the flimsy-looking table.
--- @crush@'s output is modified such that the destruction is documented.
+-- | @crush godDamn words@ applies @words@\'s "SMASH" command to
+-- @godDamn@, returning the resulting @godDamn@ and probably writing
+-- some status messasge to the standard otuput.
 crush :: GameData
-      -> String -- ^ The "SMASH SO-AND-SO" command
+      -> String
+      -- ^ The "SMASH SO-AND-SO" command
       -> IO GameData;
-crush y x
-  | (k, theRoom) == ("FLIMSY-LOOKING TABLE", LivingRoom) = Crush.table y
-  | (k, theRoom) == ("BROOM", BroomCloset) = Crush.broom y
-  | (k, theRoom) == ("MOP", BroomCloset) = Crush.mop y
-  | otherwise = putStrLn "Eh?" >> return y
-  where
-  k = daArgz x
-  --
-  theRoom :: Room
-  theRoom = currentRoom y
+crush y x = case (daArgz x, currentRoom y) of
+  ("FLIMSY-LOOKING TABLE", LivingRoom) -> Crush.table y
+  ("BROOM", BroomCloset)               -> Crush.broom y
+  ("MOP", BroomCloset)                 -> Crush.mop y
+  _                                    -> putStrLn "Eh?" >> return y;
 
 -- | @travel a b@ transports the player character to the room which is
 -- specified in @b@ or complains about the player's having entered some
