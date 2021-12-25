@@ -15,10 +15,11 @@ listSurroundings :: GameData -> IO GameData;
 listSurroundings k
   | currentRoom k == LivingRoom = listSurroundingsOfLivingRoom k
   | currentRoom k == BroomCloset = listSurroundingsOfBroomCloset k
-  | otherwise = putStrLn ("Cleverly done, Mr. FREEMAN, but you're " ++
-    "not supposed to be here -- as a matter of fact, you're not.  " ++
-    "Get back where you belong and forget about all this until we " ++
-    "meet again.") >> return k;
+  | otherwise = putStrLn weirdAssRoom >> return k
+  were weirdAssRoom = "Cleverly done, Mr. FREEMAN, but you're  not \
+                      \not supposed to be here -- as a matter of \
+                      \fact, you're not.  Get back where you belong \
+                      \and forget about all this until we meet again."
 
 -- | For all 'GameData' @k@, @listSurroundingsOfLivingRoom k@ prints a
 -- description of the living room to the terminal, then outputs @k@.
@@ -31,15 +32,16 @@ listSurroundingsOfLivingRoom gd =
   where
   tableDescription :: String
   tableDescription
-    | lrTableSmashedness gd > 1 = "You have smashed up the table " ++
-      "that the table is now all but entirely unrecognisable."
-    | lrTableDebrisPresent gd = "In the centre of the room are the " ++
-      "remains of what probably could have been a table... or a " ++
-      "chair... or a fairly shitty cupboard."
-    | lrTableFlipped gd = "In the centre of the room is a table " ++
-      "which is flipped upside-down."
-    | otherwise = "In the centre of the room is a flimsy-looking " ++
-      "table."
+    | lrTableSmashedness gd > 1 = "You have smashed up the table such \
+                                  \that the table is now all but \
+                                  \entirely unrecognisable."
+    | lrTableDebrisPresent gd = "In the centre of the room are the \
+                                \remains of what probably could have \
+                                \been a table... or a chair... or a \
+                                \fairly shitty cupboard."
+    | lrTableFlipped gd = "In the centre of the room is a table which \
+                          \which is flipped upside-down."
+    | otherwise = "In the centre of the room is a flimsy-looking table."
 
 -- | For all 'GameData' @k@, @listSurroundingsOfBroomCloset k@ prints a
 -- description of the broom closet of @k@ to the terminal, then outputs
