@@ -99,9 +99,7 @@ cleanUpLRTableDebris gd
 killSelf :: GameData
          -> String -- ^ Command used to kill, kill self
          -> IO GameData;
-killSelf godDamn strcat =
-  putStrLn MD.spontComb >>
-  return godDamn {status = Dead};
+killSelf gd j = putStrLn MD.spontComb >> return gd {status = Dead};
 
 -- | @wieldWeapon a b@ makes the player character wield the weapon which
 -- is mentioned in @b@ if doing such a thing is feasible.
