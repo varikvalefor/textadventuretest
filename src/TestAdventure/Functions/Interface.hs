@@ -2,8 +2,8 @@ module TestAdventure.Functions.Interface where
 import Data.Char (toUpper);
 import VVXtAdventure.Base;
 
--- | listInventory lists the contents of the player character's
--- inventory.
+-- | listInventory @g@ lists the contents of the player character's
+-- inventory, according t @g@.
 listInventory :: GameData -> IO GameData;
 listInventory gd = putStrLn "You have..." >> listTrinkets >> return gd
   where
