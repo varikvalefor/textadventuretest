@@ -10,7 +10,8 @@ listInventory gd = putStrLn "You have..." >> listTrinkets >> return gd
   printName = putStrLn . (\(x:xs) -> toUpper x:xs) . itemName
   listTrinkets = mapM_ printName $ inventory gd;
 
--- | listSurroundings describes the player's environment.
+-- | Where @g@ is the primary 'GameData' variable, @listSurroundings g@
+-- describes the current environment of the player character.
 listSurroundings :: GameData -> IO GameData;
 listSurroundings k = case currentRoom k of
   LivingRoom  -> listSurroundingsOfLivingRoom k
