@@ -114,4 +114,4 @@ wieldWeapon gd k
   acceptableWeapons :: [Item]
   acceptableWeapons = filter isWieldable $ inventory gd
   isWieldable :: Item -> Bool
-  isWieldable g = ((map toUpper $ itemName g) == daArgz k) && isWeapon g;
+  isWieldable g = map toUpper (itemName g) == daArgz k && isWeapon g;
