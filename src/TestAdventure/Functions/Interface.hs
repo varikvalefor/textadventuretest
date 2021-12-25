@@ -45,9 +45,8 @@ listSurroundingsOfLivingRoom gd = displayCrap >> return gd
                           \which is flipped upside-down."
     | otherwise = "In the centre of the room is a flimsy-looking table."
 
--- | For all 'GameData' @k@, @listSurroundingsOfBroomCloset k@ prints a
--- description of the broom closet of @k@ to the terminal, then outputs
--- @k@.
+-- | @listSurroundingsOfBroomCloset k@ prints a description of the broom
+-- closet of @k@ to the terminal, then outputs @k@.
 listSurroundingsOfBroomCloset :: GameData -> IO GameData;
 listSurroundingsOfBroomCloset gd = describeStuff >> return gd
   where
