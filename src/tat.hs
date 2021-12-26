@@ -56,10 +56,10 @@ introducePlayer k = putStrLn nameMessage >> return k
 --
 -- @chooseCont@ is the main game loop.
 chooseCont :: GameData -> IO ();
-chooseCont k
-  | status k == Dead = putStrLn MD.standard
-  | status k == Win = putStrLn MD.winMsg
-  | otherwise = getAndParseCommand k >>= chooseCont;
+chooseCont k = case status k of
+  Dead -> putStrLn MD.standard
+  Win  -> putStrLn MD.winMsg
+  _    -> getAndParseCommand k >>= chooseCont;
 
 -- | getAndParseCommand retrieves a command from the user and executes
 -- or rejects this command, depending upon whether or not the command is
