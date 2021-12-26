@@ -17,7 +17,7 @@ listSurroundings k = case currentRoom k of
   LivingRoom  -> listSurroundingsOfLivingRoom k
   BroomCloset -> listSurroundingsOfBroomCloset k
   _           -> putStrLn weirdAssRoom >> return k
-  where weirdAssRoom = "Cleverly done, Mr. FREEMAN, but you're  not \
+  where weirdAssRoom = "Cleverly done, Mr. FREEMAN, but you're \
                       \not supposed to be here -- as a matter of \
                       \fact, you're not.  Get back where you belong \
                       \and forget about all this until we meet again."
