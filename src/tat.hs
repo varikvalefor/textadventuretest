@@ -65,9 +65,11 @@ chooseCont k = case status k of
 -- or rejects this command, depending upon whether or not the command is
 -- recognised as being an acceptable command.
 getAndParseCommand :: GameData -> IO GameData;
-getAndParseCommand godDamn =
-  putStrLn "What do you do?" >> getLine >>= parseCommand
+getAndParseCommand godDamn = prompt >> getLine >>= parseCommand
   where
+  prompt :: IO ()
+  prompt = putStrLn "What do you do?"
+  --
   parseCommand :: String -> IO GameData
   parseCommand l
     | l == [] = putStrLn "The silent treatment won't work here." >>
