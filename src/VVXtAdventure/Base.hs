@@ -65,5 +65,11 @@ data CharName = CharName {
 -- alive.
 data State = Dead | Alive | Win deriving (Eq, Read, Show);
 
--- | Room is a room.  No shit.
-data Room = LivingRoom | BroomCloset deriving (Eq, Read, Show);
+-- | 'Room' represents a room.  No shit.
+data Room = LivingRoom
+          -- ^ This thing represents the living room in which the game
+          -- begins.
+          | BroomCloset
+          -- ^ This thing represents the broom closet which is
+          -- accessible from the living room in wich the game begins.
+          deriving (Eq, Read, Show);
