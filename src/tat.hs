@@ -9,7 +9,7 @@ import TestAdventure.Functions.Interface;
 import TestAdventure.Functions.Action;
 import TestAdventure.Functions.Miscellaneous;
 
--- | defChar is the default game data.
+-- | @defChar@ is the default game data.
 defChar :: GameData;
 defChar = GameData {
   playerName = CharName {
@@ -39,8 +39,8 @@ defChar = GameData {
 main :: IO ();
 main = introducePlayer defChar >>= getAndParseCommand >>= chooseCont;
 
--- | For all 'GameData' k, introducePlayer k prints a short description
--- of k to the standard output.
+-- | For all 'GameData' @k@, @introducePlayer k@ prints a short
+-- description of @k@ to the standard output.
 introducePlayer :: GameData -> IO GameData;
 introducePlayer k = putStrLn nameMessage >> return k 
   where
@@ -61,7 +61,7 @@ chooseCont k = case status k of
   Win  -> putStrLn MD.winMsg
   _    -> getAndParseCommand k >>= chooseCont;
 
--- | getAndParseCommand retrieves a command from the user and executes
+-- | @getAndParseCommand@ retrieves a command from the user and executes
 -- or rejects this command, depending upon whether or not the command is
 -- recognised as being an acceptable command.
 getAndParseCommand :: GameData -> IO GameData;
