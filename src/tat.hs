@@ -17,13 +17,9 @@ defChar = GameData {
     surname  = "TUBMAN",
     nickname = "THE O.G. MEATBALL"
   },
-  inventory =
-    [
-      Item {
-        itemName = "shitty-ass stick",
-        isWeapon = True
-      }
-    ],
+  inventory = [Item {itemName = "shitty-ass stick",
+                     isWeapon = True}
+  ],
   questionYNExists = False,
   secretWordNums = 0,
   status = Alive,
