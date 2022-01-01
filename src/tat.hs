@@ -18,7 +18,15 @@ defChar = GameData {
     nickname = "THE O.G. MEATBALL"
   },
   inventory = [Item {itemName = "shitty-ass stick",
-                     isWeapon = True}
+                     isWeapon = True},
+               Item {itemName = "repair kit",
+                     -- \| Is using a repair kit as a weapon infeasible?
+                     -- The contents of this repair kit are not made
+                     -- terribly obvious to the player; as such, this
+                     -- repair kit may contain a screwdriver... or
+                     -- something else which can be used to efficiently
+                     -- stab some bitches.
+                     isWeapon = False}
   ],
   questionYNExists = False,
   secretWordNums = 0,
