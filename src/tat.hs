@@ -95,4 +95,4 @@ getAndParseCommand godDamn = prompt >> getLine >>= parseCommand
     -- @junkwords@.
     k = unwords $ filter (not . (`elem` junkwords)) $ words $ map toUpper l 
     -- \| @junkwords@ is a list of words which can be safely discarded.
-    junkwords = ["TO", "THE", "A", "AN"]
+    junkwords = ["TO", "THE", "A", "AN"];
