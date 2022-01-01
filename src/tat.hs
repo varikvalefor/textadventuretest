@@ -68,7 +68,7 @@ getAndParseCommand :: GameData -> IO GameData;
 getAndParseCommand godDamn = prompt >> getLine >>= parseCommand
   where
   prompt :: IO ()
-  prompt = putStrLn "What do you do?"
+  prompt = putStrLn "What do you do?" >> putStr "$ "
   --
   parseCommand :: String -> IO GameData
   parseCommand l
