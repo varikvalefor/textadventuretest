@@ -34,20 +34,20 @@ isDemolish = (`elem` ["SMASH"]) . head . splitOn " ";
 -- For all commands @k@, @isGo k@ iff @k@ demands that the player moves
 -- somewhere.  @k@ need not actually be a followable instruction.
 isGo :: String -> Bool;
-isGo = (== "GO") . head . words;
+isGo = flip elem ["GO"] . head . words;
 
 -- | For all commands @k@, @isFlip k@ iff @k@ demands that the player
 -- character flips something, e.g., the crappy living room table.
 isFlip :: String -> Bool;
-isFlip = (== "FLIP") . head . words;
+isFlip = flip elem ["FLIP"] . head . words;
 
 -- | For all commands @k@, @isClean k@ iff @k@ demands that the player
 -- character cleans up some mess, e.g., the debris of the living room
 -- table.
 isClean :: String -> Bool;
-isClean = (== "CLEANUP") . head . words;
+isClean = flip elem ["CLEANUP"] . head . words;
 
 -- | For all commands @k@, @isWieldWeapon k@ iff @k@ demands that the
 -- player character wields some weapon.
 isWieldWeapon :: String -> Bool;
-isWieldWeapon = (== "WIELD") . head . words;
+isWieldWeapon = flip elem ["WIELD"] . head . words;
