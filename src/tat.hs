@@ -45,7 +45,7 @@ introducePlayer :: GameData -> IO GameData;
 introducePlayer k = putStrLn nameMessage >> return k 
   where
   name :: String
-  name = forename (playerName k) ++ " " ++ surname (playerName k)
+  name = unwords $ map ($ playerName k) [forename, surname]
   alias :: String
   alias = nickname $ playerName k
   nameMessage :: String
