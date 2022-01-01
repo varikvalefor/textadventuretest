@@ -51,7 +51,7 @@ introducePlayer k = putStrLn nameMessage >> return k
   nameMessage :: String
   nameMessage = "You are " ++ name ++ ", a.k.a. " ++ alias ++ ".";
 
--- | chooseCont determines whether or not the game should continue,
+-- | @chooseCont@ determines whether or not the game should continue,
 -- based upon the status of the player character.
 --
 -- @chooseCont@ is the main game loop.
