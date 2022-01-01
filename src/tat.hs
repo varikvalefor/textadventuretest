@@ -81,21 +81,21 @@ getAndParseCommand godDamn = prompt >> getLine >>= parseCommand
   parseCommand l
     | l == [] = putStrLn "The silent treatment won't work here." >>
       return godDamn
-    -- ACTIONS FOR PLAYER
+    -- \| ACTIONS FOR PLAYER
     | isClean k = cleanUp godDamn k
     | isDemolish k = crush godDamn k
     | isFlip k = flipObj godDamn k
     | isGo k = travel godDamn k
     | isSuicide k = killSelf godDamn k
     | isWieldWeapon k = wieldWeapon godDamn k
-    -- MISCELLANEOUS
+    -- \| MISCELLANEOUS
     | isAffirmative k && (not . questionYNExists) godDamn =
       putStrLn MD.answerAff >> return godDamn {status = Win}
     | isSecretWord k = secretWordProcedure godDamn
-    -- INTERFACE
+    -- \| INTERFACE
     | isCheckBag k = listInventory godDamn
     | isObsSurround k = listSurroundings godDamn
-    -- CATCH-ALL
+    -- \| CATCH-ALL
     | otherwise = putStrLn "Eh?" >> return godDamn
     where
     -- \| @k@ is a version of the player's command which lacks some
