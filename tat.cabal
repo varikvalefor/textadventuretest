@@ -7,7 +7,7 @@ Description:   _Text Adventure Test_, otherwise known as "TAT", is a
                stupid text adventure game which is created to
                demonstrate that fun things can be created with Haskell.
 
-License:       BSD-3-Clause
+License:       Unlicense
 License-file:  LICENSE
 
 Author:        Varik Valefor
