@@ -99,7 +99,7 @@ record Room : Set
     cname : String
     items : List Item
 \end{code}
-    
+
 \subsection{la'oi .\F{GameData}.}
 ni'o ga jo ko'a goi la'o zoi.\ \B a .zoi.\ ctaipe la'oi .\F{GameData} .zoi.\ gi\ldots
 \begin{itemize}
