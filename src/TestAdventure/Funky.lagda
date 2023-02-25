@@ -143,7 +143,7 @@ inspect? (c ∷ f) dang = if methch (getDown f) nothing
   getDown ("POCKET" ∷ []) = getDown ("POCKETS" ∷ [])
   getDown (n ∷ []) = gd' $ filterₗ (_≟_ n ∘ Item.name) inv
     where
-    inv = GameData.inventory dang
+    inv = Character.inventory $ GameData.player dang
     gd' : List Item → COut
     gd' (q ∷ []) = just $ Item.description q , dang
     gd' (_ ∷ _ ∷ _) = just $ m , dang

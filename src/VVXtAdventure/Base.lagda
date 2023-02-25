@@ -100,30 +100,46 @@ record Room : Set
     items : List Item
 \end{code}
 
+\subsection{la'oi .\F{Character}.}
+ni'o ga naja la'o zoi.\ \B K .zoi.\ ctaipe la'o zoi.\ \F{List} \F{Room} .zoi.\ gi la'o zoi.\ \F{Character} \B K .zoi.\ sinxa lo xarpre ja co'e
+
+.i ga jo la'o zoi.\ \B a .zoi.\ ctaipe la'o zoi.\ \F{Character} \B q .zoi.\ gi\ldots
+\begin{itemize}
+\item ga je la'o zoi.\ \F{Character.forename} \B a .zoi.\ du'acme ko'a goi lo selsni be la'o zoi.\ \B a .zoi.\ gi
+\item ga je la'o zoi.\ \F{Character.surname} \B a .zoi.\ lazme'e ko'a gi
+\item ga je la'o zoi.\ \F{Character.nicknames} \B a .zoi.\ liste lo'i datcme be ko'a gi
+\item ga je tu'a la'o zoi.\ \B a .zoi.\ .indika lo du'u ko'a zvati lo selsni be la'o zoi.\ \B q \Sym ! (\F{Character.room} \B a) .zoi.\ gi
+\item ga je la'o zoi.\ \F{Character.inventory} zoi.\ liste lo'i ro se ralte be lo selsni be ko'a
+\end{itemize}
+
+\begin{code}
+record Character (q : List Room) : Set
+  where
+  field
+    forename : String
+    surname : String
+    nicknames : List String
+    room : Fin $ Data.List.length q
+    inventory : List Item
+\end{code}
+
 \subsection{la'oi .\F{GameData}.}
 ni'o ga jo ko'a goi la'o zoi.\ \B a .zoi.\ ctaipe la'oi .\F{GameData} .zoi.\ gi\ldots
 \begin{itemize}
-	\item ga je la'o zoi.\ \F{GameData.forename} \B a .zoi.\ du'acme ko'e goi lo kelci ke xarpre ja co'e po ko'a gi
-        \item ga je la'o zoi.\ \F{GameData.surname} \B a .zoi.\ lazme'e ko'e gi
         \item ga je ga jo la'o zoi.\ \F{GameData.epicwin} \B a .zoi.\ du la'oi .\F{true}.\ gi ga je le kelci cu jinga gi le selkei cu mulno ja co'e gi
-	\item ga je la'o zoi.\ \F{GameData.nicknames} \B a .zoi.\ liste lo'i datcme be ko'e gi
-	\item ga je la'o zoi.\ \F{GameData.rooms} \B a .zoi.\ liste lo'i ro co'e poi cumki fa lo nu ke'a se zvati ko'e gi
-	\item ga je tu'a ko'a indika lo du'u ko'e zvati lo selsni be la'o zoi.\ (\F{GameData.rooms} \B a) \Sym ! (\F{GameData.room} \B a) .zoi.\ gi
-        \item ga je la'o zoi.\ \F{GameData.inventory} \B a .zoi.\ liste lo'i ro se ralte ko'e gi
-	\item tu'a ko'a .indika lo du'u lo kelci ke xarpre ja co'e cu zvati la'o zoi.\ \F{GameData.room} \B a .zoi.
+        \item ga je la'o zoi.\ \F{GameData.rooms} \B a .zoi.\ liste lo'i velski be lo'i co'e poi cumki fa lo nu zvati ke'a gi
+        \item ga je la'o zoi.\ \F{GameData.player} \B a .zoi.\ velski lo kelci ke xarpre ja co'e po ko'a gi
+        \item la'o zoi.\ \F{GameData.haters} \B a .zoi.\ liste lo'i sinxa be lo'i xarpre ja co'e poi ke'a na du lo kelci ke xarpre ja co'e
 \end{itemize}
 
 \begin{code}
 record GameData : Set
   where
   field
-    forename : String
-    surname : String
     epicwin : Bool
-    nicknames : List String
     rooms : List Room
-    room : Fin $ Data.List.length rooms
-    inventory : List Item
+    player : Character rooms
+    haters : List $ Character rooms
 \end{code}
 
 \section{le sampu}
