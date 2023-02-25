@@ -104,12 +104,14 @@ rooms = dingyliv ∷ []
 initialD : GameData
 initialD = record {
   rooms = rooms;
-  room = Data.Fin.fromℕ 0;
-  forename = "HARRIET";
-  surname = "TUBMANN";
   epicwin = false;
-  nicknames = "THE O.G. MEATBALL" ∷ [];
-  inventory = []}
+  player = record {
+    forename = "HARRIET";
+    surname = "TUBMANN";
+    nicknames = "THE O.G. MEATBALL" ∷ [];
+    room = Data.Fin.fromℕ 0;
+    inventory = []};
+  haters = []}
 \end{code}
 
 \section{la'oi .\F{main}.}
