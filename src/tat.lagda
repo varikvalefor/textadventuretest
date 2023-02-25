@@ -122,14 +122,14 @@ main = run $ lupe initialD
   lupe = λ q → prompt >>ᵢₒ ree >>=ᵢₒ crock q
     where
     prompt = putStrLn "What do you do?"
-    chews : List $ COut × (GameData → IO ⊤) → IO ⊤ → IO ⊤
-    chews ((just (a , b) , f) ∷ _) _ = putStrLn a >>ᵢₒ f b
-    chews ((nothing , _) ∷ xs) d = chews xs d
-    chews [] d = d
     ree = map (map toUpper) ∘ words IO.<$> getLine
     crock : GameData → List String → IO ⊤
     crock gd s = chews np $ putStrLn m >>ᵢₒ lupe gd
       where
+      chews : List $ COut × (GameData → IO ⊤) → IO ⊤ → IO ⊤
+      chews ((just (a , b) , f) ∷ _) _ = putStrLn a >>ᵢₒ f b
+      chews ((nothing , _) ∷ xs) d = chews xs d
+      chews [] d = d
       m = "I don't understand a word you just said."
       np : List $ COut × (GameData → IO ⊤)
       np = (epicwin? gd , boob) ∷
