@@ -145,7 +145,7 @@ inspect? (c ∷ f) dang = if methch (getDown f) nothing
     where
     inv = Character.inventory $ GameData.player dang
     gd' : List Item → COut
-    gd' (q ∷ []) = just $ Item.description q , dang
+    gd' (q ∷ []) = just $ Item.hlDescr q , dang
     gd' (_ ∷ _ ∷ _) = just $ m , dang
       where
       m = "You're going to have to be more specific.  \

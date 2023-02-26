@@ -71,6 +71,12 @@ ni'o ga jo ko'a goi la'o zoi.\ \B a .zoi.\ ctaipe la'oi .\F{Item}.\ gi\ldots
 \begin{itemize}
 	\item ga je la'o zoi.\ \F{Item.name} \B a .zoi.\ mu'oi glibau.\ display name .glibau.\ ko'a gi
 	\item ga je ga je ko'e goi la'o zoi.\ \F{Item.cname} \B a .zoi.\ cmene ko'a gi cadga fa lo nu lo kelci cu pilno ko'e tu'a ko'a gi
+	\item ga je cadga fa lo nu ga naja ga je lo kelci cu cpedu lo nu skicu lo selsni be ko'a gi curmi lo nu skicu lo selsni be ko'a gi\ldots
+	\begin{itemize}
+		\item ga jonai ga je lo me'oi .inventory.\ be lo kelci xarpre ja co'e cu vasru lo selsni be ko'a gi pilno la'o zoi.\ \F{hlDescr} \B a .zoi.\ gi
+		\item ga jonai ga je ga je cpedu lo nu skicu kei ca lo nu lo kelci xarpre ja co'e cu zvati zo'e poi la'o zoi.\ \B C .zoi.\ mu'oi glibau.\ Room.cname .glibau.\ lo sinxa be ke'a gi la'o zoi.\ \F{rmDescr} \B a .zoi.\ vasru la'o zoi.\ \B C \Sym , \B d .zoi.\ gi pilno la'o zoi.\ \B d .zoi.\ gi
+		\item pilno la'o zoi.\ \F{dfDescr} \B a .zoi.\ gi
+	\end{itemize}
 	\item la'o zoi.\ \F{Item.description} \B a .zoi.\ velski ko'a
 \end{itemize}
 
@@ -80,7 +86,9 @@ record Item : Set
   field
     name : String
     cname : String
-    description : String
+    rmDescr : List $ String × String
+    dfDescr : String
+    hlDescr : String
 \end{code}
 
 \subsection{la'oi .\F{Room}.}
