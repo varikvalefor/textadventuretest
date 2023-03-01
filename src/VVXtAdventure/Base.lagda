@@ -65,7 +65,7 @@ _!_ (x ∷ xs) Fin.zero = x
 
 \section{le me'oi .\AgdaKeyword{record}.}
 
-  \subsection{la'oi .\F{Item}.}
+\subsection{la'oi .\F{Item}.}
 
 ni'o ga jo ko'a goi la'o zoi.\ \B a .zoi.\ ctaipe la'oi .\F{Item}.\ gi\ldots
 \begin{itemize}
