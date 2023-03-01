@@ -60,7 +60,7 @@ ni'o la .varik.\ cu sorpa'a lo nu na sarcu fa lo nu ciksi
 _!_ : ∀ {a} → {A : Set a}
     → (q : List A) → Fin $ Data.List.length q → A
 _!_ (x ∷ xs) (Fin.suc n) = _!_ xs n
-_!_ (x ∷ xs) (Fin.zero) = x
+_!_ (x ∷ xs) Fin.zero = x
 \end{code}
 
 \section{le me'oi .\AgdaKeyword{record}.}
