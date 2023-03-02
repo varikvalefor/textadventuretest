@@ -95,6 +95,7 @@ rooms = dingyliv ∷ []
   dingyliv = record {
     name = "A DINGY LIVING ROOM";
     cname = "DINGYLIVRM";
+    travis = [];
     items = []}
 \end{code}
 
