@@ -49,6 +49,7 @@ open import Data.List
 open import Data.Maybe
 open import Data.String
 open import Data.Product
+open import Truthbrary.Record.Eq
 \end{code}
 
 \section{le fancu}
@@ -96,16 +97,19 @@ ni'o ga jo la'o zoi.\ \B S .zoi.\ fa'u ko'a goi la'o zoi.\ \B a .zoi.\ ctaipe la
 \begin{itemize}
 	\item ga je la'o zoi.\ \F{Room.name} \B a .zoi.\ cmene lo selsni be ko'a gi
 	\item ga je cadga fa lo nu lo kelci cu pilno la'o zoi.\ \F{Room.cname} \B a .zoi.\ tu'a ko'a gi
+        \item ga je ga jo curmi lo nu sampu klama lo sinxa be ko'a lo sinxa be la'o zoi.\ \B q .zoi.\ gi la'o zoi.\ \F{Room.travis} \B a .zoi.\ vasru la'o zoi.\ \B q .zoi.\ gi
 	\item la'o zoi.\ \F{Room.items} \B a .zoi.\ liste lo'i selvau be lo selsni be ko'a be'o poi ke'a ba'e na prenu
 \end{itemize}
 
 \begin{code}
 record Room : Set
   where
+  inductive
   field
     name : String
     cname : String
     items : List Item
+    travis : List Room
 \end{code}
 
 \subsection{la'oi .\F{Character}.}
