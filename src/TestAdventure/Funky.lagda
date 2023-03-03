@@ -63,6 +63,11 @@ module TestAdventure.Funky where
 import Level
 import Agda.Builtin.Unit as ABU
 
+open import Data.Fin
+  using (
+    Fin
+  )
+open import Data.Sum
 open import Function
 open import Data.Bool
   renaming (
@@ -82,23 +87,34 @@ open import Data.List
   )
 open import Data.Maybe
   using (
+    maybe;
     Maybe;
     just;
     nothing
   )
 open import Data.String
   hiding (
+    length;
     _≟_
   )
 open import Data.Product
   using (
+    proj₁;
+    proj₂;
+    _×_;
     _,_
   )
 open import VVXtAdventure.Base
 open import Truthbrary.Record.Eq
 open import Truthbrary.Record.LLC
   using (
+    length;
     map
+  )
+open import Truthbrary.Category.Monad
+open import Data.List.Relation.Unary.Any
+  using (
+    any?
   )
 \end{code}
 
@@ -205,5 +221,61 @@ lp? ("I'M" ∷ "A" ∷ "WINNER" ∷ []) q = just $ m , q
       \q ≡ false.  You have not won The Game.\n\n\
       \You were probably expecting something else."
 lp? _ _ = nothing
+\end{code}
+
+\section{la'oi .\F{travel?}.}
+ni'o ga jonai ga je la'o zoi.\ \F{travel?} .zoi.\ djuno ja co'e lo du'u lo nu co'e ko'a goi zoi zoi.\ \F{travel?} \B r \B g .zoi.\ cu nu cpedu lo nu lo kelci ke xarpre ja co'e cu klama lo kumfa poi la'o zoi.\ \B K .zoi.\ sinxa ke'a gi ga jonai ga je la'o zoi.\ \F{Room.travis} \Sym \$ \F{Character.room} \Sym \$ \F{GameData.player} \B g .zoi.\ vasru la'o zoi.\ \B K .zoi.\ gi ko'a broda cei sinxa ja co'e lo me'oi .product.\ be lo velski be lo nu klama bei zo'e poi tu'a ke'a .indika lo du'u lo kelci ke xarpre ja co'e cu zvati zo'e poi djica lo nu zvati ke'a xi re gi ko'a broda lo me'oi .product.\ be lo te skuxai ja zo'e bei la'o zoi.\ \B g .zoi.\ gi ko'a broda la'oi .\F{nothing}.
+
+\begin{code}
+travel? : Com
+travel? [] _ = nothing
+travel? (x₁ ∷ xs₁) = if realShit (travel' xs₁) $ const nothing
+  where
+  realShit = x₁ ≡ᵇ "TRAVEL"
+  travel' : Com
+  travel' [] q = just $ m , q
+    where
+    m = "Don't tell me to break the rules, fucker!"
+  travel' (x ∷ []) q = maybe just tryfind $ alreadythere?
+    where
+    F = Fin $ length $ GameData.rooms q
+    cur = GameData.rooms q ! Character.room (GameData.player q)
+    alreadythere? = if at (just $ m , q) nothing
+      where
+      at = x ≡ᵇ Room.cname cur
+      m = "Damn, that's some fast travel.  \
+          \You're already there!"
+    tryfind = [_,_] (just ∘ flip _,_ q) iusyf mathch
+      where
+      -- | We'll just have to live with that possibility.
+      iusyf = maybe youse fail ∘ Data.List.head
+        where
+        fail = just $ m , q
+          where
+          m = "That room is not in your immediate vicinity."
+        youse : F → COut
+        youse = just ∘ _,_ m ∘ q'
+          where
+          play = GameData.player q
+          q' = λ r → record q {player = record play {room = r}}
+          m = "You travel successfully."
+      mathch = travelable $ existant $ zipfin $ GameData.rooms q
+        where
+        zipfin = λ l → Data.List.zip (Data.List.allFin $ length l) l
+        existant = Data.List.filter $ _≟_ x ∘ Room.cname ∘ proj₂
+        travelable : List $ F × Room → String ⊎ List F
+        travelable [] = inj₁ m
+          where
+          m = "Did you take your pills this morning?  \
+              \I don't think that that room exists."
+        travelable (x ∷ xs) = inj₂ $ pj1s $ Data.List.filter tr $ x ∷ xs
+          where
+          pj1s = Data.List.map proj₁
+          cnq = λ a b → Room.cname (proj₂ a) ≟ Room.cname b
+          tr = λ a → any? (cnq a) $ Room.travis cur
+  travel' (_ ∷ _ ∷ _) q = just $ m , q
+    where
+    m = "I strongly doubt that the concept of \"super\
+        \position\" applies to a creature of your mass."
 \end{code}
 \end{document}

@@ -140,6 +140,7 @@ main = run $ lupe initialD
         where
         boob = const $ return $ Level.lift ABU.tt
         std = scream? ∷
+              travel? ∷
               sayless? ∷
               inspect? ∷
               lp? ∷
