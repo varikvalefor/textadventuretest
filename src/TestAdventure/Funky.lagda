@@ -192,7 +192,7 @@ sayless? _ = const nothing
 \end{code}
 
 \subsection{la'oi .\F{lp?}.}
-ni'o ga je la'o zoi.\ \B c .zoi.\ na vajni gi ga jonai ko'a goi la'o zoi.\ \F{lp?} \B a \B b .zoi.\ du la'o zoi.\ \F{just} \B c \B b .zoi.\ gi ko'a du la'oi .\F{nothing}.
+ni'o ga jonai ga je ga je la'o zoi.\ \B c .zoi.\ na vajni gi ko'a goi la'o zoi.\ \F{lp?} \B a \B b .zoi.\ du la'o zoi.\ \F{just} \B c \B b .zoi.\ gi ko'a du la'oi .\F{nothing}.
 
 \begin{code}
 lp? : Com
