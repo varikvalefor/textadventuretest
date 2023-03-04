@@ -259,10 +259,10 @@ travel? (x₁ ∷ xs₁) = if realShit (travel' xs₁) $ const nothing
           play = GameData.player q
           q' = λ r → record q {player = record play {room = r}}
           m = "You travel successfully."
-      mathch = travelable $ existant $ zipfin $ GameData.rooms q
+      mathch = travelable $ methching $ zipfin $ GameData.rooms q
         where
         zipfin = λ l → Data.List.zip (Data.List.allFin $ length l) l
-        existant = Data.List.filter $ _≟_ x ∘ Room.cname ∘ proj₂
+        methching = Data.List.filter $ _≟_ x ∘ Room.cname ∘ proj₂
         travelable : List $ F × Room → String ⊎ List F
         travelable [] = inj₁ m
           where
