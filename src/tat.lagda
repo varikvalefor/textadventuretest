@@ -134,7 +134,6 @@ main = run $ lupe initialD
       chews ((nothing , _) ∷ xs) d = chews xs d
       chews [] d = d
       m = "I don't understand a word you just said."
-      np : List $ COut × (GameData → IO ⊤)
       np = (epicwin? gd , boob) ∷
            map (λ f → f s gd , lupe) std
         where
