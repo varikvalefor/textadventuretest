@@ -42,7 +42,7 @@
 \newcommand\F\AgdaFunction
 \newcommand\B\AgdaBound
 
-\newcommand\cmene{TestAdventure.Funky}
+\newcommand\cmene{VVXtAdventure.Funky}
 
 \title{la'o zoi.\ \texttt{\cmene}\ .zoi.}
 \author{la .varik.\ .VALefor.}
@@ -58,7 +58,7 @@ ni'o la'o zoi.\ \texttt{\cmene}\ .zoi. vasru le velcki be lo fancu be fi la'oi .
 \begin{code}
 {-# OPTIONS --safe #-}
 
-module TestAdventure.Funky where
+module VVXtAdventure.Funky where
 
 import Level
 import Agda.Builtin.Unit as ABU

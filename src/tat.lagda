@@ -78,7 +78,7 @@ open import Data.Product
     _,_
   )
 open import VVXtAdventure.Base
-open import TestAdventure.Funky
+open import VVXtAdventure.Funky
 open import Truthbrary.Record.Eq
 open import Data.Unit.Polymorphic
 open import Truthbrary.Record.LLC
