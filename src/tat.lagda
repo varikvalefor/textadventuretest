@@ -130,7 +130,7 @@ main = run $ lupe initialD
   lupe = λ q → prompt >>ᵢₒ ree >>=ᵢₒ crock q
     where
     prompt = putStrLn "What do you do?"
-    ree = map (map toUpper) ∘ words IO.<$> getLine
+    ree = map (map toUpper) ∘ words <$> getLine
     crock : GameData → List String → IO ⊤
     crock gd s = chews np $ putStrLn m >>ᵢₒ lupe gd
       where
