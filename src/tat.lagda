@@ -68,6 +68,10 @@ open import Data.Maybe
     nothing
   )
 open import Data.String
+  using (
+    String;
+    words
+  )
 open import Data.Product
   using (
     _×_;
@@ -79,6 +83,7 @@ open import Truthbrary.Record.Eq
 open import Data.Unit.Polymorphic
 open import Truthbrary.Record.LLC
   using (
+    _++_;
     map
   )
 \end{code}
@@ -138,11 +143,14 @@ main = run $ lupe initialD
            map (λ f → f s gd , lupe) std
         where
         boob = const $ return $ Level.lift ABU.tt
-        std = scream? ∷
-              travel? ∷
-              sayless? ∷
-              inspect? ∷
-              lp? ∷
-              []
+        std = sazycimde ++ gasnu
+          where
+          sazycimde = scream? ∷
+                      sayless? ∷
+                      inspect? ∷
+                      lp? ∷
+                      []
+          gasnu = travel? ∷
+                  []
 \end{code}
 \end{document}
