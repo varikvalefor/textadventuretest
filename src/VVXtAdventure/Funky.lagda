@@ -253,7 +253,6 @@ travel? (x₁ ∷ xs₁) = if realShit (travel' xs₁) $ const nothing
         fail = just $ m , q
           where
           m = "That room is not in your immediate vicinity."
-        youse : F → COut
         youse = just ∘ _,_ m ∘ q'
           where
           play = GameData.player q
