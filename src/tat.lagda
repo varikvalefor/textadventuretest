@@ -134,11 +134,11 @@ main = run $ lupe initialD
     crock : GameData → List String → IO ⊤
     crock gd s = chews np $ putStrLn m >>ᵢₒ lupe gd
       where
+      m = "I don't understand a word you just said."
       chews : List $ COut × (GameData → IO ⊤) → IO ⊤ → IO ⊤
       chews ((just (a , b) , f) ∷ _) _ = putStrLn a >>ᵢₒ f b
       chews ((nothing , _) ∷ xs) d = chews xs d
       chews [] d = d
-      m = "I don't understand a word you just said."
       np = (epicwin? gd , boob) ∷
            map (λ f → f s gd , lupe) std
         where
