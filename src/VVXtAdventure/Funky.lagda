@@ -83,6 +83,7 @@ open import Data.List
     []
   )
   renaming (
+    lookup to _!_;
     filter to filterₗ
   )
 open import Data.Maybe
