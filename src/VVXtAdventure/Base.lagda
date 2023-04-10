@@ -14,6 +14,8 @@
 \newunicodechar{∷}{\ensuremath{\mathnormal\Colon}}
 \newunicodechar{→}{\ensuremath{\mathnormal{\rightarrow}}}
 \newunicodechar{₁}{\ensuremath{\mathnormal{_1}}}
+\newunicodechar{∘}{\ensuremath{\mathnormal{\circ}}}
+\newunicodechar{≡}{\ensuremath{\mathnormal{\equiv}}}
 
 \newcommand\Sym\AgdaSymbol
 \newcommand\D\AgdaDatatype
@@ -50,6 +52,7 @@ open import Data.Maybe
 open import Data.String
 open import Data.Product
 open import Truthbrary.Record.Eq
+open import Relation.Binary.PropositionalEquality
 \end{code}
 
 \section{le me'oi .\AgdaKeyword{record}.}
@@ -124,18 +127,22 @@ ni'o ga naja la'o zoi.\ \B K .zoi.\ ctaipe la'o zoi.\ \F{List} \F{Room} .zoi.\ g
 	\item ga je la'o zoi.\ \F{Character.surname} \B a .zoi.\ lazme'e ko'a gi
 	\item ga je la'o zoi.\ \F{Character.nicknames} \B a .zoi.\ liste lo'i datcme be ko'a gi
 	\item ga je tu'a la'o zoi.\ \B a .zoi.\ .indika lo du'u ko'a zvati lo selsni be la'o zoi.\ \F{lookup} \B q (\F{Character.room} \B a) .zoi.\ gi
-	\item la'o zoi.\ \F{Character.inventory} zoi.\ liste lo'i ro se ralte be lo selsni be ko'a
+	\item ga je la'o zoi.\ \F{Character.inventory} zoi.\ liste lo'i ro se ralte be lo selsni be ko'a gi
+        \item la'o zoi.\ \F{lookup} (\F{Character.inventory} \B a) \Sym \$ \F{Character.wielded} \B a .zoi.\ sinxa zo'e poi ko'a me'oi .wield.\ ke'a ca zo'e
 \end{itemize}
 
 \begin{code}
 record Character (q : List Room) : Set
   where
+  isWeapon = _≡_ true ∘ is-just ∘ Item.weapwn
   field
     forename : String
     surname : String
     nicknames : List String
     room : Fin $ Data.List.length q
     inventory : List Item
+    wieldedct : Σ (Fin _) $ isWeapon ∘ lookup inventory
+  wielded = proj₁ wieldedct
 \end{code}
 
 \subsection{la'oi .\F{GameData}.}
