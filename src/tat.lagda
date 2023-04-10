@@ -115,7 +115,7 @@ initialD = record {
     forename = "HARRIET";
     surname = "TUBMANN";
     nicknames = "THE O.G. MEATBALL" ∷ [];
-    room = Data.Fin.fromℕ 0;
+    room = Data.Fin.zero;
     inventory = []};
   haters = []}
 \end{code}
