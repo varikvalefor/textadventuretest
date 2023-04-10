@@ -89,6 +89,7 @@ record Item : Set
   field
     name : String
     cname : String
+    weapwn : Maybe WeaponInfo
     rmDescr : List $ String × String
     dfDescr : String
     hlDescr : String
