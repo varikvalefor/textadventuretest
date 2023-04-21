@@ -158,6 +158,7 @@ main = run $ lupe initialD
                       lp? ∷
                       []
           gasnu = travel? ∷
+                  wield? ∷
                   []
 \end{code}
 \end{document}

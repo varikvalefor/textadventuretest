@@ -80,6 +80,7 @@ open import Data.Bool
   )
 open import Data.List
   using (
+    mapMaybe;
     List;
     _∷_;
     []
@@ -90,6 +91,8 @@ open import Data.List
   )
 open import Data.Maybe
   using (
+    is-just;
+    fromMaybe;
     maybe;
     Maybe;
     just;
@@ -102,10 +105,16 @@ open import Data.String
   )
 open import Data.Product
   using (
+    Σ;
     proj₁;
     proj₂;
     _×_;
     _,_
+  )
+open import Relation.Nullary
+  using (
+    yes;
+    no
   )
 open import VVXtAdventure.Base
 open import Truthbrary.Record.Eq
@@ -119,6 +128,7 @@ open import Data.List.Relation.Unary.Any
   using (
     any?
   )
+open import Relation.Binary.PropositionalEquality
 \end{code}
 
 \chapter{le mu'oi glibau.\ low-level .glibau.}
@@ -302,5 +312,51 @@ travel? (x₁ ∷ xs₁) = if realShit (travel' xs₁) $ const nothing
     where
     m = "I strongly doubt that the concept of \"super\
         \position\" applies to a creature of your mass."
+\end{code}
+
+\section{la'oi .\F{wield?}.}
+ni'o ga jonai ga je ga je la'oi .\F{wield?}.\ djuno pe'a ru'e lo du'u tu'a la'o zoi.\ \B a .zoi.\ .indika lo du'u lo kelci cu djica lo nu ko'a goi lo kelci ke xarpre ja co'e cu me'oi .wield.\ ko'e goi zo'e poi la'o zoi.\ \B c .zoi.\ mu'oi glibau.\ \F{Item.cname} .glibau.\ lo sinxa be ke'a gi ga jonai ga je li pa nilzilcmi lo'i selvau be lo me'oi .inventory.\ be ko'a be'o be'o poi la'o zoi.\ \B c .zoi.\ mu'oi glibau.\ \F{Item.cname} .glibau.\ ke'a je poi curmi lo nu me'oi .wield.\ ke'a gi tu'a la'o zoi.\ \B x .zoi.\ lu'u je tu'a la'o zoi.\ \B y .zoi.\ cu .indika lo du'u ko'a me'oi .wield.\ ko'e gi ko'i goi la'o zoi.\ \F{wield?} \B a \B b .zoi.\ du la'o zoi.\ \F{just} \Sym \$ \B x \Sym , \B y .zoi.\ gi ga je skuxai ja co'e la'o zoi.\ \B x .zoi.\ gi ko'a du la'o zoi.\ \F{just} \Sym \$ \B x \Sym , \B b .zoi.\ gi ko'a du la'oi .\F{nothing}.
+
+\begin{code}
+wield? : Com
+wield? [] = const nothing
+wield? (x ∷ xs) dang = if (realShit x) (troci xs) nothing
+  where
+  wisyj = Data.Maybe.is-just ∘ Item.weapwn ∘ Data.List.lookup inv
+    where
+    inv = Character.inventory $ GameData.player dang
+  realShit = _≡ᵇ_ "WIELD"
+  troci : List String → Maybe $ String × GameData
+  troci [] = just $ m , dang
+    where m = "Bitch, you'd best tell me what you \
+              \want to wield, or I'll wield \
+              \your bones as clubs."
+  troci (_ ∷ _ ∷ _) = just $ m , dang
+    where
+    m = "You are giving me useless information."
+  troci (y ∷ []) with mapMaybe mapti? $ Data.List.allFin _
+    where
+    mapti? : _ → Maybe $ Σ (Fin _) $ _≡_ true ∘ wisyj
+    mapti? n with true Data.Bool.≟ wisyj n
+    ... | yes x = just $ n , x
+    ... | no _ = nothing
+  ... | [] = just $ m , dang
+    where
+    m = "You need to stop chugging PCP or whatever.  \
+        \Your hallucinations are pissing me off."
+  ... | (selpli ∷ []) = just $ wieldMsg , wieldData
+    where
+    wieldMsg = fromMaybe "You wield the weapon." nothing
+    wieldData = record dang {player = pl}
+      where
+      d = "You wield the weapon."
+      pl = record (GameData.player dang) {wieldedct = just selpli}
+  ... | (_ ∷ _ ∷ _) = just $ m , dang
+    where
+    m = "Your query matches multiple items, although \
+        \a proof of that your bag only contains items \
+        \which have unique names exists.\n\
+        \Something is mad fucked, and you might \
+        \actually be innocent this time."
 \end{code}
 \end{document}
