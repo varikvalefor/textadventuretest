@@ -64,14 +64,14 @@ open import Truthbrary.Record.LLC
 \subsection{la'oi .\F{WeaponInfo}.}
 ni'o ga jo la'o zoi.\ \B a .zoi.\ srana lo selsnu be ko'a goi lo ctaipe be la'oi .\F{Item}.\ gi\ldots
 \begin{itemize}
-	\item cadga fa lo nu cusku la'o zoi.\ \F{wieldMsg} .zoi.\ ca lo nu lo kelci ke xarpre ja co'e cu binxo lo me'oi .wield.\ be ko'a
+	\item ga jo la'o zoi.\ \F{WeaponInfo.wieldMsg} \B a .zoi.\ du la'o zoi.\ \F{just} \B b .zoi.\ gi cadga fa lo nu cusku la'o zoi.\ \B b .zoi.\ ca lo nu lo kelci ke xarpre ja co'e cu binxo lo me'oi .wield.\ be ko'a
 \end{itemize}
 
 \begin{code}
 record WeaponInfo : Set
   where
   field
-    wieldMsg : String
+    wieldMsg : Maybe String
 \end{code}
 
 \subsection{la'oi .\F{Item}.}
