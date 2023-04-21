@@ -1,4 +1,4 @@
-\documentclass{article}
+\documentclass{report}
 
 \usepackage{ar}
 \usepackage[bw]{agda}
@@ -65,7 +65,9 @@ import Agda.Builtin.Unit as ABU
 
 open import Data.Fin
   using (
-    Fin
+    Fin;
+    suc;
+    zero
   )
 open import Data.Sum
 open import Function
@@ -118,6 +120,29 @@ open import Data.List.Relation.Unary.Any
     any?
   )
 \end{code}
+
+\chapter{le mu'oi glibau.\ low-level .glibau.}
+
+\section{la'o zoi.\ \F{movePawn} .zoi.}
+ni'o tu'a la'o zoi.\ \F{movePawn} \B q \B m \B n .zoi.\ .indika lo du'u lo selsni be la'o zoi.\ \F{flip} \F{Data.List.lookup} \B h \Sym \$ \F{GameData.haters} \B{gd} .zoi.\ cu zvati lo selsni be la'o zoi.\ \F{flip} \F{Data.List.lookup} \B n \Sym \$ \F{GameData.rooms} \B{gd} .zoi.
+
+\begin{code}
+movePawn : (q : GameData)
+         → Fin $ Data.List.length $ GameData.haters q
+         → Fin $ Data.List.length $ GameData.rooms q
+         → GameData
+movePawn gd h r = record gd {haters = updateAtₗ htrs h cninykumfa}
+  where
+  cninykumfa = λ x → record x {room = r}
+  htrs = GameData.haters gd
+  updateAtₗ : ∀ {a} → {A : Set a}
+           → (L : List A) → Fin $ length L → (A → A) → List A
+  updateAtₗ (x ∷ xs) (suc n) f = x ∷ updateAtₗ xs n f
+  updateAtₗ (x ∷ xs) zero f = f x ∷ xs
+  updateAtₗ [] ()
+\end{code}
+
+\chapter{le mu'oi glibau.\ high-level .glibau.}
 
 \section{le fancu poi tu'a ke'a na rinka lo nu lo ctaipe be la'oi .\F{GameData}.\ cu na binxo pe'a ru'e}
 
