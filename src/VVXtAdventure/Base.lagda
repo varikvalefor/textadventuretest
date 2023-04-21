@@ -134,7 +134,8 @@ ni'o ga naja la'o zoi.\ \B K .zoi.\ ctaipe la'o zoi.\ \F{List} \F{Room} .zoi.\ g
 \begin{code}
 record Character (q : List Room) : Set
   where
-  isWeapon = _≡_ true ∘ is-just ∘ Item.weapwn
+  private
+    isWeapon = _≡_ true ∘ is-just ∘ Item.weapwn
   field
     forename : String
     surname : String
