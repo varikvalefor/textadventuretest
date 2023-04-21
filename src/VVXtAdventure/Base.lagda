@@ -53,6 +53,10 @@ open import Data.String
 open import Data.Product
 open import Truthbrary.Record.Eq
 open import Relation.Binary.PropositionalEquality
+open import Truthbrary.Record.LLC
+  using (
+    nu,iork
+  )
 \end{code}
 
 \section{le me'oi .\AgdaKeyword{record}.}
@@ -86,6 +90,8 @@ ni'o ga jo ko'a goi la'o zoi.\ \B a .zoi.\ ctaipe la'oi .\F{Item}.\ gi\ldots
 	\item la'o zoi.\ \F{Item.description} \B a .zoi.\ velski ko'a
 \end{itemize}
 
+.i la .varik.\ cu na jinvi le du'u sarcu fa lo nu jmina lo .lojban.\ velcki be la'o zoi.\ \F{Item.yourfloorisnowclean} .zoi.
+
 \begin{code}
 record Item : Set
   where
@@ -96,6 +102,7 @@ record Item : Set
     rmDescr : List $ String × String
     dfDescr : String
     hlDescr : String
+    yourfloorisnowclean : nu,iork $ Data.List.map proj₁ rmDescr
 \end{code}
 
 \subsection{la'oi .\F{Room}.}
@@ -131,6 +138,8 @@ ni'o ga naja la'o zoi.\ \B K .zoi.\ ctaipe la'o zoi.\ \F{List} \F{Room} .zoi.\ g
         \item ga naja la'o zoi.\ \B i .zoi.\ du la'o zoi.\ \F{Character.inventory} \B a .zoi.\footnote{ni'o pilno zo'e pe zo du mu'i le su'u djica lo nu lo me'oi .hbox.\ cu na me'oi .overfull.}\ gi la'o zoi.\ \F{Data.Maybe.map} (\F{lookup} (\B i)) \Sym \$ \F{Character.wielded} \B a .zoi.\ du la'oi .\F{nothing}.\ jonai cu me'oi .\F{just}.\ lo sinxa be zo'e poi ko'a me'oi .wield.\ ke'a ca zo'e
 \end{itemize}
 
+.i la .varik.\ cu na jinvi le du'u sarcu fa lo nu jmina lo .lojban.\ velcki be la'o zoi.\ \F{Character.yourfloorisnowclean} .zoi.
+
 \begin{code}
 record Character (q : List Room) : Set
   where
@@ -144,6 +153,8 @@ record Character (q : List Room) : Set
     inventory : List Item
     wieldedct : Maybe $ Σ (Fin _) $ isWeapon ∘ lookup inventory
   wielded = Data.Maybe.map proj₁ wieldedct
+  field
+    yourfloorisnowclean : nu,iork $ Data.List.map Item.cname inventory
 \end{code}
 
 \subsection{la'oi .\F{GameData}.}
@@ -155,6 +166,8 @@ ni'o ga jo ko'a goi la'o zoi.\ \B a .zoi.\ ctaipe la'oi .\F{GameData} .zoi.\ gi\
         \item la'o zoi.\ \F{GameData.haters} \B a .zoi.\ liste lo'i sinxa be lo'i xarpre ja co'e poi ke'a na du lo kelci ke xarpre ja co'e
 \end{itemize}
 
+.i la .varik.\ cu na jinvi le du'u sarcu fa lo nu jmina lo .lojban.\ velcki be la'o zoi.\ \F{GameData.yourfloorisnowclean} .zoi.
+
 \begin{code}
 record GameData : Set
   where
@@ -163,6 +176,7 @@ record GameData : Set
     rooms : List Room
     player : Character rooms
     haters : List $ Character rooms
+    yourfloorisnowclean : nu,iork $ Data.List.map Room.cname rooms
 \end{code}
 
 \section{le sampu}

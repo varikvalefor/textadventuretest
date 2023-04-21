@@ -86,6 +86,10 @@ open import Truthbrary.Record.LLC
     _++_;
     map
   )
+open import Relation.Binary.PropositionalEquality
+  using (
+    refl
+  )
 \end{code}
 
 \section{le tolsti co'e}
@@ -116,9 +120,11 @@ initialD = record {
     surname = "TUBMANN";
     nicknames = "THE O.G. MEATBALL" ∷ [];
     room = Data.Fin.zero;
+    inventory = [];
     wieldedct = nothing;
-    inventory = []};
-  haters = []}
+    yourfloorisnowclean = refl};
+  haters = [];
+  yourfloorisnowclean = refl}
 \end{code}
 
 \section{la'oi .\F{main}.}
