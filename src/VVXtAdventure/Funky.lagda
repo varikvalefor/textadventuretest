@@ -346,7 +346,11 @@ wield? (x ∷ xs) dang = if (realShit x) (troci xs) nothing
         \Your hallucinations are pissing me off."
   ... | (selpli ∷ []) = just $ wieldMsg , wieldData
     where
-    wieldMsg = fromMaybe "You wield the weapon." nothing
+    wieldMsg = fromMaybe "You wield the weapon." xarcynotci
+      where
+      items = Character.inventory $ GameData.player dang
+      xarci = Item.weapwn $ Data.List.lookup items $ proj₁ selpli
+      xarcynotci = xarci Data.Maybe.>>= WeaponInfo.wieldMsg
     wieldData = record dang {player = pl}
       where
       d = "You wield the weapon."
