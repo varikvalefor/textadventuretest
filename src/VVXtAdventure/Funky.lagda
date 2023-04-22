@@ -322,9 +322,8 @@ wield? : Com
 wield? [] = const nothing
 wield? (x ∷ xs) dang = if (realShit x) (troci xs) nothing
   where
+  inv = Character.inventory $ GameData.player dang
   wisyj = Data.Maybe.is-just ∘ Item.weapwn ∘ Data.List.lookup inv
-    where
-    inv = Character.inventory $ GameData.player dang
   realShit = _≡ᵇ_ "WIELD"
   troci : List String → Maybe $ String × GameData
   troci [] = just $ m , dang
@@ -334,8 +333,11 @@ wield? (x ∷ xs) dang = if (realShit x) (troci xs) nothing
   troci (_ ∷ _ ∷ _) = just $ m , dang
     where
     m = "You are giving me useless information."
-  troci (y ∷ []) with mapMaybe mapti? $ Data.List.allFin _
+  troci (y ∷ []) with flt $ mapMaybe mapti? $ Data.List.allFin _
     where
+    flt = Data.List.filter (_≟_ y ∘ cname ∘ proj₁)
+      where
+      cname = Item.cname ∘ Data.List.lookup inv
     mapti? : _ → Maybe $ Σ (Fin _) $ _≡_ true ∘ wisyj
     mapti? n with true Data.Bool.≟ wisyj n
     ... | yes x = just $ n , x
