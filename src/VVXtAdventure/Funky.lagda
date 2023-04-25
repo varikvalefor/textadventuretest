@@ -134,22 +134,24 @@ open import Relation.Binary.PropositionalEquality
 \chapter{le mu'oi glibau.\ low-level .glibau.}
 
 \section{la'o zoi.\ \F{movePawn} .zoi.}
-ni'o tu'a la'o zoi.\ \F{movePawn} \B q \B m \B n .zoi.\ .indika lo du'u lo selsni be la'o zoi.\ \F{flip} \F{Data.List.lookup} \B h \Sym \$ \F{GameData.haters} \B{gd} .zoi.\ cu zvati lo selsni be la'o zoi.\ \F{flip} \F{Data.List.lookup} \B n \Sym \$ \F{GameData.rooms} \B{gd} .zoi.
+ni'o tu'a la'o zoi.\ \F{movePawn} \B q (\F{just} \B m) \B n .zoi.\ .indika lo du'u lo selsni be la'o zoi.\ \F{flip} \F{Data.List.lookup} \B h \Sym \$ \F{GameData.haters} \B{gd} .zoi.\ cu zvati ko'a goi lo selsni be la'o zoi.\ \F{flip} \F{Data.List.lookup} \B n \Sym \$ \F{GameData.rooms} \B{gd} .zoi.  .i tu'a la'o zoi.\ \F{movePawn} \B q \F{nothing} .zoi.\ .indika lo du'u lo kelci ke xarpre ja co'e cu zvati ko'a
 
 \begin{code}
 movePawn : (q : GameData)
-         → Fin $ Data.List.length $ GameData.haters q
+         → Maybe $ Fin $ Data.List.length $ GameData.haters q
          → Fin $ Data.List.length $ GameData.rooms q
          → GameData
-movePawn gd h r = record gd {haters = updateAtₗ htrs h cninykumfa}
+movePawn gd h' r = maybe moveHater movePlayer h'
   where
   cninykumfa = λ x → record x {room = r}
-  htrs = GameData.haters gd
-  updateAtₗ : ∀ {a} → {A : Set a}
-           → (L : List A) → Fin $ length L → (A → A) → List A
-  updateAtₗ (x ∷ xs) (suc n) f = x ∷ updateAtₗ xs n f
-  updateAtₗ (x ∷ xs) zero f = f x ∷ xs
-  updateAtₗ [] ()
+  movePlayer = record gd {player = cninykumfa $ GameData.player gd}
+  moveHater = λ h → record gd {haters = updateAtₗ htrs h cninykumfa}
+    where
+    updateAtₗ : ∀ {a} → {A : Set a}
+             → (L : List A) → Fin $ length L → (A → A) → List A
+    updateAtₗ (x ∷ xs) (suc n) f = x ∷ updateAtₗ xs n f
+    updateAtₗ (x ∷ xs) zero f = f x ∷ xs
+    htrs = GameData.haters gd
 \end{code}
 
 \chapter{le mu'oi glibau.\ high-level .glibau.}
