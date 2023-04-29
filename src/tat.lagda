@@ -77,6 +77,7 @@ open import Data.Product
     _×_;
     _,_
   )
+open import TestAdventure.WYCT
 open import VVXtAdventure.Base
 open import VVXtAdventure.Funky
 open import Truthbrary.Record.Eq
@@ -90,41 +91,6 @@ open import Relation.Binary.PropositionalEquality
   using (
     refl
   )
-\end{code}
-
-\section{le tolsti co'e}
-
-\subsection{la'oi .\F{rooms}.}
-
-\begin{code}
-rooms : List Room
-rooms = dingyliv ∷ []
-  where
-  dingyliv : Room
-  dingyliv = record {
-    name = "A DINGY LIVING ROOM";
-    cname = "DINGYLIVRM";
-    travis = [];
-    items = []}
-\end{code}
-
-\subsection{la'oi .\F{initialD}.}
-
-\begin{code}
-initialD : GameData
-initialD = record {
-  rooms = rooms;
-  epicwin = false;
-  player = record {
-    forename = "HARRIET";
-    surname = "TUBMANN";
-    nicknames = "THE O.G. MEATBALL" ∷ [];
-    room = Data.Fin.zero;
-    inventory = [];
-    wieldedct = nothing;
-    yourfloorisnowclean = refl};
-  haters = [];
-  yourfloorisnowclean = refl}
 \end{code}
 
 \section{la'oi .\F{main}.}
