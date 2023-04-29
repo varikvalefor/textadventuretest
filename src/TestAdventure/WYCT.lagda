@@ -47,14 +47,34 @@ ni'o la'o zoi.\ \cmene{}\ .zoi.\ vasru le velcki be le kelci datni be le me'oi .
 
 module TestAdventure.WYCT where
 
-open import Data.Fin
+import Data.Fin
+
 open import Data.Bool
+  using (
+    true;
+    false
+  )
 open import Data.List
+  using (
+    List;
+    _∷_;
+    []
+  )
 open import Data.Maybe
+  using (
+    just;
+    nothing
+  )
 open import Data.String
+  using (
+    String
+  )
 open import VVXtAdventure.Base
 open import VVXtAdventure.Funky
 open import Relation.Binary.PropositionalEquality
+  using (
+    refl
+  )
 \end{code}
 
 \section{le tolsti co'e}
