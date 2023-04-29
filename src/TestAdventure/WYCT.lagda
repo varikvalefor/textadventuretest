@@ -31,14 +31,14 @@
 
 \newcommand\cmene{\texttt{WYCT}}
 
-\title{la'o zoi.\ \cmene{} .zoi.}
+\title{la'o zoi.\ \cmene{}\ .zoi.}
 \author{la .varik.\ .VALefor.}
 
 \begin{document}
 \maketitle
 
 \section{le me'oi .abstract.}
-ni'o la'o zoi.\ \cmene .zoi.\ vasru le velcki be le kelci datni be le me'oi .default.\ ja me'oi .demo.\ ja co'e po la .tat.
+ni'o la'o zoi.\ \cmene{}\ .zoi.\ vasru le velcki be le kelci datni be le me'oi .default.\ ja me'oi .demo.\ ja co'e po la .tat.
 
 \section{le me'oi .preamble.\ ja co'e}
 
@@ -90,7 +90,5 @@ initialD = record {
     yourfloorisnowclean = refl};
   haters = [];
   yourfloorisnowclean = refl}
-\end{code}
-
 \end{code}
 \end{document}
