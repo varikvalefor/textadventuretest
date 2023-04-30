@@ -69,6 +69,11 @@ open import Data.String
   using (
     String
   )
+open import Data.Product
+  using (
+    _×_;
+    _,_
+  )
 open import VVXtAdventure.Base
 open import VVXtAdventure.Funky
 open import Relation.Binary.PropositionalEquality
@@ -90,7 +95,22 @@ rooms = dingyliv ∷ []
     name = "A DINGY LIVING ROOM";
     cname = "DINGYLIVRM";
     travis = [];
-    items = []}
+    items = lamp ∷ []}
+    where
+    lamp : Item
+    lamp = record {
+      name = "LAMP";
+      cname = "DINGYLIVRMLMP";
+      weapwn = nothing;
+      rmDescr = ("DINGYLIVRM" , lvdsc) ∷ [];
+      dfDescr = "You see a lamp.";
+      hlDescr = "You took (from the living room \
+                \which marks the beginning of your \
+                \adventure) this mediocre lamp.";
+      yourfloorisnowclean = refl}
+      where
+      lvdsc = "A pretty mediocre-looking lamp is \
+              \nearby."
 \end{code}
 
 \subsection{la'oi .\F{initialD}.}
