@@ -254,7 +254,7 @@ takeHater q m n = youse c*
           }
           where
           kelci = mink (GameData.player q) $ proj₁ $ proj₂ c*
-    pilno _ = nothing
+    pilno _ _ _ = nothing
 \end{code}
 
 \chapter{le mu'oi glibau.\ high-level .glibau.}
