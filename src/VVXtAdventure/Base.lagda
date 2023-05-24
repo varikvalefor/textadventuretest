@@ -177,6 +177,9 @@ record GameData : Set
     player : Character rooms
     haters : List $ Character rooms
     yourfloorisnowclean : nu,iork $ Data.List.map Room.cname rooms
+  inventOf = Character.inventory ∘ Data.List.lookup haters
+  roomOf = Character.room ∘ Data.List.lookup haters
+  itemsInRoomOf = Room.items ∘ Data.List.lookup rooms ∘ roomOf
 \end{code}
 
 \section{le sampu}
