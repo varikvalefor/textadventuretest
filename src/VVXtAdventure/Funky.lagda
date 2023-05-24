@@ -238,10 +238,10 @@ takeHater q m n = youse c*
     pilno : _ → _
     pilno (yes n₁) (yes n₂) (yes n₃) = troci
       where
-      troci = (mapₘ ⍨) iofink $ λ i → q' i , n₁ , n₂ , n₃
+      troci = (mapₘ ⍨) iunik $ λ i → q' i , n₁ , n₂ , n₃
         where
-        iofink : _
-        iofink with _ ≟ _
+        iunik : _
+        iunik with _ ≟ _
         ... | (yes sir) = just sir
         ... | _ = nothing
         mapₘ = Data.Maybe.map
