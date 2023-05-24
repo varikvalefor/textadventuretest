@@ -172,7 +172,7 @@ movePawn gd h' r = maybe moveHater movePlayer h'
     htrs = GameData.haters gd
 \end{code}
 
-\section{la'o zoi.\ \F{takePawn}\ .zoi.}
+\section{la'o zoi.\ \F{takeHater}\ .zoi.}
 ni'o tu'a la'o zoi.\ \F{takeHater} \B q \B m \B n .zoi.\ cu .indika lo du'u lo me'oi .inventory.\ be lo selsni be la'o zoi.\ \F{GameData.haters} \B q \Sym ! \B m\ .zoi.\ cu vasru lo selsni be la'o zoi.\ (\F{GameData.itemsInRoomOf} \B q \B m) \Sym ! n\ .zoi... kei je zo'e
 
 ni'o la .varik.\ cu na jinvi le du'u sarcu fa lo nu la .varik.\ cu ciksi la'oi .\F{mink}.\ ja la'o zoi.\ \F{\_⍨}\ .zoi.\ bau la .lojban.
