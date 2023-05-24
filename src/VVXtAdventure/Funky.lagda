@@ -29,6 +29,7 @@
 \newunicodechar{ᵥ}{\ensuremath{\mathnormal{_v}}}
 \newunicodechar{₁}{\ensuremath{\mathnormal{_1}}}
 \newunicodechar{₂}{\ensuremath{\mathnormal{_2}}}
+\newunicodechar{₃}{\ensuremath{\mathnormal{_3}}}
 \newunicodechar{⊎}{\ensuremath{\mathnormal{\uplus}}}
 \newunicodechar{≡}{\ensuremath{\mathnormal{\equiv}}}
 \newunicodechar{∧}{\ensuremath{\mathnormal{\land}}}
@@ -36,6 +37,9 @@
 \newunicodechar{ₘ}{\ensuremath{\mathnormal{_m}}}
 \newunicodechar{≟}{\ensuremath{\stackrel{?}{=}}}
 \newunicodechar{∸}{\ensuremath{\mathnormal{\divdot}}}
+\newunicodechar{⍨}{\raisebox{-0.25ex}{$\ddot\sim$}}
+\newunicodechar{ℓ}{\ensuremath{\mathnormal{\ell}}}
+\newunicodechar{∈}{\ensuremath{\mathnormal{\in}}}
 
 \newcommand\Sym\AgdaSymbol
 \newcommand\D\AgdaDatatype
@@ -69,7 +73,17 @@ open import Data.Fin
     suc;
     zero
   )
+open import Data.Nat
+  using (
+    _+_
+  )
 open import Data.Sum
+  using (
+    _⊎_;
+    inj₁;
+    inj₂;
+    [_,_]
+  )
 open import Function
 open import Data.Bool
   renaming (
@@ -113,6 +127,7 @@ open import Data.Product
   )
 open import Relation.Nullary
   using (
+    Dec;
     yes;
     no
   )
@@ -120,10 +135,13 @@ open import VVXtAdventure.Base
 open import Truthbrary.Record.Eq
 open import Truthbrary.Record.LLC
   using (
+    updateAt;
     length;
     map
   )
 open import Truthbrary.Category.Monad
+  using (
+  )
 open import Data.List.Relation.Unary.Any
   using (
     any?
@@ -152,6 +170,91 @@ movePawn gd h' r = maybe moveHater movePlayer h'
     updateAtₗ (x ∷ xs) (suc n) f = x ∷ updateAtₗ xs n f
     updateAtₗ (x ∷ xs) zero f = f x ∷ xs
     htrs = GameData.haters gd
+\end{code}
+
+\section{la'o zoi.\ \F{takePawn}\ .zoi.}
+ni'o tu'a la'o zoi.\ \F{takeHater} \B q \B m \B n .zoi.\ cu .indika lo du'u lo me'oi .inventory.\ be lo selsni be la'o zoi.\ \F{GameData.haters} \B q \Sym ! \B m\ .zoi.\ cu vasru lo selsni be la'o zoi.\ (\F{GameData.itemsInRoomOf} \B q \B m) \Sym ! n\ .zoi... kei je zo'e
+
+ni'o la .varik.\ cu na jinvi le du'u sarcu fa lo nu la .varik.\ cu ciksi la'oi .\F{mink}.\ ja la'o zoi.\ \F{\_⍨}\ .zoi.\ bau la .lojban.
+
+\begin{code}
+private
+  mink : ∀ {a b} {A : Set a} → {F : A → Set b} → {c d : A}
+       → F c → c ≡ d → F d
+  mink a refl = a
+  
+  _⍨ = flip
+
+takeHater : (q : GameData)
+          → (m : Fin $ length $ GameData.haters q)
+          → (n : Fin $ length $ GameData.itemsInRoomOf q m)
+          → Maybe
+            $ Σ GameData $ λ o
+            → Σ (_≡_
+                 (length $ GameData.rooms q)
+                 (length $ GameData.rooms o)) $ λ r
+            → Σ (_≡_
+                 (length $ GameData.haters q)
+                 (length $ GameData.haters o)) $ λ x
+            → (_≡_
+                (map Item.cname $ GameData.inventOf o $ mink m x)
+                ((_∷_ ⍨)
+                  (map Item.cname $ GameData.inventOf q m)
+                  (Item.cname
+                    $ _!_ (GameData.itemsInRoomOf q m) n)))
+takeHater q m n = youse c*
+  where
+  r = GameData.rooms q
+  c = GameData.haters q
+  t = (GameData.itemsInRoomOf q m) ! n
+  selpo'egau = _!_ (GameData.itemsInRoomOf q m) n
+  r' : List Room
+  r' = updateAt r (Character.room $ c ! m) vimcu
+    where
+    aint = Data.Bool._≟_ false ∘ _≡ᵇ_ (Item.cname t) ∘ Item.cname
+    vimcu : _
+    vimcu x = record x {items = filterₗ aint $ Room.items x}
+  c* : Maybe
+         $ Σ (List $ Character r') $ λ c*
+           → Σ (length c ≡ length c*) $ λ ℓ
+           → (Truthbrary.Record.LLC._∈_
+               (Item.cname selpo'egau)
+               (map Item.cname $ Character.inventory $ c* ! mink m ℓ))
+  c* = {!!}
+  youse : Maybe _ → Maybe _
+  youse nothing = nothing
+  youse (just c*) = pilno romas? xatas? mapdu?
+    where
+    romas? = length r' ≟ length r
+    xatas? = length (proj₁ c*) ≟ length (GameData.haters q)
+    mapdu? = cninycme ≟ oldyprep
+      where
+      cname = Item.cname $ _!_ (GameData.itemsInRoomOf q m) n
+      liste = map Item.cname $ GameData.inventOf q m
+      oldyprep = cname ∷ liste
+      cninycme = map Item.cname $ Character.inventory cninyxebni
+        where
+        cninyxebni = proj₁ c* ! mink m (proj₁ $ proj₂ c*)
+    pilno : _ → _
+    pilno (yes n₁) (yes n₂) (yes n₃) = troci
+      where
+      troci = (mapₘ ⍨) iofink $ λ i → q' i , n₁ , n₂ , n₃
+        where
+        iofink : _
+        iofink with _ ≟ _
+        ... | (yes sir) = just sir
+        ... | _ = nothing
+        mapₘ = Data.Maybe.map
+        q' = λ i → record {
+          epicwin = GameData.epicwin q;
+          rooms = r';
+          player = kelci;
+          haters = proj₁ c*;
+          yourfloorisnowclean = i
+          }
+          where
+          kelci = mink (GameData.player q) $ proj₁ $ proj₂ c*
+    pilno _ = nothing
 \end{code}
 
 \chapter{le mu'oi glibau.\ high-level .glibau.}
