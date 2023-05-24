@@ -201,7 +201,7 @@ takeHater : (q : GameData)
                 ((_∷_ ⍨)
                   (map Item.cname $ GameData.inventOf q m)
                   (Item.cname
-                    $ _!_ (GameData.itemsInRoomOf q m) n)))
+                    $ GameData.itemsInRoomOf q m ! n)))
 takeHater q m n = youse c*
   where
   r = GameData.rooms q
