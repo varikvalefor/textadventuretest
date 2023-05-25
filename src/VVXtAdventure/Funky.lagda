@@ -66,6 +66,7 @@ module VVXtAdventure.Funky where
 
 import Level
 import Agda.Builtin.Unit as ABU
+import Data.List.Properties as DLP
 
 open import Data.Fin
   using (
@@ -125,6 +126,10 @@ open import Data.Product
     _×_;
     _,_
   )
+open import Relation.Unary
+  using (
+    Pred
+  )
 open import Relation.Nullary
   using (
     Dec;
@@ -179,8 +184,7 @@ ni'o la .varik.\ cu na jinvi le du'u sarcu fa lo nu la .varik.\ cu ciksi la'oi .
 
 \begin{code}
 private
-  mink : ∀ {a b} {A : Set a} → {F : A → Set b} → {c d : A}
-       → F c → c ≡ d → F d
+  mink : {c d : Data.Nat.ℕ} → Fin c → c ≡ d → Fin d
   mink a refl = a
   
   _⍨ = flip
@@ -188,8 +192,7 @@ private
 takeHater : (q : GameData)
           → (m : Fin $ length $ GameData.haters q)
           → (n : Fin $ length $ GameData.itemsInRoomOf q m)
-          → Maybe
-            $ Σ GameData $ λ o
+          → Σ GameData $ λ o
             → Σ (_≡_
                  (length $ GameData.rooms q)
                  (length $ GameData.rooms o)) $ λ r
@@ -202,59 +205,89 @@ takeHater : (q : GameData)
                   (map Item.cname $ GameData.inventOf q m)
                   (Item.cname
                     $ GameData.itemsInRoomOf q m ! n)))
-takeHater q m n = youse c*
+takeHater q m n = q' , dus , dis , nyfin
   where
-  r = GameData.rooms q
-  c = GameData.haters q
-  t = (GameData.itemsInRoomOf q m) ! n
-  selpo'egau = _!_ (GameData.itemsInRoomOf q m) n
-  r' : List Room
-  r' = updateAt r (Character.room $ c ! m) vimcu
+  ual : ∀ {a} → {A : Set a}
+      → (l : List A) → Fin $ length l → (A → A)
+      → Σ (List A) $ λ l' → length l ≡ length l'
+  ual (x ∷ xs) (Fin.zero) f = f x ∷ xs , refl
+  ual (x ∷ xs) (Fin.suc n) f = x ∷ (proj₁ $ ual xs n f) , rif
     where
-    aint = Data.Bool._≟_ false ∘ _≡ᵇ_ (Item.cname t) ∘ Item.cname
-    vimcu : _
-    vimcu x = record x {items = filterₗ aint $ Room.items x}
-  c* : Maybe
-         $ Σ (List $ Character r') $ λ c*
-           → Σ (length c ≡ length c*) $ λ ℓ
-           → (Truthbrary.Record.LLC._∈_
-               (Item.cname selpo'egau)
-               (map Item.cname $ Character.inventory $ c* ! mink m ℓ))
-  c* = {!!}
-  youse : Maybe _ → Maybe _
-  youse nothing = nothing
-  youse (just c*) = pilno romas? xatas? mapdu?
+    rif = cong Data.Nat.suc $ proj₂ $ ual xs n f
+  lb = GameData.haters q ! m
+  sl = Room.items (GameData.rooms q ! Character.room lb) ! n
+  k'' : Σ (List Room) $ λ r → length (GameData.rooms q) ≡ length r
+  k'' = ual (GameData.rooms q) (Character.room lb) vimcu
     where
-    romas? = length r' ≟ length r
-    xatas? = length (proj₁ c*) ≟ length (GameData.haters q)
-    mapdu? = cninycme ≟ oldyprep
+    nadu = Data.Bool._≟_ false ∘ _≡ᵇ_ (Item.cname sl) ∘ Item.cname
+    vimcu = λ x → record x {items = filterₗ nadu $ Room.items x}
+  k' = proj₁ k''
+  nakalci : Character k'
+  nakalci = record {
+    forename = Character.forename p;
+    surname = Character.surname p;
+    nicknames = Character.nicknames p;
+    room = mink (Character.room p) $ proj₂ k'';
+    inventory = Character.inventory p;
+    wieldedct = Character.wieldedct p;
+    yourfloorisnowclean = Character.yourfloorisnowclean p
+    }
+    where
+    p = GameData.player q
+  x'' : Σ (List $ Character k') $ λ x'
+        → length x' ≡ length (GameData.haters q)
+  x'' = {!!} $ ual (proj₁ ckic) (mink m {!!}) lb!
+    where
+    lb! : Character k' → Character k'
+    lb! x = record x {
+      inventory = sl ∷ Character.inventory x;
+      wieldedct = Data.Maybe.map f $ Character.wieldedct x;
+      yourfloorisnowclean = {!!}
+      }
       where
-      cname = Item.cname $ _!_ (GameData.itemsInRoomOf q m) n
-      liste = map Item.cname $ GameData.inventOf q m
-      oldyprep = cname ∷ liste
-      cninycme = map Item.cname $ Character.inventory cninyxebni
+      gimp : ∀ {a p} → {A : Set a}
+           → (P : Pred A p)
+           → (q : List A)
+           → (n : Fin $ length q)
+           → P $ q ! n
+           → (x : A)
+           → P $ (x ∷ q) ! (Fin.suc n)
+      gimp p l n c x = {!!}
+      f = λ (l , k) → Fin.suc l , gimp isWeapon inv l k sl
         where
-        cninyxebni = proj₁ c* ! mink m (proj₁ $ proj₂ c*)
-    pilno : _ → _
-    pilno (yes n₁) (yes n₂) (yes n₃) = troci
+        isWeapon = _≡_ true ∘ is-just ∘ Item.weapwn
+        inv = Character.inventory x
+    ckic : Σ (List $ Character k') $ λ lex
+           → length (GameData.haters q) ≡ length lex
+    ckic = ck , ℓₘ
       where
-      troci = (mapₘ ⍨) iunik $ λ i → q' i , n₁ , n₂ , n₃
+      kumbi'o = λ x → record {
+        forename = Character.forename x;
+        surname = Character.surname x;
+        nicknames = Character.nicknames x;
+        room = mink (Character.room x) $ proj₂ k'';
+        inventory = Character.inventory x;
+        wieldedct = Character.wieldedct x;
+        yourfloorisnowclean = Character.yourfloorisnowclean x
+        }
+      ck = Data.List.map kumbi'o $ GameData.haters q
+      ℓₘ = tr $ DLP.length-map kumbi'o $ GameData.haters q
         where
-        iunik : _
-        iunik with _ ≟ _
-        ... | (yes sir) = just sir
-        ... | _ = nothing
-        mapₘ = Data.Maybe.map
-        q' = λ i → record {
-          epicwin = GameData.epicwin q;
-          rooms = r';
-          player = kelci;
-          haters = proj₁ c*;
-          yourfloorisnowclean = i
-          }
-          where
-          kelci = mink (GameData.player q) $ proj₁ $ proj₂ c*
-    pilno _ _ _ = nothing
+        tr : ∀ {a} → {A : Set a} → {x y : A}
+           → x ≡ y → y ≡ x
+        tr refl = refl
+  q' = record {
+     epicwin = GameData.epicwin q;
+     yourfloorisnowclean = {!!};
+     player = nakalci;
+     haters = proj₁ x'';
+     rooms = k'
+     }
+  dus : length (GameData.rooms q) ≡ length k'
+  dus = proj₂ k''
+  dis : length (GameData.haters q) ≡ length (proj₁ x'')
+  dis = proj₂ x''
+  nyfin = {!!}
 \end{code}
 
 \chapter{le mu'oi glibau.\ high-level .glibau.}
