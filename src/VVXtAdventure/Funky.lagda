@@ -209,14 +209,14 @@ takeHater q m n = q' , dus , dis , nyfin
   where
   ual : ∀ {a} → {A : Set a}
       → (l : List A) → Fin $ length l → (A → A)
-      → Σ (List A) $ λ l' → length l ≡ length l'
+      → Σ (List A) $ _≡_ on length $ l
   ual (x ∷ xs) Fin.zero f = f x ∷ xs , refl
   ual (x ∷ xs) (Fin.suc n) f = x ∷ proj₁ (ual xs n f) , rif
     where
     rif = cong Data.Nat.suc $ proj₂ $ ual xs n f
   lb = GameData.haters q ! m
   sl = Room.items (GameData.rooms q ! Character.room lb) ! n
-  k'' : Σ (List Room) $ λ r → length (GameData.rooms q) ≡ length r
+  k'' : Σ (List Room) $ _≡_ on length $ GameData.rooms q
   k'' = ual (GameData.rooms q) (Character.room lb) vimcu
     where
     nadu = Data.Bool._≟_ false ∘ _≡ᵇ_ (Item.cname sl) ∘ Item.cname
