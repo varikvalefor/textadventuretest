@@ -121,6 +121,7 @@ open import Data.String
 open import Data.Product
   using (
     Σ;
+    map₂;
     proj₁;
     proj₂;
     _×_;
@@ -235,9 +236,22 @@ takeHater q m n = q' , dus , dis , nyfin
     where
     p = GameData.player q
   x'' : Σ (List $ Character k') $ λ x'
-        → length x' ≡ length (GameData.haters q)
-  x'' = {!!} $ ual (proj₁ ckic) (mink m {!!}) lb!
+        → length (GameData.haters q) ≡ length x'
+  x'' = map₂ kibix $ ual (proj₁ ckic) (mink m {!!}) lb!
     where
+    tr : ∀ {a} → {A : Set a} → {x y : A}
+       → x ≡ y → y ≡ x
+    tr refl = refl
+    ualmap : ∀ {a} → {A B : Set a}
+           → (x : List A)
+           → (f : A → B)
+           → (g : B → B)
+           → (q : Fin $ length x)
+           → (ℓ : length (Data.List.map f x) ≡ length x)
+           → _≡_
+               (length x)
+               (length $ proj₁ $ ual (Data.List.map f x) (mink q $ tr ℓ) g)
+    ualmap x f g q e = {!!}
     lb! : Character k' → Character k'
     lb! x = record x {
       inventory = sl ∷ Character.inventory x;
@@ -257,25 +271,22 @@ takeHater q m n = q' , dus , dis , nyfin
         where
         isWeapon = _≡_ true ∘ is-just ∘ Item.weapwn
         inv = Character.inventory x
+    kumbi'o = λ x → record {
+      forename = Character.forename x;
+      surname = Character.surname x;
+      nicknames = Character.nicknames x;
+      room = mink (Character.room x) $ proj₂ k'';
+      inventory = Character.inventory x;
+      wieldedct = Character.wieldedct x;
+      yourfloorisnowclean = Character.yourfloorisnowclean x
+      }
     ckic : Σ (List $ Character k') $ λ lex
            → length (GameData.haters q) ≡ length lex
     ckic = ck , ℓₘ
       where
-      kumbi'o = λ x → record {
-        forename = Character.forename x;
-        surname = Character.surname x;
-        nicknames = Character.nicknames x;
-        room = mink (Character.room x) $ proj₂ k'';
-        inventory = Character.inventory x;
-        wieldedct = Character.wieldedct x;
-        yourfloorisnowclean = Character.yourfloorisnowclean x
-        }
       ck = Data.List.map kumbi'o $ GameData.haters q
       ℓₘ = tr $ DLP.length-map kumbi'o $ GameData.haters q
-        where
-        tr : ∀ {a} → {A : Set a} → {x y : A}
-           → x ≡ y → y ≡ x
-        tr refl = refl
+    kibix = ualmap {!!} kumbi'o lb! {!!}
   q' = record {
      epicwin = GameData.epicwin q;
      yourfloorisnowclean = {!!};
