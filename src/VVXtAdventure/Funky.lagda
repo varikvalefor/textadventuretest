@@ -211,7 +211,7 @@ takeHater q m n = q' , dus , dis , nyfin
       → (l : List A) → Fin $ length l → (A → A)
       → Σ (List A) $ λ l' → length l ≡ length l'
   ual (x ∷ xs) Fin.zero f = f x ∷ xs , refl
-  ual (x ∷ xs) (Fin.suc n) f = x ∷ (proj₁ $ ual xs n f) , rif
+  ual (x ∷ xs) (Fin.suc n) f = x ∷ proj₁ (ual xs n f) , rif
     where
     rif = cong Data.Nat.suc $ proj₂ $ ual xs n f
   lb = GameData.haters q ! m
