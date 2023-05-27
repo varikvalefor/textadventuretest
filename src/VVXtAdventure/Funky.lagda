@@ -239,7 +239,7 @@ takeHater q m n = q' , dus , dis , nyfin
     p = GameData.player q
   x'' : Σ (List $ Character k') $ λ x'
         → length (GameData.haters q) ≡ length x'
-  x'' = map₂ kibix $ ual (proj₁ ckic) (mink m {!!}) lb!
+  x'' = map₂ kibix $ ual (proj₁ ckic) (mink m $ proj₂ ckic) lb!
     where
     tr : ∀ {a} → {A : Set a} → {x y : A}
        → x ≡ y → y ≡ x
