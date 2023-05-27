@@ -210,7 +210,7 @@ takeHater q m n = q' , dus , dis , nyfin
   where
   ual : ∀ {a} → {A : Set a}
       → (l : List A) → Fin $ length l → (A → A)
-      → Σ (List A) $ _≡_ on length $ l
+      → Σ (List A) $ _≡_ (length l) ∘ length
   ual (x ∷ xs) Fin.zero f = f x ∷ xs , refl
   ual (x ∷ xs) (Fin.suc n) f = x ∷ proj₁ (ual xs n f) , rif
     where
