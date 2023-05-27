@@ -270,7 +270,26 @@ takeHater q m n = q' , dus , dis , nyfin
            → P $ q ! n
            → (x : A)
            → P $ (x ∷ q) ! (Fin.suc n)
-      gimp P q n c x = {!!}
+      gimp P q n c x = fic P xin xisyn xindusyn c
+        where
+        xin = q ! n
+        xisyn = (x ∷ q) ! (Fin.suc n)
+        xindusyn : xin ≡ xisyn
+        xindusyn = blax q n x
+          where
+          blax : ∀ {a} → {A : Set a}
+               → (l : List A)
+               → (n : Fin $ length l)
+               → (x : A)
+               → l ! n ≡ (x ∷ l) ! (Fin.suc n)
+          blax l n x = {!!}
+        fic : ∀ {a p} → {A : Set a}
+            → (P : Pred A p)
+            → (x y : A)
+            → x ≡ y
+            → P x
+            → P y
+        fic P x y d g = {!!}
       f = λ (l , k) → Fin.suc l , gimp isWeapon inv l k sl
         where
         isWeapon = _≡_ true ∘ is-just ∘ Item.weapwn
