@@ -252,7 +252,10 @@ takeHater q m n = q' , dus , dis , nyfin
                (length x)
                (length $ proj₁
                 $ ual (Data.List.map f x) (mink q $ tr ℓ) g)
-    ualmap x f g q e = {!!}
+    ualmap x f g q e = step-≡ (Data.List.length x) n₁ (tr e)
+      where
+      n₁ = proj₂ $ ual (Data.List.map f x) (mink q $ tr e) g
+      step-≡ = ≡-Reasoning.step-≡
     lb! : Character k' → Character k'
     lb! x = record x {
       inventory = sl ∷ Character.inventory x;
