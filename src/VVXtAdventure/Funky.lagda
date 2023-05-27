@@ -291,7 +291,7 @@ takeHater q m n = q' , dus , dis , nyfin
             → x ≡ y
             → P x
             → P y
-        fic P x y d g = {!!}
+        fic P x y refl = id
       f = λ (l , k) → Fin.suc l , gimp isWeapon inv l k sl
         where
         isWeapon = _≡_ true ∘ is-just ∘ Item.weapwn
