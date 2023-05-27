@@ -284,7 +284,7 @@ takeHater q m n = q' , dus , dis , nyfin
                → (n : Fin $ length l)
                → (x : A)
                → l ! n ≡ (x ∷ l) ! (Fin.suc n)
-          blax l n x = {!!}
+          blax l n x = refl
         fic : ∀ {a p} → {A : Set a}
             → (P : Pred A p)
             → (x y : A)
