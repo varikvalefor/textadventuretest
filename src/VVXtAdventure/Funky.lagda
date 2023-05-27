@@ -250,7 +250,8 @@ takeHater q m n = q' , dus , dis , nyfin
            → (ℓ : length (Data.List.map f x) ≡ length x)
            → _≡_
                (length x)
-               (length $ proj₁ $ ual (Data.List.map f x) (mink q $ tr ℓ) g)
+               (length $ proj₁
+                $ ual (Data.List.map f x) (mink q $ tr ℓ) g)
     ualmap x f g q e = {!!}
     lb! : Character k' → Character k'
     lb! x = record x {
