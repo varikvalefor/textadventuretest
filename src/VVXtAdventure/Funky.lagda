@@ -280,17 +280,11 @@ takeHater q m n = q' , dus , dis , nyfin
         xᵤ = kon q n x
           where
           kon : ∀ {a} → {A : Set a}
-              → (l : List A)
-              → (n : Fin $ length l)
-              → (x : A)
+              → (l : List A) → (n : Fin $ length l) → (x : A)
               → l ! n ≡ (x ∷ l) ! (Fin.suc n)
           kon l n x = refl
         fic : ∀ {a p} → {A : Set a}
-            → (P : Pred A p)
-            → (x y : A)
-            → x ≡ y
-            → P x
-            → P y
+            → (P : Pred A p) → (x y : A) → x ≡ y → P x → P y
         fic P x y refl = id
       f = λ (l , k) → Fin.suc l , gimp isWeapon inv l k sl
         where
