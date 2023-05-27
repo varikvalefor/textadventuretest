@@ -277,14 +277,14 @@ takeHater q m n = q' , dus , dis , nyfin
         xₜ = q ! n
         xₛ = (x ∷ q) ! (Fin.suc n)
         xᵤ : xₜ ≡ xₛ
-        xᵤ = blax q n x
+        xᵤ = kon q n x
           where
-          blax : ∀ {a} → {A : Set a}
-               → (l : List A)
-               → (n : Fin $ length l)
-               → (x : A)
-               → l ! n ≡ (x ∷ l) ! (Fin.suc n)
-          blax l n x = refl
+          kon : ∀ {a} → {A : Set a}
+              → (l : List A)
+              → (n : Fin $ length l)
+              → (x : A)
+              → l ! n ≡ (x ∷ l) ! (Fin.suc n)
+          kon l n x = refl
         fic : ∀ {a p} → {A : Set a}
             → (P : Pred A p)
             → (x y : A)
