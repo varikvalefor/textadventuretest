@@ -270,7 +270,7 @@ takeHater q m n = q' , dus , dis , nyfin
            → P $ q ! n
            → (x : A)
            → P $ (x ∷ q) ! (Fin.suc n)
-      gimp p l n c x = {!!}
+      gimp P q n c x = {!!}
       f = λ (l , k) → Fin.suc l , gimp isWeapon inv l k sl
         where
         isWeapon = _≡_ true ∘ is-just ∘ Item.weapwn
