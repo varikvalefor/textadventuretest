@@ -23,6 +23,8 @@
 \newunicodechar{⦄}{\ensuremath{\mathnormal{\rbrace\!\rbrace}}}
 \newunicodechar{ₗ}{\ensuremath{\mathnormal{_l}}}
 \newunicodechar{ₛ}{\ensuremath{\mathnormal{_s}}}
+\newunicodechar{ₜ}{\ensuremath{\mathnormal{_t}}}
+\newunicodechar{ᵤ}{\ensuremath{\mathnormal{_u}}}
 \newunicodechar{ᵢ}{\ensuremath{\mathnormal{_i}}}
 \newunicodechar{ₒ}{\ensuremath{\mathnormal{_o}}}
 \newunicodechar{ᵘ}{\ensuremath{\mathnormal{^u}}}
@@ -270,12 +272,12 @@ takeHater q m n = q' , dus , dis , nyfin
            → P $ q ! n
            → (x : A)
            → P $ (x ∷ q) ! (Fin.suc n)
-      gimp P q n c x = fic P xin xisyn xindusyn c
+      gimp P q n c x = fic P xₜ xₛ xᵤ c
         where
-        xin = q ! n
-        xisyn = (x ∷ q) ! (Fin.suc n)
-        xindusyn : xin ≡ xisyn
-        xindusyn = blax q n x
+        xₜ = q ! n
+        xₛ = (x ∷ q) ! (Fin.suc n)
+        xᵤ : xₜ ≡ xₛ
+        xᵤ = blax q n x
           where
           blax : ∀ {a} → {A : Set a}
                → (l : List A)
