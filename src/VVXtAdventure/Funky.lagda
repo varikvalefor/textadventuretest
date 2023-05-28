@@ -225,18 +225,6 @@ takeHater q m n = q' , dus , dis , nyfin
     nadu = Data.Bool._≟_ false ∘ _≡ᵇ_ (Item.cname sl) ∘ Item.cname
     vimcu = λ x → record x {items = filterₗ nadu $ Room.items x}
   k' = proj₁ k''
-  nakalci : Character k'
-  nakalci = record {
-    forename = Character.forename p;
-    surname = Character.surname p;
-    nicknames = Character.nicknames p;
-    room = mink (Character.room p) $ proj₂ k'';
-    inventory = Character.inventory p;
-    wieldedct = Character.wieldedct p;
-    yourfloorisnowclean = Character.yourfloorisnowclean p
-    }
-    where
-    p = GameData.player q
   x'' : Σ (List $ Character k') $ λ x'
         → length (GameData.haters q) ≡ length x'
   x'' = map₂ kibix $ ual (proj₁ ckic) (mink m $ proj₂ ckic) lb!
@@ -307,12 +295,22 @@ takeHater q m n = q' , dus , dis , nyfin
       ℓₘ = tr $ DLP.length-map kumbi'o $ GameData.haters q
     kibix = ualmap {!!} kumbi'o lb! {!!}
   q' = record {
-     epicwin = GameData.epicwin q;
-     yourfloorisnowclean = {!!};
-     player = nakalci;
-     haters = proj₁ x'';
-     rooms = k'
-     }
+    epicwin = GameData.epicwin q;
+    yourfloorisnowclean = {!!};
+    player = record {
+      forename = Character.forename p;
+      surname = Character.surname p;
+      nicknames = Character.nicknames p;
+      room = mink (Character.room p) $ proj₂ k'';
+      inventory = Character.inventory p;
+      wieldedct = Character.wieldedct p;
+      yourfloorisnowclean = Character.yourfloorisnowclean p
+      };
+    haters = proj₁ x'';
+    rooms = k'
+    }
+    where
+    p = GameData.player q
   dus : length (GameData.rooms q) ≡ length k'
   dus = proj₂ k''
   dis : length (GameData.haters q) ≡ length (proj₁ x'')
