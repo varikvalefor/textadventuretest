@@ -272,12 +272,12 @@ takeHater q m n = q' , dus , dis , nyfin
            → P $ ℓ ! n
            → (x : A)
            → P $ (x ∷ ℓ) ! (Fin.suc n)
-      gimp P ℓ n c x = fic P xₜ xₛ xᵤ c
+      gimp P ℓ n c x = fic P sₜ sₙ sᵤ c
         where
-        xₜ = ℓ ! n
-        xₛ = (x ∷ ℓ) ! (Fin.suc n)
-        xᵤ : xₜ ≡ xₛ
-        xᵤ = kon ℓ n x
+        sₜ = ℓ ! n
+        sₙ = (x ∷ ℓ) ! (Fin.suc n)
+        sᵤ : sₜ ≡ sₙ
+        sᵤ = kon ℓ n x
           where
           kon : ∀ {a} → {A : Set a}
               → (l : List A) → (n : Fin $ length l) → (x : A)
