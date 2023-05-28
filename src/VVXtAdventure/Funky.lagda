@@ -293,7 +293,15 @@ takeHater q m n = q' , dus , dis , nyfin
       where
       ck = Data.List.map kumbi'o $ GameData.haters q
       ℓₘ = tr $ DLP.length-map kumbi'o $ GameData.haters q
-    kibix = ualmap {!!} kumbi'o lb! {!!}
+    kibix : {x : List $ Character k'}
+          → length (proj₁ ckic) ≡ length x
+          → length (GameData.haters q) ≡ length x
+    kibix {x} = tr ∘ step-≡ (length x) c ∘ tr
+      where
+      ℓ = DLP.length-map kumbi'o $ GameData.haters q
+      c : length (proj₁ ckic) ≡ length (GameData.haters q)
+      c = tr $ ualmap {!!} kumbi'o lb! m ℓ
+      step-≡ = ≡-Reasoning.step-≡
   q' = record {
     epicwin = GameData.epicwin q;
     yourfloorisnowclean = {!!};
