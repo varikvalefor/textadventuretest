@@ -43,6 +43,7 @@
 \newunicodechar{⍨}{\raisebox{-0.25ex}{$\ddot\sim$}}
 \newunicodechar{ℓ}{\ensuremath{\mathnormal{\ell}}}
 \newunicodechar{∈}{\ensuremath{\mathnormal{\in}}}
+\newunicodechar{∉}{\ensuremath{\mathnormal{\notin}}}
 
 \newcommand\Sym\AgdaSymbol
 \newcommand\D\AgdaDatatype
@@ -145,7 +146,9 @@ open import Truthbrary.Record.Eq
 open import Truthbrary.Record.LLC
   using (
     updateAt;
+    nu,iork;
     length;
+    _∉_;
     map
   )
 open import Truthbrary.Category.Monad
@@ -251,9 +254,21 @@ takeHater q m n = q' , dus , dis , nyfin
     lb! x = record x {
       inventory = sl ∷ Character.inventory x;
       wieldedct = Data.Maybe.map f $ Character.wieldedct x;
-      yourfloorisnowclean = {!!}
+      yourfloorisnowclean = iofink
       }
       where
+      iofink = f i (Item.cname sl) n₁ {!!}
+        where
+        n₁ = Character.yourfloorisnowclean x
+        i = Data.List.map Item.cname $ Character.inventory x
+        f : ∀ {a} → {A : Set a}
+          → ⦃ _ : Eq A ⦄
+          → (x : List A)
+          → (s : A)
+          → nu,iork x
+          → s ∉ x
+          → nu,iork $ s ∷ x
+        f x s n nin = {!!}
       gimp : ∀ {a p} → {A : Set a}
            → (P : Pred A p)
            → (ℓ : List A)
