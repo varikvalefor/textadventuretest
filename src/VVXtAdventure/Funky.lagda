@@ -301,7 +301,7 @@ takeHater q m n = q' , dus , dis , nyfin
       where
       ℓ = DLP.length-map kumbi'o $ GameData.haters q
       c : length (proj₁ ckic) ≡ length (GameData.haters q)
-      c = tr $ ualmap {!!} kumbi'o lb! m ℓ
+      c = tr $ proj₂ ckic
       step-≡ = ≡-Reasoning.step-≡
   q' = record {
     epicwin = GameData.epicwin q;
