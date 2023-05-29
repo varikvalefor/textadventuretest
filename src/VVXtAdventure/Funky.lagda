@@ -27,6 +27,7 @@
 \newunicodechar{ᵤ}{\ensuremath{\mathnormal{_u}}}
 \newunicodechar{ᵢ}{\ensuremath{\mathnormal{_i}}}
 \newunicodechar{ₒ}{\ensuremath{\mathnormal{_o}}}
+\newunicodechar{ₙ}{\ensuremath{\mathnormal{_n}}}
 \newunicodechar{ᵘ}{\ensuremath{\mathnormal{^u}}}
 \newunicodechar{ᵥ}{\ensuremath{\mathnormal{_v}}}
 \newunicodechar{₁}{\ensuremath{\mathnormal{_1}}}
