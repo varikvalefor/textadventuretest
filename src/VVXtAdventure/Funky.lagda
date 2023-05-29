@@ -324,7 +324,14 @@ takeHater q m n = q' , dus , dis , nyfin
   dus = proj₂ k''
   dis : length (GameData.haters q) ≡ length (proj₁ x'')
   dis = proj₂ x''
-  nyfin = {!!}
+  nyfin = f i i' sl Item.cname refl
+    where
+    i = Character.inventory lb
+    i' = Character.inventory $ (proj₁ x'') ! mink m (proj₂ x'')
+    f : ∀ {a b} → {A : Set a} → {B : Set b}
+      → (b c : List A) → (x : A) → (f : A → B) → x ∷ b ≡ c
+      → map f c ≡ f x ∷ map f b
+    f b c x g refl = refl
 \end{code}
 
 \chapter{le mu'oi glibau.\ high-level .glibau.}
