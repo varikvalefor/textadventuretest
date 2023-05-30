@@ -255,31 +255,7 @@ takeHater q m n = q' , dus , dis , nyfin
           → s ∉ x
           → nu,iork $ s ∷ x
         f x s n nin = {!!}
-      gimp : ∀ {a p} → {A : Set a}
-           → (P : Pred A p)
-           → (ℓ : List A)
-           → (n : Fin $ length ℓ)
-           → P $ ℓ ! n
-           → (x : A)
-           → P $ (x ∷ ℓ) ! (Fin.suc n)
-      gimp P ℓ n c x = fic P sₜ sₙ sᵤ c
-        where
-        sₜ = ℓ ! n
-        sₙ = (x ∷ ℓ) ! (Fin.suc n)
-        sᵤ : sₜ ≡ sₙ
-        sᵤ = kon ℓ n x
-          where
-          kon : ∀ {a} → {A : Set a}
-              → (l : List A) → (n : Fin $ length l) → (x : A)
-              → l ! n ≡ (x ∷ l) ! (Fin.suc n)
-          kon l n x = refl
-        fic : ∀ {a p} → {A : Set a}
-            → (P : Pred A p) → (x y : A) → x ≡ y → P x → P y
-        fic P x y refl = id
-      f = λ (l , k) → Fin.suc l , gimp isWeapon inv l k sl
-        where
-        isWeapon = _≡_ true ∘ is-just ∘ Item.weapwn
-        inv = Character.inventory x
+      f = λ (l , k) → Fin.suc l , k
     kumbi'o = λ x → record {
       forename = Character.forename x;
       surname = Character.surname x;
