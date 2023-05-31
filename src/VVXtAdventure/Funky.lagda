@@ -231,7 +231,7 @@ takeHater q m n = q' , dus , dis , nyfin
   k' = proj₁ k''
   x'' : Σ (List $ Character k') $ λ x'
         → length (GameData.haters q) ≡ length x'
-  x'' = map₂ kibix $ ual (proj₁ ckic) (mink m $ proj₂ ckic) lb!
+  x'' = proj₁ ulb , kibix (proj₂ ulb)
     where
     tr : ∀ {a} → {A : Set a} → {x y : A}
        → x ≡ y → y ≡ x
@@ -280,6 +280,7 @@ takeHater q m n = q' , dus , dis , nyfin
       c : length (proj₁ ckic) ≡ length (GameData.haters q)
       c = tr $ proj₂ ckic
       step-≡ = ≡-Reasoning.step-≡
+    ulb = ual (proj₁ ckic) (mink m $ proj₂ ckic) lb!
   q' = record {
     epicwin = GameData.epicwin q;
     yourfloorisnowclean = {!!};
@@ -301,7 +302,7 @@ takeHater q m n = q' , dus , dis , nyfin
   dus = proj₂ k''
   dis : length (GameData.haters q) ≡ length (proj₁ x'')
   dis = proj₂ x''
-  nyfin = f i i' sl Item.cname refl
+  nyfin = f i i' sl Item.cname ?
     where
     i = Character.inventory lb
     i' = Character.inventory $ (proj₁ x'') ! mink m (proj₂ x'')
