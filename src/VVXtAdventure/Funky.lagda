@@ -214,6 +214,9 @@ takeHater : (q : GameData)
                     $ GameData.itemsInRoomOf q m ! n)))
 takeHater q m n = q' , dus , dis , nyfin
   where
+  tr : ∀ {a} → {A : Set a} → {x y : A}
+     → x ≡ y → y ≡ x
+  tr refl = refl
   ual : ∀ {a} → {A : Set a}
       → (l : List A) → (n : Fin $ length l) → (f : A → A)
       → Σ (List A) $ λ l'
@@ -246,8 +249,6 @@ takeHater q m n = q' , dus , dis , nyfin
       min : suc n' ≡ mink (suc n) r₂
       min = sukti n (proj₁ $ proj₂ r₁) r₂
         where
-        tr : ∀ {a} → {A : Set a} → {B C : A} → B ≡ C → C ≡ B
-        tr refl = refl
         sukti : {m n : Data.Nat.ℕ}
               → (f : Fin m)
               → (dak : m ≡ n)
@@ -292,9 +293,6 @@ takeHater q m n = q' , dus , dis , nyfin
         → nu,iork $ s ∷ x
       f x s n nin = {!!}
     f = λ (l , k) → Fin.suc l , k
-  tr : ∀ {a} → {A : Set a} → {x y : A}
-     → x ≡ y → y ≡ x
-  tr refl = refl
   x'' : Σ (List $ Character k') $ λ x'
         → length (GameData.haters q) ≡ length x'
   x'' = proj₁ ulb , kibix (proj₁ $ proj₂ ulb)
