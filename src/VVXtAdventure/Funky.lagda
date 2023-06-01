@@ -244,7 +244,16 @@ takeHater q m n = q' , dus , dis , nyfin
             → l ! n ≡ k
       indus refl = id
       min : suc n' ≡ mink (suc n) r₂
-      min = {!!}
+      min = sukti n (proj₁ $ proj₂ r₁) r₂
+        where
+        tr : ∀ {a} → {A : Set a} → {B C : A} → B ≡ C → C ≡ B
+        tr refl = refl
+        sukti : {m n : Data.Nat.ℕ}
+              → (f : Fin m)
+              → (dak : m ≡ n)
+              → (dek : Data.Nat.suc m ≡ Data.Nat.suc n)
+              → suc (mink f dak) ≡ mink (suc f) dek
+        sukti f refl refl = refl
   lb = GameData.haters q ! m
   sl = Room.items (GameData.rooms q ! Character.room lb) ! n
   k'' : Σ (List Room) $ λ l
