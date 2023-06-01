@@ -215,56 +215,81 @@ takeHater : (q : GameData)
 takeHater q m n = q' , dus , dis , nyfin
   where
   ual : ∀ {a} → {A : Set a}
-      → (l : List A) → Fin $ length l → (A → A)
-      → Σ (List A) $ _≡_ (length l) ∘ length
-  ual (x ∷ xs) Fin.zero f = f x ∷ xs , refl
-  ual (x ∷ xs) (Fin.suc n) f = x ∷ proj₁ (ual xs n f) , rif
+      → (l : List A) → (n : Fin $ length l) → (f : A → A)
+      → Σ (List A) $ λ l'
+        → Σ (length l ≡ length l') $ λ ℓ
+        → l' ! mink n ℓ ≡ f (l ! n)
+  ual (x ∷ xs) Fin.zero f = f x ∷ xs , refl , refl
+  ual (x ∷ xs) (Fin.suc n) f = x ∷ proj₁ r₁ , r₂ , r₃
     where
-    rif = cong Data.Nat.suc $ proj₂ $ ual xs n f
+    r₁ = ual xs n f
+    r₂ = cong Data.Nat.suc $ proj₁ $ proj₂ r₁
+    n' = mink n $ proj₁ $ proj₂ r₁
+    r₃ = indus min $ adus (proj₁ r₁) x $ proj₂ $ proj₂ r₁
+      where
+      adus : ∀ {a} → {A : Set a}
+           → {x : A}
+           → (l : List A)
+           → {n : Fin $ length l}
+           → (z : A)
+           → l ! n ≡ x
+           → (z ∷ l) ! suc n ≡ x
+      adus l z refl = refl
+      indus : ∀ {a} → {A : Set a}
+            → {l : List A}
+            → {m n : Fin $ length l}
+            → {k : A}
+            → m ≡ n
+            → l ! m ≡ k
+            → l ! n ≡ k
+      indus refl = id
+      min : suc n' ≡ mink (suc n) r₂
+      min = {!!}
   lb = GameData.haters q ! m
   sl = Room.items (GameData.rooms q ! Character.room lb) ! n
-  k'' : Σ (List Room) $ _≡_ on length $ GameData.rooms q
+  k'' : Σ (List Room) $ λ l
+        → Σ (length (GameData.rooms q) ≡ length l) _
   k'' = ual (GameData.rooms q) (Character.room lb) vimcu
     where
     nadu = Data.Bool._≟_ false ∘ _≡ᵇ_ (Item.cname sl) ∘ Item.cname
     vimcu = λ x → record x {items = filterₗ nadu $ Room.items x}
   k' = proj₁ k''
+  kumbi'o = λ x → record {
+    forename = Character.forename x;
+    surname = Character.surname x;
+    nicknames = Character.nicknames x;
+    room = mink (Character.room x) $ proj₁ $ proj₂ k'';
+    inventory = Character.inventory x;
+    wieldedct = Character.wieldedct x;
+    yourfloorisnowclean = Character.yourfloorisnowclean x
+    }
+  lb! : Character k' → Character k'
+  lb! x = record x {
+    inventory = sl ∷ Character.inventory x;
+    wieldedct = Data.Maybe.map f $ Character.wieldedct x;
+    yourfloorisnowclean = iofink
+    }
+    where
+    iofink = f i (Item.cname sl) n₁ {!!}
+      where
+      n₁ = Character.yourfloorisnowclean x
+      i = Data.List.map Item.cname $ Character.inventory x
+      f : ∀ {a} → {A : Set a}
+        → ⦃ _ : Eq A ⦄
+        → (x : List A)
+        → (s : A)
+        → nu,iork x
+        → s ∉ x
+        → nu,iork $ s ∷ x
+      f x s n nin = {!!}
+    f = λ (l , k) → Fin.suc l , k
+  tr : ∀ {a} → {A : Set a} → {x y : A}
+     → x ≡ y → y ≡ x
+  tr refl = refl
   x'' : Σ (List $ Character k') $ λ x'
         → length (GameData.haters q) ≡ length x'
-  x'' = proj₁ ulb , kibix (proj₂ ulb)
+  x'' = proj₁ ulb , kibix (proj₁ $ proj₂ ulb)
     where
-    tr : ∀ {a} → {A : Set a} → {x y : A}
-       → x ≡ y → y ≡ x
-    tr refl = refl
-    lb! : Character k' → Character k'
-    lb! x = record x {
-      inventory = sl ∷ Character.inventory x;
-      wieldedct = Data.Maybe.map f $ Character.wieldedct x;
-      yourfloorisnowclean = iofink
-      }
-      where
-      iofink = f i (Item.cname sl) n₁ {!!}
-        where
-        n₁ = Character.yourfloorisnowclean x
-        i = Data.List.map Item.cname $ Character.inventory x
-        f : ∀ {a} → {A : Set a}
-          → ⦃ _ : Eq A ⦄
-          → (x : List A)
-          → (s : A)
-          → nu,iork x
-          → s ∉ x
-          → nu,iork $ s ∷ x
-        f x s n nin = {!!}
-      f = λ (l , k) → Fin.suc l , k
-    kumbi'o = λ x → record {
-      forename = Character.forename x;
-      surname = Character.surname x;
-      nicknames = Character.nicknames x;
-      room = mink (Character.room x) $ proj₂ k'';
-      inventory = Character.inventory x;
-      wieldedct = Character.wieldedct x;
-      yourfloorisnowclean = Character.yourfloorisnowclean x
-      }
     ckic : Σ (List $ Character k') $ λ lex
            → length (GameData.haters q) ≡ length lex
     ckic = ck , ℓₘ
@@ -288,7 +313,7 @@ takeHater q m n = q' , dus , dis , nyfin
       forename = Character.forename p;
       surname = Character.surname p;
       nicknames = Character.nicknames p;
-      room = mink (Character.room p) $ proj₂ k'';
+      room = mink (Character.room p) $ proj₁ $ proj₂ k'';
       inventory = Character.inventory p;
       wieldedct = Character.wieldedct p;
       yourfloorisnowclean = Character.yourfloorisnowclean p
@@ -299,7 +324,7 @@ takeHater q m n = q' , dus , dis , nyfin
     where
     p = GameData.player q
   dus : length (GameData.rooms q) ≡ length k'
-  dus = proj₂ k''
+  dus = proj₁ $ proj₂ k''
   dis : length (GameData.haters q) ≡ length (proj₁ x'')
   dis = proj₂ x''
   nyfin = f i i' sl Item.cname ?
