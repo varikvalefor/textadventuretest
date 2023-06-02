@@ -237,7 +237,7 @@ takeHater q m n = q' , dus , dis , nyfin
            → (z : A)
            → l ! n ≡ x
            → (z ∷ l) ! suc n ≡ x
-      adus l z refl = refl
+      adus l z = id
       indus : ∀ {a} → {A : Set a}
             → {l : List A}
             → {m n : Fin $ length l}
