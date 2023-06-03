@@ -251,9 +251,9 @@ takeHater q m n = q' , dus , dis , nyfin
         where
         sukti : {m n : Data.Nat.ℕ}
               → (f : Fin m)
-              → (dak : m ≡ n)
-              → (dek : Data.Nat.suc m ≡ Data.Nat.suc n)
-              → suc (mink f dak) ≡ mink (suc f) dek
+              → (x : m ≡ n)
+              → (z : Data.Nat.suc m ≡ Data.Nat.suc n)
+              → suc (mink f x) ≡ mink (suc f) z
         sukti f refl refl = refl
   lb = GameData.haters q ! m
   sl = Room.items (GameData.rooms q ! Character.room lb) ! n
