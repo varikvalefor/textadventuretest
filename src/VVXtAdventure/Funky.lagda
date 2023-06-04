@@ -307,7 +307,6 @@ takeHater q m n = q' , dus , dis , nyfin
           → length (GameData.haters q) ≡ length x
     kibix {x} = tr ∘ step-≡ (length x) c ∘ tr
       where
-      ℓ = DLP.length-map kumbi'o $ GameData.haters q
       c : length (proj₁ ckic) ≡ length (GameData.haters q)
       c = tr $ proj₂ ckic
       step-≡ = ≡-Reasoning.step-≡
