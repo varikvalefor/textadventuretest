@@ -227,8 +227,7 @@ takeHater q m n = q' , dus , dis , nyfin
     where
     r₁ = ual xs n f
     r₂ = cong Data.Nat.suc $ proj₁ $ proj₂ r₁
-    n' = mink n $ proj₁ $ proj₂ r₁
-    r₃ = indus min $ adus (proj₁ r₁) x $ proj₂ $ proj₂ r₁
+    r₃ = indus misuk $ adus (proj₁ r₁) x $ proj₂ $ proj₂ r₁
       where
       adus : ∀ {a} → {A : Set a}
            → {x : A}
@@ -246,8 +245,8 @@ takeHater q m n = q' , dus , dis , nyfin
             → l ! m ≡ k
             → l ! n ≡ k
       indus refl = id
-      min : suc n' ≡ mink (suc n) r₂
-      min = sukti n (proj₁ $ proj₂ r₁) r₂
+      misuk : suc (mink n $ proj₁ $ proj₂ r₁) ≡ mink (suc n) r₂
+      misuk = sukti n (proj₁ $ proj₂ r₁) r₂
         where
         sukti : {m n : Data.Nat.ℕ}
               → (f : Fin m)
