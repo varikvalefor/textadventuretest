@@ -44,6 +44,9 @@
 \newunicodechar{ℓ}{\ensuremath{\mathnormal{\ell}}}
 \newunicodechar{∈}{\ensuremath{\mathnormal{\in}}}
 \newunicodechar{∉}{\ensuremath{\mathnormal{\notin}}}
+\newunicodechar{∎}{\ensuremath{\mathnormal{\blacksquare}}}
+\newunicodechar{⟨}{\ensuremath{\mathnormal{\langle}}}
+\newunicodechar{⟩}{\ensuremath{\mathnormal{\rangle}}}
 
 \newcommand\Sym\AgdaSymbol
 \newcommand\D\AgdaDatatype
@@ -159,6 +162,8 @@ open import Data.List.Relation.Unary.Any
     any?
   )
 open import Relation.Binary.PropositionalEquality
+
+open ≡-Reasoning
 \end{code}
 
 \chapter{le mu'oi glibau.\ low-level .glibau.}
@@ -292,25 +297,50 @@ takeHater q m n = q' , dus , dis , nyfin
         → nu,iork $ s ∷ x
       f x s n nin = {!!}
     f = λ (l , k) → Fin.suc l , k
-  x'' : Σ (List $ Character k') $ λ x'
-        → length (GameData.haters q) ≡ length x'
-  x'' = proj₁ ulb , kibix (proj₁ $ proj₂ ulb)
+  ualmap : ∀ {a} → {A B : Set a}
+         → (x : List A)
+         → (f : A → B)
+         → (g : B → B)
+         → (k : Fin $ length x)
+         → Σ (List B) $ λ l
+           → Σ (length x ≡ length l) $ λ ℓ
+           → g (f $ x ! k) ≡ l ! mink k ℓ
+  ualmap {_} {A} {B} x f g k = proj₁ l , p₂ , tr p₃
     where
-    ckic : Σ (List $ Character k') $ λ lex
-           → length (GameData.haters q) ≡ length lex
-    ckic = ck , ℓₘ
-      where
-      ck = Data.List.map kumbi'o $ GameData.haters q
-      ℓₘ = tr $ DLP.length-map kumbi'o $ GameData.haters q
-    kibix : {x : List $ Character k'}
-          → length (proj₁ ckic) ≡ length x
-          → length (GameData.haters q) ≡ length x
-    kibix {x} = tr ∘ step-≡ (length x) c ∘ tr
-      where
-      c : length (proj₁ ckic) ≡ length (GameData.haters q)
-      c = tr $ proj₂ ckic
-      step-≡ = ≡-Reasoning.step-≡
-    ulb = ual (proj₁ ckic) (mink m $ proj₂ ckic) lb!
+    lum : ∀ {a} → {A B : Set a}
+        → (l : List A)
+        → (f : A → B)
+        → (n : Fin $ length l)
+        → (_≡_
+            (_!_
+              (Data.List.map f l)
+              (mink n $ tr $ DLP.length-map f l))
+            (f $ l ! n))
+    lum (x ∷ xs) f zero = {!!}
+    lum (x ∷ xs) f (suc n) = {!!}
+    ℓ : length x ≡ length (Data.List.map f x)
+    ℓ = tr $ DLP.length-map f x
+    mifix = Data.List.map f x
+    k₂ = mink k $ tr $ DLP.length-map f x
+    l : Σ (List B) $ λ l'
+      → Σ (length mifix ≡ length l') $ λ ℓ
+      → (_≡_
+          (l' ! mink k₂ ℓ)
+          (g $ mifix ! k₂))
+    l = ual (Data.List.map f x) (mink k ℓ) g
+    p₂ = begin
+      length x ≡⟨ tr (DLP.length-map f x) ⟩
+      length (Data.List.map f x) ≡⟨ proj₁ (proj₂ l) ⟩
+      length (proj₁ l) ∎
+    p₃ = begin
+      proj₁ l ! mink k p₂ ≡⟨ {!!} ⟩
+      proj₁ l ! mink k₂ (proj₁ $ proj₂ l) ≡⟨ proj₂ (proj₂ l) ⟩
+      g (Data.List.map f x ! mink k ℓ) ≡⟨ cong g (lum x f k) ⟩
+      g (f $ x ! k) ∎
+  x'' : Σ (List $ Character k') $ λ x'
+        → Σ (length (GameData.haters q) ≡ length x') $ λ ℓ
+        → _
+  x'' = ualmap (GameData.haters q) kumbi'o lb! m
   q' = record {
     epicwin = GameData.epicwin q;
     yourfloorisnowclean = {!!};
@@ -331,15 +361,23 @@ takeHater q m n = q' , dus , dis , nyfin
   dus : length (GameData.rooms q) ≡ length k'
   dus = proj₁ $ proj₂ k''
   dis : length (GameData.haters q) ≡ length (proj₁ x'')
-  dis = proj₂ x''
-  nyfin = f i i' sl Item.cname ?
+  dis = proj₁ $ proj₂ x''
+  nyfin = f i i' sl Item.cname slix
     where
+    lb' = proj₁ x'' ! mink m (proj₁ $ proj₂ x'')
     i = Character.inventory lb
-    i' = Character.inventory $ (proj₁ x'') ! mink m (proj₂ x'')
+    i' = Character.inventory lb'
     f : ∀ {a b} → {A : Set a} → {B : Set b}
       → (b c : List A) → (x : A) → (f : A → B) → x ∷ b ≡ c
       → map f c ≡ f x ∷ map f b
     f b c x g refl = refl
+    slix = begin
+      sl ∷ i ≡⟨ cong (_∷_ sl) refl ⟩
+      inv (lb! $ kumbi'o lb) ≡⟨ {!!} ⟩
+      inv lb' ≡⟨ refl ⟩
+      i' ∎
+      where
+      inv = Character.inventory
 \end{code}
 
 \chapter{le mu'oi glibau.\ high-level .glibau.}
