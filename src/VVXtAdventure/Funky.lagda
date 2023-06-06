@@ -307,7 +307,7 @@ takeHater q m n = q' , dus , dis , nyfin
            → g (f $ x ! k) ≡ l ! mink k ℓ
   ualmap {_} {A} {B} x f g k = proj₁ l , p₂ , tr p₃
     where
-    lum : ∀ {a} → {A B : Set a}
+    lum : ∀ {a b} → {A : Set a} → {B : Set b}
         → (l : List A)
         → (f : A → B)
         → (n : Fin $ length l)
