@@ -353,7 +353,7 @@ takeHater q m n = q' , dus , dis , nyfin
       length (Data.List.map f x) ≡⟨ proj₁ (proj₂ l) ⟩
       length (proj₁ l) ∎
     p₃ = begin
-      proj₁ l ! mink k p₂ ≡⟨ cong (_!_ $ proj₁ l) ? ⟩
+      proj₁ l ! mink k p₂ ≡⟨ cong (_!_ $ proj₁ l) {!!} ⟩
       proj₁ l ! mink k₂ (proj₁ $ proj₂ l) ≡⟨ proj₂ (proj₂ l) ⟩
       g (Data.List.map f x ! mink k ℓ) ≡⟨ cong g (lum x f k) ⟩
       g (f $ x ! k) ∎
