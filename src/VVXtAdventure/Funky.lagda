@@ -42,6 +42,7 @@
 \newunicodechar{∸}{\ensuremath{\mathnormal{\divdot}}}
 \newunicodechar{⍨}{\raisebox{-0.25ex}{$\ddot\sim$}}
 \newunicodechar{ℓ}{\ensuremath{\mathnormal{\ell}}}
+\newunicodechar{∋}{\ensuremath{\mathnormal{\ni}}}
 \newunicodechar{∈}{\ensuremath{\mathnormal{\in}}}
 \newunicodechar{∉}{\ensuremath{\mathnormal{\notin}}}
 \newunicodechar{∎}{\ensuremath{\mathnormal{\blacksquare}}}
@@ -316,8 +317,23 @@ takeHater q m n = q' , dus , dis , nyfin
               (Data.List.map f l)
               (mink n $ tr $ DLP.length-map f l))
             (f $ l ! n))
-    lum (x ∷ xs) f zero = {!!}
-    lum (x ∷ xs) f (suc n) = {!!}
+    lum (x ∷ xs) f zero = begin
+      Data.List.map f (x ∷ xs) ! z ≡⟨ cong x∷xs! $ z ≡ zero ∋ {!!} ⟩
+      Data.List.map f (x ∷ xs) ! zero ≡⟨ refl ⟩
+      f x ∎
+      where
+      -- | .i la .varik. cu ciksi le paroi selpli ki'u
+      -- le su'u le nu la .varik. cu ciksi le paroi
+      -- selpli cu filri'a lo nu lo lerpinsle cu na
+      -- dukse lo ni ce'u vasru lo lerfu
+      z = mink zero $ tr $ DLP.length-map f $ x ∷ xs
+      x∷xs! = _!_ $ Data.List.map f $ x ∷ xs
+    lum (x ∷ xs) f (suc n) = begin
+      Data.List.map f (x ∷ xs) ! mink (suc n) tryks ≡⟨ {!!} ⟩
+      f ((x ∷ xs) ! suc n) ≡⟨ refl ⟩
+      f (xs ! n) ∎
+      where
+      tryks = tr $ DLP.length-map f $ x ∷ xs
     ℓ : length x ≡ length (Data.List.map f x)
     ℓ = tr $ DLP.length-map f x
     mifix = Data.List.map f x
