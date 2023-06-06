@@ -330,7 +330,7 @@ takeHater q m n = q' , dus , dis , nyfin
         where
         zil : {m n : ℕ}
           → (x : ℕ.suc m ≡ ℕ.suc n)
-          → mink (Fin (ℕ.suc m) ∋ zero) x ≡ zero
+          → mink zero x ≡ zero
         zil refl = refl
     lum (x ∷ xs) f (suc n) = begin
       Data.List.map f (x ∷ xs) ! mink (suc n) tryks ≡⟨ {!!} ⟩
