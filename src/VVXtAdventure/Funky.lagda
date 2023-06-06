@@ -318,16 +318,19 @@ takeHater q m n = q' , dus , dis , nyfin
               (mink n $ tr $ DLP.length-map f l))
             (f $ l ! n))
     lum (x ∷ xs) f zero = begin
-      Data.List.map f (x ∷ xs) ! z ≡⟨ cong x∷xs! $ z ≡ zero ∋ {!!} ⟩
+      Data.List.map f (x ∷ xs) ! z ≡⟨ cong x∷xs! ziz ⟩
       Data.List.map f (x ∷ xs) ! zero ≡⟨ refl ⟩
       f x ∎
       where
-      -- | .i la .varik. cu ciksi le paroi selpli ki'u
-      -- le su'u le nu la .varik. cu ciksi le paroi
-      -- selpli cu filri'a lo nu lo lerpinsle cu na
-      -- dukse lo ni ce'u vasru lo lerfu
       z = mink zero $ tr $ DLP.length-map f $ x ∷ xs
       x∷xs! = _!_ $ Data.List.map f $ x ∷ xs
+      ziz : z ≡ zero
+      ziz = zil $ tr $ DLP.length-map f $ x ∷ xs
+        where
+        zil : {m n : Data.Nat.ℕ}
+          → (x : Data.Nat.suc m ≡ Data.Nat.suc n)
+          → mink (Fin (Data.Nat.suc m) ∋ zero) x ≡ zero
+        zil refl = refl
     lum (x ∷ xs) f (suc n) = begin
       Data.List.map f (x ∷ xs) ! mink (suc n) tryks ≡⟨ {!!} ⟩
       f ((x ∷ xs) ! suc n) ≡⟨ refl ⟩
