@@ -84,6 +84,7 @@ open import Data.Fin
   )
 open import Data.Nat
   using (
+    ℕ;
     _+_
   )
 open import Data.Sum
@@ -197,7 +198,7 @@ ni'o la .varik.\ cu na jinvi le du'u sarcu fa lo nu la .varik.\ cu ciksi la'oi .
 
 \begin{code}
 private
-  mink : {c d : Data.Nat.ℕ} → Fin c → c ≡ d → Fin d
+  mink : {c d : ℕ} → Fin c → c ≡ d → Fin d
   mink a refl = a
   
   _⍨ = flip
@@ -232,7 +233,7 @@ takeHater q m n = q' , dus , dis , nyfin
   ual (x ∷ xs) (Fin.suc n) f = x ∷ proj₁ r₁ , r₂ , r₃
     where
     r₁ = ual xs n f
-    r₂ = cong Data.Nat.suc $ proj₁ $ proj₂ r₁
+    r₂ = cong ℕ.suc $ proj₁ $ proj₂ r₁
     r₃ = indus misuk $ adus (proj₁ r₁) x $ proj₂ $ proj₂ r₁
       where
       adus : ∀ {a} → {A : Set a}
@@ -254,10 +255,10 @@ takeHater q m n = q' , dus , dis , nyfin
       misuk : suc (mink n $ proj₁ $ proj₂ r₁) ≡ mink (suc n) r₂
       misuk = sukti n (proj₁ $ proj₂ r₁) r₂
         where
-        sukti : {m n : Data.Nat.ℕ}
+        sukti : {m n : ℕ}
               → (f : Fin m)
               → (x : m ≡ n)
-              → (z : Data.Nat.suc m ≡ Data.Nat.suc n)
+              → (z : ℕ.suc m ≡ ℕ.suc n)
               → suc (mink f x) ≡ mink (suc f) z
         sukti f refl refl = refl
   lb = GameData.haters q ! m
@@ -327,9 +328,9 @@ takeHater q m n = q' , dus , dis , nyfin
       ziz : z ≡ zero
       ziz = zil $ tr $ DLP.length-map f $ x ∷ xs
         where
-        zil : {m n : Data.Nat.ℕ}
-          → (x : Data.Nat.suc m ≡ Data.Nat.suc n)
-          → mink (Fin (Data.Nat.suc m) ∋ zero) x ≡ zero
+        zil : {m n : ℕ}
+          → (x : ℕ.suc m ≡ ℕ.suc n)
+          → mink (Fin (ℕ.suc m) ∋ zero) x ≡ zero
         zil refl = refl
     lum (x ∷ xs) f (suc n) = begin
       Data.List.map f (x ∷ xs) ! mink (suc n) tryks ≡⟨ {!!} ⟩
