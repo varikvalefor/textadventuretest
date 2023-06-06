@@ -343,10 +343,10 @@ takeHater q m n = q' , dus , dis , nyfin
     mifix = Data.List.map f x
     k₂ = mink k $ tr $ DLP.length-map f x
     l : Σ (List B) $ λ l'
-      → Σ (length mifix ≡ length l') $ λ ℓ
-      → (_≡_
-          (l' ! mink k₂ ℓ)
-          (g $ mifix ! k₂))
+        → Σ (length mifix ≡ length l') $ λ ℓ
+        → (_≡_
+            (l' ! mink k₂ ℓ)
+            (g $ mifix ! k₂))
     l = ual (Data.List.map f x) (mink k ℓ) g
     p₂ = begin
       length x ≡⟨ tr (DLP.length-map f x) ⟩
