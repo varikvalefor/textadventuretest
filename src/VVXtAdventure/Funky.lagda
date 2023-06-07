@@ -412,7 +412,7 @@ takeHater q m n = q' , dus , dis , nyfin
     f b c x g refl = refl
     slix = begin
       sl ∷ i ≡⟨ cong (_∷_ sl) refl ⟩
-      inv (lb! $ kumbi'o lb) ≡⟨ {!!} ⟩
+      inv (lb! $ kumbi'o lb) ≡⟨ cong inv $ proj₂ $ proj₂ x'' ⟩
       inv lb' ≡⟨ refl ⟩
       i' ∎
       where
