@@ -372,10 +372,32 @@ takeHater q m n = q' , dus , dis , nyfin
       length (Data.List.map f x) ≡⟨ proj₁ (proj₂ l) ⟩
       length (proj₁ l) ∎
     p₃ = begin
-      proj₁ l ! mink k p₂ ≡⟨ cong (_!_ $ proj₁ l) {!!} ⟩
+      proj₁ l ! mink k p₂ ≡⟨ cong (_!_ $ proj₁ l) pip ⟩
       proj₁ l ! mink k₂ (proj₁ $ proj₂ l) ≡⟨ proj₂ (proj₂ l) ⟩
       g (Data.List.map f x ! mink k ℓ) ≡⟨ cong g (lum x f k) ⟩
       g (f $ x ! k) ∎
+      where
+      -- .i xu fegli fa ko'a goi le velcki be
+      -- la'o zoi. p₃ .zoi.  .i ko'a se pagbu
+      -- zo'e je le velcki be la'oi .M.
+      ℓ₁ = tr $ DLP.length-map f x
+      ulf = ual (Data.List.map f x) (mink k ℓ₁) g
+      ℓ₂ = proj₁ $ proj₂ ulf
+      xlulf : length x ≡ length (proj₁ ulf)
+      xlulf = begin
+        length x ≡⟨ ℓ₁ ⟩
+        length (Data.List.map f x) ≡⟨ ℓ₂ ⟩
+        length (proj₁ ulf) ∎
+      M : ∀ {a b} → {A : Set a} → {B : Set b}
+        → (l : List A)
+        → (m n : List B)
+        → (k : Fin $ length l)
+        → (v : length l ≡ length m)
+        → (x : length m ≡ length n)
+        → (xov : length l ≡ length n)
+        → mink k xov ≡ mink (mink k v) x
+      M l m n k v x xov = ?
+      pip = M x (Data.List.map f x) (proj₁ ulf) k ℓ₁ ℓ₂ xlulf
   x'' : Σ (List $ Character k') $ λ x'
         → Σ (length (GameData.haters q) ≡ length x') $ λ ℓ
         → _
