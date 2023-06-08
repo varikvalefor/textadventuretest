@@ -383,7 +383,6 @@ takeHater q m n = q' , dus , dis , nyfin
       ℓ₁ = tr $ DLP.length-map f x
       ulf = ual (Data.List.map f x) (mink k ℓ₁) g
       ℓ₂ = proj₁ $ proj₂ ulf
-      xlulf : length x ≡ length (proj₁ ulf)
       xlulf = begin
         length x ≡⟨ ℓ₁ ⟩
         length (Data.List.map f x) ≡⟨ ℓ₂ ⟩
