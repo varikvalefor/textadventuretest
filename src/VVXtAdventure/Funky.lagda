@@ -363,9 +363,7 @@ takeHater q m n = q' , dus , dis , nyfin
     k₂ = mink k ℓ
     l : Σ (List B) $ λ l'
         → Σ (length mifix ≡ length l') $ λ ℓ
-        → (_≡_
-            (l' ! mink k₂ ℓ)
-            (g $ mifix ! k₂))
+        → l' ! mink k₂ ℓ ≡ g (mifix ! k₂)
     l = ual mifix k₂ g
     p₂ = begin
       length x ≡⟨ tr (DLP.length-map f x) ⟩
