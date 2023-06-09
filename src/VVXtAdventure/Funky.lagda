@@ -387,16 +387,14 @@ takeHater q m n = q' , dus , dis , nyfin
         length x ≡⟨ ℓ₁ ⟩
         length (Data.List.map f x) ≡⟨ ℓ₂ ⟩
         length (proj₁ ulf) ∎
-      M : ∀ {a b} → {A : Set a} → {B : Set b}
-        → (l : List A)
-        → (m n : List B)
-        → (k : Fin $ length l)
-        → (v : length l ≡ length m)
-        → (x : length m ≡ length n)
-        → (xov : length l ≡ length n)
+      M : {l m n : ℕ}
+        → (k : Fin l)
+        → (v : l ≡ m)
+        → (x : m ≡ n)
+        → (xov : l ≡ n)
         → mink k xov ≡ mink (mink k v) x
-      M l m n k v x xov = ?
-      pip = M x (Data.List.map f x) (proj₁ ulf) k ℓ₁ ℓ₂ xlulf
+      M k v x xov = {!!}
+      pip = M k ℓ₁ ℓ₂ xlulf
   x'' : Σ (List $ Character k') $ λ x'
         → Σ (length (GameData.haters q) ≡ length x') $ λ ℓ
         → _
