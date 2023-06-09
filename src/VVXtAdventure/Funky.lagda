@@ -357,36 +357,34 @@ takeHater q m n = q' , dus , dis , nyfin
               (Data.List.map f (x ∷ xs) ! (suc n))
               (Data.List.map f xs ! n))
       kit x xs f n = refl
-    ℓ : length x ≡ length (Data.List.map f x)
-    ℓ = tr $ DLP.length-map f x
     mifix = Data.List.map f x
-    k₂ = mink k $ tr $ DLP.length-map f x
+    ℓ : length x ≡ length mifix
+    ℓ = tr $ DLP.length-map f x
+    k₂ = mink k ℓ
     l : Σ (List B) $ λ l'
         → Σ (length mifix ≡ length l') $ λ ℓ
         → (_≡_
             (l' ! mink k₂ ℓ)
             (g $ mifix ! k₂))
-    l = ual (Data.List.map f x) (mink k ℓ) g
+    l = ual mifix k₂ g
     p₂ = begin
       length x ≡⟨ tr (DLP.length-map f x) ⟩
       length (Data.List.map f x) ≡⟨ proj₁ (proj₂ l) ⟩
       length (proj₁ l) ∎
     p₃ = begin
-      proj₁ l ! mink k p₂ ≡⟨ cong (_!_ $ proj₁ l) pip ⟩
+      proj₁ l ! mink k p₂ ≡⟨ cong (_!_ $ proj₁ l) $ M k ℓ ℓ₂ xlulf ⟩
       proj₁ l ! mink k₂ (proj₁ $ proj₂ l) ≡⟨ proj₂ (proj₂ l) ⟩
-      g (Data.List.map f x ! mink k ℓ) ≡⟨ cong g (lum x f k) ⟩
+      g (Data.List.map f x ! k₂) ≡⟨ cong g (lum x f k) ⟩
       g (f $ x ! k) ∎
       where
       -- .i xu fegli fa ko'a goi le velcki be
       -- la'o zoi. p₃ .zoi.  .i ko'a se pagbu
       -- zo'e je le velcki be la'oi .M.
-      ℓ₁ = tr $ DLP.length-map f x
-      ulf = ual (Data.List.map f x) (mink k ℓ₁) g
-      ℓ₂ = proj₁ $ proj₂ ulf
+      ℓ₂ = proj₁ $ proj₂ l
       xlulf = begin
-        length x ≡⟨ ℓ₁ ⟩
+        length x ≡⟨ ℓ ⟩
         length (Data.List.map f x) ≡⟨ ℓ₂ ⟩
-        length (proj₁ ulf) ∎
+        length (proj₁ l) ∎
       M : {l m n : ℕ}
         → (k : Fin l)
         → (v : l ≡ m)
@@ -394,7 +392,6 @@ takeHater q m n = q' , dus , dis , nyfin
         → (xov : l ≡ n)
         → mink k xov ≡ mink (mink k v) x
       M k v x xov = {!!}
-      pip = M k ℓ₁ ℓ₂ xlulf
   x'' : Σ (List $ Character k') $ λ x'
         → Σ (length (GameData.haters q) ≡ length x') $ λ ℓ
         → _
