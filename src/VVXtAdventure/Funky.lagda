@@ -389,7 +389,7 @@ takeHater q m n = q' , dus , dis , nyfin
         → (x : m ≡ n)
         → (xov : l ≡ n)
         → mink k xov ≡ mink (mink k v) x
-      M {l} k v x xov = begin
+      M k v x xov = begin
         mink k xov ≡⟨ mit k v x xov ⟩
         mink k (trans v x) ≡⟨ remit k v x xov ⟩
         mink (mink k v) x ∎
