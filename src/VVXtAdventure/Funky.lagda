@@ -389,25 +389,7 @@ takeHater q m n = q' , dus , dis , nyfin
         → (x : m ≡ n)
         → (xov : l ≡ n)
         → mink k xov ≡ mink (mink k v) x
-      M k v x xov = begin
-        mink k xov ≡⟨ mit k v x xov ⟩
-        mink k (trans v x) ≡⟨ remit k v x xov ⟩
-        mink (mink k v) x ∎
-        where
-        remit : {l m n : ℕ}
-              → (k : Fin l)
-              → (v : l ≡ m)
-              → (x : m ≡ n)
-              → (xov : l ≡ n)
-              → mink k (trans v x) ≡ mink (mink k v) x
-        remit k refl refl refl = refl
-        mit : {l m n : ℕ}
-            → (k : Fin l)
-            → (v : l ≡ m)
-            → (x : m ≡ n)
-            → (xov : l ≡ n)
-            → mink k xov ≡ mink k (trans v x)
-        mit k refl refl refl = refl
+      M k refl refl refl = refl
   x'' : Σ (List $ Character k') $ λ x'
         → Σ (length (GameData.haters q) ≡ length x') $ λ ℓ
         → _
