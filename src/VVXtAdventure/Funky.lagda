@@ -408,7 +408,6 @@ takeHater q m n = q' , dus , dis , nyfin
             → (xov : l ≡ n)
             → mink k xov ≡ mink k (trans v x)
         mit k refl refl refl = refl
-
   x'' : Σ (List $ Character k') $ λ x'
         → Σ (length (GameData.haters q) ≡ length x') $ λ ℓ
         → _
