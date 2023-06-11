@@ -12,8 +12,6 @@
 
 \newunicodechar{∷}{\ensuremath{\mathnormal\Colon}}
 \newunicodechar{ℕ}{\ensuremath{\mathbb{N}}}
-\newunicodechar{ℤ}{\ensuremath{\mathbb{Z}}}
-\newunicodechar{ℚ}{\ensuremath{\mathbb{Q}}}
 \newunicodechar{∘}{\ensuremath{\mathnormal{\circ}}}
 \newunicodechar{∀}{\ensuremath{\forall}}
 \newunicodechar{⊤}{\ensuremath{\mathnormal{\top}}}
