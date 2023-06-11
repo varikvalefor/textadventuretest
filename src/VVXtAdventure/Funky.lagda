@@ -148,7 +148,6 @@ open import VVXtAdventure.Base
 open import Truthbrary.Record.Eq
 open import Truthbrary.Record.LLC
   using (
-    updateAt;
     nu,iork;
     length;
     _∉_;
