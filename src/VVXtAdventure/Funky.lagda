@@ -218,8 +218,7 @@ takeHater : (q : GameData)
                     $ GameData.itemsInRoomOf q m ! n)))
 takeHater q m n = q' , dus , dis , nyfin
   where
-  tr : ∀ {a} → {A : Set a} → {x y : A}
-     → x ≡ y → y ≡ x
+  tr : ∀ {a} → {A : Set a} → {x y : A} → x ≡ y → y ≡ x
   tr refl = refl
   ual : ∀ {a} → {A : Set a}
       → (l : List A) → (n : Fin $ length l) → (f : A → A)
