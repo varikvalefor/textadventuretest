@@ -325,8 +325,8 @@ takeHater q m n = q' , dus , dis , nyfin
       ziz = zil $ tr $ DLP.length-map f $ x ∷ xs
         where
         zil : {m n : ℕ}
-          → (x : ℕ.suc m ≡ ℕ.suc n)
-          → mink zero x ≡ zero
+            → (x : ℕ.suc m ≡ ℕ.suc n)
+            → mink zero x ≡ zero
         zil refl = refl
     lum (x ∷ xs) f (suc n) = begin
       mef (x ∷ xs) ! mink (suc n) tryks ≡⟨ kong $ minz n tryk tryks ⟩
