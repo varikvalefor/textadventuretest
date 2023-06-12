@@ -331,7 +331,7 @@ takeHater q m n = q' , dus , dis , nyfin
         zil refl = refl
     lum (x ∷ xs) f (suc n) = begin
       mef (x ∷ xs) ! mink (suc n) tryks ≡⟨ kong $ minz n tryk tryks ⟩
-      mef (x ∷ xs) ! suc (mink n tryk) ≡⟨ kit x xs f (mink n tryk) ⟩
+      mef (x ∷ xs) ! suc (mink n tryk) ≡⟨ kit x xs f $ mink n tryk ⟩
       mef xs ! mink n tryk ≡⟨ lum xs f n ⟩
       f (xs ! n) ∎
       where
@@ -363,13 +363,13 @@ takeHater q m n = q' , dus , dis , nyfin
         → l' ! mink k₂ ℓ ≡ g (mifix ! k₂)
     l = ual mifix k₂ g
     p₂ = begin
-      length x ≡⟨ tr (DLP.length-map f x) ⟩
-      length (Data.List.map f x) ≡⟨ proj₁ (proj₂ l) ⟩
+      length x ≡⟨ tr $ DLP.length-map f x ⟩
+      length (Data.List.map f x) ≡⟨ proj₁ $ proj₂ l ⟩
       length (proj₁ l) ∎
     p₃ = begin
       proj₁ l ! mink k p₂ ≡⟨ cong (_!_ $ proj₁ l) $ M k ℓ ℓ₂ xlulf ⟩
-      proj₁ l ! mink k₂ (proj₁ $ proj₂ l) ≡⟨ proj₂ (proj₂ l) ⟩
-      g (Data.List.map f x ! k₂) ≡⟨ cong g (lum x f k) ⟩
+      proj₁ l ! mink k₂ (proj₁ $ proj₂ l) ≡⟨ proj₂ $ proj₂ l ⟩
+      g (Data.List.map f x ! k₂) ≡⟨ cong g $ lum x f k ⟩
       g (f $ x ! k) ∎
       where
       -- .i xu fegli fa ko'a goi le velcki be
