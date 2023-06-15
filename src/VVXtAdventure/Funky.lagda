@@ -314,19 +314,16 @@ takeHater q m n = q' , dus , dis , nyfin
               (mink n $ tr $ DLP.length-map f l))
             (f $ l ! n))
     lum (x ∷ xs) f zero = begin
-      Data.List.map f (x ∷ xs) ! z ≡⟨ cong x∷xs! ziz ⟩
+      Data.List.map f (x ∷ xs) ! (mink zero ℓ) ≡⟨ cong x∷xs! $ zil ℓ ⟩
       Data.List.map f (x ∷ xs) ! zero ≡⟨ refl ⟩
       f x ∎
       where
-      z = mink zero $ tr $ DLP.length-map f $ x ∷ xs
+      ℓ = tr $ DLP.length-map f $ x ∷ xs
       x∷xs! = _!_ $ Data.List.map f $ x ∷ xs
-      ziz : z ≡ zero
-      ziz = zil $ tr $ DLP.length-map f $ x ∷ xs
-        where
-        zil : {m n : ℕ}
-            → (x : ℕ.suc m ≡ ℕ.suc n)
-            → mink zero x ≡ zero
-        zil refl = refl
+      zil : {m n : ℕ}
+          → (x : ℕ.suc m ≡ ℕ.suc n)
+          → mink zero x ≡ zero
+      zil refl = refl
     lum (x ∷ xs) f (suc n) = begin
       mef (x ∷ xs) ! mink (suc n) tryks ≡⟨ kong $ minz n tryk tryks ⟩
       mef (x ∷ xs) ! suc (mink n tryk) ≡⟨ kit x xs f $ mink n tryk ⟩
