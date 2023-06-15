@@ -302,7 +302,7 @@ takeHater q m n = q' , dus , dis , nyfin
          → Σ (List B) $ λ l
            → Σ (length x ≡ length l) $ λ ℓ
            → g (f $ x ! k) ≡ l ! mink k ℓ
-  ualmap {_} {A} {B} x f g k = proj₁ l , p₂ , tr p₃
+  ualmap {_} {_} {B} x f g k = proj₁ l , p₂ , tr p₃
     where
     lum : ∀ {a b} → {A : Set a} → {B : Set b}
         → (l : List A)
