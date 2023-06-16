@@ -195,7 +195,7 @@ ni'o la .varik.\ cu na jinvi le du'u sarcu fa lo nu la .varik.\ cu ciksi la'oi .
 
 \begin{code}
 private
-  mink : {c d : ℕ} → Fin c → c ≡ d → Fin d
+  mink : {m n : ℕ} → Fin m → m ≡ n → Fin n
   mink a refl = a
   
   _⍨ = flip
