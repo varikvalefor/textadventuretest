@@ -382,6 +382,8 @@ takeHater q m n = q' , dus , dis , nyfin
   x'' = ualmap (GameData.haters q) kumbi'o lb! m
   q' = record {
     epicwin = GameData.epicwin q;
+    rooms = k';
+    haters = proj₁ x'';
     yourfloorisnowclean = {!!};
     player = record {
       forename = Character.forename p;
@@ -391,9 +393,7 @@ takeHater q m n = q' , dus , dis , nyfin
       inventory = Character.inventory p;
       wieldedct = Character.wieldedct p;
       yourfloorisnowclean = Character.yourfloorisnowclean p
-      };
-    haters = proj₁ x'';
-    rooms = k'
+      }
     }
     where
     p = GameData.player q
