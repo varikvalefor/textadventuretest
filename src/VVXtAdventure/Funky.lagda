@@ -215,7 +215,7 @@ takeHater : (q : GameData)
                 ((_∷_ ⍨)
                   (map Item.cname $ GameData.inventOf q m)
                   (Item.cname
-                    $ GameData.itemsInRoomOf q m ! n)))
+                    (GameData.itemsInRoomOf q m ! n))))
 takeHater q m n = q' , dus , dis , nyfin
   where
   tr : ∀ {a} → {A : Set a} → {x y : A} → x ≡ y → y ≡ x
