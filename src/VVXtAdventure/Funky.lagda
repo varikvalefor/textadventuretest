@@ -305,9 +305,7 @@ takeHater q m n = q' , dus , dis , nyfin
         → (f : A → B)
         → (n : Fin $ length l)
         → (_≡_
-            (_!_
-              (Data.List.map f l)
-              (mink n $ tr $ DLP.length-map f l))
+            (Data.List.map f l ! mink n (tr $ DLP.length-map f l))
             (f $ l ! n))
     lum (x ∷ xs) f zero = begin
       Data.List.map f (x ∷ xs) ! (mink zero ℓ) ≡⟨ cong x∷xs! $ zil ℓ ⟩
