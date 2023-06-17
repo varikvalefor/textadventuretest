@@ -401,12 +401,12 @@ takeHater q m n = q' , dus , dis , nyfin
     kec = Data.List.map Room.cname k'
     iofink = GameData.yourfloorisnowclean q
     bricon : ∀ {a p} → {A : Set a}
-                     → ⦃ _ : Eq A ⦄
-                     → (P : Pred (List A) p)
-                     → (l l' : List A)
-                     → l ≡ l'
-                     → P l
-                     → P l'
+           → ⦃ _ : Eq A ⦄
+           → (P : Pred (List A) p)
+           → (l l' : List A)
+           → l ≡ l'
+           → P l
+           → P l'
     bricon P l l' refl = id
   dus : length (GameData.rooms q) ≡ length k'
   dus = proj₁ $ proj₂ k''
