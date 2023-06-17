@@ -407,9 +407,7 @@ takeHater q m n = q' , dus , dis , nyfin
            → P l
            → P l'
     bricon P l l' refl = id
-  dus : length (GameData.rooms q) ≡ length k'
   dus = proj₁ $ proj₂ k''
-  dis : length (GameData.haters q) ≡ length (proj₁ x'')
   dis = proj₁ $ proj₂ x''
   nyfin = f (inv lb) (inv lb') sl Item.cname $ cong inv $ proj₂ $ proj₂ x''
     where
