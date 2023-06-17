@@ -203,11 +203,11 @@ private
 takeHater : (q : GameData)
           → (m : Fin $ length $ GameData.haters q)
           → (n : Fin $ length $ GameData.itemsInRoomOf q m)
-          → Σ GameData $ λ o
-            → Σ ((_≡_ on length ∘ GameData.rooms) q o) $ λ r
-            → Σ ((_≡_ on length ∘ GameData.haters) q o) $ λ x
+          → Σ GameData $ λ q'
+            → Σ ((_≡_ on length ∘ GameData.rooms) q q') $ λ r
+            → Σ ((_≡_ on length ∘ GameData.haters) q q') $ λ x
             → (_≡_
-                (map Item.cname $ GameData.inventOf o $ mink m x)
+                (map Item.cname $ GameData.inventOf q' $ mink m x)
                 ((_∷_ ⍨)
                   (map Item.cname $ GameData.inventOf q m)
                   (Item.cname
