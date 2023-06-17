@@ -384,7 +384,7 @@ takeHater q m n = q' , dus , dis , nyfin
     epicwin = GameData.epicwin q;
     rooms = k';
     haters = proj₁ x'';
-    yourfloorisnowclean = {!!};
+    yourfloorisnowclean = picong nu,iork kac kec {!!} iofink;
     player = record {
       forename = Character.forename p;
       surname = Character.surname p;
@@ -397,6 +397,17 @@ takeHater q m n = q' , dus , dis , nyfin
     }
     where
     p = GameData.player q
+    kac = Data.List.map Room.cname $ GameData.rooms q
+    kec = Data.List.map Room.cname k'
+    iofink = GameData.yourfloorisnowclean q
+    picong : ∀ {a p} → {A : Set a}
+                     → ⦃ _ : Eq A ⦄
+                     → (P : Pred (List A) p)
+                     → (l l' : List A)
+                     → (l ≡ l')
+                     → P l
+                     → P l'
+    picong P l l' refl = id
   dus : length (GameData.rooms q) ≡ length k'
   dus = proj₁ $ proj₂ k''
   dis : length (GameData.haters q) ≡ length (proj₁ x'')
