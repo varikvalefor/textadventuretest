@@ -337,13 +337,13 @@ takeHater q m n = q' , dus , dis , nyfin
         → mink (suc t) d ≡ suc (mink t x)
       𝔪 t refl refl = refl
       𝔦 : ∀ {a b} → {A : Set a} → {B : Set b}
-       → (x : A)
-       → (xs : List A)
-       → (f : A → B)
-       → (n : Fin $ length $ Data.List.map f xs)
-       → (_≡_
-           (Data.List.map f (x ∷ xs) ! (suc n))
-           (Data.List.map f xs ! n))
+        → (x : A)
+        → (xs : List A)
+        → (f : A → B)
+        → (n : Fin $ length $ Data.List.map f xs)
+        → (_≡_
+            (Data.List.map f (x ∷ xs) ! (suc n))
+            (Data.List.map f xs ! n))
       𝔦 x xs f n = refl
     mifix = Data.List.map f x
     ℓ : length x ≡ length mifix
