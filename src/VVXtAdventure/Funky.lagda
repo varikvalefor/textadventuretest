@@ -46,6 +46,8 @@
 \newunicodechar{∎}{\ensuremath{\mathnormal{\blacksquare}}}
 \newunicodechar{⟨}{\ensuremath{\mathnormal{\langle}}}
 \newunicodechar{⟩}{\ensuremath{\mathnormal{\rangle}}}
+\newunicodechar{𝔦}{\ensuremath{\mathfrak{i}}}
+\newunicodechar{𝔪}{\ensuremath{\mathfrak{m}}}
 
 \newcommand\Sym\AgdaSymbol
 \newcommand\D\AgdaDatatype
@@ -319,8 +321,8 @@ takeHater q m n = q' , dus , dis , nyfin
           → mink zero x ≡ zero
       zil refl = refl
     lum (x ∷ xs) f (suc n) = begin
-      mef (x ∷ xs) ! mink (suc n) tryks ≡⟨ kong $ minz n tryk tryks ⟩
-      mef (x ∷ xs) ! suc (mink n tryk) ≡⟨ kit x xs f $ mink n tryk ⟩
+      mef (x ∷ xs) ! mink (suc n) tryks ≡⟨ kong $ 𝔪 n tryk tryks ⟩
+      mef (x ∷ xs) ! suc (mink n tryk) ≡⟨ 𝔦 x xs f $ mink n tryk ⟩
       mef xs ! mink n tryk ≡⟨ lum xs f n ⟩
       f (xs ! n) ∎
       where
@@ -328,21 +330,21 @@ takeHater q m n = q' , dus , dis , nyfin
       kong = cong $ _!_ $ mef $ x ∷ xs
       tryk = tr $ DLP.length-map f xs
       tryks = tr $ DLP.length-map f $ x ∷ xs
-      minz : {m n : ℕ}
-           → (t : Fin m)
-           → (x : m ≡ n)
-           → (d : ℕ.suc m ≡ ℕ.suc n)
-           → mink (suc t) d ≡ suc (mink t x)
-      minz t refl refl = refl
-      kit : ∀ {a b} → {A : Set a} → {B : Set b}
-          → (x : A)
-          → (xs : List A)
-          → (f : A → B)
-          → (n : Fin $ length $ Data.List.map f xs)
-          → (_≡_
-              (Data.List.map f (x ∷ xs) ! (suc n))
-              (Data.List.map f xs ! n))
-      kit x xs f n = refl
+      𝔪 : {m n : ℕ}
+        → (t : Fin m)
+        → (x : m ≡ n)
+        → (d : ℕ.suc m ≡ ℕ.suc n)
+        → mink (suc t) d ≡ suc (mink t x)
+      𝔪 t refl refl = refl
+      𝔦 : ∀ {a b} → {A : Set a} → {B : Set b}
+       → (x : A)
+       → (xs : List A)
+       → (f : A → B)
+       → (n : Fin $ length $ Data.List.map f xs)
+       → (_≡_
+           (Data.List.map f (x ∷ xs) ! (suc n))
+           (Data.List.map f xs ! n))
+      𝔦 x xs f n = refl
     mifix = Data.List.map f x
     ℓ : length x ≡ length mifix
     ℓ = tr $ DLP.length-map f x
