@@ -227,24 +227,24 @@ takeHater q m n = q' , dus , dis , nyfin
     where
     r₁ = ual xs n f
     r₂ = cong ℕ.suc $ proj₁ $ proj₂ r₁
-    r₃ = indus misuk $ adus (proj₁ r₁) x $ proj₂ $ proj₂ r₁
+    r₃ = i misuk $ p (proj₁ r₁) x $ proj₂ $ proj₂ r₁
       where
-      adus : ∀ {a} → {A : Set a}
-           → {x : A}
-           → (l : List A)
-           → {n : Fin $ length l}
-           → (z : A)
-           → l ! n ≡ x
-           → (z ∷ l) ! suc n ≡ x
-      adus l z = id
-      indus : ∀ {a} → {A : Set a}
-            → {l : List A}
-            → {m n : Fin $ length l}
-            → {k : A}
-            → m ≡ n
-            → l ! m ≡ k
-            → l ! n ≡ k
-      indus refl = id
+      p : ∀ {a} → {A : Set a}
+        → {x : A}
+        → (l : List A)
+        → {n : Fin $ length l}
+        → (z : A)
+        → l ! n ≡ x
+        → (z ∷ l) ! suc n ≡ x
+      p l z = id
+      i : ∀ {a} → {A : Set a}
+        → {l : List A}
+        → {m n : Fin $ length l}
+        → {k : A}
+        → m ≡ n
+        → l ! m ≡ k
+        → l ! n ≡ k
+      i refl = id
       misuk : suc (mink n $ proj₁ $ proj₂ r₁) ≡ mink (suc n) r₂
       misuk = sukmi n $ proj₁ $ proj₂ r₁
         where
