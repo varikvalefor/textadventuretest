@@ -246,13 +246,13 @@ takeHater q m n = q' , dus , dis , nyfin
             → l ! n ≡ k
       indus refl = id
       misuk : suc (mink n $ proj₁ $ proj₂ r₁) ≡ mink (suc n) r₂
-      misuk = sukti n $ proj₁ $ proj₂ r₁
+      misuk = sukmi n $ proj₁ $ proj₂ r₁
         where
-        sukti : {m n : ℕ}
+        sukmi : {m n : ℕ}
               → (f : Fin m)
               → (x : m ≡ n)
               → suc (mink f x) ≡ mink (suc f) (cong ℕ.suc x)
-        sukti f refl = refl
+        sukmi f refl = refl
   lb = GameData.haters q ! m
   sl = Room.items (GameData.rooms q ! Character.room lb) ! n
   k'' : Σ (List Room) $ λ l
