@@ -76,6 +76,7 @@ open import Data.Product
   )
 open import VVXtAdventure.Base
 open import VVXtAdventure.Funky
+open import TestAdventure.Items
 open import Relation.Binary.PropositionalEquality
   using (
     refl
@@ -125,7 +126,7 @@ initialD = record {
     surname = "TUBMANN";
     nicknames = "THE O.G. MEATBALL" ∷ [];
     room = Data.Fin.zero;
-    inventory = [];
+    inventory = defstick ∷ [];
     wieldedct = nothing;
     yourfloorisnowclean = refl};
   haters = [];
