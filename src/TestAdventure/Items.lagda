@@ -44,6 +44,31 @@ open import Relation.Binary.PropositionalEquality
 
 \section{le ctaipe be la'oi .\F{Item}.
 
+\subsection{la'oi .\F{defstick}.}
+ni'o ko'a goi la'oi .\F{defstick}.\ grana  .i ca le nu tolsti kei ko'a selvau le me'oi .inventory.\ be le kelci xarpre ja co'e pe la'oi .TestAventure.
+
+\begin{code}
+defstick : Item
+defstick = record {
+  name = "SHITTY-ASS STICK";
+  cname = "DEFSTICK";
+  rmDescr = [];
+  yourfloorisnowclean = refl;
+  weapwn = just wi;
+  dfDescr = "You see the stick which is dropped by you.";
+  hlDescr = m}
+  where
+  wi = record {
+    wieldMsg = just "You firmly grasp the stick."
+    }
+  m = "This stupid thing is a stick which you, for \
+      \whatever reason, absolutely refuse to let \
+      \go.  You insist that this stick shall SOMEDAY \
+      \be useful, but, franky, everyone in a \
+      \100-yard radius doubts your inane claim.  But \
+      \feel free to prove us wrong."
+\end{code}
+
 \subsection{la'oi .\F{macguffin}.}
 ni'o la'oi .\F{macguffin}.\ me'oi .coupon. lo mu'oi glibau.\ leafblower .glibau.
 
