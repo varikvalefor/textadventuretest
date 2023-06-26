@@ -222,8 +222,6 @@ takeHater : (q : GameData)
                   (Item.cname $ GameData.itemsInRoomOf q m ! n)))
 takeHater q m n = q' , dus , dis , nyfin
   where
-  tr : ∀ {a} → {A : Set a} → {x y : A} → x ≡ y → y ≡ x
-  tr refl = refl
   lb = GameData.haters q ! m
   sl = Room.items (GameData.rooms q ! Character.room lb) ! n
   k'' : Σ (List Room) $ λ l
