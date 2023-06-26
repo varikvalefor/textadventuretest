@@ -147,6 +147,10 @@ open import Relation.Nullary
     no
   )
 open import VVXtAdventure.Base
+open import Truthbrary.Data.Fin
+  using (
+    mink
+  )
 open import Truthbrary.Record.Eq
 open import Truthbrary.Record.LLC
   using (
@@ -154,6 +158,12 @@ open import Truthbrary.Record.LLC
     length;
     _∉_;
     map
+  )
+open import Truthbrary.Data.List.Loom
+  using (
+    ualmap;
+    ual;
+    lum
   )
 open import Truthbrary.Category.Monad
   using (
@@ -193,13 +203,10 @@ movePawn gd h' r = maybe moveHater movePlayer h'
 \section{la'o zoi.\ \F{takeHater}\ .zoi.}
 ni'o tu'a la'o zoi.\ \F{takeHater} \B q \B m \B n .zoi.\ cu .indika lo du'u lo me'oi .inventory.\ be lo selsni be la'o zoi.\ \F{GameData.haters} \B q \Sym ! \B m\ .zoi.\ cu vasru lo selsni be la'o zoi.\ (\F{GameData.itemsInRoomOf} \B q \B m) \Sym ! n\ .zoi... kei je zo'e
 
-ni'o la .varik.\ cu na jinvi le du'u sarcu fa lo nu la .varik.\ cu ciksi la'oi .\F{mink}.\ ja la'o zoi.\ \F{\_⍨}\ .zoi.\ bau la .lojban.
+ni'o la .varik.\ cu na jinvi le du'u sarcu fa lo nu la .varik.\ cu ciksi la'o zoi.\ \F{\_⍨}\ .zoi.\ bau la .lojban.
 
 \begin{code}
 private
-  mink : {m n : ℕ} → Fin m → m ≡ n → Fin n
-  mink a refl = a
-  
   _⍨ = flip
 
 takeHater : (q : GameData)
@@ -217,42 +224,6 @@ takeHater q m n = q' , dus , dis , nyfin
   where
   tr : ∀ {a} → {A : Set a} → {x y : A} → x ≡ y → y ≡ x
   tr refl = refl
-  ual : ∀ {a} → {A : Set a}
-      → (l : List A) → (n : Fin $ length l) → (f : A → A)
-      → Σ (List A) $ λ l'
-        → Σ (length l ≡ length l') $ λ ℓ
-        → l' ! mink n ℓ ≡ f (l ! n)
-  ual (x ∷ xs) Fin.zero f = f x ∷ xs , refl , refl
-  ual (x ∷ xs) (Fin.suc n) f = x ∷ proj₁ r₁ , r₂ , r₃
-    where
-    r₁ = ual xs n f
-    r₂ = cong ℕ.suc $ proj₁ $ proj₂ r₁
-    r₃ = i misuk $ p (proj₁ r₁) x $ proj₂ $ proj₂ r₁
-      where
-      p : ∀ {a} → {A : Set a}
-        → {x : A}
-        → (l : List A)
-        → {n : Fin $ length l}
-        → (z : A)
-        → l ! n ≡ x
-        → (z ∷ l) ! suc n ≡ x
-      p l z = id
-      i : ∀ {a} → {A : Set a}
-        → {l : List A}
-        → {m n : Fin $ length l}
-        → {k : A}
-        → m ≡ n
-        → l ! m ≡ k
-        → l ! n ≡ k
-      i refl = id
-      misuk : suc (mink n $ proj₁ $ proj₂ r₁) ≡ mink (suc n) r₂
-      misuk = sukmi n $ proj₁ $ proj₂ r₁
-        where
-        sukmi : {m n : ℕ}
-              → (f : Fin m)
-              → (x : m ≡ n)
-              → suc (mink f x) ≡ mink (suc f) (cong ℕ.suc x)
-        sukmi f refl = refl
   lb = GameData.haters q ! m
   sl = Room.items (GameData.rooms q ! Character.room lb) ! n
   k'' : Σ (List Room) $ λ l
@@ -291,92 +262,6 @@ takeHater q m n = q' , dus , dis , nyfin
         → nu,iork $ s ∷ x
       f x s n nin = {!!}
     f = λ (l , k) → Fin.suc l , k
-  ualmap : ∀ {a} → {A B : Set a}
-         → (x : List A)
-         → (f : A → B)
-         → (g : B → B)
-         → (k : Fin $ length x)
-         → Σ (List B) $ λ l
-           → Σ (length x ≡ length l) $ λ ℓ
-           → g (f $ x ! k) ≡ l ! mink k ℓ
-  ualmap {_} {_} {B} x f g k = proj₁ l , p₂ , tr p₃
-    where
-    lum : ∀ {a b} → {A : Set a} → {B : Set b}
-        → (l : List A)
-        → (f : A → B)
-        → (n : Fin $ length l)
-        → (_≡_
-            (Data.List.map f l ! mink n (tr $ DLP.length-map f l))
-            (f $ l ! n))
-    lum (x ∷ xs) f zero = begin
-      Data.List.map f (x ∷ xs) ! (mink zero ℓ) ≡⟨ cong x∷xs! $ zil ℓ ⟩
-      Data.List.map f (x ∷ xs) ! zero ≡⟨⟩
-      f x ∎
-      where
-      ℓ = tr $ DLP.length-map f $ x ∷ xs
-      x∷xs! = _!_ $ Data.List.map f $ x ∷ xs
-      zil : {m n : ℕ}
-          → (x : ℕ.suc m ≡ ℕ.suc n)
-          → mink zero x ≡ zero
-      zil refl = refl
-    lum (x ∷ xs) f (suc n) = begin
-      mef (x ∷ xs) ! mink (suc n) tryks ≡⟨ kong $ 𝔪 n tryk tryks ⟩
-      mef (x ∷ xs) ! suc (mink n tryk) ≡⟨ 𝔦 x xs f $ mink n tryk ⟩
-      mef xs ! mink n tryk ≡⟨ lum xs f n ⟩
-      f (xs ! n) ∎
-      where
-      mef = Data.List.map f
-      kong = cong $ _!_ $ mef $ x ∷ xs
-      tryk = tr $ DLP.length-map f xs
-      tryks = tr $ DLP.length-map f $ x ∷ xs
-      𝔪 : {m n : ℕ}
-        → (t : Fin m)
-        → (x : m ≡ n)
-        → (d : ℕ.suc m ≡ ℕ.suc n)
-        → mink (suc t) d ≡ suc (mink t x)
-      𝔪 t refl refl = refl
-      𝔦 : ∀ {a b} → {A : Set a} → {B : Set b}
-        → (x : A)
-        → (xs : List A)
-        → (f : A → B)
-        → (n : Fin $ length $ Data.List.map f xs)
-        → (_≡_
-            (Data.List.map f (x ∷ xs) ! (suc n))
-            (Data.List.map f xs ! n))
-      𝔦 x xs f n = refl
-    mifix = Data.List.map f x
-    ℓ : length x ≡ length mifix
-    ℓ = tr $ DLP.length-map f x
-    k₂ = mink k ℓ
-    l : Σ (List B) $ λ l'
-        → Σ (length mifix ≡ length l') $ λ ℓ
-        → l' ! mink k₂ ℓ ≡ g (mifix ! k₂)
-    l = ual mifix k₂ g
-    p₂ = begin
-      length x ≡⟨ tr $ DLP.length-map f x ⟩
-      length (Data.List.map f x) ≡⟨ proj₁ $ proj₂ l ⟩
-      length (proj₁ l) ∎
-    p₃ = begin
-      proj₁ l ! mink k p₂ ≡⟨ cong (_!_ $ proj₁ l) $ M k ℓ ℓ₂ xlulf ⟩
-      proj₁ l ! mink k₂ (proj₁ $ proj₂ l) ≡⟨ proj₂ $ proj₂ l ⟩
-      g (Data.List.map f x ! k₂) ≡⟨ cong g $ lum x f k ⟩
-      g (f $ x ! k) ∎
-      where
-      -- .i xu fegli fa ko'a goi le velcki be
-      -- la'o zoi. p₃ .zoi.  .i ko'a se pagbu
-      -- zo'e je le velcki be la'oi .M.
-      ℓ₂ = proj₁ $ proj₂ l
-      xlulf = begin
-        length x ≡⟨ ℓ ⟩
-        length (Data.List.map f x) ≡⟨ ℓ₂ ⟩
-        length (proj₁ l) ∎
-      M : {l m n : ℕ}
-        → (k : Fin l)
-        → (v : l ≡ m)
-        → (x : m ≡ n)
-        → (xov : l ≡ n)
-        → mink k xov ≡ mink (mink k v) x
-      M k refl refl refl = refl
   x'' : Σ (List $ Character k') $ λ x'
         → Σ (length (GameData.haters q) ≡ length x') $ λ ℓ
         → _
