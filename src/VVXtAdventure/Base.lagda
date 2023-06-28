@@ -132,6 +132,7 @@ ni'o ga naja la'o zoi.\ \B K .zoi.\ ctaipe la'o zoi.\ \F{List} \F{Room} .zoi.\ g
 \begin{itemize}
 	\item ga je la'o zoi.\ \F{Character.forename} \B a .zoi.\ du'acme ko'a goi lo selsni be la'o zoi.\ \B a .zoi.\ gi
 	\item ga je la'o zoi.\ \F{Character.surname} \B a .zoi.\ lazme'e ko'a gi
+	\item ga je la'o zoi.\ \F{Character.cname} \B a .zoi.\ du lo cmene be ko'a be'o poi cadga fa lo nu lo kelci cu pilno ke'a tu'a ko'a gi
 	\item ga je la'o zoi.\ \F{Character.nicknames} \B a .zoi.\ liste lo'i datcme be ko'a gi
 	\item ga je tu'a la'o zoi.\ \B a .zoi.\ .indika lo du'u ko'a zvati lo selsni be la'o zoi.\ \F{lookup} \B q (\F{Character.room} \B a) .zoi.\ gi
 	\item ga je la'o zoi.\ \F{Character.inventory} zoi.\ liste lo'i ro se ralte be lo selsni be ko'a gi
@@ -148,6 +149,7 @@ record Character (q : List Room) : Set
   field
     forename : String
     surname : String
+    cname : String
     nicknames : List String
     room : Fin $ Data.List.length q
     inventory : List Item

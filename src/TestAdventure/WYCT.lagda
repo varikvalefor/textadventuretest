@@ -124,6 +124,7 @@ initialD = record {
   player = record {
     forename = "HARRIET";
     surname = "TUBMANN";
+    cname = "XITAS";
     nicknames = "THE O.G. MEATBALL" ∷ [];
     room = Data.Fin.zero;
     inventory = defstick ∷ [];
