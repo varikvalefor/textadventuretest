@@ -61,12 +61,13 @@ defstick = record {
   wi = record {
     wieldMsg = just "You firmly grasp the stick."
     }
-  m = "This stupid thing is a stick which you, for \
-      \whatever reason, absolutely refuse to let \
-      \go.  You insist that this stick shall SOMEDAY \
-      \be useful, but, franky, everyone in a \
-      \100-yard radius doubts your inane claim.  But \
-      \feel free to prove us wrong."
+  m = "This stupid thing is a stick.  For whatever \
+      \reason, you absolutely refuse to let go of \
+      \this stick.  You insist that this stick shall \
+      \SOMEDAY be useful.  But I'll be honest.  \
+      \Everyone in a 100-yard radius doubts your \
+      \inane claim... but welcomes that you \
+      \demonstrate that we are wrong."
 \end{code}
 
 \subsection{la'oi .\F{macguffin}.}
