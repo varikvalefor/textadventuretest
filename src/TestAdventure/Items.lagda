@@ -44,8 +44,24 @@ open import Relation.Binary.PropositionalEquality
 
 \section{le ctaipe be la'oi .\F{Item}.
 
+\subsection{la'oi .\F{colorfun}.}
+
+\begin{code}
+colorfun : Item
+colorfun = record {
+  name = "COOL ROCK";
+  cname = "COLORFUN";
+  rmDescr = [];
+  weapwn = nothing;
+  yourfloorisnowclean = refl;
+  hlDescr = m;
+  dfDescr = m}
+  where
+  m = "It's blue.  IT'S GOD-DAMNED GREEN!"
+\end{code}
+
 \subsection{la'oi .\F{defstick}.}
-ni'o ko'a goi la'oi .\F{defstick}.\ grana  .i ca le nu tolsti kei ko'a selvau le me'oi .inventory.\ be le kelci xarpre ja co'e pe la'oi .TestAventure.
+ni'o ko'a goi la'oi .\F{defstick}.\ grana  .i ca le nu tolsti kei ko'a selvau le me'oi .inventory.\ be le kelci ke xarpre ja co'e pe la'oi .TestAventure.
 
 \begin{code}
 defstick : Item

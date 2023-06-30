@@ -96,7 +96,7 @@ rooms = dingyliv ∷ []
     name = "A DINGY LIVING ROOM";
     cname = "DINGYLIVRM";
     travis = [];
-    items = lamp ∷ []}
+    items = lamp ∷ colorfun ∷ []}
     where
     lamp : Item
     lamp = record {
