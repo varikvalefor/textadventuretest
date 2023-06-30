@@ -234,6 +234,7 @@ takeHater q m n = q' , dus , dis , nyfin
   kumbi'o = λ x → record {
     forename = Character.forename x;
     surname = Character.surname x;
+    cname = Character.cname x;
     nicknames = Character.nicknames x;
     room = mink (Character.room x) $ proj₁ $ proj₂ k'';
     inventory = Character.inventory x;
@@ -272,6 +273,7 @@ takeHater q m n = q' , dus , dis , nyfin
     player = record {
       forename = Character.forename p;
       surname = Character.surname p;
+      cname = Character.cname p;
       nicknames = Character.nicknames p;
       room = mink (Character.room p) $ proj₁ $ proj₂ k'';
       inventory = Character.inventory p;
@@ -457,7 +459,7 @@ travel? (x₁ ∷ xs₁) = if realShit (travel' xs₁) $ const nothing
         travelable (x ∷ xs) = inj₂ $ pj1s $ Data.List.filter tr $ x ∷ xs
           where
           pj1s = Data.List.map proj₁
-          cnq = λ a b → Room.cname (proj₂ a) ≟ Room.cname b
+          cnq = λ a b → Room.cname (proj₂ a) ≟ b
           tr = λ a → any? (cnq a) $ Room.travis cur
   travel' (_ ∷ _ ∷ _) q = just $ m , q
     where

@@ -16,6 +16,9 @@
 \newunicodechar{₁}{\ensuremath{\mathnormal{_1}}}
 \newunicodechar{∘}{\ensuremath{\mathnormal{\circ}}}
 \newunicodechar{≡}{\ensuremath{\mathnormal{\equiv}}}
+\newunicodechar{ₗ}{\ensuremath{\mathnormal{_l}}}
+\newunicodechar{∈}{\ensuremath{\mathnormal{\in}}}
+\newunicodechar{∃}{\ensuremath{\mathnormal{\exists}}}
 
 \newcommand\Sym\AgdaSymbol
 \newcommand\D\AgdaDatatype
@@ -44,18 +47,55 @@ open import Data.Fin
   using (
     Fin
   )
-open import Data.Nat
 open import Function
+  using (
+    _$_;
+    _∘_
+  )
 open import Data.Bool
+  using (
+    Bool;
+    true
+  )
 open import Data.List
+  using (
+    lookup;
+    List;
+    _∷_;
+    []
+  )
 open import Data.Maybe
+  using (
+    Maybe;
+    nothing;
+    just;
+    is-just
+  )
 open import Data.String
+  using (
+    String
+  )
 open import Data.Product
+  using (
+    proj₁;
+    proj₂;
+    _×_;
+    ∃;
+    Σ
+  )
 open import Truthbrary.Record.Eq
-open import Relation.Binary.PropositionalEquality
+  using (
+    _≟_
+  )
 open import Truthbrary.Record.LLC
   using (
-    nu,iork
+    nu,iork;
+    _∈_
+  )
+open import Relation.Binary.PropositionalEquality
+  using (
+    refl;
+    _≡_
   )
 \end{code}
 
@@ -81,13 +121,12 @@ ni'o ga jo ko'a goi la'o zoi.\ \B a .zoi.\ ctaipe la'oi .\F{Item}.\ gi\ldots
 	\item ga je la'o zoi.\ \F{Item.name} \B a .zoi.\ mu'oi glibau.\ display name .glibau.\ ko'a gi
 	\item ga je ga je ko'e goi la'o zoi.\ \F{Item.cname} \B a .zoi.\ cmene ko'a gi cadga fa lo nu lo kelci cu pilno ko'e tu'a ko'a gi
         \item ga jo ga jonai ga je ko'a sinxa lo me'oi .weapon.\ gi ko'e goi la'o zoi.\ \F{weapwn} \B a .zoi.\ me'oi .\F{just}.\ lo velski be ko'a gi ko'e du la'oi .\F{nothing}.\ gi
-	\item ga je cadga fa lo nu ga naja ga je lo kelci cu cpedu lo nu skicu lo selsni be ko'a gi curmi lo nu skicu lo selsni be ko'a gi\ldots
+	\item cadga fa lo nu ga naja ga je lo kelci cu cpedu lo nu skicu lo selsni be ko'a gi curmi lo nu skicu lo selsni be ko'a gi\ldots
 	\begin{itemize}
 		\item ga jonai ga je lo me'oi .inventory.\ be lo kelci xarpre ja co'e cu vasru lo selsni be ko'a gi pilno la'o zoi.\ \F{hlDescr} \B a .zoi.\ gi
 		\item ga jonai ga je ga je cpedu lo nu skicu kei ca lo nu lo kelci xarpre ja co'e cu zvati zo'e poi la'o zoi.\ \B C .zoi.\ mu'oi glibau.\ \F{Room.cname} .glibau.\ lo sinxa be ke'a gi la'o zoi.\ \F{rmDescr} \B a .zoi.\ vasru la'o zoi.\ \B C \Sym , \B d .zoi.\ gi pilno la'o zoi.\ \B d .zoi.\ gi
-		\item pilno la'o zoi.\ \F{dfDescr} \B a .zoi.\ gi
+		\item pilno la'o zoi.\ \F{dfDescr} \B a .zoi.
 	\end{itemize}
-	\item la'o zoi.\ \F{Item.description} \B a .zoi.\ velski ko'a
 \end{itemize}
 
 .i la .varik.\ cu na jinvi le du'u sarcu fa lo nu jmina lo .lojban.\ velcki be la'o zoi.\ \F{Item.yourfloorisnowclean} .zoi.
@@ -110,7 +149,7 @@ ni'o ga jo la'o zoi.\ \B S .zoi.\ fa'u ko'a goi la'o zoi.\ \B a .zoi.\ ctaipe la
 \begin{itemize}
 	\item ga je la'o zoi.\ \F{Room.name} \B a .zoi.\ cmene lo selsni be ko'a gi
 	\item ga je cadga fa lo nu lo kelci cu pilno la'o zoi.\ \F{Room.cname} \B a .zoi.\ tu'a ko'a gi
-        \item ga je ga jo curmi lo nu sampu klama lo sinxa be ko'a lo sinxa be la'o zoi.\ \B q .zoi.\ gi la'o zoi.\ \F{Room.travis} \B a .zoi.\ vasru la'o zoi.\ \B q .zoi.\ gi
+        \item ga je ga jo curmi lo nu sampu klama lo sinxa be ko'a lo sinxa be la'o zoi.\ \B q .zoi.\ gi la'o zoi.\ \F{Room.travis} \B a .zoi.\ vasru lo mu'oi glibau.\ \F{Room.cname}\ .glibau.\ be la'o zoi.\ \B q .zoi.\ gi
 	\item la'o zoi.\ \F{Room.items} \B a .zoi.\ liste lo'i selvau be lo selsni be ko'a be'o poi ke'a ba'e na prenu
 \end{itemize}
 
@@ -122,7 +161,7 @@ record Room : Set
     name : String
     cname : String
     items : List Item
-    travis : List Room
+    travis : List String
 \end{code}
 
 \subsection{la'oi .\F{Character}.}
@@ -132,6 +171,7 @@ ni'o ga naja la'o zoi.\ \B K .zoi.\ ctaipe la'o zoi.\ \F{List} \F{Room} .zoi.\ g
 \begin{itemize}
 	\item ga je la'o zoi.\ \F{Character.forename} \B a .zoi.\ du'acme ko'a goi lo selsni be la'o zoi.\ \B a .zoi.\ gi
 	\item ga je la'o zoi.\ \F{Character.surname} \B a .zoi.\ lazme'e ko'a gi
+	\item ga je la'o zoi.\ \F{Character.cname} \B a .zoi.\ du lo cmene be ko'a be'o poi cadga fa lo nu lo kelci cu pilno ke'a tu'a ko'a gi
 	\item ga je la'o zoi.\ \F{Character.nicknames} \B a .zoi.\ liste lo'i datcme be ko'a gi
 	\item ga je tu'a la'o zoi.\ \B a .zoi.\ .indika lo du'u ko'a zvati lo selsni be la'o zoi.\ \F{lookup} \B q (\F{Character.room} \B a) .zoi.\ gi
 	\item ga je la'o zoi.\ \F{Character.inventory} zoi.\ liste lo'i ro se ralte be lo selsni be ko'a gi
@@ -148,10 +188,11 @@ record Character (q : List Room) : Set
   field
     forename : String
     surname : String
+    cname : String
     nicknames : List String
     room : Fin $ Data.List.length q
     inventory : List Item
-    wieldedct : Maybe $ Σ (Fin _) $ isWeapon ∘ lookup inventory
+    wieldedct : Maybe $ ∃ $ isWeapon ∘ lookup inventory
   wielded = Data.Maybe.map proj₁ wieldedct
   field
     yourfloorisnowclean : nu,iork $ Data.List.map Item.cname inventory
@@ -166,7 +207,7 @@ ni'o ga jo ko'a goi la'o zoi.\ \B a .zoi.\ ctaipe la'oi .\F{GameData} .zoi.\ gi\
         \item la'o zoi.\ \F{GameData.haters} \B a .zoi.\ liste lo'i sinxa be lo'i xarpre ja co'e poi ke'a na du lo kelci ke xarpre ja co'e
 \end{itemize}
 
-.i la .varik.\ cu na jinvi le du'u sarcu fa lo nu jmina lo .lojban.\ velcki be la'o zoi.\ \F{GameData.yourfloorisnowclean} .zoi.
+.i la .varik.\ cu na jinvi le du'u sarcu fa lo nu ciksi la'o zoi.\ \F{GameData.yourfloorisnowclean}\ .zoi.\ ja la'o zoi.\ \F{GameData.travis}\ .zoi.\ bau la .lojban.
 
 \begin{code}
 record GameData : Set

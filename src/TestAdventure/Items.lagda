@@ -44,8 +44,24 @@ open import Relation.Binary.PropositionalEquality
 
 \section{le ctaipe be la'oi .\F{Item}.
 
+\subsection{la'oi .\F{colorfun}.}
+
+\begin{code}
+colorfun : Item
+colorfun = record {
+  name = "COOL ROCK";
+  cname = "COLORFUN";
+  rmDescr = [];
+  weapwn = nothing;
+  yourfloorisnowclean = refl;
+  hlDescr = m;
+  dfDescr = m}
+  where
+  m = "It's blue.  IT'S GOD-DAMNED GREEN!"
+\end{code}
+
 \subsection{la'oi .\F{defstick}.}
-ni'o ko'a goi la'oi .\F{defstick}.\ grana  .i ca le nu tolsti kei ko'a selvau le me'oi .inventory.\ be le kelci xarpre ja co'e pe la'oi .TestAventure.
+ni'o ko'a goi la'oi .\F{defstick}.\ grana  .i ca le nu tolsti kei ko'a selvau le me'oi .inventory.\ be le kelci ke xarpre ja co'e pe la'oi .TestAventure.
 
 \begin{code}
 defstick : Item
@@ -61,12 +77,13 @@ defstick = record {
   wi = record {
     wieldMsg = just "You firmly grasp the stick."
     }
-  m = "This stupid thing is a stick which you, for \
-      \whatever reason, absolutely refuse to let \
-      \go.  You insist that this stick shall SOMEDAY \
-      \be useful, but, franky, everyone in a \
-      \100-yard radius doubts your inane claim.  But \
-      \feel free to prove us wrong."
+  m = "This stupid thing is a stick.  For whatever \
+      \reason, you absolutely refuse to let go of \
+      \this stick.  You insist that this stick shall \
+      \SOMEDAY be useful.  But I'll be honest.  \
+      \Everyone in a 100-yard radius doubts your \
+      \inane claim... but welcomes that you \
+      \demonstrate that we are wrong."
 \end{code}
 
 \subsection{la'oi .\F{macguffin}.}
@@ -94,7 +111,7 @@ macguffin = record {
       \You find that this coupon is noteworthy \
       \partially because you suspect that the \
       \creators of the coupon probably wanted to \
-      \ create a brochure or something, as opposed \
+      \create a brochure or something, as opposed \
       \to a simple coupon.\n\n\
       \Anyway, the full text of the coupon is as \
       \follows:\n\n\
