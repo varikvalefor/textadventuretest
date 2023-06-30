@@ -17,7 +17,7 @@
 \newunicodechar{∘}{\ensuremath{\mathnormal{\circ}}}
 \newunicodechar{≡}{\ensuremath{\mathnormal{\equiv}}}
 \newunicodechar{ₗ}{\ensuremath{\mathnormal{_l}}}
-\newunicodechar{∈}{\ensuremath{\mathnormal{∈}}}
+\newunicodechar{∈}{\ensuremath{\mathnormal{\in}}}
 
 \newcommand\Sym\AgdaSymbol
 \newcommand\D\AgdaDatatype
