@@ -46,19 +46,54 @@ open import Data.Fin
   using (
     Fin
   )
-open import Data.Nat
 open import Function
+  using (
+    _$_;
+    _∘_
+  )
 open import Data.Bool
+  using (
+    Bool;
+    true
+  )
 open import Data.List
+  using (
+    lookup;
+    List;
+    _∷_;
+    []
+  )
 open import Data.Maybe
+  using (
+    Maybe;
+    nothing;
+    just;
+    is-just
+  )
 open import Data.String
+  using (
+    String
+  )
 open import Data.Product
+  using (
+    proj₁;
+    proj₂;
+    _×_;
+    Σ
+  )
 open import Truthbrary.Record.Eq
-open import Relation.Binary.PropositionalEquality
+  using (
+    _≟_
+  )
 open import Truthbrary.Record.LLC
   using (
     nu,iork;
     _∈_
+  )
+open import Relation.Binary.PropositionalEquality
+  using (
+    refl;
+    _≡_
   )
 \end{code}
 
