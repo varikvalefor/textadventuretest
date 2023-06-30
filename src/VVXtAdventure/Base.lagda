@@ -18,6 +18,7 @@
 \newunicodechar{≡}{\ensuremath{\mathnormal{\equiv}}}
 \newunicodechar{ₗ}{\ensuremath{\mathnormal{_l}}}
 \newunicodechar{∈}{\ensuremath{\mathnormal{\in}}}
+\newunicodechar{∃}{\ensuremath{\mathnormal{\exists}}}
 
 \newcommand\Sym\AgdaSymbol
 \newcommand\D\AgdaDatatype
@@ -79,6 +80,7 @@ open import Data.Product
     proj₁;
     proj₂;
     _×_;
+    ∃;
     Σ
   )
 open import Truthbrary.Record.Eq
@@ -190,7 +192,7 @@ record Character (q : List Room) : Set
     nicknames : List String
     room : Fin $ Data.List.length q
     inventory : List Item
-    wieldedct : Maybe $ Σ (Fin _) $ isWeapon ∘ lookup inventory
+    wieldedct : Maybe $ ∃ $ isWeapon ∘ lookup inventory
   wielded = Data.Maybe.map proj₁ wieldedct
   field
     yourfloorisnowclean : nu,iork $ Data.List.map Item.cname inventory
