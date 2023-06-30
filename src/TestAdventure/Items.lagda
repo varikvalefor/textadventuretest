@@ -111,7 +111,7 @@ macguffin = record {
       \You find that this coupon is noteworthy \
       \partially because you suspect that the \
       \creators of the coupon probably wanted to \
-      \ create a brochure or something, as opposed \
+      \create a brochure or something, as opposed \
       \to a simple coupon.\n\n\
       \Anyway, the full text of the coupon is as \
       \follows:\n\n\
