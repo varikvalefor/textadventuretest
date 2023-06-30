@@ -308,7 +308,7 @@ travel? (x₁ ∷ xs₁) = if realShit (travel' xs₁) $ const nothing
         travelable (x ∷ xs) = inj₂ $ pj1s $ Data.List.filter tr $ x ∷ xs
           where
           pj1s = Data.List.map proj₁
-          cnq = λ a b → Room.cname (proj₂ a) ≟ Room.cname b
+          cnq = λ a b → Room.cname (proj₂ a) ≟ b
           tr = λ a → any? (cnq a) $ Room.travis cur
   travel' (_ ∷ _ ∷ _) q = just $ m , q
     where

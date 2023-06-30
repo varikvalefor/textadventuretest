@@ -16,6 +16,8 @@
 \newunicodechar{₁}{\ensuremath{\mathnormal{_1}}}
 \newunicodechar{∘}{\ensuremath{\mathnormal{\circ}}}
 \newunicodechar{≡}{\ensuremath{\mathnormal{\equiv}}}
+\newunicodechar{ₗ}{\ensuremath{\mathnormal{_l}}}
+\newunicodechar{∈}{\ensuremath{\mathnormal{∈}}}
 
 \newcommand\Sym\AgdaSymbol
 \newcommand\D\AgdaDatatype
@@ -55,7 +57,8 @@ open import Truthbrary.Record.Eq
 open import Relation.Binary.PropositionalEquality
 open import Truthbrary.Record.LLC
   using (
-    nu,iork
+    nu,iork;
+    _∈_
   )
 \end{code}
 
@@ -110,7 +113,7 @@ ni'o ga jo la'o zoi.\ \B S .zoi.\ fa'u ko'a goi la'o zoi.\ \B a .zoi.\ ctaipe la
 \begin{itemize}
 	\item ga je la'o zoi.\ \F{Room.name} \B a .zoi.\ cmene lo selsni be ko'a gi
 	\item ga je cadga fa lo nu lo kelci cu pilno la'o zoi.\ \F{Room.cname} \B a .zoi.\ tu'a ko'a gi
-        \item ga je ga jo curmi lo nu sampu klama lo sinxa be ko'a lo sinxa be la'o zoi.\ \B q .zoi.\ gi la'o zoi.\ \F{Room.travis} \B a .zoi.\ vasru la'o zoi.\ \B q .zoi.\ gi
+        \item ga je ga jo curmi lo nu sampu klama lo sinxa be ko'a lo sinxa be la'o zoi.\ \B q .zoi.\ gi la'o zoi.\ \F{Room.travis} \B a .zoi.\ vasru lo mu'oi glibau.\ \F{Room.cname}\ .glibau.\ be la'o zoi.\ \B q .zoi.\ gi
 	\item la'o zoi.\ \F{Room.items} \B a .zoi.\ liste lo'i selvau be lo selsni be ko'a be'o poi ke'a ba'e na prenu
 \end{itemize}
 
@@ -122,7 +125,7 @@ record Room : Set
     name : String
     cname : String
     items : List Item
-    travis : List Room
+    travis : List String
 \end{code}
 
 \subsection{la'oi .\F{Character}.}
@@ -168,7 +171,7 @@ ni'o ga jo ko'a goi la'o zoi.\ \B a .zoi.\ ctaipe la'oi .\F{GameData} .zoi.\ gi\
         \item la'o zoi.\ \F{GameData.haters} \B a .zoi.\ liste lo'i sinxa be lo'i xarpre ja co'e poi ke'a na du lo kelci ke xarpre ja co'e
 \end{itemize}
 
-.i la .varik.\ cu na jinvi le du'u sarcu fa lo nu jmina lo .lojban.\ velcki be la'o zoi.\ \F{GameData.yourfloorisnowclean} .zoi.
+.i la .varik.\ cu na jinvi le du'u sarcu fa lo nu ciksi la'o zoi.\ \F{GameData.yourfloorisnowclean}\ .zoi.\ ja la'o zoi.\ \F{GameData.travis}\ .zoi.\ bau la .lojban.
 
 \begin{code}
 record GameData : Set
