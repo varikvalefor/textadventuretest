@@ -33,8 +33,15 @@ ni'o la'o zoi.\ \kulmodis\ .zoi.\ vasru le velcki be le ctaipe be la'oi .\F{Item
 module TestAdventure.Items where
 
 open import Data.List
+  using (
+    _∷_;
+    []
+  )
 open import Data.Maybe
-open import Data.String
+  using (
+    just;
+    nothing
+  )
 open import VVXtAdventure.Base
 open import Relation.Binary.PropositionalEquality
   using (
