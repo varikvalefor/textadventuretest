@@ -78,14 +78,12 @@ open import Data.String
 open import Data.Product
   using (
     proj₁;
-    proj₂;
     _×_;
     ∃;
     Σ
   )
 open import Truthbrary.Record.Eq
   using (
-    _≟_
   )
 open import Truthbrary.Record.LLC
   using (
