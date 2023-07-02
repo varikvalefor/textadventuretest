@@ -159,7 +159,7 @@ movePawn gd h' r = maybe moveHater movePlayer h'
 \section{le fancu poi tu'a ke'a na rinka lo nu lo ctaipe be la'oi .\F{GameData}.\ cu na binxo pe'a ru'e}
 
 \subsection{la'oi .\F{epicwin?}.}
-ni'o ga jonai ga je tu'a la'o zoi.\ \B a .zoi.\ .indika le du'u jinga gi ko'a goi la'o zoi.\ \F{epicwin?} \B m \B a .zoi. du la'o zoi.\ \B m , \B a .zoi.\ gi ko'a du la'oi .\F{nothing}.
+ni'o ga jonai ga je tu'a la'o zoi.\ \B a .zoi.\ .indika lo du'u lo kelci cu jinga gi ko'a goi la'o zoi.\ \F{epicwin?} \B m \B a .zoi. du la'o zoi.\ \B m , \B a .zoi.\ gi ko'a du la'oi .\F{nothing}.
 
 \begin{code}
 epicwin? : String → GameData → COut
