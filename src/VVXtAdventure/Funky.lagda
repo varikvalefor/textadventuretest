@@ -163,10 +163,7 @@ ni'o ga jonai ga je tu'a la'o zoi.\ \B a .zoi.\ .indika le du'u jinga gi ko'a go
 
 \begin{code}
 epicwin? : String → GameData → COut
-epicwin? jasat = scrimmage GameData.epicwin
-  where
-  scrimmage : (GameData → Bool) → GameData → COut
-  scrimmage f g = if (f g) (just $ jasat , g) nothing
+epicwin? m g = if (GameData.epicwin g) (just $ m , g) nothing
 \end{code}
 
 \subsection{la'oi .\F{inspect?}.}
