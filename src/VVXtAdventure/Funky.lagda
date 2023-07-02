@@ -258,7 +258,7 @@ kumski? m g = if mapti (just $ vijac , g) nothing
     ... | (x ∷ xs) = "CONNECTED ROOMS: " ++ concatₛ liste
       where
       liste = intersperseₗ ", " $ x ∷ xs
-    le'i-ro-velski = jaiv ∷ Data.List.map velski (Room.items kumfa)
+    le'i-ro-velski = jaiv ∷ mapₗ velski (Room.items kumfa)
 \end{code}
 
 \subsection{la'oi .\F{scream?}.}
