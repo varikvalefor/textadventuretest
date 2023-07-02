@@ -250,8 +250,8 @@ kumski? m g = if mapti (just $ vijac , g) nothing
     velski z with Data.List.filter methch $ Item.rmDescr z
       where
       methch = λ a → proj₁ a ≟ Room.cname kumfa
-    ... | [] = Item.dfDescr z
-    ... | (x ∷ _) = proj₂ x
+    ... | [] = Item.cname z ++ ": " ++ Item.dfDescr z
+    ... | (x ∷ _) = Item.cname z ++ ": " ++ proj₂ x
     jaiv : String
     jaiv with Room.travis kumfa
     ... | [] = "This room is completely isolated.  GFL."
