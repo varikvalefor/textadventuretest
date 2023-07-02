@@ -114,6 +114,24 @@ rooms = dingyliv ∷ []
               \nearby."
 \end{code}
 
+\subsection{la'oi .\F{winmsg}.}
+
+\begin{code}
+winmsg : String
+winmsg = "YOU HAVE ACCOMPLISHED\n\
+         \THE MISSION.\n\
+         \YOU ARE THE VERY PREVAILER\n\
+         \THAT PROTECT RIGHT\n\
+         \AND JUSTICE.\n\
+         \I WOULD EXPRESS MY SINCERE.\n\
+         \THANKS TO YOU.\n\n\
+         \\
+         \TAKE GOOD REST !\n\n\
+         \\
+         \\tGENERAL KAWASAKI"
+
+\end{code}
+
 \subsection{la'oi .\F{initialD}.}
 
 \begin{code}
