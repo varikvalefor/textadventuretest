@@ -122,6 +122,7 @@ main = run $ lupe initialD
                       sayless? ∷
                       inspect? ∷
                       lp? ∷
+                      kumski? ∷
                       []
           gasnu = travel? ∷
                   wield? ∷

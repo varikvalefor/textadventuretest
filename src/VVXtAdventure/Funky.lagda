@@ -227,6 +227,38 @@ inspect? (c ∷ f) dang = if methch (getDown f) nothing
 inspect? [] _ = nothing
 \end{code}
 
+\subsection{la'oi .\F{kumski?}.}
+
+ni'o ga jonai ga je la'oi .\F{scream?}.\ djuno pe'a ru'e lo du'u tu'a la'o zoi.\ \B a .zoi.\ .indika lo du'u lo kelci cu djica lo nu tcidu ko'a goi lo velski be lo selvau be lo kumfa poi la'o zoi.\ \B b\ .zoi.\ .indika lo du'u ke'a zasti gi ga je la'o zoi.\ \B v .zoi.\ vasru lo velcki be ko'a gi ko'e goi la'o zoi.\ \F{kumski?} \B a \B b\ .zoi.\ du la'o zoi.\ \F{just} \Sym \$ \B v \Sym , \B b\ .zoi.\ gi ko'e du la'oi .\F{nothing}.
+
+\begin{code}
+kumski? : Com
+kumski? m g = if mapti (just $ vijac , g) nothing
+  where
+  mapti = Data.List.take 3 m ≡ᵇ ("LOOK" ∷ "AROUND" ∷ "YOU" ∷ [])
+  kumfa = Data.List.lookup (GameData.rooms g) kumfid
+    where
+    kumfid = Character.room $ GameData.player g
+  -- | ni'o zo .vijac. cmavlaka'i lu velski ja canlu li'u
+  concatₛ = Data.String.concat
+  mapₗ = Data.List.map
+  intersperseₗ = Data.List.intersperse
+  vijac : String
+  vijac = concatₛ $ intersperseₗ "\n\n" le'i-ro-velski
+    where
+    velski : Item → String
+    velski z with Data.List.filter methch $ Item.rmDescr z
+      where
+      methch = λ a → proj₁ a ≟ Room.cname kumfa
+    ... | [] = Item.dfDescr z
+    ... | (x ∷ _) = proj₂ x
+    jaiv = hedyr ++ concatₛ liste
+      where
+      liste = Data.List.intersperse ", " $ Room.travis kumfa
+      hedyr = "CONNECTED ROOMS: "
+    le'i-ro-velski = jaiv ∷ Data.List.map velski (Room.items kumfa)
+\end{code}
+
 \subsection{la'oi .\F{scream?}.}
 ni'o ga jonai ga je la'oi .\F{scream?}.\ djuno pe'a ru'e lo du'u tu'a la'o zoi.\ \B a .zoi.\ .indika lo du'u lo kelci cu djica lo nu krixa fa ko'a goi lo krixa ke xarpre ja co'e po la'o zoi.\ \B b .zoi.\ gi ga je tu'a la'o zoi.\ \B c .zoi.\ .indika lo du'u ko'a krixa gi ko'e goi la'o zoi.\ \F{scream?} \B a \B b .zoi.\ du la'o zoi.\ \F{just} \Sym \$ c \Sym , b .zoi.\ gi ko'e du la'oi .\F{nothing}.
 
