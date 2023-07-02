@@ -252,10 +252,12 @@ kumski? m g = if mapti (just $ vijac , g) nothing
       methch = λ a → proj₁ a ≟ Room.cname kumfa
     ... | [] = Item.dfDescr z
     ... | (x ∷ _) = proj₂ x
-    jaiv = hedyr ++ concatₛ liste
+    jaiv : String
+    jaiv with Room.travis kumfa
+    ... | [] = "This room is completely isolated.  GFL."
+    ... | (x ∷ xs) = "CONNECTED ROOMS: " ++ concatₛ liste
       where
-      liste = Data.List.intersperse ", " $ Room.travis kumfa
-      hedyr = "CONNECTED ROOMS: "
+      liste = intersperseₗ ", " $ x ∷ xs
     le'i-ro-velski = jaiv ∷ Data.List.map velski (Room.items kumfa)
 \end{code}
 
