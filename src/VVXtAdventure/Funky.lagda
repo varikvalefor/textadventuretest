@@ -117,6 +117,10 @@ open import Relation.Nullary
     no
   )
 open import VVXtAdventure.Base
+open import Truthbrary.Data.Fin
+  using (
+    mink
+  )
 open import Truthbrary.Record.Eq
 open import Truthbrary.Record.LLC
   using (
@@ -124,6 +128,10 @@ open import Truthbrary.Record.LLC
     map
   )
 open import Truthbrary.Category.Monad
+open import Truthbrary.Data.List.Loom
+  using (
+    ual
+  )
 open import Data.List.Relation.Unary.Any
   using (
     any?
@@ -134,24 +142,50 @@ open import Relation.Binary.PropositionalEquality
 \chapter{le mu'oi glibau.\ low-level .glibau.}
 
 \section{la'o zoi.\ \F{movePawn} .zoi.}
-ni'o tu'a la'o zoi.\ \F{movePawn} \B q (\F{just} \B m) \B n .zoi.\ .indika lo du'u lo selsni be la'o zoi.\ \F{flip} \F{Data.List.lookup} \B h \Sym \$ \F{GameData.haters} \B{gd} .zoi.\ cu zvati ko'a goi lo selsni be la'o zoi.\ \F{flip} \F{Data.List.lookup} \B n \Sym \$ \F{GameData.rooms} \B{gd} .zoi.  .i tu'a la'o zoi.\ \F{movePawn} \B q \F{nothing} \B n .zoi.\ .indika lo du'u lo kelci ke xarpre ja co'e cu zvati ko'a
+ni'o tu'a la'o zoi.\ \F{movePawn} \B q \B m \B n .zoi.\ .indika lo du'u lo selsni be la'o zoi.\ \F{Data.List.lookup} (\F{GameData.haters \B q) \B h .zoi.\ cu zvati ko'a goi lo selsni be la'o zoi.\ \F{Data.List.lookup} (\F{GameData.rooms} \B q) \B n .zoi.
 
 \begin{code}
 movePawn : (q : GameData)
-         → Maybe $ Fin $ Data.List.length $ GameData.haters q
+         → Fin $ Data.List.length $ GameData.haters q
          → Fin $ Data.List.length $ GameData.rooms q
          → GameData
-movePawn gd h' r = maybe moveHater movePlayer h'
+movePawn gd h r = record gd {haters = proj₁ xat; player' = player''}
   where
   cninykumfa = λ x → record x {room = r}
-  movePlayer = record gd {player = cninykumfa $ GameData.player gd}
-  moveHater = λ h → record gd {haters = updateAtₗ htrs h cninykumfa}
-    where
-    updateAtₗ : ∀ {a} → {A : Set a}
-             → (L : List A) → Fin $ length L → (A → A) → List A
-    updateAtₗ (x ∷ xs) (suc n) f = x ∷ updateAtₗ xs n f
-    updateAtₗ (x ∷ xs) zero f = f x ∷ xs
-    htrs = GameData.haters gd
+  updateAtₗ : ∀ {a} → {A : Set a}
+           → (L : List A) → Fin $ length L → (A → A) → List A
+  updateAtₗ (x ∷ xs) (suc n) f = x ∷ updateAtₗ xs n f
+  updateAtₗ (x ∷ xs) zero f = f x ∷ xs
+  htrs = GameData.haters gd
+  xat = ual htrs h cninykumfa
+  haters' = updateAtₗ htrs h cninykumfa
+  player'' = mink (GameData.player' gd) $ proj₁ $ proj₂ xat
+\end{code}
+
+\section{la'o zoi.\ \F{wieldPawn}\ .zoi.}
+ni'o tu'a la'o zoi.\ \F{wieldPawn} \B q \B m \B n \F{refl}\ .zoi.\ .indika lo du'u zo'e ja lo selsni be la'o zoi.\ \F{Data.List.lookup} (\F{GameData.haters} \B q) \B m .zoi.\ cu me'oi .wield.\ lo selsni be la'o zoi.\ \F{Data.List.lookup} (\F{Character.inventory} \Sym \$ \F{Data.List.lookup} (\F{GameData.haters} \B q) \B m) \B n .zoi.
+
+\begin{code}
+wieldPawn : (q : GameData)
+         → (j : Fin $ Data.List.length $ GameData.haters q)
+         → (i : Fin $ Data.List.length $
+                Character.inventory $ GameData.haters q ! j)
+         → (_≡_
+             true
+             (is-just $ Item.weapwn $
+              _!_ (Character.inventory $ GameData.haters q ! j) i))
+         → GameData
+wieldPawn gd j i t = record gd {haters = proj₁ xebste; player' = p}
+  where
+  xeb = GameData.haters gd ! j
+  xebste = ual (GameData.haters gd) j {!!}
+  p = mink (GameData.player' gd) $ proj₁ $ proj₂ xebste
+  invlen : (flip _≡_
+             (length (Character.inventory xeb))
+             (length
+               (Character.inventory
+                 (proj₁ xebste ! mink j (proj₁ $ proj₂ xebste)))))
+  invlen = {!!}
 \end{code}
 
 \chapter{le mu'oi glibau.\ high-level .glibau.}
@@ -293,8 +327,7 @@ travel? (x₁ ∷ xs₁) = if realShit (travel' xs₁) $ const nothing
           m = "That room is not in your immediate vicinity."
         youse = just ∘ _,_ m ∘ q'
           where
-          play = GameData.player q
-          q' = λ r → record q {player = record play {room = r}}
+          q' = movePawn q (GameData.player' q)
           m = "You travel successfully."
       mathch = travelable $ methching $ zipfin $ GameData.rooms q
         where
@@ -355,10 +388,9 @@ wield? (x ∷ xs) dang = if (realShit x) (troci xs) nothing
       items = Character.inventory $ GameData.player dang
       xarci = Item.weapwn $ Data.List.lookup items $ proj₁ selpli
       xarcynotci = xarci Data.Maybe.>>= WeaponInfo.wieldMsg
-    wieldData = record dang {player = pl}
+    wieldData = wieldPawn dang p (proj₁ selpli) $ proj₂ selpli
       where
-      d = "You wield the weapon."
-      pl = record (GameData.player dang) {wieldedct = just selpli}
+      p = GameData.player' dang
   ... | (_ ∷ _ ∷ _) = just $ m , dang
     where
     m = "Your query matches multiple items, although \
