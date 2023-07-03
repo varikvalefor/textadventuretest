@@ -210,12 +210,12 @@ wieldPawn gd j i t = record gd {haters = proj₁ z; player' = p'}
       l xs₁ + l (x ∷ xs₂) ≡⟨ cong (_+_ $ length xs₁) refl ⟩
       l xs₁ + (1 + l xs₂) ≡⟨ sym $ DNP.+-assoc (l xs₁) 1 (l xs₂) ⟩
       l xs₁ + 1 + l xs₂ ∎
-    x₁ = Data.List.take (Data.Fin.toℕ j ∸ 1) xeb
+    x₁ = Data.List.take (Data.Fin.toℕ j) xeb
     x₂ = record (xeb ! j) {wieldedct = just $ i , t}
-    x₃ = Data.List.drop (Data.Fin.toℕ j) xeb
+    x₃ = Data.List.drop (ℕ.suc $ Data.Fin.toℕ j) xeb
     xeb' = x₁ Data.List.++ x₂ ∷ x₃
     xeblen = begin
-      l xeb ≡⟨ cong l $ sym $ DLP.take++drop (j' ∸ 1) xeb ⟩
+      l xeb ≡⟨ cong l $ sym $ DLP.take++drop j' xeb ⟩
       l (x₁ Data.List.++ d₂) ≡⟨ DLP.length-++ x₁ ⟩
       l x₁ + l d₂ ≡⟨ cong (_+_ (l x₁) ∘ l) dix ⟩
       l x₁ + l (x₂ ∷ x₃) ≡⟨ cong (_+_ $ l x₁) refl ⟩
@@ -224,7 +224,7 @@ wieldPawn gd j i t = record gd {haters = proj₁ z; player' = p'}
       l xeb' ∎
       where
       j' = Data.Fin.toℕ j
-      d₂ = Data.List.drop (j' ∸ 1) xeb
+      d₂ = Data.List.drop j' xeb
       dix : d₂ ≡ x₂ ∷ x₃
       dix = ?
   p' = mink (GameData.player' gd) $ proj₂ z
