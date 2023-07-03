@@ -217,7 +217,8 @@ wieldPawn gd j i t = record gd {haters = proj₁ z; player' = p'}
     xeblen = begin
       l xeb ≡⟨ cong l $ sym $ DLP.take++drop j' xeb ⟩
       l (x₁ Data.List.++ d₂) ≡⟨ DLP.length-++ x₁ ⟩
-      l x₁ + l d₂ ≡⟨ cong (_+_ $ l x₁) {!!} ⟩
+      l x₁ + l d₂ ≡⟨ cong (_+_ $ l x₁) $ DLP.length-drop j' xeb ⟩
+      l x₁ + (l xeb ∸ j') ≡⟨ {!!} ⟩
       l x₁ + l (x₂ ∷ x₃) ≡⟨ cong (_+_ $ l x₁) refl ⟩
       l x₁ + (1 + l x₃) ≡⟨ sym $ DNP.+-assoc (l x₁) 1 (l x₃) ⟩
       l x₁ + 1 + l x₃ ≡⟨ sym $ lenkat x₁ x₂ x₃ ⟩
