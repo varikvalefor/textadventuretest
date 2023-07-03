@@ -215,8 +215,16 @@ wieldPawn gd j i t = record gd {haters = proj₁ z; player' = p'}
     x₃ = Data.List.drop (Data.Fin.toℕ j) xeb
     xeb' = x₁ Data.List.++ x₂ ∷ x₃
     xeblen = begin
-      l xeb ≡⟨ {!!} ⟩
+      l xeb ≡⟨ cong l $ sym $ DLP.take++drop (j' ∸ 1) xeb ⟩
+      l (x₁ Data.List.++ d₂) ≡⟨ DLP.length-++ x₁ ⟩
+      l x₁ + l d₂ ≡⟨ {!!} ⟩
+      l x₁ + l (x₂ ∷ x₃) ≡⟨ cong (_+_ $ l x₁) refl ⟩
+      l x₁ + (1 + l x₃) ≡⟨ sym $ DNP.+-assoc (l x₁) 1 (l x₃) ⟩
+      l x₁ + 1 + l x₃ ≡⟨ sym $ lenkat x₁ x₂ x₃ ⟩
       l xeb' ∎
+      where
+      j' = Data.Fin.toℕ j
+      d₂ = Data.List.drop (j' ∸ 1) xeb
   p' = mink (GameData.player' gd) $ proj₂ z
 \end{code}
 
