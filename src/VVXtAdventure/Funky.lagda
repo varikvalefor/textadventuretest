@@ -142,7 +142,7 @@ open import Relation.Binary.PropositionalEquality
 \chapter{le mu'oi glibau.\ low-level .glibau.}
 
 \section{la'o zoi.\ \F{movePawn} .zoi.}
-ni'o tu'a la'o zoi.\ \F{movePawn} \B q \B m \B n .zoi.\ .indika lo du'u lo selsni be la'o zoi.\ \F{Data.List.lookup} (\F{GameData.haters \B q) \B h .zoi.\ cu zvati ko'a goi lo selsni be la'o zoi.\ \F{Data.List.lookup} (\F{GameData.rooms} \B q) \B n .zoi.
+ni'o tu'a la'o zoi.\ \F{movePawn} \B q \B m \B n .zoi.\ .indika lo du'u lo selsni be la'o zoi.\ \F{Data.List.lookup} (\F{GameData.haters} \B q) \B h .zoi.\ cu zvati ko'a goi lo selsni be la'o zoi.\ \F{Data.List.lookup} (\F{GameData.rooms} \B q) \B n .zoi.
 
 \begin{code}
 movePawn : (q : GameData)
