@@ -215,8 +215,8 @@ wieldPawn gd j i t = record gd {haters = proj₁ z; player' = p'}
     x₃ = Data.List.drop (Data.Fin.toℕ j) xeb
     xeb' = x₁ Data.List.++ x₂ ∷ x₃
     xeblen = begin
-      length (GameData.haters gd) ≡⟨ {!!} ⟩
-      length xeb' ∎
+      l xeb ≡⟨ {!!} ⟩
+      l xeb' ∎
   p' = mink (GameData.player' gd) $ proj₂ z
 \end{code}
 
