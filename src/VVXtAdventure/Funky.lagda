@@ -149,8 +149,9 @@ movePawn gd h' r = maybe moveHater movePlayer h'
   where
   cninykumfa = λ x → record x {room = r}
   movePlayer = record gd {player = cninykumfa $ GameData.player gd}
-  moveHater = λ h → record gd {haters = proj₁ $ ual htrs h cninykumfa}
+  moveHater = λ h → record gd {haters = ual₁ htrs h cninykumfa}
     where
+    ual₁ = λ t → proj₁ ∘₂ ual t
     htrs = GameData.haters gd
 \end{code}
 
