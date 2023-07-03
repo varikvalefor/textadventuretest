@@ -124,6 +124,10 @@ open import Truthbrary.Record.LLC
     map
   )
 open import Truthbrary.Category.Monad
+open import Truthbrary.Data.List.Loom
+  using (
+    ual
+  )
 open import Data.List.Relation.Unary.Any
   using (
     any?
@@ -145,12 +149,8 @@ movePawn gd h' r = maybe moveHater movePlayer h'
   where
   cninykumfa = λ x → record x {room = r}
   movePlayer = record gd {player = cninykumfa $ GameData.player gd}
-  moveHater = λ h → record gd {haters = updateAtₗ htrs h cninykumfa}
+  moveHater = λ h → record gd {haters = proj₁ $ ual htrs h cninykumfa}
     where
-    updateAtₗ : ∀ {a} → {A : Set a}
-             → (L : List A) → Fin $ length L → (A → A) → List A
-    updateAtₗ (x ∷ xs) (suc n) f = x ∷ updateAtₗ xs n f
-    updateAtₗ (x ∷ xs) zero f = f x ∷ xs
     htrs = GameData.haters gd
 \end{code}
 
