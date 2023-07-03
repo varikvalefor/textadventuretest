@@ -76,7 +76,8 @@ open import Data.Fin
 open import Data.Nat
   using (
     _∸_;
-    _+_
+    _+_;
+    ℕ
   )
 open import Data.Sum
 open import Function
@@ -147,6 +148,9 @@ open import Data.List.Relation.Unary.Any
   )
 open import Relation.Binary.PropositionalEquality
 
+import Data.Nat.Properties as DNP
+import Data.List.Properties as DLP
+
 open ≡-Reasoning
 \end{code}
 
@@ -192,15 +196,20 @@ wieldPawn gd j i t = record gd {haters = proj₁ z; player' = p'}
       → length (GameData.haters gd) ≡ length t
   z = xeb' , xeblen
     where
+    l = Data.List.length
     xeb = GameData.haters gd
     lenkat : ∀ {a} → {A : Set a}
            → (xs₁ : List A)
            → (x : A)
            → (xs₂ : List A)
            → (_≡_
-               (length $ xs₁ Data.List.++ x ∷ xs₂)
-               (length xs₁ + 1 + length xs₂))
-    lenkat xs₁ x xs₂ = {!!}
+               (l $ xs₁ Data.List.++ x ∷ xs₂)
+               (l xs₁ + 1 + l xs₂))
+    lenkat xs₁ x xs₂ = begin
+      l (xs₁ Data.List.++ x ∷ xs₂) ≡⟨ DLP.length-++ xs₁ ⟩
+      l xs₁ + l (x ∷ xs₂) ≡⟨ cong (_+_ $ length xs₁) refl ⟩
+      l xs₁ + (1 + l xs₂) ≡⟨ sym $ DNP.+-assoc (l xs₁) 1 (l xs₂) ⟩
+      l xs₁ + 1 + l xs₂ ∎
     x₁ = Data.List.take (Data.Fin.toℕ j ∸ 1) xeb
     x₂ = record (xeb ! j) {wieldedct = just $ i , t}
     x₃ = Data.List.drop (Data.Fin.toℕ j) xeb
