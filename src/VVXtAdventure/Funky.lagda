@@ -225,8 +225,19 @@ wieldPawn gd j i t = record gd {haters = proj₁ z; player' = p'}
       where
       j' = Data.Fin.toℕ j
       d₂ = Data.List.drop j' xeb
+      dror : ∀ {a} → {A : Set a}
+           → (xs : List A)
+           → (n : Fin $ length xs)
+           → (_≡_
+               (Data.List.drop 1 $ Data.List.drop (Data.Fin.toℕ n) xs)
+               (Data.List.drop (ℕ.suc $ Data.Fin.toℕ n) xs))
+      dror (x ∷ xs) Fin.zero = refl
+      dror (x ∷ xs) (Fin.suc n) = dror xs n
       dix : d₂ ≡ x₂ ∷ x₃
-      dix = ?
+      dix = begin
+        d₂ ≡⟨ {!!} ⟩
+        x₂ ∷ Data.List.drop 1 d₂ ≡⟨ cong (_∷_ x₂) $ dror xeb j ⟩
+        x₂ ∷ x₃ ∎
   p' = mink (GameData.player' gd) $ proj₂ z
 \end{code}
 
