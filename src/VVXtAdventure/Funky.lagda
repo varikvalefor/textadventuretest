@@ -29,6 +29,7 @@
 \newunicodechar{ᵥ}{\ensuremath{\mathnormal{_v}}}
 \newunicodechar{₁}{\ensuremath{\mathnormal{_1}}}
 \newunicodechar{₂}{\ensuremath{\mathnormal{_2}}}
+\newunicodechar{₃}{\ensuremath{\mathnormal{_3}}}
 \newunicodechar{⊎}{\ensuremath{\mathnormal{\uplus}}}
 \newunicodechar{≡}{\ensuremath{\mathnormal{\equiv}}}
 \newunicodechar{∧}{\ensuremath{\mathnormal{\land}}}
@@ -36,6 +37,9 @@
 \newunicodechar{ₘ}{\ensuremath{\mathnormal{_m}}}
 \newunicodechar{≟}{\ensuremath{\stackrel{?}{=}}}
 \newunicodechar{∸}{\ensuremath{\mathnormal{\divdot}}}
+\newunicodechar{∎}{\ensuremath{\mathnormal{\blacksquare}}}
+\newunicodechar{⟨}{\ensuremath{\mathnormal{\langle}}}
+\newunicodechar{⟩}{\ensuremath{\mathnormal{\rangle}}}
 
 \newcommand\Sym\AgdaSymbol
 \newcommand\D\AgdaDatatype
@@ -68,6 +72,11 @@ open import Data.Fin
     Fin;
     suc;
     zero
+  )
+open import Data.Nat
+  using (
+    _∸_;
+    _+_
   )
 open import Data.Sum
 open import Function
@@ -137,6 +146,8 @@ open import Data.List.Relation.Unary.Any
     any?
   )
 open import Relation.Binary.PropositionalEquality
+
+open ≡-Reasoning
 \end{code}
 
 \chapter{le mu'oi glibau.\ low-level .glibau.}
@@ -175,17 +186,29 @@ wieldPawn : (q : GameData)
              (is-just $ Item.weapwn $
               _!_ (Character.inventory $ GameData.haters q ! j) i))
          → GameData
-wieldPawn gd j i t = record gd {haters = proj₁ xebste; player' = p}
+wieldPawn gd j i t = record gd {haters = proj₁ z; player' = p'}
   where
-  xeb = GameData.haters gd ! j
-  xebste = ual (GameData.haters gd) j {!!}
-  p = mink (GameData.player' gd) $ proj₁ $ proj₂ xebste
-  invlen : (flip _≡_
-             (length (Character.inventory xeb))
-             (length
-               (Character.inventory
-                 (proj₁ xebste ! mink j (proj₁ $ proj₂ xebste)))))
-  invlen = {!!}
+  z : Σ (List $ Character $ GameData.rooms gd) $ λ t
+      → length (GameData.haters gd) ≡ length t
+  z = xeb' , xeblen
+    where
+    xeb = GameData.haters gd
+    lenkat : ∀ {a} → {A : Set a}
+           → (xs₁ : List A)
+           → (x : A)
+           → (xs₂ : List A)
+           → (_≡_
+               (length $ xs₁ Data.List.++ x ∷ xs₂)
+               (length xs₁ + 1 + length xs₂))
+    lenkat xs₁ x xs₂ = {!!}
+    x₁ = Data.List.take (Data.Fin.toℕ j ∸ 1) xeb
+    x₂ = record (xeb ! j) {wieldedct = just $ i , t}
+    x₃ = Data.List.drop (Data.Fin.toℕ j) xeb
+    xeb' = x₁ Data.List.++ x₂ ∷ x₃
+    xeblen = begin
+      length (GameData.haters gd) ≡⟨ {!!} ⟩
+      length xeb' ∎
+  p' = mink (GameData.player' gd) $ proj₂ z
 \end{code}
 
 \chapter{le mu'oi glibau.\ high-level .glibau.}
