@@ -224,15 +224,15 @@ wieldPawn gd j i t = record gd {haters = proj₁ z; player' = p'}
       d₂ = Data.List.drop j' xen
       xex = begin
         𝓁 (x₂ ∷ x₃) ≡⟨ refl ⟩
-        ℕ.suc (𝓁 $ Data.List.drop (ℕ.suc j') xen) ≡⟨ dropsuc xen j ⟩
-        𝓁 (Data.List.drop j' xen) ≡⟨ DLP.length-drop j' xen ⟩
+        ℕ.suc (𝓁 $ ℕ.suc j' ↓ xen) ≡⟨ dropsuc xen j ⟩
+        𝓁 (j' ↓ xen) ≡⟨ DLP.length-drop j' xen ⟩
         𝓁 xen ∸ j' ∎
         where
+        _↓_ = Data.List.drop
         dropsuc : ∀ {a} → {A : Set a}
                 → (x : List A)
                 → (n : Fin $ length x)
                 → let n' = Data.Fin.toℕ n in
-                  let _↓_ = Data.List.drop in
                   ℕ.suc (𝓁 $ ℕ.suc n' ↓ x) ≡ 𝓁 (n' ↓ x)
         dropsuc (x ∷ xs) (Fin.zero) = refl
         dropsuc (x ∷ xs) (Fin.suc n) = dropsuc xs n
