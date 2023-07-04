@@ -195,10 +195,10 @@ wieldPawn gd j i t = record gd {haters = proj₁ z; player' = p'}
   where
   z : Σ (List $ Character $ GameData.rooms gd) $ λ t
       → length (GameData.haters gd) ≡ length t
-  z = xeb' , xeblen
+  z = xen' , xenlen
     where
     𝓁 = Data.List.length
-    xeb = GameData.haters gd
+    xen = GameData.haters gd
     lenkat : ∀ {a} → {A : Set a}
            → (xs₁ : List A)
            → (x : A)
@@ -210,26 +210,26 @@ wieldPawn gd j i t = record gd {haters = proj₁ z; player' = p'}
       𝓁 (xs₁ Data.List.++ x ∷ xs₂) ≡⟨ DLP.length-++ xs₁ ⟩
       𝓁 xs₁ + 𝓁 (x ∷ xs₂) ≡⟨ cong (_+_ $ length xs₁) refl ⟩
       𝓁 xs₁ + ℕ.suc (𝓁 xs₂) ∎
-    x₁ = Data.List.take (Data.Fin.toℕ j) xeb
-    x₂ = record (xeb ! j) {wieldedct = just $ i , t}
-    x₃ = Data.List.drop (ℕ.suc $ Data.Fin.toℕ j) xeb
-    xeb' = x₁ Data.List.++ x₂ ∷ x₃
-    xeblen = begin
-      𝓁 xeb ≡⟨ cong 𝓁 $ sym $ DLP.take++drop j' xeb ⟩
+    x₁ = Data.List.take (Data.Fin.toℕ j) xen
+    x₂ = record (xen ! j) {wieldedct = just $ i , t}
+    x₃ = Data.List.drop (ℕ.suc $ Data.Fin.toℕ j) xen
+    xen' = x₁ Data.List.++ x₂ ∷ x₃
+    xenlen = begin
+      𝓁 xen ≡⟨ cong 𝓁 $ sym $ DLP.take++drop j' xen ⟩
       𝓁 (x₁ Data.List.++ d₂) ≡⟨ DLP.length-++ x₁ ⟩
-      𝓁 x₁ + 𝓁 d₂ ≡⟨ cong (_+_ $ 𝓁 x₁) $ DLP.length-drop j' xeb ⟩
-      𝓁 x₁ + (𝓁 xeb ∸ j') ≡⟨ cong (_+_ $ 𝓁 x₁) $ sym xex ⟩
+      𝓁 x₁ + 𝓁 d₂ ≡⟨ cong (_+_ $ 𝓁 x₁) $ DLP.length-drop j' xen ⟩
+      𝓁 x₁ + (𝓁 xen ∸ j') ≡⟨ cong (_+_ $ 𝓁 x₁) $ sym xex ⟩
       𝓁 x₁ + 𝓁 (x₂ ∷ x₃) ≡⟨ cong (_+_ $ 𝓁 x₁) refl ⟩
       𝓁 x₁ + ℕ.suc (𝓁 x₃) ≡⟨ sym $ lenkat x₁ x₂ x₃ ⟩
-      𝓁 xeb' ∎
+      𝓁 xen' ∎
       where
       j' = Data.Fin.toℕ j
-      d₂ = Data.List.drop j' xeb
+      d₂ = Data.List.drop j' xen
       xex = begin
         𝓁 (x₂ ∷ x₃) ≡⟨ refl ⟩
-        ℕ.suc (𝓁 $ Data.List.drop (ℕ.suc j') xeb) ≡⟨ dropsuc xeb j ⟩
-        𝓁 (Data.List.drop j' xeb) ≡⟨ DLP.length-drop j' xeb ⟩
-        𝓁 xeb ∸ j' ∎
+        ℕ.suc (𝓁 $ Data.List.drop (ℕ.suc j') xen) ≡⟨ dropsuc xen j ⟩
+        𝓁 (Data.List.drop j' xen) ≡⟨ DLP.length-drop j' xen ⟩
+        𝓁 xen ∸ j' ∎
         where
         dropsuc : ∀ {a} → {A : Set a}
                 → (x : List A)
