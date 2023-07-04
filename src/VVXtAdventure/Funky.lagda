@@ -232,9 +232,8 @@ wieldPawn gd j i t = record gd {haters = proj₁ z; player' = p'}
                 → (x : List A)
                 → (n : Fin $ length x)
                 → let n' = Data.Fin.toℕ n in
-                  (_≡_
-                    (ℕ.suc $ 𝓁 $ (Data.List.drop (ℕ.suc n') x))
-                    (𝓁 $ Data.List.drop n' x))
+                  let _↓_ = Data.List.drop in
+                  ℕ.suc (𝓁 $ ℕ.suc n' ↓ x) ≡ 𝓁 (n' ↓ x)
         dropsuc (x ∷ xs) (Fin.zero) = refl
         dropsuc (x ∷ xs) (Fin.suc n) = dropsuc xs n
   p' = mink (GameData.player' gd) $ proj₂ z
