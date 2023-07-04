@@ -183,14 +183,14 @@ ni'o tu'a la'o zoi.\ \F{wieldPawn} \B q \B m \B n \F{refl}\ .zoi.\ .indika lo du
 
 \begin{code}
 wieldPawn : (q : GameData)
-         → (j : Fin $ Data.List.length $ GameData.haters q)
-         → (i : Fin $ Data.List.length $
-                Character.inventory $ GameData.haters q ! j)
-         → (_≡_
-             true
-             (is-just $ Item.weapwn $
-              _!_ (Character.inventory $ GameData.haters q ! j) i))
-         → GameData
+          → (j : Fin $ Data.List.length $ GameData.haters q)
+          → (i : Fin $ Data.List.length $
+                 Character.inventory $ GameData.haters q ! j)
+          → (_≡_
+              true
+              (is-just $ Item.weapwn $
+               _!_ (Character.inventory $ GameData.haters q ! j) i))
+          → GameData
 wieldPawn gd j i t = record gd {haters = proj₁ z; player' = p'}
   where
   z : Σ (List $ Character $ GameData.rooms gd) $ λ t
