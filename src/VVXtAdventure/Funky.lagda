@@ -218,7 +218,7 @@ wieldPawn gd j i t = record gd {haters = proj₁ z; player' = p'}
       l xeb ≡⟨ cong l $ sym $ DLP.take++drop j' xeb ⟩
       l (x₁ Data.List.++ d₂) ≡⟨ DLP.length-++ x₁ ⟩
       l x₁ + l d₂ ≡⟨ cong (_+_ $ l x₁) $ DLP.length-drop j' xeb ⟩
-      l x₁ + (l xeb ∸ j') ≡⟨ {!!} ⟩
+      l x₁ + (l xeb ∸ j') ≡⟨ cong (_+_ $ l x₁) $ sym xex ⟩
       l x₁ + l (x₂ ∷ x₃) ≡⟨ cong (_+_ $ l x₁) refl ⟩
       l x₁ + (1 + l x₃) ≡⟨ sym $ DNP.+-assoc (l x₁) 1 (l x₃) ⟩
       l x₁ + 1 + l x₃ ≡⟨ sym $ lenkat x₁ x₂ x₃ ⟩
@@ -226,6 +226,21 @@ wieldPawn gd j i t = record gd {haters = proj₁ z; player' = p'}
       where
       j' = Data.Fin.toℕ j
       d₂ = Data.List.drop j' xeb
+      xex = begin
+        l (x₂ ∷ x₃) ≡⟨ refl ⟩
+        ℕ.suc (l $ Data.List.drop (ℕ.suc j') xeb) ≡⟨ dropsuc xeb j ⟩
+        l (Data.List.drop j' xeb) ≡⟨ DLP.length-drop j' xeb ⟩
+        l xeb ∸ j' ∎
+        where
+        dropsuc : ∀ {a} → {A : Set a}
+                → (x : List A)
+                → (n : Fin $ length x)
+                → (flip _≡_
+                    (l $ Data.List.drop (Data.Fin.toℕ n) x)
+                    (ℕ.suc $ l $
+                      (Data.List.drop (ℕ.suc $ Data.Fin.toℕ n) x)))
+        dropsuc (x ∷ xs) (Fin.zero) = refl
+        dropsuc (x ∷ xs) (Fin.suc n) = dropsuc xs n
   p' = mink (GameData.player' gd) $ proj₂ z
 \end{code}
 
