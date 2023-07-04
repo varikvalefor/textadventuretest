@@ -40,6 +40,7 @@
 \newunicodechar{∎}{\ensuremath{\mathnormal{\blacksquare}}}
 \newunicodechar{⟨}{\ensuremath{\mathnormal{\langle}}}
 \newunicodechar{⟩}{\ensuremath{\mathnormal{\rangle}}}
+\newunicodechar{𝓁}{\ensuremath{\mathcal{l}}}
 
 \newcommand\Sym\AgdaSymbol
 \newcommand\D\AgdaDatatype
@@ -196,48 +197,46 @@ wieldPawn gd j i t = record gd {haters = proj₁ z; player' = p'}
       → length (GameData.haters gd) ≡ length t
   z = xeb' , xeblen
     where
-    l = Data.List.length
+    𝓁 = Data.List.length
     xeb = GameData.haters gd
     lenkat : ∀ {a} → {A : Set a}
            → (xs₁ : List A)
            → (x : A)
            → (xs₂ : List A)
            → (_≡_
-               (l $ xs₁ Data.List.++ x ∷ xs₂)
-               (l xs₁ + 1 + l xs₂))
+               (𝓁 $ xs₁ Data.List.++ x ∷ xs₂)
+               (𝓁 xs₁ + ℕ.suc (𝓁 xs₂)))
     lenkat xs₁ x xs₂ = begin
-      l (xs₁ Data.List.++ x ∷ xs₂) ≡⟨ DLP.length-++ xs₁ ⟩
-      l xs₁ + l (x ∷ xs₂) ≡⟨ cong (_+_ $ length xs₁) refl ⟩
-      l xs₁ + (1 + l xs₂) ≡⟨ sym $ DNP.+-assoc (l xs₁) 1 (l xs₂) ⟩
-      l xs₁ + 1 + l xs₂ ∎
+      𝓁 (xs₁ Data.List.++ x ∷ xs₂) ≡⟨ DLP.length-++ xs₁ ⟩
+      𝓁 xs₁ + 𝓁 (x ∷ xs₂) ≡⟨ cong (_+_ $ length xs₁) refl ⟩
+      𝓁 xs₁ + ℕ.suc (𝓁 xs₂) ∎
     x₁ = Data.List.take (Data.Fin.toℕ j) xeb
     x₂ = record (xeb ! j) {wieldedct = just $ i , t}
     x₃ = Data.List.drop (ℕ.suc $ Data.Fin.toℕ j) xeb
     xeb' = x₁ Data.List.++ x₂ ∷ x₃
     xeblen = begin
-      l xeb ≡⟨ cong l $ sym $ DLP.take++drop j' xeb ⟩
-      l (x₁ Data.List.++ d₂) ≡⟨ DLP.length-++ x₁ ⟩
-      l x₁ + l d₂ ≡⟨ cong (_+_ $ l x₁) $ DLP.length-drop j' xeb ⟩
-      l x₁ + (l xeb ∸ j') ≡⟨ cong (_+_ $ l x₁) $ sym xex ⟩
-      l x₁ + l (x₂ ∷ x₃) ≡⟨ cong (_+_ $ l x₁) refl ⟩
-      l x₁ + (1 + l x₃) ≡⟨ sym $ DNP.+-assoc (l x₁) 1 (l x₃) ⟩
-      l x₁ + 1 + l x₃ ≡⟨ sym $ lenkat x₁ x₂ x₃ ⟩
-      l xeb' ∎
+      𝓁 xeb ≡⟨ cong 𝓁 $ sym $ DLP.take++drop j' xeb ⟩
+      𝓁 (x₁ Data.List.++ d₂) ≡⟨ DLP.length-++ x₁ ⟩
+      𝓁 x₁ + 𝓁 d₂ ≡⟨ cong (_+_ $ 𝓁 x₁) $ DLP.length-drop j' xeb ⟩
+      𝓁 x₁ + (𝓁 xeb ∸ j') ≡⟨ cong (_+_ $ 𝓁 x₁) $ sym xex ⟩
+      𝓁 x₁ + 𝓁 (x₂ ∷ x₃) ≡⟨ cong (_+_ $ 𝓁 x₁) refl ⟩
+      𝓁 x₁ + ℕ.suc (𝓁 x₃) ≡⟨ sym $ lenkat x₁ x₂ x₃ ⟩
+      𝓁 xeb' ∎
       where
       j' = Data.Fin.toℕ j
       d₂ = Data.List.drop j' xeb
       xex = begin
-        l (x₂ ∷ x₃) ≡⟨ refl ⟩
-        ℕ.suc (l $ Data.List.drop (ℕ.suc j') xeb) ≡⟨ dropsuc xeb j ⟩
-        l (Data.List.drop j' xeb) ≡⟨ DLP.length-drop j' xeb ⟩
-        l xeb ∸ j' ∎
+        𝓁 (x₂ ∷ x₃) ≡⟨ refl ⟩
+        ℕ.suc (𝓁 $ Data.List.drop (ℕ.suc j') xeb) ≡⟨ dropsuc xeb j ⟩
+        𝓁 (Data.List.drop j' xeb) ≡⟨ DLP.length-drop j' xeb ⟩
+        𝓁 xeb ∸ j' ∎
         where
         dropsuc : ∀ {a} → {A : Set a}
                 → (x : List A)
                 → (n : Fin $ length x)
                 → (flip _≡_
-                    (l $ Data.List.drop (Data.Fin.toℕ n) x)
-                    (ℕ.suc $ l $
+                    (𝓁 $ Data.List.drop (Data.Fin.toℕ n) x)
+                    (ℕ.suc $ 𝓁 $
                       (Data.List.drop (ℕ.suc $ Data.Fin.toℕ n) x)))
         dropsuc (x ∷ xs) (Fin.zero) = refl
         dropsuc (x ∷ xs) (Fin.suc n) = dropsuc xs n
