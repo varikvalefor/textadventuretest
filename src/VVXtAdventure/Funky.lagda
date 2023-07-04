@@ -183,13 +183,12 @@ ni'o tu'a la'o zoi.\ \F{wieldPawn} \B q \B m \B n \F{refl}\ .zoi.\ .indika lo du
 
 \begin{code}
 wieldPawn : (q : GameData)
-          → (j : Fin $ Data.List.length $ GameData.haters q)
-          → (i : Fin $ Data.List.length $
-                 Character.inventory $ GameData.haters q ! j)
-          → (_≡_
-              true
-              (is-just $ Item.weapwn $
-               _!_ (Character.inventory $ GameData.haters q ! j) i))
+          → let x = GameData.haters in
+            let 𝓁 = Data.List.length in
+            let iv = Character.inventory in
+            (j : Fin $ 𝓁 $ x q)
+          → (i : Fin $ 𝓁 $ Character.inventory $ x q ! j)
+          → (_≡_ true $ is-just $ Item.weapwn $ _!_ (iv $ x q ! j) i)
           → GameData
 wieldPawn gd j i t = record gd {haters = proj₁ z; player' = p'}
   where
@@ -232,10 +231,10 @@ wieldPawn gd j i t = record gd {haters = proj₁ z; player' = p'}
         dropsuc : ∀ {a} → {A : Set a}
                 → (x : List A)
                 → (n : Fin $ length x)
-                → (flip _≡_
-                    (𝓁 $ Data.List.drop (Data.Fin.toℕ n) x)
-                    (ℕ.suc $ 𝓁 $
-                      (Data.List.drop (ℕ.suc $ Data.Fin.toℕ n) x)))
+                → let n' = Data.Fin.toℕ n in
+                  (_≡_
+                    (ℕ.suc $ 𝓁 $ (Data.List.drop (ℕ.suc n') x))
+                    (𝓁 $ Data.List.drop n' x))
         dropsuc (x ∷ xs) (Fin.zero) = refl
         dropsuc (x ∷ xs) (Fin.suc n) = dropsuc xs n
   p' = mink (GameData.player' gd) $ proj₂ z
