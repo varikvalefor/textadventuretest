@@ -33,6 +33,7 @@
 \newunicodechar{⊎}{\ensuremath{\mathnormal{\uplus}}}
 \newunicodechar{≡}{\ensuremath{\mathnormal{\equiv}}}
 \newunicodechar{∧}{\ensuremath{\mathnormal{\land}}}
+\newunicodechar{≤}{\ensuremath{\mathnormal{\leq}}}
 \newunicodechar{ᵇ}{\ensuremath{\mathnormal{^b}}}
 \newunicodechar{ₘ}{\ensuremath{\mathnormal{_m}}}
 \newunicodechar{≟}{\ensuremath{\stackrel{?}{=}}}
@@ -41,6 +42,8 @@
 \newunicodechar{⟨}{\ensuremath{\mathnormal{\langle}}}
 \newunicodechar{⟩}{\ensuremath{\mathnormal{\rangle}}}
 \newunicodechar{𝓁}{\ensuremath{\mathcal{l}}}
+\newunicodechar{ℓ}{\ensuremath{\mathnormal{\ell}}}
+\newunicodechar{⊃}{\ensuremath{\mathnormal{\supset}}}
 
 \newcommand\Sym\AgdaSymbol
 \newcommand\D\AgdaDatatype
@@ -149,8 +152,10 @@ open import Data.List.Relation.Unary.Any
   )
 open import Relation.Binary.PropositionalEquality
 
+import Data.Fin.Properties as DFP
 import Data.Nat.Properties as DNP
 import Data.List.Properties as DLP
+import Data.Maybe.Properties as DMP
 
 open ≡-Reasoning
 \end{code}
@@ -189,12 +194,28 @@ wieldPawn : (q : GameData)
             (j : Fin $ 𝓁 $ x q)
           → (i : Fin $ 𝓁 $ Character.inventory $ x q ! j)
           → (_≡_ true $ is-just $ Item.weapwn $ _!_ (iv $ x q ! j) i)
-          → GameData
-wieldPawn gd j i t = record gd {haters = proj₁ z; player' = p'}
+          → Σ GameData $ λ q'
+            → Σ (𝓁 (x q) ≡ 𝓁 (x q')) $ λ ℓ
+            → Σ (𝓁 (iv $ x q ! j) ≡ 𝓁 (iv $ x q' ! mink j ℓ)) $ λ ℓ₂
+            → (_≡_
+                (just i)
+                (Data.Maybe.map
+                  (λ t → mink (proj₁ t) $ sym ℓ₂)
+                  (Character.wieldedct $ x q' ! mink j ℓ)))
+wieldPawn gd j i t = gd' , proj₂ z
   where
   z : Σ (List $ Character $ GameData.rooms gd) $ λ t
-      → length (GameData.haters gd) ≡ length t
-  z = xen' , xenlen
+      → let x = GameData.haters in
+        let 𝓁 = Data.List.length in
+        let iv = Character.inventory in
+        Σ (𝓁 (x gd) ≡ 𝓁 t) $ λ ℓ
+      → Σ (𝓁 (iv $ x gd ! j) ≡ 𝓁 (iv $ t ! mink j ℓ)) $ λ ℓ₂
+      → (_≡_
+          (just i)
+          (Data.Maybe.map
+            (λ t → mink (proj₁ t) $ sym ℓ₂)
+            (Character.wieldedct $ t ! mink j ℓ)))
+  z = xen' , xenlen , xendj , {!!}
     where
     𝓁 = Data.List.length
     xen = GameData.haters gd
@@ -211,6 +232,7 @@ wieldPawn gd j i t = record gd {haters = proj₁ z; player' = p'}
     x₂ = record (xen ! j) {wieldedct = just $ i , t}
     x₃ = Data.List.drop (ℕ.suc $ Data.Fin.toℕ j) xen
     xen' = x₁ Data.List.++ x₂ ∷ x₃
+
     xenlen = begin
       𝓁 xen ≡⟨ cong 𝓁 $ sym $ DLP.take++drop j' xen ⟩
       𝓁 (x₁ Data.List.++ d₂) ≡⟨ DLP.length-++ x₁ ⟩
@@ -236,7 +258,86 @@ wieldPawn gd j i t = record gd {haters = proj₁ z; player' = p'}
                   ℕ.suc (𝓁 $ ℕ.suc n' ↓ x) ≡ 𝓁 (n' ↓ x)
         dropsuc (x ∷ xs) (Fin.zero) = refl
         dropsuc (x ∷ xs) (Fin.suc n) = dropsuc xs n
-  p' = mink (GameData.player' gd) $ proj₂ z
+    xendj : let iv = Character.inventory in
+            let 𝓁 = Data.List.length in
+            𝓁 (iv $ xen ! j) ≡ 𝓁 (iv $ xen' ! mink j xenlen)
+    xendj = cong length $ DMP.just-injective x₂d
+      where
+      _↓_ = Data.List.drop
+      iv = Character.inventory
+      dropkat : ∀ {a} → {A : Set a}
+              → (xs ys : List A)
+              → (𝓁 xs) ↓ (xs Data.List.++ ys) ≡ ys
+      dropkat [] _ = refl
+      dropkat (_ ∷ xs) ys = dropkat xs ys
+      x₂d : just (iv $ xen ! j) ≡ just (iv $ xen' ! mink j xenlen)
+      x₂d = begin
+        just (iv $ xen ! j) ≡⟨ refl ⟩
+        just (iv x₂) ≡⟨ refl ⟩
+        mapₘ iv (⊃ $ x₂ ∷ x₃) ≡⟨ cong (mapₘ iv ∘ ⊃) $ dropsim ⟩
+        mapₘ iv (⊃ $ (𝓁 x₁) ↓ xen') ≡⟨ cong (mapₘ iv) xent ⟩
+        just (iv $ xen' ! mink j xenlen) ∎
+        where
+        toℕ = Data.Fin.toℕ
+        mapₘ = Data.Maybe.map
+        ⊃ = Data.List.head
+        dropsim = sym $ dropkat x₁ $ x₂ ∷ x₃
+        xent : ⊃ ((𝓁 x₁) ↓ xen') ≡ just (xen' ! mink j xenlen)
+        xent = sym $ dropind xen' (mink j xenlen) {!!} xil
+          where
+          dropind : ∀ {a} → {A : Set a}
+                  → (xs : List A)
+                  → (n : Fin $ 𝓁 xs)
+                  → (m : ℕ)
+                  → Data.Fin.toℕ n ≡ m
+                  → just (xs ! n) ≡ Data.List.head (m ↓ xs)
+          dropind (x ∷ xs) Fin.zero (ℕ.zero) refl = refl
+          dropind (x ∷ xs) (Fin.suc n) (ℕ.suc m) refl = ret
+            where
+            ret = dropind xs n m refl
+          teikgek : ∀ {a} → {A : Set a}
+                  → (xs : List A)
+                  → (n : ℕ)
+                  → n Data.Nat.≤ 𝓁 xs
+                  → 𝓁 (Data.List.take n xs) ≡ n
+          teikgek _ 0 _ = refl
+          teikgek (x ∷ xs) (ℕ.suc n) (Data.Nat.s≤s q) = ret
+            where
+            ret = cong ℕ.suc $ teikgek xs n q
+          mindut : (m n : ℕ)
+                 → (o : Fin m)
+                 → (x : m ≡ n)
+                 → toℕ (mink o x) ≡ toℕ o
+          mindut m n o refl = refl
+          lisfis : ∀ {a} → {A : Set a}
+                 → (xs : List A)
+                 → (n : Fin $ 𝓁 xs)
+                 → Σ ℕ $ _≡_ (𝓁 xs) ∘ ℕ.suc
+          lisfis (_ ∷ xs) j = 𝓁 xs , refl
+          tuik : toℕ j Data.Nat.≤ 𝓁 xen
+          tuik = subst lix {!!} $ subst lex (mindut _ _ j d) j'
+            where
+            d = proj₂ $ lisfis xen j
+            kix : toℕ (Data.Fin.fromℕ _) ≡ 𝓁 xen
+            kix = tif _ _ $ sym $ proj₂ $ lisfis xen j
+              where
+              tif : (m n : ℕ) → m ≡ n → toℕ (Data.Fin.fromℕ m) ≡ n
+              tif ℕ.zero ℕ.zero refl = refl
+              tif (ℕ.suc m) (ℕ.suc n) refl = ret
+                where
+                ret = cong ℕ.suc $ tif m n refl
+            lix = Data.Nat._≤_ _
+            lex = flip Data.Nat._≤_ _
+            j' = DFP.≤fromℕ $ mink j $ proj₂ $ lisfis xen j
+          xil : toℕ (mink j xenlen) ≡ 𝓁 x₁
+          xil = begin
+            toℕ (mink j xenlen) ≡⟨ mindut _ _ j xenlen ⟩
+            toℕ j ≡⟨ sym $ teikgek xen (toℕ j) tuik ⟩
+            𝓁 x₁ ∎
+  z₁ = proj₁ z
+  z₂ = proj₁ $ proj₂ z
+  p' = mink (GameData.player' gd) z₂
+  gd' = record gd {haters = z₁; player' = p'}
 \end{code}
 
 \chapter{le mu'oi glibau.\ high-level .glibau.}
@@ -432,7 +533,7 @@ wield? (x ∷ xs) dang = if (realShit x) (troci xs) nothing
     where
     m = "You need to stop chugging PCP or whatever.  \
         \Your hallucinations are pissing me off."
-  ... | (selpli ∷ []) = just $ wieldMsg , wieldData
+  ... | (selpli ∷ []) = just $ wieldMsg , proj₁ wieldData
     where
     wieldMsg = fromMaybe "You wield the weapon." xarcynotci
       where
