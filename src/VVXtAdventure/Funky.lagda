@@ -315,10 +315,13 @@ wieldPawn gd j i t = gd' , proj₂ z
                  → Σ ℕ $ _≡_ (𝓁 xs) ∘ ℕ.suc
           lisfis (_ ∷ xs) j = 𝓁 xs , refl
           tuik : toℕ j Data.Nat.≤ 𝓁 xen
-          tuik = subst lix {!!} $ subst lex (mindut _ _ j d) j'
+          tuik = subst (Data.Nat._≤_ _) kix $ DNP.≤-step slex
             where
             d = proj₂ $ lisfis xen j
-            kix : toℕ (Data.Fin.fromℕ _) ≡ 𝓁 xen
+            j' = DFP.≤fromℕ $ mink j $ proj₂ $ lisfis xen j
+            slex : toℕ j Data.Nat.≤ _
+            slex = subst (flip Data.Nat._≤_ _) (mindut _ _ j d) j'
+            kix : ℕ.suc _ ≡ 𝓁 xen
             kix = tif _ _ $ sym $ proj₂ $ lisfis xen j
               where
               tif : (m n : ℕ) → m ≡ n → toℕ (Data.Fin.fromℕ m) ≡ n
@@ -326,9 +329,6 @@ wieldPawn gd j i t = gd' , proj₂ z
               tif (ℕ.suc m) (ℕ.suc n) refl = ret
                 where
                 ret = cong ℕ.suc $ tif m n refl
-            lix = Data.Nat._≤_ _
-            lex = flip Data.Nat._≤_ _
-            j' = DFP.≤fromℕ $ mink j $ proj₂ $ lisfis xen j
           xil : toℕ (mink j xenlen) ≡ 𝓁 x₁
           xil = begin
             toℕ (mink j xenlen) ≡⟨ mindut _ _ j xenlen ⟩
