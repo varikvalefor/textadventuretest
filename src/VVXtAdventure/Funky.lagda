@@ -215,7 +215,7 @@ wieldPawn gd j i t = gd' , proj₂ z
           (Data.Maybe.map
             (λ t → mink (proj₁ t) $ sym ℓ₂)
             (Character.wieldedct $ t ! mink j ℓ)))
-  z = xen' , xenlen , xendj , {!!}
+  z = xen' , xenlen , xendj , sym tivos
     where
     𝓁 = Data.List.length
     xen = GameData.haters gd
@@ -334,6 +334,34 @@ wieldPawn gd j i t = gd' , proj₂ z
             toℕ (mink j xenlen) ≡⟨ mindut _ _ j xenlen ⟩
             toℕ j ≡⟨ sym $ teikgek xen (toℕ j) tuik ⟩
             𝓁 x₁ ∎
+    tivos = begin
+      mapₘ (λ t → mink (proj₁ t) $ sym xendj) uxij ≡⟨ komp (uxij) _ _ ⟩
+      mapₘ (λ t → mink t $ sym xendj) (mapₘ proj₁ $ uxij) ≡⟨ xenkik ⟩
+      mapₘ proj₁ (uid x₂) ≡⟨ refl ⟩
+      just i ∎
+      where
+      j' = mink j xenlen
+      mapₘ = Data.Maybe.map
+      komp : ∀ {a b c} → {A : Set a} → {B : Set b} → {C : Set c}
+           → (x : Maybe A)
+           → (f : A → B)
+           → (g : B → C)
+           → mapₘ (g ∘ f) x ≡ mapₘ g (mapₘ f x)
+      komp {_} {A} {B} {C} nothing f g = refl
+      komp {_} {A} {B} {C} (just t) f g = refl
+      kix : ∀ {a} → {A : Set a}
+          → (xs : List A)
+          → (x : A)
+          → {n : A → ℕ}
+          → (f : (a : A) → Maybe $ Fin $ n a)
+          → (i : Fin $ 𝓁 xs)
+          → (d : n (xs ! i) ≡ n x)
+          → mapₘ (λ t → mink t d) (f $ xs ! i) ≡ f x
+      kix xs x f i d = {!!}
+      xij = xen' ! mink j xenlen
+      uid = Character.wieldedct
+      uxij = uid xij
+      xenkik = kix xen' x₂ (mapₘ proj₁ ∘ uid) j' $ sym xendj
   z₁ = proj₁ z
   z₂ = proj₁ $ proj₂ z
   p' = mink (GameData.player' gd) z₂
