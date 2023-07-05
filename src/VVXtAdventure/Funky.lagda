@@ -283,7 +283,7 @@ wieldPawn gd j i t = gd' , proj₂ z
         ⊃ = Data.List.head
         dropsim = sym $ dropkat x₁ $ x₂ ∷ x₃
         xent : ⊃ ((𝓁 x₁) ↓ xen') ≡ just (xen' ! mink j xenlen)
-        xent = sym $ dropind xen' (mink j xenlen) {!!} xil
+        xent = sym $ dropind xen' (mink j xenlen) (𝓁 x₁) xil
           where
           dropind : ∀ {a} → {A : Set a}
                   → (xs : List A)
