@@ -324,7 +324,9 @@ wieldPawn gd j i t = gd' , proj₂ z
             kix : ℕ.suc _ ≡ 𝓁 xen
             kix = tif _ _ $ sym $ proj₂ $ lisfis xen j
               where
-              tif : (m n : ℕ) → m ≡ n → toℕ (Data.Fin.fromℕ m) ≡ n
+              tif : (m n : ℕ)
+                  → m ≡ n
+                  → toℕ (Data.Fin.fromℕ m) ≡ n
               tif ℕ.zero ℕ.zero refl = refl
               tif (ℕ.suc m) (ℕ.suc n) refl = ret
                 where
