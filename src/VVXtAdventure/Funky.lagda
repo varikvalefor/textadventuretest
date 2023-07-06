@@ -204,163 +204,148 @@ wieldPawn : (q : GameData)
                 (Data.Maybe.map
                   (Data.Fin.toℕ ∘ proj₁)
                   (Character.wieldedct $ x q' ! mink j ℓ)))
-wieldPawn gd j i t = gd' , proj₂ z
+wieldPawn gd j i t = gd' , xenlen , xendj , sym tivos
   where
-  z : Σ (List $ Character $ GameData.rooms gd) $ λ t
-      → let x = GameData.haters in
-        let 𝓁 = Data.List.length in
-        let iv = Character.inventory in
-        Σ (𝓁 (x gd) ≡ 𝓁 t) $ λ ℓ
-      → Σ (𝓁 (iv $ x gd ! j) ≡ 𝓁 (iv $ t ! mink j ℓ)) $ λ ℓ₂
-      → (_≡_
-          (just $ Data.Fin.toℕ i)
-          (Data.Maybe.map
-            (Data.Fin.toℕ ∘ proj₁)
-            (Character.wieldedct $ t ! mink j ℓ)))
-  z = xen' , xenlen , xendj , sym tivos
+  ⊃ = Data.List.head
+  𝓁 = Data.List.length
+  _↓_ = Data.List.drop
+
+  xen = GameData.haters gd
+  x₁ = Data.List.take (Data.Fin.toℕ j) xen
+  x₂ = record (xen ! j) {wieldedct = just $ i , t}
+  x₃ = Data.List.drop (ℕ.suc $ Data.Fin.toℕ j) xen
+  xen' = x₁ Data.List.++ x₂ ∷ x₃
+
+  dropkat : ∀ {a} → {A : Set a}
+          → (xs ys : List A)
+          → (𝓁 xs) ↓ (xs Data.List.++ ys) ≡ ys
+  dropkat [] _ = refl
+  dropkat (_ ∷ xs) ys = dropkat xs ys
+
+  xenlen = begin
+    𝓁 xen ≡⟨ cong 𝓁 $ sym $ DLP.take++drop j' xen ⟩
+    𝓁 (x₁ Data.List.++ d₂) ≡⟨ DLP.length-++ x₁ ⟩
+    𝓁 x₁ + 𝓁 d₂ ≡⟨ cong (_+_ $ 𝓁 x₁) $ DLP.length-drop j' xen ⟩
+    𝓁 x₁ + (𝓁 xen ∸ j') ≡⟨ cong (_+_ $ 𝓁 x₁) $ sym xex ⟩
+    𝓁 x₁ + 𝓁 (x₂ ∷ x₃) ≡⟨ cong (_+_ $ 𝓁 x₁) refl ⟩
+    𝓁 x₁ + ℕ.suc (𝓁 x₃) ≡⟨ sym $ lenkat x₁ x₂ x₃ ⟩
+    𝓁 xen' ∎
     where
-    ⊃ = Data.List.head
-    𝓁 = Data.List.length
-    _↓_ = Data.List.drop
-
-    xen = GameData.haters gd
-    x₁ = Data.List.take (Data.Fin.toℕ j) xen
-    x₂ = record (xen ! j) {wieldedct = just $ i , t}
-    x₃ = Data.List.drop (ℕ.suc $ Data.Fin.toℕ j) xen
-    xen' = x₁ Data.List.++ x₂ ∷ x₃
-
-    dropkat : ∀ {a} → {A : Set a}
-            → (xs ys : List A)
-            → (𝓁 xs) ↓ (xs Data.List.++ ys) ≡ ys
-    dropkat [] _ = refl
-    dropkat (_ ∷ xs) ys = dropkat xs ys
-
-    xenlen = begin
-      𝓁 xen ≡⟨ cong 𝓁 $ sym $ DLP.take++drop j' xen ⟩
-      𝓁 (x₁ Data.List.++ d₂) ≡⟨ DLP.length-++ x₁ ⟩
-      𝓁 x₁ + 𝓁 d₂ ≡⟨ cong (_+_ $ 𝓁 x₁) $ DLP.length-drop j' xen ⟩
-      𝓁 x₁ + (𝓁 xen ∸ j') ≡⟨ cong (_+_ $ 𝓁 x₁) $ sym xex ⟩
-      𝓁 x₁ + 𝓁 (x₂ ∷ x₃) ≡⟨ cong (_+_ $ 𝓁 x₁) refl ⟩
-      𝓁 x₁ + ℕ.suc (𝓁 x₃) ≡⟨ sym $ lenkat x₁ x₂ x₃ ⟩
-      𝓁 xen' ∎
+    j' = Data.Fin.toℕ j
+    d₂ = Data.List.drop j' xen
+    lenkat : ∀ {a} → {A : Set a}
+           → (xs₁ : List A)
+           → (x : A)
+           → (xs₂ : List A)
+           → 𝓁 (xs₁ Data.List.++ x ∷ xs₂) ≡ 𝓁 xs₁ + ℕ.suc (𝓁 xs₂)
+    lenkat xs₁ x xs₂ = begin
+      𝓁 (xs₁ Data.List.++ x ∷ xs₂) ≡⟨ DLP.length-++ xs₁ ⟩
+      𝓁 xs₁ + 𝓁 (x ∷ xs₂) ≡⟨ cong (_+_ $ length xs₁) refl ⟩
+      𝓁 xs₁ + ℕ.suc (𝓁 xs₂) ∎
+    xex = begin
+      𝓁 (x₂ ∷ x₃) ≡⟨ refl ⟩
+      ℕ.suc (𝓁 $ ℕ.suc j' ↓ xen) ≡⟨ dropsuc xen j ⟩
+      𝓁 (j' ↓ xen) ≡⟨ DLP.length-drop j' xen ⟩
+      𝓁 xen ∸ j' ∎
       where
-      j' = Data.Fin.toℕ j
-      d₂ = Data.List.drop j' xen
-      lenkat : ∀ {a} → {A : Set a}
-             → (xs₁ : List A)
-             → (x : A)
-             → (xs₂ : List A)
-             → 𝓁 (xs₁ Data.List.++ x ∷ xs₂) ≡ 𝓁 xs₁ + ℕ.suc (𝓁 xs₂)
-      lenkat xs₁ x xs₂ = begin
-        𝓁 (xs₁ Data.List.++ x ∷ xs₂) ≡⟨ DLP.length-++ xs₁ ⟩
-        𝓁 xs₁ + 𝓁 (x ∷ xs₂) ≡⟨ cong (_+_ $ length xs₁) refl ⟩
-        𝓁 xs₁ + ℕ.suc (𝓁 xs₂) ∎
-      xex = begin
-        𝓁 (x₂ ∷ x₃) ≡⟨ refl ⟩
-        ℕ.suc (𝓁 $ ℕ.suc j' ↓ xen) ≡⟨ dropsuc xen j ⟩
-        𝓁 (j' ↓ xen) ≡⟨ DLP.length-drop j' xen ⟩
-        𝓁 xen ∸ j' ∎
-        where
-        dropsuc : ∀ {a} → {A : Set a}
-                → (x : List A)
-                → (n : Fin $ length x)
-                → let n' = Data.Fin.toℕ n in
-                  ℕ.suc (𝓁 $ ℕ.suc n' ↓ x) ≡ 𝓁 (n' ↓ x)
-        dropsuc (x ∷ xs) (Fin.zero) = refl
-        dropsuc (x ∷ xs) (Fin.suc n) = dropsuc xs n
+      dropsuc : ∀ {a} → {A : Set a}
+              → (x : List A)
+              → (n : Fin $ length x)
+              → let n' = Data.Fin.toℕ n in
+                ℕ.suc (𝓁 $ ℕ.suc n' ↓ x) ≡ 𝓁 (n' ↓ x)
+      dropsuc (x ∷ xs) (Fin.zero) = refl
+      dropsuc (x ∷ xs) (Fin.suc n) = dropsuc xs n
 
-    xent : ⊃ ((𝓁 x₁) ↓ xen') ≡ just (xen' ! mink j xenlen)
-    xent = sym $ dropind xen' (mink j xenlen) (𝓁 x₁) xil
+  xent : ⊃ ((𝓁 x₁) ↓ xen') ≡ just (xen' ! mink j xenlen)
+  xent = sym $ dropind xen' (mink j xenlen) (𝓁 x₁) xil
+    where
+    toℕ = Data.Fin.toℕ
+    dropind : ∀ {a} → {A : Set a}
+            → (xs : List A)
+            → (n : Fin $ 𝓁 xs)
+            → (m : ℕ)
+            → Data.Fin.toℕ n ≡ m
+            → just (xs ! n) ≡ Data.List.head (m ↓ xs)
+    dropind (x ∷ xs) Fin.zero (ℕ.zero) refl = refl
+    dropind (x ∷ xs) (Fin.suc n) (ℕ.suc m) refl = ret
       where
-      toℕ = Data.Fin.toℕ
-      dropind : ∀ {a} → {A : Set a}
-              → (xs : List A)
-              → (n : Fin $ 𝓁 xs)
-              → (m : ℕ)
-              → Data.Fin.toℕ n ≡ m
-              → just (xs ! n) ≡ Data.List.head (m ↓ xs)
-      dropind (x ∷ xs) Fin.zero (ℕ.zero) refl = refl
-      dropind (x ∷ xs) (Fin.suc n) (ℕ.suc m) refl = ret
+      ret = dropind xs n m refl
+    teikgek : ∀ {a} → {A : Set a}
+            → (xs : List A)
+            → (n : ℕ)
+            → n Data.Nat.≤ 𝓁 xs
+            → 𝓁 (Data.List.take n xs) ≡ n
+    teikgek _ 0 _ = refl
+    teikgek (x ∷ xs) (ℕ.suc n) (Data.Nat.s≤s q) = ret
+      where
+      ret = cong ℕ.suc $ teikgek xs n q
+    mindut : (m n : ℕ)
+           → (o : Fin m)
+           → (x : m ≡ n)
+           → toℕ (mink o x) ≡ toℕ o
+    mindut m n o refl = refl
+    lisfis : ∀ {a} → {A : Set a}
+           → (xs : List A)
+           → (n : Fin $ 𝓁 xs)
+           → Σ ℕ $ _≡_ (𝓁 xs) ∘ ℕ.suc
+    lisfis (_ ∷ xs) j = 𝓁 xs , refl
+    _≤_ = Data.Nat._≤_
+    tuik : toℕ j ≤ 𝓁 xen
+    tuik = subst (_≤_ _) kix $ DNP.≤-step slex
+      where
+      d = proj₂ $ lisfis xen j
+      j' = DFP.≤fromℕ $ mink j $ proj₂ $ lisfis xen j
+      slex : toℕ j ≤ _
+      slex = subst (flip _≤_ _) (mindut _ _ j d) j'
+      kix : ℕ.suc _ ≡ 𝓁 xen
+      kix = tif _ _ $ sym $ proj₂ $ lisfis xen j
         where
-        ret = dropind xs n m refl
-      teikgek : ∀ {a} → {A : Set a}
-              → (xs : List A)
-              → (n : ℕ)
-              → n Data.Nat.≤ 𝓁 xs
-              → 𝓁 (Data.List.take n xs) ≡ n
-      teikgek _ 0 _ = refl
-      teikgek (x ∷ xs) (ℕ.suc n) (Data.Nat.s≤s q) = ret
-        where
-        ret = cong ℕ.suc $ teikgek xs n q
-      mindut : (m n : ℕ)
-             → (o : Fin m)
-             → (x : m ≡ n)
-             → toℕ (mink o x) ≡ toℕ o
-      mindut m n o refl = refl
-      lisfis : ∀ {a} → {A : Set a}
-             → (xs : List A)
-             → (n : Fin $ 𝓁 xs)
-             → Σ ℕ $ _≡_ (𝓁 xs) ∘ ℕ.suc
-      lisfis (_ ∷ xs) j = 𝓁 xs , refl
-      _≤_ = Data.Nat._≤_
-      tuik : toℕ j ≤ 𝓁 xen
-      tuik = subst (_≤_ _) kix $ DNP.≤-step slex
-        where
-        d = proj₂ $ lisfis xen j
-        j' = DFP.≤fromℕ $ mink j $ proj₂ $ lisfis xen j
-        slex : toℕ j ≤ _
-        slex = subst (flip _≤_ _) (mindut _ _ j d) j'
-        kix : ℕ.suc _ ≡ 𝓁 xen
-        kix = tif _ _ $ sym $ proj₂ $ lisfis xen j
+        tif : (m n : ℕ)
+            → m ≡ n
+            → toℕ (Data.Fin.fromℕ m) ≡ n
+        tif ℕ.zero ℕ.zero refl = refl
+        tif (ℕ.suc m) (ℕ.suc n) refl = ret
           where
-          tif : (m n : ℕ)
-              → m ≡ n
-              → toℕ (Data.Fin.fromℕ m) ≡ n
-          tif ℕ.zero ℕ.zero refl = refl
-          tif (ℕ.suc m) (ℕ.suc n) refl = ret
-            where
-            ret = cong ℕ.suc $ tif m n refl
-      xil = begin
-        toℕ (mink j xenlen) ≡⟨ mindut _ _ j xenlen ⟩
-        toℕ j ≡⟨ sym $ teikgek xen (toℕ j) tuik ⟩
-        𝓁 x₁ ∎
+          ret = cong ℕ.suc $ tif m n refl
+    xil = begin
+      toℕ (mink j xenlen) ≡⟨ mindut _ _ j xenlen ⟩
+      toℕ j ≡⟨ sym $ teikgek xen (toℕ j) tuik ⟩
+      𝓁 x₁ ∎
 
-    xendj : let iv = Character.inventory in
-            𝓁 (iv $ xen ! j) ≡ 𝓁 (iv $ xen' ! mink j xenlen)
-    xendj = cong length $ DMP.just-injective x₂d
-      where
-      iv = Character.inventory
-      x₂d : just (iv $ xen ! j) ≡ just (iv $ xen' ! mink j xenlen)
-      x₂d = begin
-        just (iv $ xen ! j) ≡⟨ refl ⟩
-        just (iv x₂) ≡⟨ refl ⟩
-        mapₘ iv (⊃ $ x₂ ∷ x₃) ≡⟨ cong (mapₘ iv ∘ ⊃) $ dropsim ⟩
-        mapₘ iv (⊃ $ (𝓁 x₁) ↓ xen') ≡⟨ cong (mapₘ iv) xent ⟩
-        just (iv $ xen' ! mink j xenlen) ∎
-        where
-        toℕ = Data.Fin.toℕ
-        mapₘ = Data.Maybe.map
-        dropsim = sym $ dropkat x₁ $ x₂ ∷ x₃
-
-    tivos = cong u₁ xijre
+  xendj : let iv = Character.inventory in
+          𝓁 (iv $ xen ! j) ≡ 𝓁 (iv $ xen' ! mink j xenlen)
+  xendj = cong length $ DMP.just-injective x₂d
+    where
+    iv = Character.inventory
+    x₂d : just (iv $ xen ! j) ≡ just (iv $ xen' ! mink j xenlen)
+    x₂d = begin
+      just (iv $ xen ! j) ≡⟨ refl ⟩
+      just (iv x₂) ≡⟨ refl ⟩
+      mapₘ iv (⊃ $ x₂ ∷ x₃) ≡⟨ cong (mapₘ iv ∘ ⊃) $ dropsim ⟩
+      mapₘ iv (⊃ $ (𝓁 x₁) ↓ xen') ≡⟨ cong (mapₘ iv) xent ⟩
+      just (iv $ xen' ! mink j xenlen) ∎
       where
       toℕ = Data.Fin.toℕ
-      j' = mink j xenlen
       mapₘ = Data.Maybe.map
-      u₁ = mapₘ (toℕ ∘ proj₁) ∘ Character.wieldedct
-      xij = xen' ! mink j xenlen
-      xijre : xij ≡ x₂
-      xijre = sym $ DMP.just-injective $ begin
-        just x₂ ≡⟨ refl ⟩
-        ⊃ (x₂ ∷ x₃) ≡⟨ cong ⊃ (sym $ dropkat x₁ $ x₂ ∷ x₃) ⟩
-        ⊃ ((𝓁 x₁) ↓ xen') ≡⟨ xent ⟩
-        just (xen' ! mink j xenlen) ≡⟨ refl ⟩
-        just xij ∎
+      dropsim = sym $ dropkat x₁ $ x₂ ∷ x₃
 
-  z₁ = proj₁ z
-  z₂ = proj₁ $ proj₂ z
-  p' = mink (GameData.player' gd) z₂
-  gd' = record gd {haters = z₁; player' = p'}
+  tivos = cong u₁ xijre
+    where
+    toℕ = Data.Fin.toℕ
+    j' = mink j xenlen
+    mapₘ = Data.Maybe.map
+    u₁ = mapₘ (toℕ ∘ proj₁) ∘ Character.wieldedct
+    xij = xen' ! mink j xenlen
+    xijre : xij ≡ x₂
+    xijre = sym $ DMP.just-injective $ begin
+      just x₂ ≡⟨ refl ⟩
+      ⊃ (x₂ ∷ x₃) ≡⟨ cong ⊃ (sym $ dropkat x₁ $ x₂ ∷ x₃) ⟩
+      ⊃ ((𝓁 x₁) ↓ xen') ≡⟨ xent ⟩
+      just (xen' ! mink j xenlen) ≡⟨ refl ⟩
+      just xij ∎
+
+  p' = mink (GameData.player' gd) xenlen
+  gd' = record gd {haters = xen'; player' = p'}
 \end{code}
 
 \chapter{le mu'oi glibau.\ high-level .glibau.}
