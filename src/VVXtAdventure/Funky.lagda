@@ -199,7 +199,7 @@ wieldPawn : (q : GameData)
           → (_≡_ true $ is-just $ Item.weapwn $ _!_ (iv $ x q ! j) i)
           → Σ GameData $ λ q'
             → Σ (𝓁 (x q) ≡ 𝓁 (x q')) $ λ ℓ
-            → Σ (𝓁 (iv $ x q ! j) ≡ 𝓁 (iv $ x q' ! mink j ℓ)) $ λ ℓ₂
+            → Σ (iv (x q ! j) ≡ iv (x q' ! mink j ℓ)) $ λ ℓ₂
             → (_≡_
                 (just $ toℕ i)
                 (Data.Maybe.map
@@ -309,8 +309,8 @@ wieldPawn gd j i t = gd' , xenlen , xendj , sym tivos
     subkon = subst (_≡_ _) $ cong (⊃ ∘ flip _↓_ xen') xil
 
   xendj : let iv = Character.inventory in
-          𝓁 (iv $ xen ! j) ≡ 𝓁 (iv $ xen' ! mink j xenlen)
-  xendj = cong length $ DMP.just-injective x₂d
+          iv (xen ! j) ≡ iv (xen' ! mink j xenlen)
+  xendj = DMP.just-injective x₂d
     where
     iv = Character.inventory
     x₂d : just (iv $ xen ! j) ≡ just (iv $ xen' ! mink j xenlen)
