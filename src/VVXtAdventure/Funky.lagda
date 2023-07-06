@@ -296,15 +296,15 @@ wieldPawn gd j i t = gd' , xenlen , xendj , sym tivos
       slex : toℕ j ≤ _
       slex = subst (flip _≤_ _) (mindut _ _ j d) j'
       kix : ℕ.suc _ ≡ 𝓁 xen
-      kix = tif _ _ $ sym $ proj₂ $ lisfis xen j
+      kix = tif $ sym $ proj₂ $ lisfis xen j
         where
-        tif : (m n : ℕ)
+        tif : {m n : ℕ}
             → m ≡ n
             → toℕ (Data.Fin.fromℕ m) ≡ n
-        tif ℕ.zero ℕ.zero refl = refl
-        tif (ℕ.suc m) (ℕ.suc n) refl = ret
+        tif {ℕ.zero} = id
+        tif {ℕ.suc m} {ℕ.suc n} refl = ret
           where
-          ret = cong ℕ.suc $ tif m n refl
+          ret = cong ℕ.suc $ tif {m} {n} refl
     xil = begin
       toℕ (mink j xenlen) ≡⟨ mindut _ _ j xenlen ⟩
       toℕ j ≡⟨ sym $ teiklendus xen (toℕ j) tuik ⟩
