@@ -75,6 +75,7 @@ open import Data.Fin
   using (
     Fin;
     suc;
+    toℕ;
     zero
   )
 open import Data.Nat
@@ -200,9 +201,9 @@ wieldPawn : (q : GameData)
             → Σ (𝓁 (x q) ≡ 𝓁 (x q')) $ λ ℓ
             → Σ (𝓁 (iv $ x q ! j) ≡ 𝓁 (iv $ x q' ! mink j ℓ)) $ λ ℓ₂
             → (_≡_
-                (just $ Data.Fin.toℕ i)
+                (just $ toℕ i)
                 (Data.Maybe.map
-                  (Data.Fin.toℕ ∘ proj₁)
+                  (toℕ ∘ proj₁)
                   (Character.wieldedct $ x q' ! mink j ℓ)))
 wieldPawn gd j i t = gd' , xenlen , xendj , sym tivos
   where
@@ -211,9 +212,9 @@ wieldPawn gd j i t = gd' , xenlen , xendj , sym tivos
   _↓_ = Data.List.drop
 
   xen = GameData.haters gd
-  x₁ = Data.List.take (Data.Fin.toℕ j) xen
+  x₁ = Data.List.take (toℕ j) xen
   x₂ = record (xen ! j) {wieldedct = just $ i , t}
-  x₃ = (ℕ.suc $ Data.Fin.toℕ j) ↓ xen
+  x₃ = (ℕ.suc $ toℕ j) ↓ xen
   xen' = x₁ Data.List.++ x₂ ∷ x₃
 
   dropkat : ∀ {a} → {A : Set a}
@@ -231,7 +232,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , sym tivos
     𝓁 x₁ + ℕ.suc (𝓁 x₃) ≡⟨ sym $ lenkat x₁ x₂ x₃ ⟩
     𝓁 xen' ∎
     where
-    j' = Data.Fin.toℕ j
+    j' = toℕ j
     d₂ = j' ↓ xen
     lenkat : ∀ {a} → {A : Set a}
            → (xs₁ : List A)
@@ -251,7 +252,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , sym tivos
       dropsuc : ∀ {a} → {A : Set a}
               → (x : List A)
               → (n : Fin $ 𝓁 x)
-              → let n' = Data.Fin.toℕ n in
+              → let n' = toℕ n in
                 ℕ.suc (𝓁 $ ℕ.suc n' ↓ x) ≡ 𝓁 (n' ↓ x)
       dropsuc (x ∷ xs) (Fin.zero) = refl
       dropsuc (x ∷ xs) (Fin.suc n) = dropsuc xs n
@@ -259,12 +260,11 @@ wieldPawn gd j i t = gd' , xenlen , xendj , sym tivos
   xent : ⊃ ((𝓁 x₁) ↓ xen') ≡ just (xen' ! mink j xenlen)
   xent = sym $ dropind xen' (mink j xenlen) (𝓁 x₁) xil
     where
-    toℕ = Data.Fin.toℕ
     dropind : ∀ {a} → {A : Set a}
             → (xs : List A)
             → (n : Fin $ 𝓁 xs)
             → (m : ℕ)
-            → Data.Fin.toℕ n ≡ m
+            → toℕ n ≡ m
             → just (xs ! n) ≡ ⊃ (m ↓ xs)
     dropind (x ∷ xs) Fin.zero (ℕ.zero) refl = refl
     dropind (x ∷ xs) (Fin.suc n) (ℕ.suc m) refl = ret
@@ -325,13 +325,11 @@ wieldPawn gd j i t = gd' , xenlen , xendj , sym tivos
       mapₘ iv (⊃ $ (𝓁 x₁) ↓ xen') ≡⟨ cong (mapₘ iv) xent ⟩
       just (iv $ xen' ! mink j xenlen) ∎
       where
-      toℕ = Data.Fin.toℕ
       mapₘ = Data.Maybe.map
       dropsim = sym $ dropkat x₁ $ x₂ ∷ x₃
 
   tivos = cong u₁ xijre
     where
-    toℕ = Data.Fin.toℕ
     j' = mink j xenlen
     mapₘ = Data.Maybe.map
     u₁ = mapₘ (toℕ ∘ proj₁) ∘ Character.wieldedct
