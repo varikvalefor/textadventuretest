@@ -258,18 +258,16 @@ wieldPawn gd j i t = gd' , xenlen , xendj , sym tivos
       dropsuc (x ∷ xs) (Fin.suc n) = dropsuc xs n
 
   xent : ⊃ ((𝓁 x₁) ↓ xen') ≡ just (xen' ! mink j xenlen)
-  xent = sym $ dropind xen' (mink j xenlen) (𝓁 x₁) xil
+  xent = sym $ subkon $ dropind xen' $ mink j xenlen
     where
     dropind : ∀ {a} → {A : Set a}
             → (xs : List A)
             → (n : Fin $ 𝓁 xs)
-            → (m : ℕ)
-            → toℕ n ≡ m
-            → just (xs ! n) ≡ ⊃ (m ↓ xs)
-    dropind (x ∷ xs) Fin.zero (ℕ.zero) refl = refl
-    dropind (x ∷ xs) (Fin.suc n) (ℕ.suc m) refl = ret
+            → just (xs ! n) ≡ ⊃ ((toℕ n) ↓ xs)
+    dropind (x ∷ xs) Fin.zero = refl
+    dropind (x ∷ xs) (Fin.suc n) = ret
       where
-      ret = dropind xs n m refl
+      ret = dropind xs n
     teiklendus : ∀ {a} → {A : Set a}
             → (xs : List A)
             → (n : ℕ)
@@ -311,6 +309,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , sym tivos
       toℕ (mink j xenlen) ≡⟨ mindut _ _ j xenlen ⟩
       toℕ j ≡⟨ sym $ teiklendus xen (toℕ j) tuik ⟩
       𝓁 x₁ ∎
+    subkon = subst (_≡_ _) $ cong (⊃ ∘ flip _↓_ xen') xil
 
   xendj : let iv = Character.inventory in
           𝓁 (iv $ xen ! j) ≡ 𝓁 (iv $ xen' ! mink j xenlen)
