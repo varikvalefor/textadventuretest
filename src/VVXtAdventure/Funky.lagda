@@ -313,7 +313,6 @@ wieldPawn gd j i t = gd' , xenlen , xendj , sym tivos
   xendj = DMP.just-injective x₂d
     where
     iv = Character.inventory
-    x₂d : just (iv $ xen ! j) ≡ just (iv $ xen' ! mink j xenlen)
     x₂d = begin
       just (iv $ xen ! j) ≡⟨ refl ⟩
       just (iv x₂) ≡⟨ refl ⟩
