@@ -334,7 +334,6 @@ wieldPawn gd j i t = gd' , proj₂ z
               tif (ℕ.suc m) (ℕ.suc n) refl = ret
                 where
                 ret = cong ℕ.suc $ tif m n refl
-          xil : toℕ (mink j xenlen) ≡ 𝓁 x
           xil = begin
             toℕ (mink j xenlen) ≡⟨ mindut _ _ j xenlen ⟩
             toℕ j ≡⟨ sym $ teikgek xen (toℕ j) tuik ⟩
