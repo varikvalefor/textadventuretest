@@ -265,9 +265,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , sym tivos
             → (n : Fin $ 𝓁 xs)
             → just (xs ! n) ≡ ⊃ ((toℕ n) ↓ xs)
     dropind (x ∷ xs) Fin.zero = refl
-    dropind (x ∷ xs) (Fin.suc n) = ret
-      where
-      ret = dropind xs n
+    dropind (x ∷ xs) (Fin.suc n) = dropind xs n
     teiklendus : ∀ {a} → {A : Set a}
             → (xs : List A)
             → (n : ℕ)
