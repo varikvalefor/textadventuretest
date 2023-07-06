@@ -275,11 +275,11 @@ wieldPawn gd j i t = gd' , xenlen , xendj , sym tivos
     teiklendus (x ∷ xs) (ℕ.suc n) (Data.Nat.s≤s q) = ret
       where
       ret = cong ℕ.suc $ teiklendus xs n q
-    mindut : (m n : ℕ)
+    mindut : {m n : ℕ}
            → (o : Fin m)
            → (x : m ≡ n)
            → toℕ (mink o x) ≡ toℕ o
-    mindut m n o refl = refl
+    mindut o refl = refl
     lisfis : ∀ {a} → {A : Set a}
            → (xs : List A)
            → (n : Fin $ 𝓁 xs)
@@ -292,7 +292,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , sym tivos
       d = proj₂ $ lisfis xen j
       j' = DFP.≤fromℕ $ mink j $ proj₂ $ lisfis xen j
       slex : toℕ j ≤ _
-      slex = subst (flip _≤_ _) (mindut _ _ j d) j'
+      slex = subst (flip _≤_ _) (mindut j d) j'
       kix : ℕ.suc _ ≡ 𝓁 xen
       kix = tif $ sym $ proj₂ $ lisfis xen j
         where
@@ -304,7 +304,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , sym tivos
           where
           ret = cong ℕ.suc $ tif {m} {n} refl
     xil = begin
-      toℕ (mink j xenlen) ≡⟨ mindut _ _ j xenlen ⟩
+      toℕ (mink j xenlen) ≡⟨ mindut j xenlen ⟩
       toℕ j ≡⟨ sym $ teiklendus xen (toℕ j) tuik ⟩
       𝓁 x₁ ∎
     subkon = subst (_≡_ _) $ cong (⊃ ∘ flip _↓_ xen') xil
