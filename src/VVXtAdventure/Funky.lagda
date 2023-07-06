@@ -270,15 +270,15 @@ wieldPawn gd j i t = gd' , xenlen , xendj , sym tivos
     dropind (x ∷ xs) (Fin.suc n) (ℕ.suc m) refl = ret
       where
       ret = dropind xs n m refl
-    teikgek : ∀ {a} → {A : Set a}
+    teiklendus : ∀ {a} → {A : Set a}
             → (xs : List A)
             → (n : ℕ)
             → n Data.Nat.≤ 𝓁 xs
             → 𝓁 (Data.List.take n xs) ≡ n
-    teikgek _ 0 _ = refl
-    teikgek (x ∷ xs) (ℕ.suc n) (Data.Nat.s≤s q) = ret
+    teiklendus _ 0 _ = refl
+    teiklendus (x ∷ xs) (ℕ.suc n) (Data.Nat.s≤s q) = ret
       where
-      ret = cong ℕ.suc $ teikgek xs n q
+      ret = cong ℕ.suc $ teiklendus xs n q
     mindut : (m n : ℕ)
            → (o : Fin m)
            → (x : m ≡ n)
@@ -309,7 +309,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , sym tivos
           ret = cong ℕ.suc $ tif m n refl
     xil = begin
       toℕ (mink j xenlen) ≡⟨ mindut _ _ j xenlen ⟩
-      toℕ j ≡⟨ sym $ teikgek xen (toℕ j) tuik ⟩
+      toℕ j ≡⟨ sym $ teiklendus xen (toℕ j) tuik ⟩
       𝓁 x₁ ∎
 
   xendj : let iv = Character.inventory in
