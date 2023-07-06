@@ -280,20 +280,20 @@ wieldPawn gd j i t = gd' , xenlen , xendj , sym tivos
            → (x : m ≡ n)
            → toℕ (mink o x) ≡ toℕ o
     mindut o refl = refl
-    lisfis : ∀ {a} → {A : Set a}
-           → (xs : List A)
-           → (n : Fin $ 𝓁 xs)
-           → Σ ℕ $ _≡_ (𝓁 xs) ∘ ℕ.suc
-    lisfis (_ ∷ xs) j = 𝓁 xs , refl
+    lisuc : ∀ {a} → {A : Set a}
+          → (xs : List A)
+          → (n : Fin $ 𝓁 xs)
+          → Σ ℕ $ _≡_ (𝓁 xs) ∘ ℕ.suc
+    lisuc (_ ∷ xs) j = 𝓁 xs , refl
     _≤_ = Data.Nat._≤_
     tuik : toℕ j ≤ 𝓁 xen
     tuik = subst (_≤_ _) kix $ DNP.≤-step $ subst (flip _≤_ _) mijd j'
       where
       _≥_ = flip _≤_
-      j' = DFP.≤fromℕ $ mink j $ proj₂ $ lisfis xen j
-      mijd = mindut j $ proj₂ $ lisfis xen j
+      j' = DFP.≤fromℕ $ mink j $ proj₂ $ lisuc xen j
+      mijd = mindut j $ proj₂ $ lisuc xen j
       kix : ℕ.suc (toℕ $ Data.Fin.fromℕ _) ≡ 𝓁 xen
-      kix = tif $ sym $ proj₂ $ lisfis xen j
+      kix = tif $ sym $ proj₂ $ lisuc xen j
         where
         tif : {m n : ℕ}
             → m ≡ n
