@@ -339,7 +339,7 @@ wieldPawn gd j i t = gd' , proj₂ z
             toℕ j ≡⟨ sym $ teikgek xen (toℕ j) tuik ⟩
             𝓁 x₁ ∎
     tivos = begin
-      mapₘ (λ t → mink (proj₁ t) $ sym xendj) uxij ≡⟨ komp (uxij) _ _ ⟩
+      mapₘ (λ t → mink (proj₁ t) $ sym xendj) uxij ≡⟨ komp uxij _ _ ⟩
       mapₘ (λ t → mink t $ sym xendj) (mapₘ proj₁ $ uxij) ≡⟨ xenkik ⟩
       mapₘ proj₁ (uid x₂) ≡⟨ refl ⟩
       just i ∎
