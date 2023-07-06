@@ -293,7 +293,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , sym tivos
       j' = DFP.≤fromℕ $ mink j $ proj₂ $ lisfis xen j
       slex : toℕ j ≤ _
       slex = subst (flip _≤_ _) (mindut j d) j'
-      kix : ℕ.suc _ ≡ 𝓁 xen
+      kix : ℕ.suc (toℕ $ Data.Fin.fromℕ _) ≡ 𝓁 xen
       kix = tif $ sym $ proj₂ $ lisfis xen j
         where
         tif : {m n : ℕ}
