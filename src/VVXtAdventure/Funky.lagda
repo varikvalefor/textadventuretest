@@ -261,7 +261,6 @@ wieldPawn gd j i t = gd' , proj₂ z
         dropsuc (x ∷ xs) (Fin.zero) = refl
         dropsuc (x ∷ xs) (Fin.suc n) = dropsuc xs n
     xendj : let iv = Character.inventory in
-            let 𝓁 = Data.List.length in
             𝓁 (iv $ xen ! j) ≡ 𝓁 (iv $ xen' ! mink j xenlen)
     xendj = cong length $ DMP.just-injective x₂d
       where
