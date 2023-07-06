@@ -90,6 +90,7 @@ open import Data.Bool
     if_then_else_ to if
   )
   hiding (
+    _≤_;
     _≟_
   )
 open import Data.List
@@ -115,6 +116,7 @@ open import Data.Maybe
 open import Data.String
   hiding (
     length;
+    _≤_;
     _≟_
   )
 open import Data.Product
@@ -314,13 +316,14 @@ wieldPawn gd j i t = gd' , proj₂ z
                  → (n : Fin $ 𝓁 xs)
                  → Σ ℕ $ _≡_ (𝓁 xs) ∘ ℕ.suc
           lisfis (_ ∷ xs) j = 𝓁 xs , refl
-          tuik : toℕ j Data.Nat.≤ 𝓁 xen
-          tuik = subst (Data.Nat._≤_ _) kix $ DNP.≤-step slex
+          _≤_ = Data.Nat._≤_
+          tuik : toℕ j ≤ 𝓁 xen
+          tuik = subst (_≤_ _) kix $ DNP.≤-step slex
             where
             d = proj₂ $ lisfis xen j
             j' = DFP.≤fromℕ $ mink j $ proj₂ $ lisfis xen j
-            slex : toℕ j Data.Nat.≤ _
-            slex = subst (flip Data.Nat._≤_ _) (mindut _ _ j d) j'
+            slex : toℕ j ≤ _
+            slex = subst (flip _≤_ _) (mindut _ _ j d) j'
             kix : ℕ.suc _ ≡ 𝓁 xen
             kix = tif _ _ $ sym $ proj₂ $ lisfis xen j
               where
