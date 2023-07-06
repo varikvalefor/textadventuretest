@@ -289,10 +289,9 @@ wieldPawn gd j i t = gd' , xenlen , xendj , sym tivos
     tuik : toℕ j ≤ 𝓁 xen
     tuik = subst (_≤_ _) kix $ DNP.≤-step slex
       where
-      d = proj₂ $ lisfis xen j
       j' = DFP.≤fromℕ $ mink j $ proj₂ $ lisfis xen j
       slex : toℕ j ≤ _
-      slex = subst (flip _≤_ _) (mindut j d) j'
+      slex = subst (flip _≤_ _) (mindut j $ proj₂ $ lisfis xen j) j'
       kix : ℕ.suc (toℕ $ Data.Fin.fromℕ _) ≡ 𝓁 xen
       kix = tif $ sym $ proj₂ $ lisfis xen j
         where
