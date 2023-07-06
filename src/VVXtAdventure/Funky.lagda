@@ -221,15 +221,6 @@ wieldPawn gd j i t = gd' , proj₂ z
     where
     𝓁 = Data.List.length
     xen = GameData.haters gd
-    lenkat : ∀ {a} → {A : Set a}
-           → (xs₁ : List A)
-           → (x : A)
-           → (xs₂ : List A)
-           → 𝓁 (xs₁ Data.List.++ x ∷ xs₂) ≡ 𝓁 xs₁ + ℕ.suc (𝓁 xs₂)
-    lenkat xs₁ x xs₂ = begin
-      𝓁 (xs₁ Data.List.++ x ∷ xs₂) ≡⟨ DLP.length-++ xs₁ ⟩
-      𝓁 xs₁ + 𝓁 (x ∷ xs₂) ≡⟨ cong (_+_ $ length xs₁) refl ⟩
-      𝓁 xs₁ + ℕ.suc (𝓁 xs₂) ∎
     x₁ = Data.List.take (Data.Fin.toℕ j) xen
     x₂ = record (xen ! j) {wieldedct = just $ i , t}
     x₃ = Data.List.drop (ℕ.suc $ Data.Fin.toℕ j) xen
@@ -246,6 +237,15 @@ wieldPawn gd j i t = gd' , proj₂ z
       where
       j' = Data.Fin.toℕ j
       d₂ = Data.List.drop j' xen
+      lenkat : ∀ {a} → {A : Set a}
+             → (xs₁ : List A)
+             → (x : A)
+             → (xs₂ : List A)
+             → 𝓁 (xs₁ Data.List.++ x ∷ xs₂) ≡ 𝓁 xs₁ + ℕ.suc (𝓁 xs₂)
+      lenkat xs₁ x xs₂ = begin
+        𝓁 (xs₁ Data.List.++ x ∷ xs₂) ≡⟨ DLP.length-++ xs₁ ⟩
+        𝓁 xs₁ + 𝓁 (x ∷ xs₂) ≡⟨ cong (_+_ $ length xs₁) refl ⟩
+        𝓁 xs₁ + ℕ.suc (𝓁 xs₂) ∎
       xex = begin
         𝓁 (x₂ ∷ x₃) ≡⟨ refl ⟩
         ℕ.suc (𝓁 $ ℕ.suc j' ↓ xen) ≡⟨ dropsuc xen j ⟩
@@ -260,6 +260,7 @@ wieldPawn gd j i t = gd' , proj₂ z
                   ℕ.suc (𝓁 $ ℕ.suc n' ↓ x) ≡ 𝓁 (n' ↓ x)
         dropsuc (x ∷ xs) (Fin.zero) = refl
         dropsuc (x ∷ xs) (Fin.suc n) = dropsuc xs n
+
     xendj : let iv = Character.inventory in
             𝓁 (iv $ xen ! j) ≡ 𝓁 (iv $ xen' ! mink j xenlen)
     xendj = cong length $ DMP.just-injective x₂d
@@ -333,11 +334,12 @@ wieldPawn gd j i t = gd' , proj₂ z
               tif (ℕ.suc m) (ℕ.suc n) refl = ret
                 where
                 ret = cong ℕ.suc $ tif m n refl
-          xil : toℕ (mink j xenlen) ≡ 𝓁 x₁
+          xil : toℕ (mink j xenlen) ≡ 𝓁 x
           xil = begin
             toℕ (mink j xenlen) ≡⟨ mindut _ _ j xenlen ⟩
             toℕ j ≡⟨ sym $ teikgek xen (toℕ j) tuik ⟩
             𝓁 x₁ ∎
+
     tivos = begin
       mapₘ (λ t → mink (proj₁ t) $ sym xendj) uxij ≡⟨ komp uxij _ _ ⟩
       mapₘ (λ t → mink t $ sym xendj) (mapₘ proj₁ $ uxij) ≡⟨ xenkik ⟩
