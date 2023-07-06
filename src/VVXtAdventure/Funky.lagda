@@ -184,7 +184,7 @@ movePawn gd h r = record gd {haters = proj₁ xat; player' = player''}
   haters' = updateAtₗ htrs h cninykumfa
   player'' = mink (GameData.player' gd) $ proj₁ $ proj₂ xat
 \end{code}
-
+ 
 \section{la'o zoi.\ \F{wieldPawn}\ .zoi.}
 ni'o tu'a la'o zoi.\ \F{wieldPawn} \B q \B m \B n \F{refl}\ .zoi.\ .indika lo du'u zo'e ja lo selsni be la'o zoi.\ \F{Data.List.lookup} (\F{GameData.haters} \B q) \B m .zoi.\ cu me'oi .wield.\ lo selsni be la'o zoi.\ \F{Data.List.lookup} (\F{Character.inventory} \Sym \$ \F{Data.List.lookup} (\F{GameData.haters} \B q) \B m) \B n .zoi.
 
