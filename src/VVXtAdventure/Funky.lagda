@@ -195,18 +195,27 @@ wieldPawn : (q : GameData)
           → let x = GameData.haters in
             let 𝓁 = Data.List.length in
             let iv = Character.inventory in
+            let ifinc = GameData.yourfloorisnowclean in
             (j : Fin $ 𝓁 $ x q)
           → (i : Fin $ 𝓁 $ Character.inventory $ x q ! j)
           → (_≡_ true $ is-just $ Item.weapwn $ _!_ (iv $ x q ! j) i)
           → Σ GameData $ λ q'
             → Σ (𝓁 (x q) ≡ 𝓁 (x q')) $ λ ℓ
             → Σ (iv (x q ! j) ≡ iv (x q' ! mink j ℓ)) $ λ ℓ₂
-            → (_≡_
-                (just $ toℕ i)
-                (Data.Maybe.map
-                  (toℕ ∘ proj₁)
-                  (Character.wieldedct $ x q' ! mink j ℓ)))
-wieldPawn gd j i t = gd' , xenlen , xendj , sym tivos
+            → (_×_
+                (_≡_
+                  (just $ toℕ i)
+                  (Data.Maybe.map
+                    (toℕ ∘ proj₁)
+                    (Character.wieldedct $ x q' ! mink j ℓ)))
+                (_≡_
+                  q'
+                  (record q {
+                     rooms = GameData.rooms q';
+                     haters = GameData.haters q';
+                     player' = GameData.player' q';
+                     yourfloorisnowclean = ifinc q'})))
+wieldPawn gd j i t = gd' , xenlen , xendj , sym tivos , refl
   where
   ⊃ = Data.List.head
   𝓁 = Data.List.length
