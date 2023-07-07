@@ -34,6 +34,7 @@
 \newunicodechar{≡}{\ensuremath{\mathnormal{\equiv}}}
 \newunicodechar{∧}{\ensuremath{\mathnormal{\land}}}
 \newunicodechar{≤}{\ensuremath{\mathnormal{\leq}}}
+\newunicodechar{≥}{\ensuremath{\mathnormal{\geq}}}
 \newunicodechar{ᵇ}{\ensuremath{\mathnormal{^b}}}
 \newunicodechar{ₘ}{\ensuremath{\mathnormal{_m}}}
 \newunicodechar{≟}{\ensuremath{\stackrel{?}{=}}}
