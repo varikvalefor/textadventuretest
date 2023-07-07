@@ -288,7 +288,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , sym tivos
     lisuc (_ ∷ xs) j = 𝓁 xs , refl
     _≤_ = Data.Nat._≤_
     tuik : toℕ j ≤ 𝓁 xen
-    tuik = subst (_≤_ _) kix $ DNP.≤-step $ subst (flip _≤_ _) mijd j'
+    tuik = subst (_≤_ _) kix $ DNP.≤-step $ subst (_≥_ _) mijd j'
       where
       _≥_ = flip _≤_
       j' = DFP.≤fromℕ $ mink j $ proj₂ $ lisuc xen j
