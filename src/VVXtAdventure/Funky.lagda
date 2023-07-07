@@ -253,6 +253,9 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym tivos , refl , teid
     where
     j' = toℕ j
     d₂ = j' ↓ xen
+    -- | .i le su'u filri'a lo nu pilno zoi zoi. lenkat
+    -- x₁ x₂ x₃ .zoi. ja zo'e cu krinu le nu na pilno zoi
+    -- zoi. (xs₁ xs₂ : List A) .zoi. ja zo'e
     lenkat : ∀ {a} → {A : Set a}
            → (xs₁ : List A)
            → (x : A)
