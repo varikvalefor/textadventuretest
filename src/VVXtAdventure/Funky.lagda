@@ -286,10 +286,10 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym tivos , refl , teid
     dropind (x ∷ xs) Fin.zero = refl
     dropind (x ∷ xs) (Fin.suc n) = dropind xs n
     teiklendus : ∀ {a} → {A : Set a}
-            → (xs : List A)
-            → (n : ℕ)
-            → n Data.Nat.≤ 𝓁 xs
-            → 𝓁 (Data.List.take n xs) ≡ n
+               → (xs : List A)
+               → (n : ℕ)
+               → n Data.Nat.≤ 𝓁 xs
+               → 𝓁 (Data.List.take n xs) ≡ n
     teiklendus _ 0 _ = refl
     teiklendus (x ∷ xs) (ℕ.suc n) (Data.Nat.s≤s q) = ret
       where
@@ -315,8 +315,8 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym tivos , refl , teid
       kix = tondus $ sym $ proj₂ $ lisuc xen j
         where
         tondus : {m n : ℕ}
-            → m ≡ n
-            → toℕ (Data.Fin.fromℕ m) ≡ n
+               → m ≡ n
+               → toℕ (Data.Fin.fromℕ m) ≡ n
         tondus {ℕ.zero} = id
         tondus {ℕ.suc m} {ℕ.suc n} refl = ret
           where
@@ -375,13 +375,13 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym tivos , refl , teid
     takedus (_ ∷ xs) zero = refl
     takedus (x ∷ xs) (suc n) = cong (_∷_ x) $ takedus xs n
     dropydus : ∀ {a} → {A : Set a}
-            → (a : List A)
-            → {b : List A}
-            → {x : A}
-            → (n : Fin $ 𝓁 a)
-            → let n' = toℕ n in
-              let s = ℕ.suc n' in
-              s ↓ a ≡ s ↓ cik (n' ↑ a) (x ∷ s ↓ a)
+             → (a : List A)
+             → {b : List A}
+             → {x : A}
+             → (n : Fin $ 𝓁 a)
+             → let n' = toℕ n in
+               let s = ℕ.suc n' in
+               s ↓ a ≡ s ↓ cik (n' ↑ a) (x ∷ s ↓ a)
     dropydus (_ ∷ xs) zero = refl
     dropydus (_ ∷ xs) {b} (suc n) = dropydus xs {b} n
 
