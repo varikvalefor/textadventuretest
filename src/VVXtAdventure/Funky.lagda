@@ -202,20 +202,29 @@ wieldPawn : (q : GameData)
           → Σ GameData $ λ q'
             → Σ (𝓁 (x q) ≡ 𝓁 (x q')) $ λ ℓ
             → Σ (iv (x q ! j) ≡ iv (x q' ! mink j ℓ)) $ λ ℓ₂
-            → (_×_
-                (_≡_
-                  (just $ toℕ i)
-                  (Data.Maybe.map
-                    (toℕ ∘ proj₁)
-                    (Character.wieldedct $ x q' ! mink j ℓ)))
-                (_≡_
+            → Σ ((_≡_ on GameData.rooms) q q') $ λ rud
+            → (_≡_
+                (just $ toℕ i)
+                (Data.Maybe.map
+                  (toℕ ∘ proj₁)
+                  (Character.wieldedct $ x q' ! mink j ℓ)))
+              × (_≡_
                   q'
                   (record q {
                      rooms = GameData.rooms q';
                      haters = GameData.haters q';
-                     player' = GameData.player' q';
-                     yourfloorisnowclean = ifinc q'})))
-wieldPawn gd j i t = gd' , xenlen , xendj , sym tivos , refl
+                     player' = mink (GameData.player' q) ℓ;
+                     yourfloorisnowclean = ifinc q'}))
+              × let cik = Data.List._++_ in
+                (_≡_
+                  (cik
+                    (Data.List.take (toℕ j) $ x q)
+                    (Data.List.drop (ℕ.suc $ toℕ j) $ x q))
+                  (subst (List ∘ Character) (sym rud)
+                    (cik
+                      (Data.List.take (toℕ j) $ x q')
+                      (Data.List.drop (ℕ.suc $ toℕ j) $ x q'))))
+wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym tivos , refl , teid
   where
   ⊃ = Data.List.head
   𝓁 = Data.List.length
@@ -346,6 +355,35 @@ wieldPawn gd j i t = gd' , xenlen , xendj , sym tivos , refl
       ⊃ ((𝓁 x₁) ↓ xen') ≡⟨ xent ⟩
       just (xen' ! mink j xenlen) ≡⟨ refl ⟩
       just xij ∎
+
+  teid = begin
+    cik ((toℕ j) ↑ xen) (ℕ.suc (toℕ j) ↓ xen) ≡⟨ refl ⟩
+    cik x₁ x₃ ≡⟨ cong (flip cik x₃) $ takedus xen j ⟩
+    cik x₁' x₃ ≡⟨ cong (cik x₁') $ dropydus xen {x₂ ∷ x₃} j ⟩
+    cik x₁' x₃' ∎
+    where
+    cik = Data.List._++_
+    _↑_ = Data.List.take
+    x₁' = (toℕ j) ↑ xen'
+    x₃' = (ℕ.suc $ toℕ j) ↓ xen'
+    takedus : ∀ {a} → {A : Set a}
+            → (a : List A)
+            → {b : List A}
+            → (n : Fin $ 𝓁 a)
+            → let n' = toℕ n in
+              n' ↑ a ≡ n' ↑ (flip cik b $ n' ↑ a)
+    takedus (_ ∷ xs) zero = refl
+    takedus (x ∷ xs) (suc n) = cong (_∷_ x) $ takedus xs n
+    dropydus : ∀ {a} → {A : Set a}
+            → (a : List A)
+            → {b : List A}
+            → {x : A}
+            → (n : Fin $ 𝓁 a)
+            → let n' = toℕ n in
+              let s = ℕ.suc n' in
+              s ↓ a ≡ s ↓ cik (n' ↑ a) (x ∷ s ↓ a)
+    dropydus (_ ∷ xs) zero = refl
+    dropydus (_ ∷ xs) {b} (suc n) = dropydus xs {b} n
 
   p' = mink (GameData.player' gd) xenlen
   gd' = record gd {haters = xen'; player' = p'}
