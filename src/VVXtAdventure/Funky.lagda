@@ -229,9 +229,10 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym tivos , refl , teid
   ⊃ = Data.List.head
   𝓁 = Data.List.length
   _↓_ = Data.List.drop
+  _↑_ = Data.List.take
 
   xen = GameData.haters gd
-  x₁ = Data.List.take (toℕ j) xen
+  x₁ = (toℕ j) ↑ xen
   x₂ = record (xen ! j) {wieldedct = just $ i , t}
   x₃ = (ℕ.suc $ toℕ j) ↓ xen
   xen' = x₁ Data.List.++ x₂ ∷ x₃
@@ -282,6 +283,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym tivos , refl , teid
   xent : ⊃ ((𝓁 x₁) ↓ xen') ≡ just (xen' ! mink j xenlen)
   xent = sym $ subkon $ dropind xen' $ mink j xenlen
     where
+    _≤_ = Data.Nat._≤_
     dropind : ∀ {a} → {A : Set a}
             → (xs : List A)
             → (n : Fin $ 𝓁 xs)
@@ -291,8 +293,8 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym tivos , refl , teid
     teiklendus : ∀ {a} → {A : Set a}
                → (xs : List A)
                → (n : ℕ)
-               → n Data.Nat.≤ 𝓁 xs
-               → 𝓁 (Data.List.take n xs) ≡ n
+               → n ≤ 𝓁 xs
+               → 𝓁 (n ↑ xs) ≡ n
     teiklendus _ 0 _ = refl
     teiklendus (x ∷ xs) (ℕ.suc n) (Data.Nat.s≤s q) = ret
       where
@@ -307,7 +309,6 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym tivos , refl , teid
           → (n : Fin $ 𝓁 xs)
           → Σ ℕ $ _≡_ (𝓁 xs) ∘ ℕ.suc
     lisuc (_ ∷ xs) j = 𝓁 xs , refl
-    _≤_ = Data.Nat._≤_
     tuik : toℕ j ≤ 𝓁 xen
     tuik = subst (_≤_ _) kix $ DNP.≤-step $ subst (_≥_ _) mijd j'
       where
@@ -366,7 +367,6 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym tivos , refl , teid
     cik x₁' x₃' ∎
     where
     cik = Data.List._++_
-    _↑_ = Data.List.take
     x₁' = (toℕ j) ↑ xen'
     x₃' = (ℕ.suc $ toℕ j) ↓ xen'
     takedus : ∀ {a} → {A : Set a}
