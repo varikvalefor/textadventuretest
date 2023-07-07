@@ -241,7 +241,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , sym tivos
            → 𝓁 (xs₁ Data.List.++ x ∷ xs₂) ≡ 𝓁 xs₁ + ℕ.suc (𝓁 xs₂)
     lenkat xs₁ x xs₂ = begin
       𝓁 (xs₁ Data.List.++ x ∷ xs₂) ≡⟨ DLP.length-++ xs₁ ⟩
-      𝓁 xs₁ + 𝓁 (x ∷ xs₂) ≡⟨ cong (_+_ $ length xs₁) refl ⟩
+      𝓁 xs₁ + 𝓁 (x ∷ xs₂) ≡⟨ cong (_+_ $ 𝓁 xs₁) refl ⟩
       𝓁 xs₁ + ℕ.suc (𝓁 xs₂) ∎
     xex = begin
       𝓁 (x₂ ∷ x₃) ≡⟨ refl ⟩
