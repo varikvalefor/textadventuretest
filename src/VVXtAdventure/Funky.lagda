@@ -208,22 +208,22 @@ wieldPawn : (q : GameData)
                 (Data.Maybe.map
                   (toℕ ∘ proj₁)
                   (Character.wieldedct $ x q' ! mink j ℓ)))
-              × (_≡_
-                  q'
-                  (record q {
-                     rooms = GameData.rooms q';
-                     haters = GameData.haters q';
-                     player' = mink (GameData.player' q) ℓ;
-                     yourfloorisnowclean = ifinc q'}))
-              × let cik = Data.List._++_ in
-                (_≡_
+            × (_≡_
+                q'
+                (record q {
+                   rooms = GameData.rooms q';
+                   haters = GameData.haters q';
+                   player' = mink (GameData.player' q) ℓ;
+                   yourfloorisnowclean = ifinc q'}))
+            × let cik = Data.List._++_ in
+              (_≡_
+                (cik
+                  (Data.List.take (toℕ j) $ x q)
+                  (Data.List.drop (ℕ.suc $ toℕ j) $ x q))
+                (subst (List ∘ Character) (sym rud)
                   (cik
-                    (Data.List.take (toℕ j) $ x q)
-                    (Data.List.drop (ℕ.suc $ toℕ j) $ x q))
-                  (subst (List ∘ Character) (sym rud)
-                    (cik
-                      (Data.List.take (toℕ j) $ x q')
-                      (Data.List.drop (ℕ.suc $ toℕ j) $ x q'))))
+                    (Data.List.take (toℕ j) $ x q')
+                    (Data.List.drop (ℕ.suc $ toℕ j) $ x q'))))
 wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym tivos , refl , teid
   where
   ⊃ = Data.List.head
