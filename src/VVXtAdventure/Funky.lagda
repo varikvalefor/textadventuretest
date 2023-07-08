@@ -443,7 +443,7 @@ inspect? (c ∷ f) dang = if methch (getDown f) nothing
     m = "Hey, asshole, you're using an abstraction.  \
         \Stop worrying about your damned pockets and \
         \play by the rules."
-  getDown ("POCKET" ∷ []) = getDown ("POCKETS" ∷ [])
+  getDown ("POCKET" ∷ []) = getDown $ "POCKETS" ∷ []
   getDown (n ∷ []) = gd' $ filterₗ (_≟_ n ∘ Item.name) inv
     where
     inv = Character.inventory $ GameData.player dang
@@ -576,7 +576,7 @@ travel? (x₁ ∷ xs₁) = if realShit (travel' xs₁) $ const nothing
           m = "That room is not in your immediate vicinity."
         youse = just ∘ _,_ m ∘ proj₁ ∘ q'
           where
-          q' = movePawn q (GameData.player' q)
+          q' = movePawn q $ GameData.player' q
           m = "You travel successfully."
       mathch = travelable $ methching $ zipfin $ GameData.rooms q
         where
@@ -619,7 +619,7 @@ wield? (x ∷ xs) dang = if (realShit x) (troci xs) nothing
     m = "You are giving me useless information."
   troci (y ∷ []) with flt $ mapMaybe mapti? $ Data.List.allFin _
     where
-    flt = Data.List.filter (_≟_ y ∘ cname ∘ proj₁)
+    flt = Data.List.filter $ _≟_ y ∘ cname ∘ proj₁
       where
       cname = Item.cname ∘ Data.List.lookup inv
     mapti? : _ → Maybe $ Σ (Fin _) $ _≡_ true ∘ wisyj
