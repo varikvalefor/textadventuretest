@@ -109,7 +109,13 @@ rooms = dingyliv ∷ []
                 \looking table.  Possible is that \
                 \excessive carrying causes the \
                 \degradation of the table; this thing \
-                \looks like a real piece.";
+                \looks like a real piece.\n\n\
+                \The copious amounts (of duct tape, \
+                \glue, and string) are the result of \
+                \compensation for potential damage \
+                \which may be the result of \
+                \potentially excessive partying and \
+                \whatnot.  Hackathons can be wild.";
       yourfloorisnowclean = refl
       }
       where
