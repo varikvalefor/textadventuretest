@@ -123,6 +123,7 @@ main = run $ lupe initialD
                       inspect? ∷
                       lp? ∷
                       kumski? ∷
+                      invent? ∷
                       []
           gasnu = travel? ∷
                   wield? ∷

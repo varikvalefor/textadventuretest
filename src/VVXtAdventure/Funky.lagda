@@ -470,6 +470,21 @@ inspect? (c ∷ f) dang = if methch (getDown f) nothing
 inspect? [] _ = nothing
 \end{code}
 
+\subsection{la'oi .\F{invent?}.}
+ni'o ga jonai ga je tu'a la'o zoi.\ \B m\ .zoi.\ .indika lo du'u lo kelci cu djica lo nu skicu lo selvau be ko'a goi lo me'oi .inventory.\ be lo kelci ke xarpre ja co'e gi ga je la'o zoi.\ \B s\ .zoi.\ vasru lo velski be lo ro selvau be ko'a gi ko'e goi la'o zoi.\ \F{invent?} \B \B g\ .zoi.\ du la'o zoi.\ \F{just} \Sym \$ \B s \Sym , \B g .zoi.\ gi ko'e du la'oi .\F{nothing}.
+
+\begin{code}
+invent? : Com
+invent? ("LIST" ∷ "INVENTORY" ∷ []) g = just $ desk , g
+  where
+  desk = concat $ Data.List.intersperse "\n\n" le'i-cname-je-velski
+    where
+    items = Character.inventory $ GameData.player g
+    konk = λ a → Item.cname a ++ ": " ++ Item.hlDescr a
+    le'i-cname-je-velski = Data.List.map konk items
+invent? _ _ = nothing
+\end{code}
+
 \subsection{la'oi .\F{kumski?}.}
 
 ni'o ga jonai ga je la'oi .\F{scream?}.\ djuno pe'a ru'e lo du'u tu'a la'o zoi.\ \B a .zoi.\ .indika lo du'u lo kelci cu djica lo nu tcidu ko'a goi lo velski be lo selvau be lo kumfa poi la'o zoi.\ \B b\ .zoi.\ .indika lo du'u ke'a zasti gi ga je la'o zoi.\ \B v .zoi.\ vasru lo velcki be ko'a gi ko'e goi la'o zoi.\ \F{kumski?} \B a \B b\ .zoi.\ du la'o zoi.\ \F{just} \Sym \$ \B v \Sym , \B b\ .zoi.\ gi ko'e du la'oi .\F{nothing}.
