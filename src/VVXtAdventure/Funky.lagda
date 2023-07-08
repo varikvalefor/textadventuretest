@@ -171,14 +171,30 @@ ni'o tu'a la'o zoi.\ \F{movePawn} \B q \B m \B n .zoi.\ .indika lo du'u lo selsn
 
 \begin{code}
 movePawn : (q : GameData)
-         → Fin $ Data.List.length $ GameData.haters q
-         → Fin $ Data.List.length $ GameData.rooms q
-         → GameData
-movePawn gd h r = record gd {haters = proj₁ xat; player' = player''}
+         → (i : Fin $ Data.List.length $ GameData.haters q)
+         → (j : Fin $ Data.List.length $ GameData.rooms q)
+         → let 𝓁 = Data.List.length in
+           let x = GameData.haters in
+           let k = Character.room in
+           Σ GameData $ λ q'
+           → Σ (𝓁 (GameData.rooms q) ≡ 𝓁 (GameData.rooms q')) $ λ ℓ
+           → Σ (𝓁 (x q) ≡ 𝓁 (x q')) $ λ ℓ₂
+           → let uil = ual (x q) i $ λ x → record x {room = j} in
+             (j ≡ mink (k $ x q' ! mink i ℓ₂) (sym ℓ))
+             -- | .i xu ti ronsa
+           × (_≡_
+               q'
+               record q {
+                 haters = proj₁ uil;
+                 player' = mink (GameData.player' q) $ proj₁ $ proj₂ uil
+                 })
+movePawn gd h r = gd' , refl , proj₁ (proj₂ xat) , rudus , refl
   where
   cninykumfa = λ x → record x {room = r}
   xat = ual (GameData.haters gd) h cninykumfa
   player'' = mink (GameData.player' gd) $ proj₁ $ proj₂ xat
+  rudus = sym $ cong Character.room $ proj₂ $ proj₂ xat
+  gd' = record gd {haters = proj₁ xat; player' = player''}
 \end{code}
  
 \section{la'o zoi.\ \F{wieldPawn}\ .zoi.}
@@ -557,7 +573,7 @@ travel? (x₁ ∷ xs₁) = if realShit (travel' xs₁) $ const nothing
         fail = just $ m , q
           where
           m = "That room is not in your immediate vicinity."
-        youse = just ∘ _,_ m ∘ q'
+        youse = just ∘ _,_ m ∘ proj₁ ∘ q'
           where
           q' = movePawn q (GameData.player' q)
           m = "You travel successfully."
