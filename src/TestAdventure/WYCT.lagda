@@ -96,8 +96,27 @@ rooms = dingyliv ∷ []
     name = "A DINGY LIVING ROOM";
     cname = "DINGYLIVRM";
     travis = [];
-    items = lamp ∷ colorfun ∷ []}
+    items = lamp ∷ table ∷ colorfun ∷ []}
     where
+    table : Item
+    table = record {
+      name = "FLIMSY TABLE";
+      cname = "DINGYLIVRMTBL";
+      weapwn = nothing;
+      rmDescr = ("DINGYLIVRM" , lvdsc) ∷ [];
+      dfDescr = "You see a flimsy-looking table.";
+      hlDescr = "For some reason, you remove (from \
+                \looking table.  Possible is that \
+                \excessive carrying causes the \
+                \degradation of the table; this thing \
+                \looks like a real piece.";
+      yourfloorisnowclean = refl
+      }
+      where
+      lvdsc = "A flimsy-looking table is in the middle \
+              \of the room.  Glue, duct tape, and other \
+              \go-to tools of kludgers are attached to \
+              \the table."
     lamp : Item
     lamp = record {
       name = "LAMP";
