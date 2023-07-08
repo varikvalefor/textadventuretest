@@ -176,17 +176,19 @@ movePawn : (q : GameData)
          → let 𝓁 = Data.List.length in
            let x = GameData.haters in
            let k = Character.room in
+           let gek = GameData.rooms in
            Σ GameData $ λ q'
-           → Σ (𝓁 (GameData.rooms q) ≡ 𝓁 (GameData.rooms q')) $ λ ℓ
+           → Σ (𝓁 (gek q) ≡ 𝓁 (gek q')) $ λ ℓ
            → Σ (𝓁 (x q) ≡ 𝓁 (x q')) $ λ ℓ₂
            → let uil = ual (x q) i $ λ x → record x {room = j} in
              (j ≡ mink (k $ x q' ! mink i ℓ₂) (sym ℓ))
              -- | .i xu ti ronsa
-           × (_≡_
+           × let uil₂ = proj₁ $ proj₂ uil in
+             (_≡_
                q'
                record q {
                  haters = proj₁ uil;
-                 player' = mink (GameData.player' q) $ proj₁ $ proj₂ uil
+                 player' = mink (GameData.player' q) uil₂
                  })
 movePawn gd h r = gd' , refl , proj₁ (proj₂ xat) , rudus , refl
   where
