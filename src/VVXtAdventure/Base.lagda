@@ -201,9 +201,9 @@ ni'o ga jo ko'a goi la'o zoi.\ \B a .zoi.\ ctaipe la'oi .\F{GameData} .zoi.\ gi\
 \begin{itemize}
         \item ga je ga jo la'o zoi.\ \F{GameData.epicwin} \B a .zoi.\ du la'oi .\F{true}.\ gi ga je le kelci cu jinga gi le selkei cu mulno ja co'e gi
         \item ga je la'o zoi.\ \F{GameData.rooms} \B a .zoi.\ liste lo'i velski be lo'i co'e poi cumki fa lo nu zvati ke'a gi
-        \item ga je la'o zoi.\ \F{GameData.player} \B a .zoi.\ velski lo kelci ke xarpre ja co'e po ko'a gi
-        \item la'o zoi.\ \F{GameData.haters} \B a .zoi.\ liste lo'i sinxa be lo'i xarpre ja co'e poi ke'a na du lo kelci ke xarpre ja co'e
-\end{itemize}
+        \item ga je la'o zoi.\ \F{GameData.haters} \B a .zoi.\ liste lo'i sinxa be lo'i xarpre ja co'e po ko'a gi
+        \item la'o zoi.\ \F{Data.List.lookup} (\F{GameData.xebni} \B a) \Sym \$ \F{GameData.player} \B a .zoi.\ velski lo kelci ke xarpre ja co'e po ko'a gi
+        \end{itemize}
 
 .i la .varik.\ cu na jinvi le du'u sarcu fa lo nu ciksi la'o zoi.\ \F{GameData.yourfloorisnowclean}\ .zoi.\ ja la'o zoi.\ \F{GameData.travis}\ .zoi.\ bau la .lojban.
 
@@ -213,9 +213,10 @@ record GameData : Set
   field
     epicwin : Bool
     rooms : List Room
-    player : Character rooms
     haters : List $ Character rooms
+    player' : Fin $ Data.List.length haters
     yourfloorisnowclean : nu,iork $ Data.List.map Room.cname rooms
+  player = Data.List.lookup haters player'
 \end{code}
 
 \section{le sampu}
