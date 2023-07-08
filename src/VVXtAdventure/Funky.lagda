@@ -190,8 +190,7 @@ movePawn : (q : GameData)
                  })
 movePawn gd h r = gd' , refl , proj₁ (proj₂ xat) , rudus , refl
   where
-  cninykumfa = λ x → record x {room = r}
-  xat = ual (GameData.haters gd) h cninykumfa
+  xat = ual (GameData.haters gd) h $ λ x → record x {room = r}
   player'' = mink (GameData.player' gd) $ proj₁ $ proj₂ xat
   rudus = sym $ cong Character.room $ proj₂ $ proj₂ xat
   gd' = record gd {haters = proj₁ xat; player' = player''}
