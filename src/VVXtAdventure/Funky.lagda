@@ -502,7 +502,7 @@ takePawn q m n = q' , dus , dis , nyfin
     epicwin = GameData.epicwin q;
     rooms = k';
     haters = proj₁ x'';
-    yourfloorisnowclean = bricon nu,iork kac kec {!!} iofink;
+    yourfloorisnowclean = subst nu,iork {!!} iofink;
     player' = mink (GameData.player' q) $ proj₁ $ proj₂ x''
     }
     where
@@ -510,13 +510,6 @@ takePawn q m n = q' , dus , dis , nyfin
     kac = Data.List.map Room.cname $ GameData.rooms q
     kec = Data.List.map Room.cname k'
     iofink = GameData.yourfloorisnowclean q
-    bricon : ∀ {a p} → {A : Set a}
-           → (P : Pred (List A) p)
-           → (l l' : List A)
-           → l ≡ l'
-           → P l
-           → P l'
-    bricon P l l' refl = id
   dus = proj₁ $ proj₂ k''
   dis = proj₁ $ proj₂ x''
   nyfin = f (inv lb) (inv lb') sl Item.cname $ cong inv $ proj₂ $ proj₂ x''
