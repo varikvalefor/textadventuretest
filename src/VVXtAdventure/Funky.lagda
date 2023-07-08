@@ -438,13 +438,7 @@ inspect? (c ∷ f) dang = if methch (getDown f) nothing
   where
   methch = c ≡ᵇ "INSPECT"
   getDown : List String → COut
-  getDown ("POCKETS" ∷ []) = just $ m , dang
-    where
-    m = "Hey, asshole, you're using an abstraction.  \
-        \Stop worrying about your damned pockets and \
-        \play by the rules."
-  getDown ("POCKET" ∷ []) = getDown $ "POCKETS" ∷ []
-  getDown (n ∷ []) = gd' $ filterₗ (_≟_ n ∘ Item.name) inv
+  getDown (n ∷ []) = gd' $ filterₗ (_≟_ n ∘ Item.cname) inv
     where
     inv = Character.inventory $ GameData.player dang
     gd' : List Item → COut
