@@ -494,7 +494,7 @@ kumski? : Com
 kumski? m g = if mapti (just $ vijac , g) nothing
   where
   mapti = Data.List.take 3 m ≡ᵇ ("LOOK" ∷ "AROUND" ∷ "YOU" ∷ [])
-  kumfa = Data.List.lookup (GameData.rooms g) kumfid
+  kumfa = GameData.rooms g ! kumfid
     where
     kumfid = Character.room $ GameData.player g
   -- | ni'o zo .vijac. cmavlaka'i lu velski ja canlu li'u
@@ -505,7 +505,7 @@ kumski? m g = if mapti (just $ vijac , g) nothing
     concatₛ = Data.String.concat
     mapₗ = Data.List.map
     velski : Item → String
-    velski z with Data.List.filter methch $ Item.rmDescr z
+    velski z with filterₗ methch $ Item.rmDescr z
       where
       methch = λ a → proj₁ a ≟ Room.cname kumfa
     ... | [] = Item.cname z ++ ": " ++ Item.dfDescr z
@@ -590,13 +590,13 @@ travel? (x₁ ∷ xs₁) = if realShit (travel' xs₁) $ const nothing
       mathch = travelable $ methching $ zipfin $ GameData.rooms q
         where
         zipfin = λ l → Data.List.zip (Data.List.allFin $ length l) l
-        methching = Data.List.filter $ _≟_ x ∘ Room.cname ∘ proj₂
+        methching = filterₗ $ _≟_ x ∘ Room.cname ∘ proj₂
         travelable : List $ F × Room → String ⊎ List F
         travelable [] = inj₁ m
           where
           m = "Did you take your pills this morning?  \
               \I don't think that that room exists."
-        travelable (x ∷ xs) = inj₂ $ pj1s $ Data.List.filter tr $ x ∷ xs
+        travelable (x ∷ xs) = inj₂ $ pj1s $ filterₗ tr $ x ∷ xs
           where
           pj1s = Data.List.map proj₁
           cnq = λ a b → Room.cname (proj₂ a) ≟ b
@@ -628,7 +628,7 @@ wield? (x ∷ xs) dang = if (realShit x) (troci xs) nothing
     m = "You are giving me useless information."
   troci (y ∷ []) with flt $ mapMaybe mapti? $ Data.List.allFin _
     where
-    flt = Data.List.filter $ _≟_ y ∘ cname ∘ proj₁
+    flt = filterₗ $ _≟_ y ∘ cname ∘ proj₁
       where
       cname = Item.cname ∘ Data.List.lookup inv
     mapti? : _ → Maybe $ Σ (Fin _) $ _≡_ true ∘ wisyj
