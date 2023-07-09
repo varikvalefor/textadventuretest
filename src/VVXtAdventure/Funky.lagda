@@ -167,7 +167,7 @@ open ≡-Reasoning
 \chapter{le mu'oi glibau.\ low-level .glibau.}
 
 \section{la'o zoi.\ \F{movePawn} .zoi.}
-ni'o tu'a la'o zoi.\ \F{movePawn} \B q \B m \B n .zoi.\ .indika lo du'u lo selsni be la'o zoi.\ \F{Data.List.lookup} (\F{GameData.haters} \B q) \B h .zoi.\ cu zvati ko'a goi lo selsni be la'o zoi.\ \F{Data.List.lookup} (\F{GameData.rooms} \B q) \B n .zoi.
+ni'o tu'a la'o zoi.\ \F{movePawn} \B q \B m \B n .zoi.\ .indika lo du'u lo selsni be la'o zoi.\ \F{GameData.haters} \B q \Sym ! \B h .zoi.\ cu zvati ko'a goi lo selsni be la'o zoi.\ \F{GameData.rooms} \B q) \Sym ! \B n .zoi.
 
 \begin{code}
 movePawn : (q : GameData)
@@ -199,7 +199,7 @@ movePawn gd h r = gd' , refl , proj₁ (proj₂ xat) , rudus , refl
 \end{code}
  
 \section{la'o zoi.\ \F{wieldPawn}\ .zoi.}
-ni'o tu'a la'o zoi.\ \F{wieldPawn} \B q \B m \B n \F{refl}\ .zoi.\ .indika lo du'u zo'e ja lo selsni be la'o zoi.\ \F{Data.List.lookup} (\F{GameData.haters} \B q) \B m .zoi.\ cu me'oi .wield.\ lo selsni be la'o zoi.\ \F{Data.List.lookup} (\F{Character.inventory} \Sym \$ \F{Data.List.lookup} (\F{GameData.haters} \B q) \B m) \B n .zoi.
+ni'o tu'a la'o zoi.\ \F{wieldPawn} \B q \B m \B n \F{refl}\ .zoi.\ .indika lo du'u zo'e ja lo selsni be la'o zoi.\ \F{GameData.haters} \B q \Sym ! \B m .zoi.\ cu me'oi .wield.\ lo selsni be la'o zoi.\ \F{Character.inventory} (\F{GameData.haters} \B q \Sym ! \B m) \Sym ! \B n .zoi.
 
 \begin{code}
 wieldPawn : (q : GameData)
