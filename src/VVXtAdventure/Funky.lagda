@@ -498,10 +498,10 @@ kumski? m g = if mapti (just $ vijac , g) nothing
     where
     kumfid = Character.room $ GameData.player g
   -- | ni'o zo .vijac. cmavlaka'i lu velski ja canlu li'u
-  intersperseₗ = Data.List.intersperse
   vijac : String
   vijac = concatₛ $ intersperseₗ "\n\n" le'i-ro-velski
     where
+    intersperseₗ = Data.List.intersperse
     concatₛ = Data.String.concat
     mapₗ = Data.List.map
     velski : Item → String
