@@ -197,7 +197,7 @@ open ≡-Reasoning
 \chapter{le mu'oi glibau.\ low-level .glibau.}
 
 \section{la'o zoi.\ \F{movePawn} .zoi.}
-ni'o tu'a la'o zoi.\ \F{movePawn} \B q \B m \B n .zoi.\ .indika lo du'u lo selsni be la'o zoi.\ \F{Data.List.lookup} (\F{GameData.haters} \B q) \B h .zoi.\ cu zvati ko'a goi lo selsni be la'o zoi.\ \F{Data.List.lookup} (\F{GameData.rooms} \B q) \B n .zoi.
+ni'o tu'a la'o zoi.\ \F{movePawn} \B q \B m \B n .zoi.\ .indika lo du'u lo selsni be la'o zoi.\ \F{GameData.haters} \B q \Sym ! \B h .zoi.\ cu zvati ko'a goi lo selsni be la'o zoi.\ \F{GameData.rooms} \B q) \Sym ! \B n .zoi.
 
 \begin{code}
 movePawn : (q : GameData)
@@ -229,7 +229,7 @@ movePawn gd h r = gd' , refl , proj₁ (proj₂ xat) , rudus , refl
 \end{code}
  
 \section{la'o zoi.\ \F{wieldPawn}\ .zoi.}
-ni'o tu'a la'o zoi.\ \F{wieldPawn} \B q \B m \B n \F{refl}\ .zoi.\ .indika lo du'u zo'e ja lo selsni be la'o zoi.\ \F{Data.List.lookup} (\F{GameData.haters} \B q) \B m .zoi.\ cu me'oi .wield.\ lo selsni be la'o zoi.\ \F{Data.List.lookup} (\F{Character.inventory} \Sym \$ \F{Data.List.lookup} (\F{GameData.haters} \B q) \B m) \B n .zoi.
+ni'o tu'a la'o zoi.\ \F{wieldPawn} \B q \B m \B n \F{refl}\ .zoi.\ .indika lo du'u zo'e ja lo selsni be la'o zoi.\ \F{GameData.haters} \B q \Sym ! \B m .zoi.\ cu me'oi .wield.\ lo selsni be la'o zoi.\ \F{Character.inventory} (\F{GameData.haters} \B q \Sym ! \B m) \Sym ! \B n .zoi.
 
 \begin{code}
 wieldPawn : (q : GameData)
@@ -239,7 +239,7 @@ wieldPawn : (q : GameData)
             let ifinc = GameData.yourfloorisnowclean in
             (j : Fin $ 𝓁 $ x q)
           → (i : Fin $ 𝓁 $ Character.inventory $ x q ! j)
-          → (_≡_ true $ is-just $ Item.weapwn $ _!_ (iv $ x q ! j) i)
+          → (_≡_ true $ is-just $ Item.weapwn $ iv (x q ! j) ! i)
           → Σ GameData $ λ q'
             → Σ (𝓁 (x q) ≡ 𝓁 (x q')) $ λ ℓ
             → Σ (iv (x q ! j) ≡ iv (x q' ! mink j ℓ)) $ λ ℓ₂
@@ -761,9 +761,12 @@ lp? ("WHO" ∷ "ARE" ∷ "YOU?" ∷ []) q = just $ m , q
   m = "I really want to know."
 lp? ("I'M" ∷ "A" ∷ "WINNER" ∷ []) q = just $ m , q
   where
-  m = "Actually, refl is a proof of GameData.epicwin \
-      \q ≡ false.  You have not won The Game.\n\n\
-      \You were probably expecting something else."
+  m = if (GameData.epicwin q) m₁ m₂
+    where
+    m₁ = "I just can't argue with that."
+    m₂ = "Actually, refl is a proof of GameData.epicwin \
+         \q ≡ false.  You have not won The Game.\n\n\
+         \You were probably expecting something else."
 lp? _ _ = nothing
 \end{code}
 
@@ -784,9 +787,9 @@ travel? (x₁ ∷ xs₁) = if realShit (travel' xs₁) $ const nothing
     where
     F = Fin $ length $ GameData.rooms q
     cur = GameData.rooms q ! Character.room (GameData.player q)
-    alreadythere? = if at (just $ m , q) nothing
+    alreadythere? = if atRoom (just $ m , q) nothing
       where
-      at = x ≡ᵇ Room.cname cur
+      atRoom = x ≡ᵇ Room.cname cur
       m = "Damn, that's some fast travel.  \
           \You're already there!"
     tryfind = [_,_] (just ∘ flip _,_ q) iusyf mathch
