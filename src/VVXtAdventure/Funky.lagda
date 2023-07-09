@@ -554,9 +554,7 @@ takePawn q m n = q' , dus , dis , nyfin
       misuks : {m n : ℕ}
              → (f : Fin m)
              → (d : m ≡ n)
-             → (_≡_
-                 (ℕ.suc $ toℕ f)
-                 (toℕ $ mink (suc f) $ cong ℕ.suc d))
+             → ℕ.suc (toℕ f) ≡ toℕ (mink (suc f) $ cong ℕ.suc d)
       misuks f refl = refl
       ualteik : ∀ {a} → {A : Set a}
               → (x : List A)
