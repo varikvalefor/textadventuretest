@@ -593,9 +593,8 @@ takePawn q m n = q' , dus , dis , nyfin
                  → (x : List A)
                  → (n : Fin $ length x)
                  → (f : A → A)
-                 → (_≡_
-                     (ℕ.suc (toℕ n) ↓ x)
-                     (ℕ.suc (toℕ n) ↓ proj₁ (ual x n f)))
+                 → let n' = ℕ.suc $ toℕ n in
+                   n' ↓ x ≡ n' ↓ proj₁ (ual x n f)
         ualdrop₁ (_ ∷ _) zero _ = refl
         ualdrop₁ (_ ∷ xs) (suc n) f = ualdrop₁ xs n f
         ut = ualdrop₁ (x ∷ xs) (suc n) f
