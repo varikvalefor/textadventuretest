@@ -549,10 +549,10 @@ lp? ("I'M" ∷ "A" ∷ "WINNER" ∷ []) q = just $ m , q
   where
   m = if (GameData.epicwin q) m₁ m₂
     where
-    m₁ = "Actually, refl is a proof of GameData.epicwin \
+    m₁ = "I just can't argue with that."
+    m₂ = "Actually, refl is a proof of GameData.epicwin \
          \q ≡ false.  You have not won The Game.\n\n\
          \You were probably expecting something else."
-    m₂ = "I just can't argue with that."
 lp? _ _ = nothing
 \end{code}
 
