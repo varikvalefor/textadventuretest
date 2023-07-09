@@ -534,12 +534,10 @@ takePawn q m n = q' , dus , dis , nyfin
       b₂' = mapₗ cname $ (ℕ.suc $ toℕ libek') ↓ k'
       konk₁ = λ b1 → konk (mapₗ cname b1) (cname k₂) b₂
       konk₂ = konk b₁' (cname k₂) ∘ mapₗ cname
-      entydus = begin
-        cname k₁ ≡⟨ sym $ vimcud k₁ ⟩
-        cname (vimcu k₁) ≡⟨ sym $ cong cname $ proj₃ k'' ⟩
-        cname k₂ ∎
-        where
-        proj₃ = proj₂ ∘ proj₂
+      entydus = sym $ begin
+        cname k₂ ≡⟨ cong cname $ proj₂ $ proj₂ k'' ⟩
+        cname (vimcu k₁) ≡⟨ vimcud k₁ ⟩
+        cname k₁ ∎
       madek : ∀ {a b} → {A : Set a} → {B : Set b}
             → (x : List A)
             → (n : Fin $ length x)
