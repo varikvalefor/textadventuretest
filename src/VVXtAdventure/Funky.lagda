@@ -457,12 +457,14 @@ takePawn q m n = q' , dus , dis , nyfin
   where
   lb = GameData.haters q ! m
   sl = Room.items (GameData.rooms q ! Character.room lb) ! n
+  vimcu = λ x → record x {items = filterₗ nadu $ Room.items x}
+    where
+    nadu = Data.Bool._≟_ false ∘ _≡ᵇ_ (Item.cname sl) ∘ Item.cname
+  vimcud : (q : Room) → Room.cname (vimcu q) ≡ Room.cname q
+  vimcud _ = refl
   k'' : Σ (List Room) $ λ l
         → Σ (length (GameData.rooms q) ≡ length l) _
   k'' = ual (GameData.rooms q) (Character.room lb) vimcu
-    where
-    nadu = Data.Bool._≟_ false ∘ _≡ᵇ_ (Item.cname sl) ∘ Item.cname
-    vimcu = λ x → record x {items = filterₗ nadu $ Room.items x}
   k' = proj₁ k''
   kumbi'o = λ x → record {
     forename = Character.forename x;
@@ -502,10 +504,111 @@ takePawn q m n = q' , dus , dis , nyfin
     epicwin = GameData.epicwin q;
     rooms = k';
     haters = proj₁ x'';
-    yourfloorisnowclean = subst nu,iork {!!} iofink;
+    yourfloorisnowclean = subst nu,iork entydut iofink;
     player' = mink (GameData.player' q) $ proj₁ $ proj₂ x''
     }
     where
+    mapₗ = Data.List.map
+    k = GameData.rooms q
+    entydut = begin
+      mapₗ cname k ≡⟨ madek k libek cname ⟩
+      konk b₁ (cname k₁) b₂ ≡⟨ cong (flip (konk b₁) b₂) entydus ⟩
+      konk b₁ (cname k₂) b₂ ≡⟨ cong konk₁ $ ualteik k libek vimcu ⟩
+      konk b₁' (cname k₂) b₂ ≡⟨ cong konk₂ $ ualdrop k libek vimcu ⟩
+      konk b₁' (cname k₂) b₂' ≡⟨ sym $ madek k' libek' cname ⟩
+      mapₗ cname k' ∎
+      where
+      cname = Room.cname
+      libek = Character.room lb
+      libek' = mink libek $ proj₁ $ proj₂ k''
+      k₁ = k ! libek
+      k₂ = k' ! libek'
+      konk : ∀ {a} → {A : Set a}
+           → List A → A → List A → List A
+      konk = λ b₁ b₂ b₃ → b₁ Data.List.++ b₂ ∷ b₃
+      _↑_ = Data.List.take
+      _↓_ = Data.List.drop
+      w = Data.Fin.toℕ $ Character.room lb
+      katre = konk (w ↑ k) k₂ $ (ℕ.suc w) ↓ k
+      katre' = konk (w ↑ k') k₂ $ (ℕ.suc w) ↓ k'
+      b₁ = mapₗ cname $ w ↑ k
+      b₂ = mapₗ cname $ (ℕ.suc w) ↓ k
+      b₁' = mapₗ cname $ (toℕ libek') ↑ k'
+      b₂' = mapₗ cname $ (ℕ.suc $ toℕ libek') ↓ k'
+      konk₁ = λ b1 → konk (mapₗ cname b1) (cname k₂) b₂
+      konk₂ = konk b₁' (cname k₂) ∘ mapₗ cname
+      entydus = begin
+        cname k₁ ≡⟨ sym $ vimcud k₁ ⟩
+        cname (vimcu k₁) ≡⟨ sym $ cong cname $ proj₃ k'' ⟩
+        cname k₂ ∎
+        where
+        proj₃ = proj₂ ∘ proj₂
+      madek : ∀ {a b} → {A : Set a} → {B : Set b}
+            → (x : List A)
+            → (n : Fin $ length x)
+            → (f : A → B)
+            → (_≡_
+                (mapₗ f x)
+                (Data.List._++_
+                  (mapₗ f $ ((toℕ n) ↑ x))
+                  (_∷_
+                    (f $ x ! n)
+                    (mapₗ f $ ((ℕ.suc $ toℕ n) ↓ x)))))
+      madek (_ ∷ _) zero _ = refl
+      madek (x ∷ xs) (suc n) f = cong (_∷_ $ f x) $ madek xs n f
+      misuks : {m n : ℕ}
+             → (f : Fin m)
+             → (d : m ≡ n)
+             → (_≡_
+                 (ℕ.suc $ toℕ f)
+                 (toℕ $ mink (suc f) $ cong ℕ.suc d))
+      misuks f refl = refl
+      ualteik : ∀ {a} → {A : Set a}
+              → (x : List A)
+              → (n : Fin $ length x)
+              → (f : A → A)
+              → let u = ual x n f in
+                (_≡_
+                  ((toℕ n) ↑ x)
+                  ((toℕ $ mink n $ proj₁ $ proj₂ $ u) ↑ proj₁ u))
+      ualteik (_ ∷ _) zero _ = refl
+      ualteik (x ∷ xs) (suc n) f = subst (_≡_ _) kong utz
+        where
+        ualteik₁ : ∀ {a} → {A : Set a}
+                 → (x : List A)
+                 → (n : Fin $ length x)
+                 → (f : A → A)
+                 → (toℕ n) ↑ x ≡ (toℕ n) ↑ proj₁ (ual x n f)
+        ualteik₁ (_ ∷ _) zero _ = refl
+        ualteik₁ (x ∷ xs) (suc n) f = cong (_∷_ x) $ ualteik₁ xs n f
+        kong = cong (flip _↑_ $ proj₁ $ ual (x ∷ xs) (suc n) f) misuk
+          where
+          misuk = misuks n $ proj₁ $ proj₂ $ ual xs n f
+        utz = ualteik₁ (x ∷ xs) (suc n) f
+      ualdrop : ∀ {a} → {A : Set a}
+              → (x : List A)
+              → (n : Fin $ length x)
+              → (f : A → A)
+              → let n' = mink n $ proj₁ $ proj₂ $ ual x n f in
+                (_≡_
+                  ((ℕ.suc $ toℕ n) ↓ x)
+                  ((ℕ.suc $ toℕ n') ↓ proj₁ (ual x n f)))
+      ualdrop (_ ∷ _) zero _ = refl
+      ualdrop (x ∷ xs) (suc n) f = subst (_≡_ _) c ut
+        where
+        ualdrop₁ : ∀ {a} → {A : Set a}
+                 → (x : List A)
+                 → (n : Fin $ length x)
+                 → (f : A → A)
+                 → (_≡_
+                     (ℕ.suc (toℕ n) ↓ x)
+                     (ℕ.suc (toℕ n) ↓ proj₁ (ual x n f)))
+        ualdrop₁ (_ ∷ _) zero _ = refl
+        ualdrop₁ (_ ∷ xs) (suc n) f = ualdrop₁ xs n f
+        ut = ualdrop₁ (x ∷ xs) (suc n) f
+        c = cong (flip _↓_ $ proj₁ u) $ misuks n $ proj₁ $ proj₂ u
+          where
+          u = ual xs n f
     p = GameData.player q
     kac = Data.List.map Room.cname $ GameData.rooms q
     kec = Data.List.map Room.cname k'
