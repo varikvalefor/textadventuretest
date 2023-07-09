@@ -573,9 +573,9 @@ travel? (x₁ ∷ xs₁) = if realShit (travel' xs₁) $ const nothing
     where
     F = Fin $ length $ GameData.rooms q
     cur = GameData.rooms q ! Character.room (GameData.player q)
-    alreadythere? = if at (just $ m , q) nothing
+    alreadythere? = if atRoom (just $ m , q) nothing
       where
-      at = x ≡ᵇ Room.cname cur
+      atRoom = x ≡ᵇ Room.cname cur
       m = "Damn, that's some fast travel.  \
           \You're already there!"
     tryfind = [_,_] (just ∘ flip _,_ q) iusyf mathch
