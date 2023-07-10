@@ -607,7 +607,7 @@ wield? [] = const nothing
 wield? (x ∷ xs) dang = if (realShit x) (troci xs) nothing
   where
   inv = Character.inventory $ GameData.player dang
-  wisyj = Data.Maybe.is-just ∘ Item.weapwn ∘ Data.List.lookup inv
+  wisyj = Data.Maybe.is-just ∘ Item.weapwn ∘ _!_ inv
   realShit = _≡ᵇ_ "WIELD"
   troci : List String → Maybe $ String × GameData
   troci [] = just $ m , dang
@@ -635,7 +635,7 @@ wield? (x ∷ xs) dang = if (realShit x) (troci xs) nothing
     wieldMsg = fromMaybe "You wield the weapon." xarcynotci
       where
       items = Character.inventory $ GameData.player dang
-      xarci = Item.weapwn $ Data.List.lookup items $ proj₁ selpli
+      xarci = Item.weapwn $ items ! proj₁ selpli
       xarcynotci = xarci Data.Maybe.>>= WeaponInfo.wieldMsg
     wieldData = wieldPawn dang p (proj₁ selpli) $ proj₂ selpli
       where
