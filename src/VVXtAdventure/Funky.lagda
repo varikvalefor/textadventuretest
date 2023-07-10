@@ -453,7 +453,14 @@ takePawn : (q : GameData)
                ((_∷_ ⍨)
                  (map Item.cname $ GameData.inventOf q m)
                  (Item.cname $ GameData.itemsInRoomOf q m ! n)))
-takePawn q m n = q' , dus , dis , nyfin
+           × (_≡_
+               q'
+               record q {
+                 rooms = GameData.rooms q';
+                 haters = GameData.haters q';
+                 player' = mink (GameData.player' q) x;
+                 yourfloorisnowclean = GameData.yourfloorisnowclean q'})
+takePawn q m n = q' , dus , dis , nyfin , refl
   where
   lb = GameData.haters q ! m
   sl = Room.items (GameData.rooms q ! Character.room lb) ! n
