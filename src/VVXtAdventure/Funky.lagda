@@ -702,9 +702,11 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
       konk xenkim (kib likil') xenksim ≡⟨ cong (λ t → xenkim Data.List.++ t ∷ xenksim) midju ⟩
       konk xenkim likil xenksim ≡⟨ sym mip ⟩
       konk xenim' likil xensim' ≡⟨ cong (flip Data.List._++_ _) xenteik ⟩
-      konk (Data.List.take (toℕ m) xen') likil xensim' ≡⟨ cong (konk (Data.List.take (toℕ m) xen') likil) xendrop ⟩
-      konk (Data.List.take (toℕ m) xen') likil (Data.List.drop (ℕ.suc $ toℕ m) xen') ∎
+      konk ((toℕ m) ↑ xen') likil xensim' ≡⟨ cong (konk ((toℕ m) ↑ xen') likil) xendrop ⟩
+      konk ((toℕ m) ↑ xen') likil ((ℕ.suc $ toℕ m) ↓ xen') ∎
       where
+      _↑_ = Data.List.take
+      _↓_ = Data.List.drop
       konk : ∀ {a} → {A : Set a}
            → List A → A → List A → List A
       konk = λ a b c → a Data.List.++ b ∷ c
@@ -712,13 +714,13 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
       likil' = kumfybi'o q' q (sym dus) likil
       kib = kumfybi'o q q' dus
       m' = mink m $ sym $ DLP.length-map kumbi'o xen
-      xenim = Data.List.take (toℕ m) xen
-      xensim = Data.List.drop (ℕ.suc $ toℕ m) xen
+      xenim = (toℕ m) ↑ xen
+      xensim = (ℕ.suc $ toℕ m) ↓ xen
       xenkim = Data.List.map kib xenim
       xenksim = Data.List.map kib xensim
       xenbis = Data.List.map kumbi'o xen
-      xenim' = Data.List.take (toℕ m) xenbis
-      xensim' = Data.List.drop (ℕ.suc $ toℕ m) xenbis
+      xenim' = (toℕ m) ↑ xenbis
+      xensim' = (ℕ.suc $ toℕ m) ↓ xenbis
       m≡m' : toℕ m ≡ toℕ m'
       m≡m' = tomindus m $ sym $ DLP.length-map kumbi'o xen
       u = ual xenbis m' lb!
@@ -729,9 +731,7 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
         (toℕ m') ↑ (proj₁ u) ≡⟨ refl ⟩
         (toℕ m') ↑ xen' ≡⟨ cong (flip _↑_ xen') $ sym m≡m' ⟩
         (toℕ m) ↑ xen' ∎
-        where
-        _↑_ = Data.List.take
-      xendrop : xensim' ≡ Data.List.drop (ℕ.suc $ toℕ m) xen'
+      xendrop : xensim' ≡ (ℕ.suc $ toℕ m) ↓ xen'
       xendrop = begin
         xensim' ≡⟨ refl ⟩
         (ℕ.suc $ toℕ m) ↓ xenbis ≡⟨ cong (flip _↓_ xenbis ∘ ℕ.suc) m≡m' ⟩
@@ -739,8 +739,6 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
         (ℕ.suc $ toℕ m') ↓ (proj₁ u) ≡⟨ refl ⟩
         (ℕ.suc $ toℕ m') ↓ xen' ≡⟨ cong (flip _↓_ xen' ∘ ℕ.suc) $ sym m≡m' ⟩
         (ℕ.suc $ toℕ m) ↓ xen' ∎
-        where
-        _↓_ = Data.List.drop
       mip = mapimplant xen (lb! $ kumbi'o lb) kib m
       midju : kib likil' ≡ likil
       midju = cong cninykumfa $ mindus (Character.room likil) (sym dus) dus
