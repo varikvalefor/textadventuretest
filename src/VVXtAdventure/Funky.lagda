@@ -157,6 +157,8 @@ open import Relation.Nullary
 open import VVXtAdventure.Base
 open import Truthbrary.Data.Fin
   using (
+    tomindus;
+    mindus;
     mink
   )
 open import Truthbrary.Record.Eq
@@ -169,6 +171,7 @@ open import Truthbrary.Record.LLC
   )
 open import Truthbrary.Data.List.Loom
   using (
+    ualmapkonk;
     ualmap;
     ual;
     lum
@@ -178,6 +181,7 @@ open import Truthbrary.Category.Monad
   )
 open import Truthbrary.Data.List.Loom
   using (
+    mapimplant;
     ual
   )
 open import Data.List.Relation.Unary.Any
@@ -442,25 +446,74 @@ ni'o la .varik.\ cu na jinvi le du'u sarcu fa lo nu la .varik.\ cu ciksi la'o zo
 private
   _⍨ = flip
 
+  kumfybi'o : (q q' : GameData)
+            → let rooms = GameData.rooms in
+              length (rooms q) ≡ length (rooms q')
+            → Character $ rooms q
+            → Character $ rooms q'
+  kumfybi'o _ _ g x = record {
+    room = mink (Character.room x) g;
+    forename = Character.forename x;
+    surname = Character.surname x;
+    cname = Character.cname x;
+    nicknames = Character.nicknames x;
+    inventory = Character.inventory x;
+    wieldedct =  Character.wieldedct x;
+    yourfloorisnowclean = Character.yourfloorisnowclean x}
+
 takePawn : (q : GameData)
          → (m : Fin $ length $ GameData.haters q)
          → (n : Fin $ length $ GameData.itemsInRoomOf q m)
          → Σ GameData $ λ q'
            → Σ ((_≡_ on length ∘ GameData.rooms) q q') $ λ r
            → Σ ((_≡_ on length ∘ GameData.haters) q q') $ λ x
-           → (_≡_
-               (map Item.cname $ GameData.inventOf q' $ mink m x)
-               ((_∷_ ⍨)
-                 (map Item.cname $ GameData.inventOf q m)
-                 (Item.cname $ GameData.itemsInRoomOf q m ! n)))
-           × (_≡_
+             -- | lb
+           → let xen = GameData.haters in
+             let room = Character.room in
+             (Σ (Character $ GameData.rooms q') $ λ k
+              → (_≡_
+                  (Data.List.map (kumfybi'o q q' r)
+                    (Data.List._++_
+                      (Data.List.take (toℕ m) $ xen q)
+                      (_∷_
+                        (kumfybi'o q' q (sym r) k)
+                        (Data.List.drop
+                          (ℕ.suc $ toℕ m)
+                          (GameData.haters q)))))
+                  (Data.List._++_
+                    (Data.List.take
+                      (toℕ m)
+                      (GameData.haters q'))
+                    (_∷_
+                      k
+                      (Data.List.drop
+                        (ℕ.suc $ toℕ m)
+                        (xen q'))))))
+           × (Σ Room $ λ r'
+              → let kit = toℕ $ room $ xen q ! m in
+                (_≡_
+                  (GameData.rooms q')
+                  (Data.List._++_
+                    (Data.List.take kit $ GameData.rooms q)
+                    (_∷_
+                      r'
+                      (Data.List.drop
+                        (ℕ.suc kit)
+                        (GameData.rooms q))))))
+           × let iofink = GameData.yourfloorisnowclean in
+             (_≡_
                q'
                record q {
                  rooms = GameData.rooms q';
                  haters = GameData.haters q';
                  player' = mink (GameData.player' q) x;
-                 yourfloorisnowclean = GameData.yourfloorisnowclean q'})
-takePawn q m n = q' , dus , dis , nyfin , refl
+                 yourfloorisnowclean = iofink q'})
+           × (_≡_
+               (map Item.cname $ GameData.inventOf q' $ mink m x)
+               ((_∷_ ⍨)
+                 (map Item.cname $ GameData.inventOf q m)
+                 (Item.cname $ GameData.itemsInRoomOf q m ! n)))
+takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
   where
   lb = GameData.haters q ! m
   sl = Room.items (GameData.rooms q ! Character.room lb) ! n
@@ -622,6 +675,93 @@ takePawn q m n = q' , dus , dis , nyfin , refl
       → (b c : List A) → (x : A) → (f : A → B) → x ∷ b ≡ c
       → map f c ≡ f x ∷ map f b
     f b c x g refl = refl
+
+  ualkong : ∀ {a} → {A : Set a}
+          → (x : List A)
+          → (n : Fin $ length x)
+          → (f : A → A)
+          → let n' = toℕ n in
+            (_≡_
+              (proj₁ $ ual x n f)
+              (Data.List._++_
+                (Data.List.take n' x)
+                (_∷_
+                  (f $ x ! n)
+                  (Data.List.drop (ℕ.suc n') x))))
+  ualkong (_ ∷ _) zero _ = refl
+  ualkong (x ∷ xs) (suc mydick) f = cong (_∷_ x) u
+    where
+    u = ualkong xs mydick f
+
+  xendus = lb! (kumbi'o lb) , j
+    where
+    xen = GameData.haters q
+    xen' = GameData.haters q'
+    j = begin
+      Data.List.map kib (xenim Data.List.++ kumfybi'o q' q (sym dus) likil ∷ xensim) ≡⟨ mapinj xenim xensim (kumfybi'o q' q (sym dus) likil) kib ⟩
+      xenkim Data.List.++ kib (kumfybi'o q' q (sym dus) likil) ∷ xenksim ≡⟨ cong (λ t → xenkim Data.List.++ t ∷ xenksim) midju ⟩
+      xenkim Data.List.++ likil ∷ xenksim ≡⟨ sym mip ⟩
+      xenim' Data.List.++ likil ∷ xensim' ≡⟨ cong (flip Data.List._++_ _) xenteik ⟩
+      Data.List.take (toℕ m) xen' Data.List.++ likil ∷ xensim' ≡⟨ cong (λ t → Data.List._++_ (Data.List.take (toℕ m) xen') $ likil ∷ t) xendrop ⟩
+      Data.List.take (toℕ m) xen' Data.List.++ likil ∷ Data.List.drop (ℕ.suc $ toℕ m) xen' ∎
+      where
+      likil = lb! (kumbi'o lb)
+      kib = kumfybi'o q q' dus
+      m' = mink m $ sym $ DLP.length-map kumbi'o xen
+      xenim = Data.List.take (toℕ m) xen
+      xensim = Data.List.drop (ℕ.suc $ toℕ m) xen
+      xenkim = Data.List.map kib xenim
+      xenksim = Data.List.map kib xensim
+      xenbis = Data.List.map kumbi'o xen
+      xenim' = Data.List.take (toℕ m) xenbis
+      xensim' = Data.List.drop (ℕ.suc $ toℕ m) xenbis
+      m≡m' : toℕ m ≡ toℕ m'
+      m≡m' = tomindus m $ sym $ DLP.length-map kumbi'o xen
+      u = ual xenbis m' lb!
+      xenteik = begin
+        xenim' ≡⟨ refl ⟩
+        (toℕ m) ↑ xenbis ≡⟨ cong (flip _↑_ xenbis) m≡m' ⟩
+        (toℕ m') ↑ xenbis ≡⟨ Truthbrary.Data.List.Loom.ualteik xenbis m' lb! ⟩
+        (toℕ m') ↑ (proj₁ u) ≡⟨ refl ⟩
+        (toℕ m') ↑ xen' ≡⟨ cong (flip _↑_ xen') $ sym m≡m' ⟩
+        (toℕ m) ↑ xen' ∎
+        where
+        _↑_ = Data.List.take
+      xendrop : xensim' ≡ Data.List.drop (ℕ.suc $ toℕ m) xen'
+      xendrop = begin
+        xensim' ≡⟨ refl ⟩
+        (ℕ.suc $ toℕ m) ↓ xenbis ≡⟨ cong (flip _↓_ xenbis ∘ ℕ.suc) m≡m' ⟩
+        (ℕ.suc $ toℕ m') ↓ xenbis ≡⟨ Truthbrary.Data.List.Loom.ualdrop xenbis m' lb! ⟩
+        (ℕ.suc $ toℕ m') ↓ (proj₁ u) ≡⟨ refl ⟩
+        (ℕ.suc $ toℕ m') ↓ xen' ≡⟨ cong (flip _↓_ xen' ∘ ℕ.suc) $ sym m≡m' ⟩
+        (ℕ.suc $ toℕ m) ↓ xen' ∎
+        where
+        _↓_ = Data.List.drop
+      mip = mapimplant xen (lb! $ kumbi'o lb) kib m
+      midju : kib (kumfybi'o q' q (sym dus) likil) ≡ likil
+      midju = cong cninykumfa $ mindus (Character.room likil) (sym dus) dus
+        where
+        cninykumfa = λ n → record likil {room = n}
+      mapinj : ∀ {a b} → {A : Set a} → {B : Set b}
+             → (xs ys : List A)
+             → (x : A)
+             → (f : A → B)
+             → (_≡_
+                 (Data.List.map
+                   f
+                   (Data.List._++_
+                     xs
+                     (x ∷ ys)))
+                 (Data.List._++_
+                   (Data.List.map f xs)
+                   (f x ∷ Data.List.map f ys)))
+      mapinj [] _ _ _ = refl
+      mapinj (x ∷ xs) ys z f = cong (_∷_ $ f x) $ mapinj xs ys z f
+
+  kumdus = xenku'a , ualkong kumste (Character.room lb) vimcu
+    where
+    kumste = GameData.rooms q
+    xenku'a = vimcu $ kumste ! Character.room lb
 \end{code}
 
 \chapter{le mu'oi glibau.\ high-level .glibau.}
