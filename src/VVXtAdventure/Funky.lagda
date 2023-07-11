@@ -698,13 +698,16 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
     xen = GameData.haters q
     xen' = GameData.haters q'
     j = begin
-      Data.List.map kib (xenim Data.List.++ likil' ∷ xensim) ≡⟨ mapinj xenim xensim likil' kib ⟩
-      xenkim Data.List.++ kib likil' ∷ xenksim ≡⟨ cong (λ t → xenkim Data.List.++ t ∷ xenksim) midju ⟩
-      xenkim Data.List.++ likil ∷ xenksim ≡⟨ sym mip ⟩
-      xenim' Data.List.++ likil ∷ xensim' ≡⟨ cong (flip Data.List._++_ _) xenteik ⟩
-      Data.List.take (toℕ m) xen' Data.List.++ likil ∷ xensim' ≡⟨ cong (λ t → Data.List._++_ (Data.List.take (toℕ m) xen') $ likil ∷ t) xendrop ⟩
-      Data.List.take (toℕ m) xen' Data.List.++ likil ∷ Data.List.drop (ℕ.suc $ toℕ m) xen' ∎
+      Data.List.map kib (konk xenim likil' xensim) ≡⟨ mapinj xenim xensim likil' kib ⟩
+      konk xenkim (kib likil') xenksim ≡⟨ cong (λ t → xenkim Data.List.++ t ∷ xenksim) midju ⟩
+      konk xenkim likil xenksim ≡⟨ sym mip ⟩
+      konk xenim' likil xensim' ≡⟨ cong (flip Data.List._++_ _) xenteik ⟩
+      konk (Data.List.take (toℕ m) xen') likil xensim' ≡⟨ cong (konk (Data.List.take (toℕ m) xen') likil) xendrop ⟩
+      konk (Data.List.take (toℕ m) xen') likil (Data.List.drop (ℕ.suc $ toℕ m) xen') ∎
       where
+      konk : ∀ {a} → {A : Set a}
+           → List A → A → List A → List A
+      konk = λ a b c → a Data.List.++ b ∷ c
       likil = lb! (kumbi'o lb)
       likil' = kumfybi'o q' q (sym dus) likil
       kib = kumfybi'o q q' dus
