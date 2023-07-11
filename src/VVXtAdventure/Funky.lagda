@@ -699,7 +699,7 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
     xen' = GameData.haters q'
     j = begin
       Data.List.map kib (konk xenim likil' xensim) ≡⟨ mapinj xenim xensim likil' kib ⟩
-      konk xenkim (kib likil') xenksim ≡⟨ cong (λ t → xenkim Data.List.++ t ∷ xenksim) midju ⟩
+      konk xenkim (kib likil') xenksim ≡⟨ cong (flip (konk xenkim) xenksim) midju ⟩
       konk xenkim likil xenksim ≡⟨ sym mip ⟩
       konk xenim' likil xensim' ≡⟨ cong (flip Data.List._++_ _) xenteik ⟩
       konk ((toℕ m) ↑ xen') likil xensim' ≡⟨ cong (konk ((toℕ m) ↑ xen') likil) xendrop ⟩
