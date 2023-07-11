@@ -698,14 +698,15 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
     xen = GameData.haters q
     xen' = GameData.haters q'
     j = begin
-      Data.List.map kib (xenim Data.List.++ kumfybi'o q' q (sym dus) likil ∷ xensim) ≡⟨ mapinj xenim xensim (kumfybi'o q' q (sym dus) likil) kib ⟩
-      xenkim Data.List.++ kib (kumfybi'o q' q (sym dus) likil) ∷ xenksim ≡⟨ cong (λ t → xenkim Data.List.++ t ∷ xenksim) midju ⟩
+      Data.List.map kib (xenim Data.List.++ likil' ∷ xensim) ≡⟨ mapinj xenim xensim likil' kib ⟩
+      xenkim Data.List.++ kib likil' ∷ xenksim ≡⟨ cong (λ t → xenkim Data.List.++ t ∷ xenksim) midju ⟩
       xenkim Data.List.++ likil ∷ xenksim ≡⟨ sym mip ⟩
       xenim' Data.List.++ likil ∷ xensim' ≡⟨ cong (flip Data.List._++_ _) xenteik ⟩
       Data.List.take (toℕ m) xen' Data.List.++ likil ∷ xensim' ≡⟨ cong (λ t → Data.List._++_ (Data.List.take (toℕ m) xen') $ likil ∷ t) xendrop ⟩
       Data.List.take (toℕ m) xen' Data.List.++ likil ∷ Data.List.drop (ℕ.suc $ toℕ m) xen' ∎
       where
       likil = lb! (kumbi'o lb)
+      likil' = kumfybi'o q' q (sym dus) likil
       kib = kumfybi'o q q' dus
       m' = mink m $ sym $ DLP.length-map kumbi'o xen
       xenim = Data.List.take (toℕ m) xen
@@ -738,7 +739,7 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
         where
         _↓_ = Data.List.drop
       mip = mapimplant xen (lb! $ kumbi'o lb) kib m
-      midju : kib (kumfybi'o q' q (sym dus) likil) ≡ likil
+      midju : kib likil' ≡ likil
       midju = cong cninykumfa $ mindus (Character.room likil) (sym dus) dus
         where
         cninykumfa = λ n → record likil {room = n}
