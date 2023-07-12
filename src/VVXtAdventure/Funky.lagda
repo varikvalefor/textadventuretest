@@ -674,8 +674,8 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
       konk xenkim (kib likil') xenksim ≡⟨ cong (flip (konk xenkim) xenksim) midju ⟩
       konk xenkim likil xenksim ≡⟨ sym $ mapimplant xen likil kib m ⟩
       konk xenim' likil xensim' ≡⟨ cong (flip _++ₗ_ _) xenteik ⟩
-      konk ((toℕ m) ↑ xen') likil xensim' ≡⟨ cong (konk ((toℕ m) ↑ xen') likil) xendrop ⟩
-      konk ((toℕ m) ↑ xen') likil ((ℕ.suc (toℕ m)) ↓ xen') ∎
+      konk (m:ℕ ↑ xen') likil xensim' ≡⟨ cong (konk (m:ℕ ↑ xen') likil) xendrop ⟩
+      konk (m:ℕ ↑ xen') likil ((ℕ.suc m:ℕ) ↓ xen') ∎
       where
       _++ₗ_ = Data.List._++_
       _¨_ = Data.List.map
@@ -687,14 +687,15 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
       likil = lb! (kumbi'o lb)
       likil' = kumfybi'o q' q (sym dus) likil
       kib = kumfybi'o q q' dus
+      m:ℕ = toℕ m
       m' = mink m $ sym $ DLP.length-map kumbi'o xen
-      xenim = (toℕ m) ↑ xen
-      xensim = (ℕ.suc $ toℕ m) ↓ xen
+      xenim = m:ℕ ↑ xen
+      xensim = (ℕ.suc m:ℕ) ↓ xen
       xenkim = kib ¨ xenim
       xenksim = kib ¨ xensim
       xenbis = kumbi'o ¨ xen
-      xenim' = (toℕ m) ↑ xenbis
-      xensim' = (ℕ.suc $ toℕ m) ↓ xenbis
+      xenim' = m:ℕ ↑ xenbis
+      xensim' = (ℕ.suc $ m:ℕ) ↓ xenbis
       m≡m' : toℕ m ≡ toℕ m'
       m≡m' = tomindus m $ sym $ DLP.length-map kumbi'o xen
       u = ual xenbis m' lb!
