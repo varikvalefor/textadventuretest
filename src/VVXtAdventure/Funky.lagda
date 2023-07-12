@@ -705,6 +705,7 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
       konk ((toℕ m) ↑ xen') likil xensim' ≡⟨ cong (konk ((toℕ m) ↑ xen') likil) xendrop ⟩
       konk ((toℕ m) ↑ xen') likil ((ℕ.suc $ toℕ m) ↓ xen') ∎
       where
+      _¨_ = Data.List.map
       _↑_ = Data.List.take
       _↓_ = Data.List.drop
       konk : ∀ {a} → {A : Set a}
@@ -716,9 +717,9 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
       m' = mink m $ sym $ DLP.length-map kumbi'o xen
       xenim = (toℕ m) ↑ xen
       xensim = (ℕ.suc $ toℕ m) ↓ xen
-      xenkim = Data.List.map kib xenim
-      xenksim = Data.List.map kib xensim
-      xenbis = Data.List.map kumbi'o xen
+      xenkim = kib ¨ xenim
+      xenksim = kib ¨ xensim
+      xenbis = kumbi'o ¨ xen
       xenim' = (toℕ m) ↑ xenbis
       xensim' = (ℕ.suc $ toℕ m) ↓ xenbis
       m≡m' : toℕ m ≡ toℕ m'
