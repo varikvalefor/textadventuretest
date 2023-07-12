@@ -172,6 +172,7 @@ open import Truthbrary.Record.LLC
 open import Truthbrary.Data.List.Loom
   using (
     ualmapkonk;
+    ualkonk;
     ualmap;
     ual;
     lum
@@ -664,23 +665,6 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
       → map f c ≡ f x ∷ map f b
     f b c x g refl = refl
 
-  ualkong : ∀ {a} → {A : Set a}
-          → (x : List A)
-          → (n : Fin $ length x)
-          → (f : A → A)
-          → let n' = toℕ n in
-            (_≡_
-              (proj₁ $ ual x n f)
-              (Data.List._++_
-                (Data.List.take n' x)
-                (_∷_
-                  (f $ x ! n)
-                  (Data.List.drop (ℕ.suc n') x))))
-  ualkong (_ ∷ _) zero _ = refl
-  ualkong (x ∷ xs) (suc mydick) f = cong (_∷_ x) u
-    where
-    u = ualkong xs mydick f
-
   xendus = lb! (kumbi'o lb) , j
     where
     xen = GameData.haters q
@@ -749,7 +733,7 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
       mapinj [] _ _ _ = refl
       mapinj (x ∷ xs) ys z f = cong (_∷_ $ f x) $ mapinj xs ys z f
 
-  kumdus = xenku'a , ualkong kumste (Character.room lb) vimcu
+  kumdus = xenku'a , ualkonk kumste (Character.room lb) vimcu
     where
     kumste = GameData.rooms q
     xenku'a = vimcu $ kumste ! Character.room lb
