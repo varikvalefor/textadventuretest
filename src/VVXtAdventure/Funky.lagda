@@ -703,18 +703,22 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
       xenteik = begin
         xenim' ≡⟨ refl ⟩
         (toℕ m) ↑ xenbis ≡⟨ cong (flip _↑_ xenbis) m≡m' ⟩
-        (toℕ m') ↑ xenbis ≡⟨ Truthbrary.Data.List.Loom.ualteik xenbis m' lb! ⟩
+        (toℕ m') ↑ xenbis ≡⟨ ualteik xenbis m' lb! ⟩
         (toℕ m') ↑ (proj₁ u) ≡⟨ refl ⟩
         (toℕ m') ↑ xen' ≡⟨ cong (flip _↑_ xen') $ sym m≡m' ⟩
         (toℕ m) ↑ xen' ∎
+        where
+        ualteik = Truthbrary.Data.List.Loom.ualteik
       xendrop : xensim' ≡ (ℕ.suc $ toℕ m) ↓ xen'
       xendrop = begin
         xensim' ≡⟨ refl ⟩
         (ℕ.suc $ toℕ m) ↓ xenbis ≡⟨ cong (flip _↓_ xenbis ∘ ℕ.suc) m≡m' ⟩
-        (ℕ.suc $ toℕ m') ↓ xenbis ≡⟨ Truthbrary.Data.List.Loom.ualdrop xenbis m' lb! ⟩
+        (ℕ.suc $ toℕ m') ↓ xenbis ≡⟨ ualdrop xenbis m' lb! ⟩
         (ℕ.suc $ toℕ m') ↓ (proj₁ u) ≡⟨ refl ⟩
         (ℕ.suc $ toℕ m') ↓ xen' ≡⟨ cong (flip _↓_ xen' ∘ ℕ.suc) $ sym m≡m' ⟩
         (ℕ.suc $ toℕ m) ↓ xen' ∎
+        where
+        ualdrop = Truthbrary.Data.List.Loom.ualdrop
       midju : kib likil' ≡ likil
       midju = cong cninykumfa $ mindus (Character.room likil) (sym dus) dus
         where
