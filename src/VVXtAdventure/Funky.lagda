@@ -695,7 +695,7 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
       xenksim = kib ¨ xensim
       xenbis = kumbi'o ¨ xen
       xenim' = m:ℕ ↑ xenbis
-      xensim' = (ℕ.suc $ m:ℕ) ↓ xenbis
+      xensim' = (ℕ.suc m:ℕ) ↓ xenbis
       m≡m' : toℕ m ≡ toℕ m'
       m≡m' = tomindus m $ sym $ DLP.length-map kumbi'o xen
       u = ual xenbis m' lb!
