@@ -429,7 +429,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym tivos , refl , teid
 \section{la'o zoi.\ \F{takePawn}\ .zoi.}
 ni'o tu'a la'o zoi.\ \F{takePawn} \B q \B m \B n .zoi.\ cu .indika lo du'u lo me'oi .inventory.\ be lo selsni be la'o zoi.\ \F{GameData.haters} \B q \Sym ! \B m\ .zoi.\ cu vasru lo selsni be la'o zoi.\ (\F{GameData.itemsInRoomOf} \B q \B m) \Sym ! n\ .zoi... kei je zo'e
 
-ni'o la .varik.\ cu na jinvi le du'u sarcu fa lo nu la .varik.\ cu ciksi la'o zoi.\ \F{\_⍨}\ .zoi.\ bau la .lojban.
+ni'o la .varik.\ cu na jinvi le du'u sarcu fa lo nu la .varik.\ cu ciksi le me'oi .\AgdaKeyword{private}.\ bau la .lojban.
 
 \begin{code}
 private
