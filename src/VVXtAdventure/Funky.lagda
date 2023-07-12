@@ -670,7 +670,7 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
     xen = GameData.haters q
     xen' = GameData.haters q'
     j = begin
-      kib ¨ (konk xenim likil' xensim) ≡⟨ mapinj xenim xensim likil' kib ⟩
+      kib ¨ (konk xenim likil' xensim) ≡⟨ mapinj xenim xensim kib ⟩
       konk xenkim (kib likil') xenksim ≡⟨ cong (flip (konk xenkim) xenksim) midju ⟩
       konk xenkim likil xenksim ≡⟨ sym $ mapimplant xen likil kib m ⟩
       konk xenim' likil xensim' ≡⟨ cong (flip _++ₗ_ _) xenteik ⟩
@@ -720,7 +720,7 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
         cninykumfa = λ n → record likil {room = n}
       mapinj : ∀ {a b} → {A : Set a} → {B : Set b}
              → (xs ys : List A)
-             → (x : A)
+             → {x : A}
              → (f : A → B)
              → (_≡_
                  (_¨_
@@ -731,8 +731,8 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
                  (Data.List._++_
                    (f ¨ xs)
                    (f x ∷ f ¨ ys)))
-      mapinj [] _ _ _ = refl
-      mapinj (x ∷ xs) ys z f = cong (_∷_ $ f x) $ mapinj xs ys z f
+      mapinj [] _ _ = refl
+      mapinj (x ∷ xs) ys f = cong (_∷_ $ f x) $ mapinj xs ys f
 
   kumdus = xenku'a , ualkonk kumste (Character.room lb) vimcu
     where
