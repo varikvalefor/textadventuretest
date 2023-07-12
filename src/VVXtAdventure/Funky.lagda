@@ -672,7 +672,7 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
     j = begin
       kib ¨ (konk xenim likil' xensim) ≡⟨ mapinj xenim xensim likil' kib ⟩
       konk xenkim (kib likil') xenksim ≡⟨ cong (flip (konk xenkim) xenksim) midju ⟩
-      konk xenkim likil xenksim ≡⟨ sym mip ⟩
+      konk xenkim likil xenksim ≡⟨ sym $ mapimplant xen likil kib m ⟩
       konk xenim' likil xensim' ≡⟨ cong (flip _++ₗ_ _) xenteik ⟩
       konk ((toℕ m) ↑ xen') likil xensim' ≡⟨ cong (konk ((toℕ m) ↑ xen') likil) xendrop ⟩
       konk ((toℕ m) ↑ xen') likil ((ℕ.suc (toℕ m)) ↓ xen') ∎
@@ -713,7 +713,6 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
         (ℕ.suc $ toℕ m') ↓ (proj₁ u) ≡⟨ refl ⟩
         (ℕ.suc $ toℕ m') ↓ xen' ≡⟨ cong (flip _↓_ xen' ∘ ℕ.suc) $ sym m≡m' ⟩
         (ℕ.suc $ toℕ m) ↓ xen' ∎
-      mip = mapimplant xen likil kib m
       midju : kib likil' ≡ likil
       midju = cong cninykumfa $ mindus (Character.room likil) (sym dus) dus
         where
