@@ -672,10 +672,10 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
     j = begin
       kib ¨ (konk xenim likil' xensim) ≡⟨ mapinj xenim xensim kib ⟩
       konk xenkim (kib likil') xenksim ≡⟨ cong (flip (konk xenkim) xenksim) midju ⟩
-      konk xenkim likil xenksim ≡⟨ sym $ mapimplant xen likil kib m ⟩
-      konk xenim' likil xensim' ≡⟨ cong (flip _++ₗ_ _) xenteik ⟩
-      konk (m:ℕ ↑ xen') likil xensim' ≡⟨ cong (konk (m:ℕ ↑ xen') likil) xendrop ⟩
-      konk (m:ℕ ↑ xen') likil ((ℕ.suc m:ℕ) ↓ xen') ∎
+      klonk xenkim xenksim ≡⟨ sym $ mapimplant xen likil kib m ⟩
+      klonk xenim' xensim' ≡⟨ cong (flip Data.List._++_ _) xenteik ⟩
+      klonk (m:ℕ ↑ xen') xensim' ≡⟨ cong (konk (m:ℕ ↑ xen') likil) xendrop ⟩
+      klonk (m:ℕ ↑ xen') ((ℕ.suc m:ℕ) ↓ xen') ∎
       where
       _++ₗ_ = Data.List._++_
       _¨_ = Data.List.map
@@ -685,6 +685,7 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
            → List A → A → List A → List A
       konk = λ a b c → a ++ₗ (b ∷ c)
       likil = lb! (kumbi'o lb)
+      klonk = λ a → konk a likil
       likil' = kumfybi'o q' q (sym dus) likil
       kib = kumfybi'o q q' dus
       m:ℕ = toℕ m
