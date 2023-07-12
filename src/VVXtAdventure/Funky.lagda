@@ -673,16 +673,17 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
       kib ¨ (konk xenim likil' xensim) ≡⟨ mapinj xenim xensim likil' kib ⟩
       konk xenkim (kib likil') xenksim ≡⟨ cong (flip (konk xenkim) xenksim) midju ⟩
       konk xenkim likil xenksim ≡⟨ sym mip ⟩
-      konk xenim' likil xensim' ≡⟨ cong (flip Data.List._++_ _) xenteik ⟩
+      konk xenim' likil xensim' ≡⟨ cong (flip _++ₗ_ _) xenteik ⟩
       konk ((toℕ m) ↑ xen') likil xensim' ≡⟨ cong (konk ((toℕ m) ↑ xen') likil) xendrop ⟩
-      konk ((toℕ m) ↑ xen') likil ((ℕ.suc $ toℕ m) ↓ xen') ∎
+      konk ((toℕ m) ↑ xen') likil ((ℕ.suc (toℕ m)) ↓ xen') ∎
       where
+      _++ₗ_ = Data.List._++_
       _¨_ = Data.List.map
       _↑_ = Data.List.take
       _↓_ = Data.List.drop
       konk : ∀ {a} → {A : Set a}
            → List A → A → List A → List A
-      konk = λ a b c → a Data.List.++ b ∷ c
+      konk = λ a b c → a ++ₗ (b ∷ c)
       likil = lb! (kumbi'o lb)
       likil' = kumfybi'o q' q (sym dus) likil
       kib = kumfybi'o q q' dus
