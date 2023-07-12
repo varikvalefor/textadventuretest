@@ -683,7 +683,7 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
       _↓_ = Data.List.drop
       konk : ∀ {a} → {A : Set a}
            → List A → A → List A → List A
-      konk = λ a b c → a ++ₗ (b ∷ c)
+      konk a b c = a ++ₗ (b ∷ c)
       likil = lb! (kumbi'o lb)
       klonk = λ a → konk a likil
       likil' = kumfybi'o q' q (sym dus) likil
