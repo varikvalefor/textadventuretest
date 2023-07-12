@@ -294,23 +294,11 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym tivos , refl , teid
     𝓁 x₁ + 𝓁 d₂ ≡⟨ cong (_+_ $ 𝓁 x₁) $ DLP.length-drop j' xen ⟩
     𝓁 x₁ + (𝓁 xen ∸ j') ≡⟨ cong (_+_ $ 𝓁 x₁) $ sym xex ⟩
     𝓁 x₁ + 𝓁 (x₂ ∷ x₃) ≡⟨ cong (_+_ $ 𝓁 x₁) refl ⟩
-    𝓁 x₁ + ℕ.suc (𝓁 x₃) ≡⟨ sym $ lenkat x₁ x₂ x₃ ⟩
+    𝓁 x₁ + ℕ.suc (𝓁 x₃) ≡⟨ sym $ DLP.length-++ x₁ ⟩
     𝓁 xen' ∎
     where
     j' = toℕ j
     d₂ = j' ↓ xen
-    -- | .i le su'u filri'a lo nu pilno zoi zoi. lenkat
-    -- x₁ x₂ x₃ .zoi. ja zo'e cu krinu le nu na pilno zoi
-    -- zoi. (xs₁ xs₂ : List A) .zoi. ja zo'e
-    lenkat : ∀ {a} → {A : Set a}
-           → (xs₁ : List A)
-           → (x : A)
-           → (xs₂ : List A)
-           → 𝓁 (xs₁ Data.List.++ x ∷ xs₂) ≡ 𝓁 xs₁ + ℕ.suc (𝓁 xs₂)
-    lenkat xs₁ x xs₂ = begin
-      𝓁 (xs₁ Data.List.++ x ∷ xs₂) ≡⟨ DLP.length-++ xs₁ ⟩
-      𝓁 xs₁ + 𝓁 (x ∷ xs₂) ≡⟨ cong (_+_ $ 𝓁 xs₁) refl ⟩
-      𝓁 xs₁ + ℕ.suc (𝓁 xs₂) ∎
     xex = begin
       𝓁 (x₂ ∷ x₃) ≡⟨ refl ⟩
       ℕ.suc (𝓁 $ ℕ.suc j' ↓ xen) ≡⟨ dropsuc xen j ⟩
@@ -983,7 +971,7 @@ wield? [] = const nothing
 wield? (x ∷ xs) dang = if (realShit x) (troci xs) nothing
   where
   inv = Character.inventory $ GameData.player dang
-  wisyj = Data.Maybe.is-just ∘ Item.weapwn ∘ Data.List.lookup inv
+  wisyj = Data.Maybe.is-just ∘ Item.weapwn ∘ _!_ inv
   realShit = _≡ᵇ_ "WIELD"
   troci : List String → Maybe $ String × GameData
   troci [] = just $ m , dang
@@ -1011,7 +999,7 @@ wield? (x ∷ xs) dang = if (realShit x) (troci xs) nothing
     wieldMsg = fromMaybe "You wield the weapon." xarcynotci
       where
       items = Character.inventory $ GameData.player dang
-      xarci = Item.weapwn $ Data.List.lookup items $ proj₁ selpli
+      xarci = Item.weapwn $ items ! proj₁ selpli
       xarcynotci = xarci Data.Maybe.>>= WeaponInfo.wieldMsg
     wieldData = wieldPawn dang p (proj₁ selpli) $ proj₂ selpli
       where
