@@ -456,7 +456,6 @@ takePawn : (q : GameData)
          → Σ GameData $ λ q'
            → Σ ((_≡_ on length ∘ GameData.rooms) q q') $ λ r
            → Σ ((_≡_ on length ∘ GameData.haters) q q') $ λ x
-             -- | lb
            → let xen = GameData.haters in
              let room = Character.room in
              (Σ (Character $ GameData.rooms q') $ λ k
