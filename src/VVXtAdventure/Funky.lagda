@@ -713,7 +713,7 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
         (ℕ.suc $ toℕ m') ↓ (proj₁ u) ≡⟨ refl ⟩
         (ℕ.suc $ toℕ m') ↓ xen' ≡⟨ cong (flip _↓_ xen' ∘ ℕ.suc) $ sym m≡m' ⟩
         (ℕ.suc $ toℕ m) ↓ xen' ∎
-      mip = mapimplant xen (lb! $ kumbi'o lb) kib m
+      mip = mapimplant xen likil kib m
       midju : kib likil' ≡ likil
       midju = cong cninykumfa $ mindus (Character.room likil) (sym dus) dus
         where
