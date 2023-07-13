@@ -611,7 +611,7 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
               → let u = ual x n f in
                 (_≡_
                   ((toℕ n) ↑ x)
-                  ((toℕ $ mink n $ proj₁ $ proj₂ $ u) ↑ proj₁ u))
+                  ((toℕ $ mink n $ proj₁ $ proj₂ u) ↑ proj₁ u))
       ualteik (_ ∷ _) zero _ = refl
       ualteik (x ∷ xs) (suc n) f = subst (_≡_ _) kong utz
         where
