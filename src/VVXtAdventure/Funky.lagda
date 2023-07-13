@@ -670,7 +670,8 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
     xen' = GameData.haters q'
     j = begin
       kib ¨ (konk xenim likil' xensim) ≡⟨ mapinj xenim xensim kib ⟩
-      konk xenkim (kib likil') xenksim ≡⟨ cong (flip (konk xenkim) xenksim) midju ⟩
+      konk xenkim (kib likil') xenksim ≡⟨ midkonklikil  ⟩
+      konk xenkim likil xenksim ≡⟨ refl ⟩
       klonk xenkim xenksim ≡⟨ sym $ mapimplant xen likil kib m ⟩
       klonk xenim' xensim' ≡⟨ cong (flip Data.List._++_ _) xenteik ⟩
       klonk (m:ℕ ↑ xen') xensim' ≡⟨ cong (konk (m:ℕ ↑ xen') likil) xendrop ⟩
@@ -696,6 +697,16 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
       xenbis = kumbi'o ¨ xen
       xenim' = m:ℕ ↑ xenbis
       xensim' = (ℕ.suc m:ℕ) ↓ xenbis
+      midkonklikil : (_≡_
+                        (konk xenkim (kib likil') xenksim)
+                        (konk xenkim likil xenksim))
+      midkonklikil = cong (midkonk xenkim xenksim) midju
+        where
+        midkonk = λ a b c → a ++ₗ (c ∷ b)
+        room = Character.room
+        cninykumfa = λ n → record likil {room = n}
+        midju : kib likil' ≡ likil
+        midju = cong cninykumfa $ mindus (room likil) (sym dus) dus
       m≡m' : toℕ m ≡ toℕ m'
       m≡m' = tomindus m $ sym $ DLP.length-map kumbi'o xen
       u = ual xenbis m' lb!
@@ -718,10 +729,6 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
         (ℕ.suc $ toℕ m) ↓ xen' ∎
         where
         ualdrop = Truthbrary.Data.List.Loom.ualdrop
-      midju : kib likil' ≡ likil
-      midju = cong cninykumfa $ mindus (Character.room likil) (sym dus) dus
-        where
-        cninykumfa = λ n → record likil {room = n}
       mapinj : ∀ {a b} → {A : Set a} → {B : Set b}
              → (xs ys : List A)
              → {x : A}
