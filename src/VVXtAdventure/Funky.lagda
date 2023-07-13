@@ -681,12 +681,12 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
       _¨_ = Data.List.map
       _↑_ = Data.List.take
       _↓_ = Data.List.drop
+      likil = lb! (kumbi'o lb)
+      likil' = kumfybi'o q' q (sym dus) likil
       konk : ∀ {a} → {A : Set a}
            → List A → A → List A → List A
       konk a b c = a ++ₗ (b ∷ c)
-      likil = lb! (kumbi'o lb)
       klonk = λ a → konk a likil
-      likil' = kumfybi'o q' q (sym dus) likil
       kib = kumfybi'o q q' dus
       m:ℕ = toℕ m
       m' = mink m $ sym $ DLP.length-map kumbi'o xen
