@@ -698,8 +698,8 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
       xenim' = m:ℕ ↑ xenbis
       xensim' = (ℕ.suc m:ℕ) ↓ xenbis
       midkonklikil : (_≡_
-                        (konk xenkim (kib likil') xenksim)
-                        (konk xenkim likil xenksim))
+                       (konk xenkim (kib likil') xenksim)
+                       (konk xenkim likil xenksim))
       midkonklikil = cong (midkonk xenkim xenksim) midju
         where
         midkonk = λ a b c → a ++ₗ (c ∷ b)
