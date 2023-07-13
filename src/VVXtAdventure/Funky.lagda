@@ -659,6 +659,11 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
     where
     inv = Character.inventory
 
+  kumdus = xenku'a , ualkonk kumste (Character.room lb) vimcu
+    where
+    kumste = GameData.rooms q
+    xenku'a = vimcu $ kumste ! Character.room lb
+
   xendus = lb! (kumbi'o lb) , j
     where
     xen = GameData.haters q
@@ -742,11 +747,6 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
                    (f x ∷ f ¨ ys)))
       mapinj [] _ _ = refl
       mapinj (x ∷ xs) ys f = cong (_∷_ $ f x) $ mapinj xs ys f
-
-  kumdus = xenku'a , ualkonk kumste (Character.room lb) vimcu
-    where
-    kumste = GameData.rooms q
-    xenku'a = vimcu $ kumste ! Character.room lb
 \end{code}
 
 \chapter{le mu'oi glibau.\ high-level .glibau.}
