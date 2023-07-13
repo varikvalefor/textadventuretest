@@ -722,12 +722,15 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
       xendrop : xensim' ≡ (ℕ.suc $ toℕ m) ↓ xen'
       xendrop = begin
         xensim' ≡⟨ refl ⟩
-        (ℕ.suc $ toℕ m) ↓ xenbis ≡⟨ cong (flip _↓_ xenbis ∘ ℕ.suc) m≡m' ⟩
+        (ℕ.suc $ toℕ m) ↓ xenbis ≡⟨ cong (zunbas xenbis) m≡m' ⟩
         (ℕ.suc $ toℕ m') ↓ xenbis ≡⟨ ualdrop xenbis m' lb! ⟩
         (ℕ.suc $ toℕ m') ↓ (proj₁ u) ≡⟨ refl ⟩
-        (ℕ.suc $ toℕ m') ↓ xen' ≡⟨ cong (flip _↓_ xen' ∘ ℕ.suc) $ sym m≡m' ⟩
+        (ℕ.suc $ toℕ m') ↓ xen' ≡⟨ cong (zunbas xen') $ sym m≡m' ⟩
         (ℕ.suc $ toℕ m) ↓ xen' ∎
         where
+        -- | .i zo .zunbas. cmavlaka'i lu zunle basti
+        -- li'u ja zo'e
+        zunbas = λ a → flip _↓_ a ∘ ℕ.suc
         ualdrop = Truthbrary.Data.List.Loom.ualdrop
       mapinj : ∀ {a b} → {A : Set a} → {B : Set b}
              → (xs ys : List A)
