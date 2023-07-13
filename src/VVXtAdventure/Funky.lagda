@@ -674,7 +674,7 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
       konk xenkim likil xenksim ≡⟨ refl ⟩
       klonk xenkim xenksim ≡⟨ sym $ mapimplant xen likil kib m ⟩
       klonk xenim' xensim' ≡⟨ cong (flip Data.List._++_ _) xenteik ⟩
-      klonk (m:ℕ ↑ xen') xensim' ≡⟨ cong (konk (m:ℕ ↑ xen') likil) xendrop ⟩
+      klonk (m:ℕ ↑ xen') xensim' ≡⟨ cong (klonk $ m:ℕ ↑ xen') xendrop ⟩
       klonk (m:ℕ ↑ xen') ((ℕ.suc m:ℕ) ↓ xen') ∎
       where
       _++ₗ_ = Data.List._++_
