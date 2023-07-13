@@ -497,10 +497,10 @@ takePawn : (q : GameData)
                  player' = mink (GameData.player' q) x;
                  yourfloorisnowclean = iofink q'})
            × (_≡_
-               (map Item.cname $ GameData.inventOf q' $ mink m x)
+               (GameData.inventOf q' $ mink m x)
                ((_∷_ ⍨)
-                 (map Item.cname $ GameData.inventOf q m)
-                 (Item.cname $ GameData.itemsInRoomOf q m ! n)))
+                 (GameData.inventOf q m)
+                 (GameData.itemsInRoomOf q m ! n)))
 takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
   where
   lb = GameData.haters q ! m
@@ -655,14 +655,9 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
     iofink = GameData.yourfloorisnowclean q
   dus = proj₁ $ proj₂ k''
   dis = proj₁ $ proj₂ x''
-  nyfin = f (inv lb) (inv lb') sl Item.cname $ cong inv $ proj₂ $ proj₂ x''
+  nyfin = sym $ cong inv $ proj₂ $ proj₂ x''
     where
-    lb' = proj₁ x'' ! mink m (proj₁ $ proj₂ x'')
     inv = Character.inventory
-    f : ∀ {a b} → {A : Set a} → {B : Set b}
-      → (b c : List A) → (x : A) → (f : A → B) → x ∷ b ≡ c
-      → map f c ≡ f x ∷ map f b
-    f b c x g refl = refl
 
   xendus = lb! (kumbi'o lb) , j
     where
