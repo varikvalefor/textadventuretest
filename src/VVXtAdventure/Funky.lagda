@@ -500,8 +500,6 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
   vimcu = λ x → record x {items = filterₗ nadu $ Room.items x}
     where
     nadu = Data.Bool._≟_ false ∘ _≡ᵇ_ (Item.cname sl) ∘ Item.cname
-  vimcud : (q : Room) → Room.cname (vimcu q) ≡ Room.cname q
-  vimcud _ = refl
   k'' : Σ (List Room) $ λ l
         → Σ (length (GameData.rooms q) ≡ length l) _
   k'' = ual (GameData.rooms q) (Character.room lb) vimcu
@@ -576,7 +574,7 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
       konk₂ = konk b₁' (cname k₂) ∘ mapₗ cname
       entydus = sym $ begin
         cname k₂ ≡⟨ cong cname $ proj₂ $ proj₂ k'' ⟩
-        cname (vimcu k₁) ≡⟨ vimcud k₁ ⟩
+        cname (vimcu k₁) ≡⟨ refl ⟩
         cname k₁ ∎
       madek : ∀ {a b} → {A : Set a} → {B : Set b}
             → (x : List A)
