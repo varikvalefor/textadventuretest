@@ -612,10 +612,10 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
                  → (toℕ n) ↑ x ≡ (toℕ n) ↑ proj₁ (ual x n f)
         ualteik₁ (_ ∷ _) zero _ = refl
         ualteik₁ (x ∷ xs) (suc n) f = cong (_∷_ x) $ ualteik₁ xs n f
+        utz = ualteik₁ (x ∷ xs) (suc n) f
         kong = cong (flip _↑_ $ proj₁ $ ual (x ∷ xs) (suc n) f) misuk
           where
           misuk = misuks n $ proj₁ $ proj₂ $ ual xs n f
-        utz = ualteik₁ (x ∷ xs) (suc n) f
       ualdrop : ∀ {a} → {A : Set a}
               → (x : List A)
               → (n : Fin $ length x)
