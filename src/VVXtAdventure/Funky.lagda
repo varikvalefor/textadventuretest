@@ -721,12 +721,11 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
         midju = cong cninykumfa $ mindus (room likil) (sym dus) dus
       m≡m' : toℕ m ≡ toℕ m'
       m≡m' = tomindus m $ sym $ DLP.length-map kumbi'o xen
-      u = ual xenbis m' lb!
       xenteik = begin
         xenim' ≡⟨ refl ⟩
         (toℕ m) ↑ xenbis ≡⟨ cong (flip _↑_ xenbis) m≡m' ⟩
         (toℕ m') ↑ xenbis ≡⟨ ualteik xenbis m' lb! ⟩
-        (toℕ m') ↑ (proj₁ u) ≡⟨ refl ⟩
+        (toℕ m') ↑ (proj₁ $ ual xenbis m' lb!) ≡⟨ refl ⟩
         (toℕ m') ↑ xen' ≡⟨ cong (flip _↑_ xen') $ sym m≡m' ⟩
         (toℕ m) ↑ xen' ∎
         where
@@ -736,7 +735,7 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
         xensim' ≡⟨ refl ⟩
         (ℕ.suc $ toℕ m) ↓ xenbis ≡⟨ cong (zunbas xenbis) m≡m' ⟩
         (ℕ.suc $ toℕ m') ↓ xenbis ≡⟨ ualdrop xenbis m' lb! ⟩
-        (ℕ.suc $ toℕ m') ↓ (proj₁ u) ≡⟨ refl ⟩
+        (ℕ.suc $ toℕ m') ↓ (proj₁ $ ual xenbis m' lb!) ≡⟨ refl ⟩
         (ℕ.suc $ toℕ m') ↓ xen' ≡⟨ cong (zunbas xen') $ sym m≡m' ⟩
         (ℕ.suc $ toℕ m) ↓ xen' ∎
         where
