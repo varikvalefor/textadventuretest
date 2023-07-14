@@ -589,11 +589,6 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
                     (mapₗ f $ ((ℕ.suc $ toℕ n) ↓ x)))))
       madek (_ ∷ _) zero _ = refl
       madek (x ∷ xs) (suc n) f = cong (_∷_ $ f x) $ madek xs n f
-      misuks : {m n : ℕ}
-             → (f : Fin m)
-             → (d : m ≡ n)
-             → ℕ.suc (toℕ f) ≡ toℕ (mink (suc f) $ cong ℕ.suc d)
-      misuks f refl = refl
       ualteik : ∀ {a} → {A : Set a}
               → (x : List A)
               → (n : Fin $ length x)
@@ -613,9 +608,10 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
         ualteik₁ (_ ∷ _) zero _ = refl
         ualteik₁ (x ∷ xs) (suc n) f = cong (_∷_ x) $ ualteik₁ xs n f
         utz = ualteik₁ (x ∷ xs) (suc n) f
-        kong = cong (flip _↑_ $ proj₁ $ ual (x ∷ xs) (suc n) f) misuk
+        kong = cong (flip _↑_ $ proj₁ u) misuk
           where
-          misuk = misuks n $ proj₁ $ proj₂ $ ual xs n f
+          u = ual (x ∷ xs) (suc n) f
+          misuk = tomindus (suc n) $ proj₁ $ proj₂ u
       ualdrop : ∀ {a} → {A : Set a}
               → (x : List A)
               → (n : Fin $ length x)
@@ -636,9 +632,9 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
         ualdrop₁ (_ ∷ _) zero _ = refl
         ualdrop₁ (_ ∷ xs) (suc n) f = ualdrop₁ xs n f
         ut = ualdrop₁ (x ∷ xs) (suc n) f
-        c = cong (flip _↓_ $ proj₁ u) $ misuks n $ proj₁ $ proj₂ u
-          where
-          u = ual xs n f
+        u = ual xs n f
+        uresuk = cong ℕ.suc $ proj₁ $ proj₂ u
+        c = cong (flip _↓_ $ proj₁ u) $ tomindus (suc n) uresuk
     p = GameData.player q
     kac = Data.List.map Room.cname $ GameData.rooms q
     kec = Data.List.map Room.cname k'
