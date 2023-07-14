@@ -670,7 +670,7 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
       klonk xenim' xensim' ≡⟨ cong (flip Data.List._++_ _) xenteik ⟩
       klonk (m:ℕ ↑ xen') xensim' ≡⟨ cong (klonk $ m:ℕ ↑ xen') xendrop ⟩
       klonk (m:ℕ ↑ xen') ((ℕ.suc m:ℕ) ↓ xen') ≡⟨ refl ⟩
-      konk (m:ℕ ↑ xen') likil ((ℕ.suc m:ℕ) ↓ xen') ≡⟨ likilxen ⟩
+      konk _ likil _ ≡⟨ cong (flip (konk _) _) $ proj₂ $ proj₂ x'' ⟩
       konk (m:ℕ ↑ xen') (xen' ! m'') ((ℕ.suc m:ℕ) ↓ xen') ≡⟨ refl ⟩
       koxonk (m:ℕ ↑ xen') ((ℕ.suc m:ℕ) ↓ xen') ≡⟨ koxonkdus ⟩
       koxonk (m'':ℕ ↑ xen') ((ℕ.suc m'':ℕ) ↓ xen') ≡⟨ xokonkyxen ⟩
@@ -699,12 +699,6 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
       xenbis = kumbi'o ¨ xen
       xenim' = m:ℕ ↑ xenbis
       xensim' = (ℕ.suc m:ℕ) ↓ xenbis
-      likilxen : (_≡_
-                   (klonk (m:ℕ ↑ xen') (ℕ.suc m:ℕ ↓ xen'))
-                   (koxonk (m:ℕ ↑ xen') (ℕ.suc m:ℕ ↓ xen')))
-      likilxen = cong midkonk $ proj₂ $ proj₂ x''
-        where
-        midkonk = λ t → konk (m:ℕ ↑ xen') t $ ℕ.suc m:ℕ ↓ xen'
       koxonkdus : (_≡_
                     (koxonk (m:ℕ ↑ xen') (ℕ.suc m:ℕ ↓ xen'))
                     (koxonk (m'':ℕ ↑ xen') (ℕ.suc m'':ℕ ↓ xen')))
