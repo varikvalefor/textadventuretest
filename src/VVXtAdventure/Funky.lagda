@@ -468,15 +468,7 @@ takePawn : (q : GameData)
                         (Data.List.drop
                           (ℕ.suc $ toℕ m)
                           (GameData.haters q)))))
-                  (Data.List._++_
-                    (Data.List.take
-                      (toℕ m)
-                      (GameData.haters q'))
-                    (_∷_
-                      k
-                      (Data.List.drop
-                        (ℕ.suc $ toℕ m)
-                        (xen q'))))))
+                  (xen q')))
            × (Σ Room $ λ r'
               → let kit = toℕ $ room $ xen q ! m in
                 (_≡_
@@ -675,7 +667,12 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
       klonk xenkim xenksim ≡⟨ sym $ mapimplant xen likil kib m ⟩
       klonk xenim' xensim' ≡⟨ cong (flip Data.List._++_ _) xenteik ⟩
       klonk (m:ℕ ↑ xen') xensim' ≡⟨ cong (klonk $ m:ℕ ↑ xen') xendrop ⟩
-      klonk (m:ℕ ↑ xen') ((ℕ.suc m:ℕ) ↓ xen') ∎
+      klonk (m:ℕ ↑ xen') ((ℕ.suc m:ℕ) ↓ xen') ≡⟨ refl ⟩
+      konk (m:ℕ ↑ xen') likil ((ℕ.suc m:ℕ) ↓ xen') ≡⟨ likilxen ⟩
+      konk (m:ℕ ↑ xen') (xen' ! m'') ((ℕ.suc m:ℕ) ↓ xen') ≡⟨ refl ⟩
+      koxonk (m:ℕ ↑ xen') ((ℕ.suc m:ℕ) ↓ xen') ≡⟨ koxonkdus ⟩
+      koxonk (m'':ℕ ↑ xen') ((ℕ.suc m'':ℕ) ↓ xen') ≡⟨ xokonkyxen ⟩
+      xen' ∎
       where
       _++ₗ_ = Data.List._++_
       _¨_ = Data.List.map
@@ -687,9 +684,12 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
            → List A → A → List A → List A
       konk a b c = a ++ₗ (b ∷ c)
       klonk = λ a → konk a likil
+      koxonk = λ a → konk a $ xen' ! mink m dis
       kib = kumfybi'o q q' dus
       m:ℕ = toℕ m
       m' = mink m $ sym $ DLP.length-map kumbi'o xen
+      m'' = mink m dis
+      m'':ℕ = toℕ m''
       xenim = m:ℕ ↑ xen
       xensim = (ℕ.suc m:ℕ) ↓ xen
       xenkim = kib ¨ xenim
@@ -697,6 +697,18 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
       xenbis = kumbi'o ¨ xen
       xenim' = m:ℕ ↑ xenbis
       xensim' = (ℕ.suc m:ℕ) ↓ xenbis
+      likilxen : (_≡_
+                   (klonk (m:ℕ ↑ xen') (ℕ.suc m:ℕ ↓ xen'))
+                   (koxonk (m:ℕ ↑ xen') (ℕ.suc m:ℕ ↓ xen')))
+      likilxen = cong midkonk $ proj₂ $ proj₂ x''
+        where
+        midkonk = λ t → konk (m:ℕ ↑ xen') t $ ℕ.suc m:ℕ ↓ xen'
+      koxonkdus : (_≡_
+                    (koxonk (m:ℕ ↑ xen') (ℕ.suc m:ℕ ↓ xen'))
+                    (koxonk (m'':ℕ ↑ xen') (ℕ.suc m'':ℕ ↓ xen')))
+      koxonkdus = cong f $ tomindus m dis
+        where
+        f = λ a → koxonk (a ↑ xen') (ℕ.suc a ↓ xen')
       midkonklikil : (_≡_
                        (konk xenkim (kib likil') xenksim)
                        (konk xenkim likil xenksim))
@@ -747,6 +759,23 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
                    (f x ∷ f ¨ ys)))
       mapinj [] _ _ = refl
       mapinj (x ∷ xs) ys f = cong (_∷_ $ f x) $ mapinj xs ys f
+      xokonkyxen = sym $ konkdus xen' m''
+        where
+        konkdus : ∀ {a} → {A : Set a}
+                → (x : List A)
+                → (n : Fin $ length x)
+                → let n' = toℕ n in
+                  (_≡_
+                    x
+                    (Data.List._++_
+                      (Data.List.take n' x)
+                      (_∷_
+                        (x ! n)
+                        (Data.List.drop
+                          (ℕ.suc n')
+                          x))))
+        konkdus (_ ∷ _) zero = refl
+        konkdus (x ∷ z) (suc n) = cong (_∷_ x) $ konkdus z n
 \end{code}
 
 \chapter{le mu'oi glibau.\ high-level .glibau.}
