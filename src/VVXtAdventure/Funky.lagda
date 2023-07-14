@@ -645,8 +645,10 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
     kac = Data.List.map Room.cname $ GameData.rooms q
     kec = Data.List.map Room.cname k'
     iofink = GameData.yourfloorisnowclean q
+
   dus = proj₁ $ proj₂ k''
   dis = proj₁ $ proj₂ x''
+
   nyfin = sym $ cong inv $ proj₂ $ proj₂ x''
     where
     inv = Character.inventory
