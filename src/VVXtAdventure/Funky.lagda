@@ -459,7 +459,8 @@ takePawn : (q : GameData)
            → let xen = GameData.haters in
              let room = Character.room in
              (Σ (Character $ GameData.rooms q') $ λ k
-              → (_≡_
+              → ((_≡_ ⍨)
+                  (xen q')
                   (Data.List.map (kumfybi'o q q' r)
                     (Data.List._++_
                       (Data.List.take (toℕ m) $ xen q)
@@ -467,8 +468,7 @@ takePawn : (q : GameData)
                         (kumfybi'o q' q (sym r) k)
                         (Data.List.drop
                           (ℕ.suc $ toℕ m)
-                          (GameData.haters q)))))
-                  (xen q')))
+                          (GameData.haters q)))))))
            × (Σ Room $ λ r'
               → let kit = toℕ $ room $ xen q ! m in
                 (_≡_
