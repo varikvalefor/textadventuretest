@@ -89,13 +89,20 @@ open import Relation.Binary.PropositionalEquality
 
 \begin{code}
 rooms : List Room
-rooms = dingyliv ∷ []
+rooms = dingyliv ∷ dingycos ∷ []
   where
+  dingycos : Room
+  dingycos = record {
+    name = "BROOM CLOSET";
+    cname = "DINGYLIVCLST";
+    travis = "DINGYLIVRM" ∷ [];
+    items = []
+    }
   dingyliv : Room
   dingyliv = record {
     name = "A DINGY LIVING ROOM";
     cname = "DINGYLIVRM";
-    travis = [];
+    travis = "DINGYLIVCLST" ∷ [];
     items = lamp ∷ table ∷ colorfun ∷ []}
     where
     table : Item
