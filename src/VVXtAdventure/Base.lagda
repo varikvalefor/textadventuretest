@@ -11,6 +11,8 @@
 \usepackage{newunicodechar}
 
 \newunicodechar{∀}{\ensuremath{\mathnormal\forall}}
+\newunicodechar{λ}{\ensuremath{\mathnormal\lambda}}
+\newunicodechar{≟}{\ensuremath{\stackrel{?}{=}}}
 \newunicodechar{∷}{\ensuremath{\mathnormal\Colon}}
 \newunicodechar{→}{\ensuremath{\mathnormal{\rightarrow}}}
 \newunicodechar{₁}{\ensuremath{\mathnormal{_1}}}
