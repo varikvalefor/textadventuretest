@@ -113,6 +113,7 @@ rooms = dingyliv ∷ dingycos ∷ []
       rmDescr = ("DINGYLIVRM" , lvdsc) ∷ [];
       dfDescr = "You see a flimsy-looking table.";
       hlDescr = "For some reason, you remove (from \
+                \your living room) this flimsy-\
                 \looking table.  Possible is that \
                 \excessive carrying causes the \
                 \degradation of the table; this thing \
