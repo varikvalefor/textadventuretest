@@ -652,11 +652,11 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
     kumste = GameData.rooms q
     xenku'a = vimcu $ kumste ! Character.room lb
 
-  xendus = lb! (kumbi'o lb) , j
+  xendus = lb! (kumbi'o lb) , kibyduxen
     where
     xen = GameData.haters q
     xen' = GameData.haters q'
-    j = begin
+    kibyduxen = begin
       kib ¨ (konk xenim likil' xensim) ≡⟨ mapinj xenim xensim kib ⟩
       konk xenkim (kib likil') xenksim ≡⟨ midkonklikil  ⟩
       konk xenkim likil xenksim ≡⟨ refl ⟩
