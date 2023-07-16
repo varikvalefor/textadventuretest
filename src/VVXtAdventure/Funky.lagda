@@ -772,25 +772,11 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
 \section{le fancu poi tu'a ke'a na rinka lo nu lo ctaipe be la'oi .\F{GameData}.\ cu na binxo pe'a ru'e}
 
 \subsection{la'oi .\F{epicwin?}.}
-ni'o ga jonai ga je tu'a la'o zoi.\ \B a .zoi.\ .indika le du'u jinga gi ga je la'o zoi.\ \B b .zoi.\ du lo xatra ja co'e poi tu'a ke'a cusku pe'a ru'e le du'u jinga gi ko'a goi la'o zoi.\ \F{epicwin?} \B a .zoi. du la'o zoi.\ \B b , \B a .zoi.\ gi ko'a du la'oi .\F{nothing}.
+ni'o ga jonai ga je tu'a la'o zoi.\ \B a .zoi.\ .indika lo du'u lo kelci cu jinga gi ko'a goi la'o zoi.\ \F{epicwin?} \B m \B a .zoi. du la'o zoi.\ \B m , \B a .zoi.\ gi ko'a du la'oi .\F{nothing}.
 
 \begin{code}
-epicwin? : GameData → COut
-epicwin? = scrimmage GameData.epicwin
-  where
-  jasat = "YOU HAVE ACCOMPLISHED\n\
-          \THE MISSION.\n\
-          \YOU ARE THE VERY PREVAILER\n\
-          \THAT PROTECT RIGHT\n\
-          \AND JUSTICE.\n\
-          \I WOULD EXPRESS MY SINCERE.\n\
-          \THANKS TO YOU.\n\n\
-          \\
-          \TAKE GOOD REST !\n\n\
-          \\
-          \\tGENERAL KAWASAKI"
-  scrimmage : (GameData → Bool) → GameData → COut
-  scrimmage f g = if (f g) (just $ jasat , g) nothing
+epicwin? : String → GameData → COut
+epicwin? m g = if (GameData.epicwin g) (just $ m , g) nothing
 \end{code}
 
 \subsection{la'oi .\F{inspect?}.}

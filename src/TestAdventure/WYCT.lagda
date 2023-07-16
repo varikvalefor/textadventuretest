@@ -89,13 +89,20 @@ open import Relation.Binary.PropositionalEquality
 
 \begin{code}
 rooms : List Room
-rooms = dingyliv ∷ []
+rooms = dingyliv ∷ dingycos ∷ []
   where
+  dingycos : Room
+  dingycos = record {
+    name = "BROOM CLOSET";
+    cname = "DINGYLIVCLST";
+    travis = "DINGYLIVRM" ∷ [];
+    items = []
+    }
   dingyliv : Room
   dingyliv = record {
     name = "A DINGY LIVING ROOM";
     cname = "DINGYLIVRM";
-    travis = [];
+    travis = "DINGYLIVCLST" ∷ [];
     items = lamp ∷ table ∷ colorfun ∷ []}
     where
     table : Item
@@ -106,6 +113,7 @@ rooms = dingyliv ∷ []
       rmDescr = ("DINGYLIVRM" , lvdsc) ∷ [];
       dfDescr = "You see a flimsy-looking table.";
       hlDescr = "For some reason, you remove (from \
+                \your living room) this flimsy-\
                 \looking table.  Possible is that \
                 \excessive carrying causes the \
                 \degradation of the table; this thing \
@@ -137,6 +145,24 @@ rooms = dingyliv ∷ []
       where
       lvdsc = "A pretty mediocre-looking lamp is \
               \nearby."
+\end{code}
+
+\subsection{la'oi .\F{winmsg}.}
+
+\begin{code}
+winmsg : String
+winmsg = "YOU HAVE ACCOMPLISHED\n\
+         \THE MISSION.\n\
+         \YOU ARE THE VERY PREVAILER\n\
+         \THAT PROTECT RIGHT\n\
+         \AND JUSTICE.\n\
+         \I WOULD EXPRESS MY SINCERE.\n\
+         \THANKS TO YOU.\n\n\
+         \\
+         \TAKE GOOD REST !\n\n\
+         \\
+         \\tGENERAL KAWASAKI"
+
 \end{code}
 
 \subsection{la'oi .\F{initialD}.}

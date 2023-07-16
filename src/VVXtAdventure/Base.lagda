@@ -11,6 +11,8 @@
 \usepackage{newunicodechar}
 
 \newunicodechar{∀}{\ensuremath{\mathnormal\forall}}
+\newunicodechar{λ}{\ensuremath{\mathnormal\lambda}}
+\newunicodechar{≟}{\ensuremath{\stackrel{?}{=}}}
 \newunicodechar{∷}{\ensuremath{\mathnormal\Colon}}
 \newunicodechar{→}{\ensuremath{\mathnormal{\rightarrow}}}
 \newunicodechar{₁}{\ensuremath{\mathnormal{_1}}}
@@ -173,7 +175,7 @@ ni'o ga naja la'o zoi.\ \B K .zoi.\ ctaipe la'o zoi.\ \F{List} \F{Room} .zoi.\ g
 	\item ga je la'o zoi.\ \F{Character.nicknames} \B a .zoi.\ liste lo'i datcme be ko'a gi
 	\item ga je tu'a la'o zoi.\ \B a .zoi.\ .indika lo du'u ko'a zvati lo selsni be la'o zoi.\ \F{lookup} \B q (\F{Character.room} \B a) .zoi.\ gi
 	\item ga je la'o zoi.\ \F{Character.inventory} zoi.\ liste lo'i ro se ralte be lo selsni be ko'a gi
-        \item ga naja la'o zoi.\ \B i .zoi.\ du la'o zoi.\ \F{Character.inventory} \B a .zoi.\footnote{ni'o pilno zo'e pe zo du mu'i le su'u djica lo nu lo me'oi .hbox.\ cu na me'oi .overfull.}\ gi la'o zoi.\ \F{Data.Maybe.map} (\F{lookup} (\B i)) \Sym \$ \F{Character.wielded} \B a .zoi.\ du la'oi .\F{nothing}.\ jonai cu me'oi .\F{just}.\ lo sinxa be zo'e poi ko'a me'oi .wield.\ ke'a ca zo'e
+        \item ga naja la'o zoi.\ \B i .zoi.\ du la'o zoi.\ \F{Character.inventory} \B a .zoi.\footnote{ni'o pilno zo'e pe zo du mu'i le su'u djica lo nu lo me'oi .hbox.\ cu na me'oi .overfull.}\ gi la'o zoi.\ \F{Data.Maybe.map} (\F{lookup} \B i) \Sym \$ \F{Character.wielded} \B a .zoi.\ du la'oi .\F{nothing}.\ jonai cu me'oi .\F{just}.\ lo sinxa be zo'e poi ko'a me'oi .wield.\ ke'a ca zo'e
 \end{itemize}
 
 .i la .varik.\ cu na jinvi le du'u sarcu fa lo nu jmina lo .lojban.\ velcki be la'o zoi.\ \F{Character.yourfloorisnowclean} .zoi.
