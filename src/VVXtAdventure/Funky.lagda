@@ -679,8 +679,8 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
       konk : ∀ {a} → {A : Set a}
            → List A → A → List A → List A
       konk a b c = a ++ₗ (b ∷ c)
-      klonk = λ a → konk a likil
-      koxonk = λ a → konk a $ xen' ! mink m dis
+      klonk = flip konk likil
+      koxonk = flip konk $ xen' ! mink m dis
       kib = kumfybi'o q q' dus
       m:ℕ = toℕ m
       m' = mink m $ sym $ DLP.length-map kumbi'o xen
