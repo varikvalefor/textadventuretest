@@ -760,9 +760,7 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
                       (Data.List.take n' x)
                       (_∷_
                         (x ! n)
-                        (Data.List.drop
-                          (ℕ.suc n')
-                          x))))
+                        (Data.List.drop (ℕ.suc n') x))))
         konkdus (_ ∷ _) zero = refl
         konkdus (x ∷ z) (suc n) = cong (_∷_ x) $ konkdus z n
 \end{code}
