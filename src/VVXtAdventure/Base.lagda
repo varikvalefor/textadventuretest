@@ -230,7 +230,7 @@ record GameData : Set
 
 ni'o ro da poi ke'a midnoi ja co'e zo'u ga jonai ga je lo se pruce cu mapti da gi da me'oi .\F{just}.\ pruce fi lo ctaipe be la'o zoi.\ \F{String} \Sym × \F{GameData} .zoi.\ be'o noi cagda fa lo nu ciska lo se .orsi be ke'a lo mu'oi glibau.\ standard output .glibau.\ kei je lo nu me'oi .\F{main}.\ pilno lo te .orsi be ke'a gi da du la'oi .\F{nothing}.
 
-.i la'oi .\F{COut}.\ na mutce lo ka ce'u smimlu la'oi .\texttt{cout}.\ po la'o zoi.\ C++ .zoi.\ fo la .varik.
+.i la'oi .\F{COut}.\ na mutce lo ka ce'u smimlu fo la .varik.\ fe la'oi .\texttt{cout}.\ po la'o zoi.\ C++ .zoi.
 
 \begin{code}
 COut = Maybe $ String × GameData
