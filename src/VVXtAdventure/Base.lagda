@@ -120,8 +120,8 @@ ni'o ga jo ko'a goi la'o zoi.\ \B a .zoi.\ ctaipe la'oi .\F{Item}.\ gi\ldots
 \begin{itemize}
 	\item ga je la'o zoi.\ \F{Item.name} \B a .zoi.\ mu'oi glibau.\ display name .glibau.\ ko'a gi
 	\item ga je ga je ko'e goi la'o zoi.\ \F{Item.cname} \B a .zoi.\ cmene ko'a gi cadga fa lo nu lo kelci cu pilno ko'e tu'a ko'a gi
-        \item ga jo ga jonai ga je ko'a sinxa lo me'oi .weapon.\ gi ko'e goi la'o zoi.\ \F{weapwn} \B a .zoi.\ me'oi .\F{just}.\ lo velski be ko'a gi ko'e du la'oi .\F{nothing}.\ gi
-        \item ga jo la'o zoi.\ \B s\ .zoi.\ du la'o zoi.\ \F{Item.smashInfo}\ \B a\ .zoi.\ gi ga jonai ga je na curmi lo nu spogau ja co'e fi lo selsni be ko'a gi ko'a goi la'o zoi.\ \B s\ .zoi.\ cu du la'oi .\F{nothing}.\ gi\ldots
+        \item ga je ga jonai ga je ko'a sinxa lo me'oi .weapon.\ gi ko'e goi la'o zoi.\ \F{weapwn} \B a .zoi.\ me'oi .\F{just}.\ lo velski be ko'a gi ko'e du la'oi .\F{nothing}.\ gi
+        \item ga je ga jo la'o zoi.\ \B s\ .zoi.\ du la'o zoi.\ \F{Item.smashInfo}\ \B a\ .zoi.\ gi ga jonai ga je na curmi lo nu spogau ja co'e fi lo selsni be ko'a gi ko'a goi la'o zoi.\ \B s\ .zoi.\ cu du la'oi .\F{nothing}.\ gi\ldots
         \begin{itemize}
 		\item ga je ga jonai ga je ko'e goi la'o zoi.\ \F{proj₁}\ \B s\ .zoi.\ du la'oi .\F{nothing}.\ gi cadga fa lo nu ko'i goi lo nu daspo ja co'e fi lo selsni be ko'a cu rinka lo nu cusku lo me'oi .default.\ gi cadga fa lo nu ko'i rinka lo nu ko'i rinka lo nu cusku lo selvau ja co'e be ko'e gi
 		\item ko'i rinka lo nu lo selsni be ko'a cu binxo ja co'e lo selsni be lo selvau ja co'e be la'o zoi.\ \F{Data.Maybe.map}\ \F{proj₁}\ \B s\ .zoi.\ gi
