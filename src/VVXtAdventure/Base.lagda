@@ -129,7 +129,7 @@ ni'o ga jo ko'a goi la'o zoi.\ \B a .zoi.\ ctaipe la'oi .\F{Item}.\ gi\ldots
 	\end{itemize}
 \end{itemize}
 
-.i la .varik.\ cu na jinvi le du'u sarcu fa lo nu jmina lo .lojban.\ velcki be la'o zoi.\ \F{Item.yourfloorisnowclean} .zoi.
+.i la .varik.\ cu na jinvi le du'u sarcu fa lo nu ciksi la'o zoi.\ \F{Item.yourfloorisnowclean} .zoi.\ bau la .lojban.
 
 \begin{code}
 record Item : Set
