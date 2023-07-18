@@ -226,13 +226,12 @@ wieldPawn : (q : GameData)
                    haters = GameData.haters q';
                    player' = mink (GameData.player' q) ℓ;
                    yourfloorisnowclean = ifinc q'}))
-            × let cik = Data.List._++_ in
-              (_≡_
-                (cik
+            × (_≡_
+                (Data.List._++_
                   (Data.List.take (toℕ j) $ x q)
                   (Data.List.drop (ℕ.suc $ toℕ j) $ x q))
                 (subst (List ∘ Character) (sym rud)
-                  (cik
+                  (Data.List._++_
                     (Data.List.take (toℕ j) $ x q')
                     (Data.List.drop (ℕ.suc $ toℕ j) $ x q'))))
 wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym tivos , refl , teid
