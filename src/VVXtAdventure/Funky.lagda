@@ -380,14 +380,14 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym tivos , refl , teid
       mapₘ = Data.Maybe.map
       dropsim = sym $ dropkat x₁ $ x₂ ∷ x₃
 
-  tivos = cong u₁ xijre
+  tivos = cong u₁ xijred
     where
     j' = mink j xenlen
     mapₘ = Data.Maybe.map
     u₁ = mapₘ (toℕ ∘ proj₁) ∘ Character.wieldedct
     xij = xen' ! mink j xenlen
-    xijre : xij ≡ x₂
-    xijre = sym $ DMP.just-injective $ begin
+    xijred : xij ≡ x₂
+    xijred = sym $ DMP.just-injective $ begin
       just x₂ ≡⟨ refl ⟩
       ⊃ (x₂ ∷ x₃) ≡⟨ cong ⊃ (sym $ dropkat x₁ $ x₂ ∷ x₃) ⟩
       ⊃ ((𝓁 x₁) ↓ xen') ≡⟨ xent ⟩
