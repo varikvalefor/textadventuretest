@@ -382,7 +382,6 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym tivos , refl , teid
 
   tivos = cong u₁ xijred
     where
-    j' = mink j xenlen
     mapₘ = Data.Maybe.map
     u₁ = mapₘ (toℕ ∘ proj₁) ∘ Character.wieldedct
     xij = xen' ! mink j xenlen
