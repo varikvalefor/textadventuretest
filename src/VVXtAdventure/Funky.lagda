@@ -283,6 +283,11 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym tivos , refl , teid
   xent = sym $ subkon $ dropind xen' $ mink j xenlen
     where
     _≤_ = Data.Nat._≤_
+    mindut : {m n : ℕ}
+           → (o : Fin m)
+           → (x : m ≡ n)
+           → toℕ (mink o x) ≡ toℕ o
+    mindut o refl = refl
     dropind : ∀ {a} → {A : Set a}
             → (xs : List A)
             → (n : Fin $ 𝓁 xs)
@@ -298,11 +303,6 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym tivos , refl , teid
     teiklendus (x ∷ xs) (ℕ.suc n) (Data.Nat.s≤s q) = ret
       where
       ret = cong ℕ.suc $ teiklendus xs n q
-    mindut : {m n : ℕ}
-           → (o : Fin m)
-           → (x : m ≡ n)
-           → toℕ (mink o x) ≡ toℕ o
-    mindut o refl = refl
     lisuc : ∀ {a} → {A : Set a}
           → (xs : List A)
           → (n : Fin $ 𝓁 xs)
