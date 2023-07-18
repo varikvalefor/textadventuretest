@@ -121,10 +121,15 @@ ni'o ga jo ko'a goi la'o zoi.\ \B a .zoi.\ ctaipe la'oi .\F{Item}.\ gi\ldots
 	\item ga je la'o zoi.\ \F{Item.name} \B a .zoi.\ mu'oi glibau.\ display name .glibau.\ ko'a gi
 	\item ga je ga je ko'e goi la'o zoi.\ \F{Item.cname} \B a .zoi.\ cmene ko'a gi cadga fa lo nu lo kelci cu pilno ko'e tu'a ko'a gi
         \item ga jo ga jonai ga je ko'a sinxa lo me'oi .weapon.\ gi ko'e goi la'o zoi.\ \F{weapwn} \B a .zoi.\ me'oi .\F{just}.\ lo velski be ko'a gi ko'e du la'oi .\F{nothing}.\ gi
+        \item ga jo la'o zoi.\ \B s\ .zoi.\ du la'o zoi.\ \F{Item.smashInfo}\ \B a\ .zoi.\ gi ga jonai ga je na curmi lo nu spogau ja co'e fi lo selsni be ko'a gi ko'a goi la'o zoi.\ \B s\ .zoi.\ cu du la'oi .\F{nothing}.\ gi\ldots
+        \begin{itemize}
+		\item ga je ga jonai ga je ko'e goi la'o zoi.\ \F{proj₁}\ \B s\ .zoi.\ du la'oi .\F{nothing}.\ gi cadga fa lo nu ko'i goi lo nu daspo ja co'e fi lo selsni be ko'a cu rinka lo nu cusku lo me'oi .default.\ gi cadga fa lo nu ko'i rinka lo nu ko'i rinka lo nu cusku lo selvau ja co'e be ko'e gi
+		\item ko'i rinka lo nu lo selsni be ko'a cu binxo ja co'e lo selsni be lo selvau ja co'e be la'o zoi.\ \F{Data.Maybe.map}\ \F{proj₁}\ \B s\ .zoi.\ gi
+        \end{itemize}
 	\item cadga fa lo nu ga naja ga je lo kelci cu cpedu lo nu skicu lo selsni be ko'a gi curmi lo nu skicu lo selsni be ko'a gi\ldots
 	\begin{itemize}
-		\item ga jonai ga je lo me'oi .inventory.\ be lo kelci xarpre ja co'e cu vasru lo selsni be ko'a gi pilno la'o zoi.\ \F{hlDescr} \B a .zoi.\ gi
-		\item ga jonai ga je ga je cpedu lo nu skicu kei ca lo nu lo kelci xarpre ja co'e cu zvati zo'e poi la'o zoi.\ \B C .zoi.\ mu'oi glibau.\ \F{Room.cname} .glibau.\ lo sinxa be ke'a gi la'o zoi.\ \F{rmDescr} \B a .zoi.\ vasru la'o zoi.\ \B C \Sym , \B d .zoi.\ gi pilno la'o zoi.\ \B d .zoi.\ gi
+	\item ga jonai ga je lo me'oi .inventory.\ be lo kelci xarpre ja co'e cu vasru lo selsni be ko'a gi pilno la'o zoi.\ \F{hlDescr} \B a .zoi.\ gi
+	\item ga jonai ga je ga je cpedu lo nu skicu kei ca lo nu lo kelci xarpre ja co'e cu zvati zo'e poi la'o zoi.\ \B C .zoi.\ mu'oi glibau.\ \F{Room.cname} .glibau.\ lo sinxa be ke'a gi la'o zoi.\ \F{rmDescr} \B a .zoi.\ vasru la'o zoi.\ \B C \Sym , \B d .zoi.\ gi pilno la'o zoi.\ \B d .zoi.\ gi
 		\item pilno la'o zoi.\ \F{dfDescr} \B a .zoi.
 	\end{itemize}
 \end{itemize}
@@ -134,6 +139,7 @@ ni'o ga jo ko'a goi la'o zoi.\ \B a .zoi.\ ctaipe la'oi .\F{Item}.\ gi\ldots
 \begin{code}
 record Item : Set
   where
+  inductive
   field
     name : String
     cname : String
@@ -141,6 +147,7 @@ record Item : Set
     rmDescr : List $ String × String
     dfDescr : String
     hlDescr : String
+    smashInfo : Maybe $ Maybe String × Item
     yourfloorisnowclean : nu,iork $ Data.List.map proj₁ rmDescr
 \end{code}
 
