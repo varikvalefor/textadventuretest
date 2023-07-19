@@ -69,9 +69,6 @@ ni'o la'o zoi.\ \texttt{\cmene}\ .zoi.\ vasru le velcki be lo fancu be fi la'oi 
 
 module VVXtAdventure.Funky where
 
-import Level
-import Agda.Builtin.Unit as ABU
-
 open import Data.Fin
   using (
     Fin;
