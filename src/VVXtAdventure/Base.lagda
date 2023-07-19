@@ -193,9 +193,8 @@ record Character (q : List Room) : Set
     room : Fin $ Data.List.length q
     inventory : List Item
     wieldedct : Maybe $ ∃ $ isWeapon ∘ lookup inventory
-  wielded = Data.Maybe.map proj₁ wieldedct
-  field
     yourfloorisnowclean : nu,iork $ Data.List.map Item.cname inventory
+  wielded = Data.Maybe.map proj₁ wieldedct
 \end{code}
 
 \subsection{la'oi .\F{GameData}.}
@@ -207,7 +206,7 @@ ni'o ga jo ko'a goi la'o zoi.\ \B a .zoi.\ ctaipe la'oi .\F{GameData} .zoi.\ gi\
         \item la'o zoi.\ \F{Data.List.lookup} (\F{GameData.xebni} \B a) \Sym \$ \F{GameData.player} \B a .zoi.\ velski lo kelci ke xarpre ja co'e po ko'a gi
         \end{itemize}
 
-.i la .varik.\ cu na jinvi le du'u sarcu fa lo nu ciksi la'o zoi.\ \F{GameData.yourfloorisnowclean}\ .zoi.\ ja la'o zoi.\ \F{GameData.travis}\ .zoi.\ bau la .lojban.
+.i la .varik.\ cu na jinvi le du'u sarcu fa lo nu ciksi la'o zoi.\ \F{GameData.yourfloorisnowclean}\ .zoi.\ bau la .lojban.
 
 \begin{code}
 record GameData : Set

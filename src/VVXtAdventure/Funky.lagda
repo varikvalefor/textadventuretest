@@ -67,7 +67,7 @@
 \maketitle
 
 \section{le me'oi .abstract.\ ja co'e}
-ni'o la'o zoi.\ \texttt{\cmene}\ .zoi. vasru le velcki be lo fancu be fi la'oi .\F{GameData}.\ ja zo'e
+ni'o la'o zoi.\ \texttt{\cmene}\ .zoi.\ vasru le velcki be lo fancu be fi la'oi .\F{GameData}.\ ja zo'e
 
 \section{le me'oi .preamble.\ ja co'e}
 
@@ -75,10 +75,6 @@ ni'o la'o zoi.\ \texttt{\cmene}\ .zoi. vasru le velcki be lo fancu be fi la'oi .
 {-# OPTIONS --safe #-}
 
 module VVXtAdventure.Funky where
-
-import Level
-import Agda.Builtin.Unit as ABU
-import Data.List.Properties as DLP
 
 open import Data.Fin
   using (
@@ -261,13 +257,12 @@ wieldPawn : (q : GameData)
                    haters = GameData.haters q';
                    player' = mink (GameData.player' q) ℓ;
                    yourfloorisnowclean = ifinc q'}))
-            × let cik = Data.List._++_ in
-              (_≡_
-                (cik
+            × (_≡_
+                (Data.List._++_
                   (Data.List.take (toℕ j) $ x q)
                   (Data.List.drop (ℕ.suc $ toℕ j) $ x q))
                 (subst (List ∘ Character) (sym rud)
-                  (cik
+                  (Data.List._++_
                     (Data.List.take (toℕ j) $ x q')
                     (Data.List.drop (ℕ.suc $ toℕ j) $ x q'))))
 wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym tivos , refl , teid
@@ -294,7 +289,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym tivos , refl , teid
     𝓁 (x₁ Data.List.++ d₂) ≡⟨ DLP.length-++ x₁ ⟩
     𝓁 x₁ + 𝓁 d₂ ≡⟨ cong (_+_ $ 𝓁 x₁) $ DLP.length-drop j' xen ⟩
     𝓁 x₁ + (𝓁 xen ∸ j') ≡⟨ cong (_+_ $ 𝓁 x₁) $ sym xex ⟩
-    𝓁 x₁ + 𝓁 (x₂ ∷ x₃) ≡⟨ cong (_+_ $ 𝓁 x₁) refl ⟩
+    𝓁 x₁ + 𝓁 (x₂ ∷ x₃) ≡⟨ refl ⟩
     𝓁 x₁ + ℕ.suc (𝓁 x₃) ≡⟨ sym $ DLP.length-++ x₁ ⟩
     𝓁 xen' ∎
     where
@@ -318,6 +313,11 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym tivos , refl , teid
   xent = sym $ subkon $ dropind xen' $ mink j xenlen
     where
     _≤_ = Data.Nat._≤_
+    mindut : {m n : ℕ}
+           → (o : Fin m)
+           → (x : m ≡ n)
+           → toℕ (mink o x) ≡ toℕ o
+    mindut o refl = refl
     dropind : ∀ {a} → {A : Set a}
             → (xs : List A)
             → (n : Fin $ 𝓁 xs)
@@ -333,11 +333,6 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym tivos , refl , teid
     teiklendus (x ∷ xs) (ℕ.suc n) (Data.Nat.s≤s q) = ret
       where
       ret = cong ℕ.suc $ teiklendus xs n q
-    mindut : {m n : ℕ}
-           → (o : Fin m)
-           → (x : m ≡ n)
-           → toℕ (mink o x) ≡ toℕ o
-    mindut o refl = refl
     lisuc : ∀ {a} → {A : Set a}
           → (xs : List A)
           → (n : Fin $ 𝓁 xs)
@@ -373,7 +368,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym tivos , refl , teid
     x₂d = begin
       just (iv $ xen ! j) ≡⟨ refl ⟩
       just (iv x₂) ≡⟨ refl ⟩
-      mapₘ iv (⊃ $ x₂ ∷ x₃) ≡⟨ cong (mapₘ iv ∘ ⊃) $ dropsim ⟩
+      mapₘ iv (⊃ $ x₂ ∷ x₃) ≡⟨ cong (mapₘ iv ∘ ⊃) dropsim ⟩
       mapₘ iv (⊃ $ (𝓁 x₁) ↓ xen') ≡⟨ cong (mapₘ iv) xent ⟩
       just (iv $ xen' ! mink j xenlen) ∎
       where
