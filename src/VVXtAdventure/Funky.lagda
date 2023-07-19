@@ -334,7 +334,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym tivos , refl , teid
     x₂d = begin
       just (iv $ xen ! j) ≡⟨ refl ⟩
       just (iv x₂) ≡⟨ refl ⟩
-      mapₘ iv (⊃ $ x₂ ∷ x₃) ≡⟨ cong (mapₘ iv ∘ ⊃) $ dropsim ⟩
+      mapₘ iv (⊃ $ x₂ ∷ x₃) ≡⟨ cong (mapₘ iv ∘ ⊃) dropsim ⟩
       mapₘ iv (⊃ $ (𝓁 x₁) ↓ xen') ≡⟨ cong (mapₘ iv) xent ⟩
       just (iv $ xen' ! mink j xenlen) ∎
       where
