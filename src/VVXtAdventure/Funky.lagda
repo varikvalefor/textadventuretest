@@ -231,7 +231,7 @@ wieldPawn : (q : GameData)
                   (Data.List._++_
                     (Data.List.take (toℕ j) $ x q')
                     (Data.List.drop (ℕ.suc $ toℕ j) $ x q'))))
-wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym tivos , refl , teid
+wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym tivos , refl , skrud
   where
   ⊃ = Data.List.head
   𝓁 = Data.List.length
@@ -354,7 +354,8 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym tivos , refl , teid
       just (xen' ! mink j xenlen) ≡⟨ refl ⟩
       just xij ∎
 
-  teid = begin
+  -- | ni'o zo .kond. binxo ja co'e zo .skrud.
+  skrud = begin
     cik ((toℕ j) ↑ xen) (ℕ.suc (toℕ j) ↓ xen) ≡⟨ refl ⟩
     cik x₁ x₃ ≡⟨ cong (flip cik x₃) $ takedus xen j ⟩
     cik x₁' x₃ ≡⟨ cong (cik x₁') $ dropydus xen {x₂ ∷ x₃} j ⟩
