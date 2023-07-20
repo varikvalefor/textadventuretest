@@ -231,7 +231,7 @@ wieldPawn : (q : GameData)
                   (Data.List._++_
                     (Data.List.take (toℕ j) $ x q')
                     (Data.List.drop (ℕ.suc $ toℕ j) $ x q'))))
-wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym tivos , refl , skrud
+wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
   where
   ⊃ = Data.List.head
   𝓁 = Data.List.length
@@ -341,7 +341,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym tivos , refl , skrud
       mapₘ = Data.Maybe.map
       dropsim = sym $ dropkat x₁ $ x₂ ∷ x₃
 
-  tivos = cong u₁ xijred
+  uidus = cong u₁ xijred
     where
     mapₘ = Data.Maybe.map
     u₁ = mapₘ (toℕ ∘ proj₁) ∘ Character.wieldedct
