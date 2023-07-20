@@ -301,9 +301,9 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
       ret = cong ℕ.suc $ teiklendus xs n q
     lisuc : ∀ {a} → {A : Set a}
           → (xs : List A)
-          → (n : Fin $ 𝓁 xs)
+          → Fin $ 𝓁 xs
           → Σ ℕ $ _≡_ (𝓁 xs) ∘ ℕ.suc
-    lisuc (_ ∷ xs) j = 𝓁 xs , refl
+    lisuc (_ ∷ xs) _ = 𝓁 xs , refl
     tuik : toℕ j ≤ 𝓁 xen
     tuik = subst (_≤_ _) kix $ DNP.≤-step $ subst (_≥_ _) mijd j'
       where
