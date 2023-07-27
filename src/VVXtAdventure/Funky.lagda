@@ -559,7 +559,7 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
       kₗ' = k' ! libek'
       konk : ∀ {a} → {A : Set a}
            → List A → A → List A → List A
-      konk b₁ b₂ b₃ = b₁ Data.List.++ b₂ ∷ b₃
+      konk a = Data.List._++_ a ∘₂ _∷_
       _↑_ = Data.List.take
       _↓_ = Data.List.drop
       b₁ = mapₗ cname $ (toℕ libek) ↑ k
