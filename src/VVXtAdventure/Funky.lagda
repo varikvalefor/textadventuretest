@@ -621,17 +621,19 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
       ualdrop (x ∷ xs) (suc n) f = subst (_≡_ _) c ud
         where
         u = ual xs n f
-        uresuk = cong ℕ.suc $ proj₁ $ proj₂ u
         c = cong (flip _↓_ $ proj₁ u) $ tomindus (suc n) uresuk
-        ualdrop₁ : ∀ {a} → {A : Set a}
-                 → (x : List A)
-                 → (n : Fin $ length x)
-                 → (f : A → A)
-                 → let n' = ℕ.suc $ toℕ n in
-                   n' ↓ x ≡ n' ↓ proj₁ (ual x n f)
-        ualdrop₁ (_ ∷ _) zero _ = refl
-        ualdrop₁ (_ ∷ xs) (suc n) f = ualdrop₁ xs n f
+          where
+          uresuk = cong ℕ.suc $ proj₁ $ proj₂ u
         ud = ualdrop₁ (x ∷ xs) (suc n) f
+          where
+          ualdrop₁ : ∀ {a} → {A : Set a}
+                   → (x : List A)
+                   → (n : Fin $ length x)
+                   → (f : A → A)
+                   → let n' = ℕ.suc $ toℕ n in
+                     n' ↓ x ≡ n' ↓ proj₁ (ual x n f)
+          ualdrop₁ (_ ∷ _) zero _ = refl
+          ualdrop₁ (_ ∷ xs) (suc n) f = ualdrop₁ xs n f
 
   dus = proj₁ $ proj₂ k''
   dis = proj₁ $ proj₂ x''
