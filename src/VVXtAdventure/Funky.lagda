@@ -541,6 +541,10 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
     player' = mink (GameData.player' q) $ proj₁ $ proj₂ x''
     }
     where
+    p = GameData.player q
+    kac = Data.List.map Room.cname $ GameData.rooms q
+    kec = Data.List.map Room.cname k'
+    iofink = GameData.yourfloorisnowclean q
     mapₗ = Data.List.map
     k = GameData.rooms q
     entydut = begin
@@ -631,10 +635,6 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
         u = ual xs n f
         uresuk = cong ℕ.suc $ proj₁ $ proj₂ u
         c = cong (flip _↓_ $ proj₁ u) $ tomindus (suc n) uresuk
-    p = GameData.player q
-    kac = Data.List.map Room.cname $ GameData.rooms q
-    kec = Data.List.map Room.cname k'
-    iofink = GameData.yourfloorisnowclean q
 
   dus = proj₁ $ proj₂ k''
   dis = proj₁ $ proj₂ x''
