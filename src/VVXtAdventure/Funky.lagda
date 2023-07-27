@@ -541,9 +541,6 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
     player' = mink (GameData.player' q) $ proj₁ $ proj₂ x''
     }
     where
-    p = GameData.player q
-    kac = Data.List.map Room.cname $ GameData.rooms q
-    kec = Data.List.map Room.cname k'
     iofink = GameData.yourfloorisnowclean q
     mapₗ = Data.List.map
     k = GameData.rooms q
