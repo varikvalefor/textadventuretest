@@ -546,17 +546,17 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
     k = GameData.rooms q
     entydut = begin
       mapₗ cname k ≡⟨ madek k libek cname ⟩
-      konk b₁ (cname k₁) b₂ ≡⟨ cong (flip (konk b₁) b₂) entydus ⟩
-      konk b₁ (cname k₂) b₂ ≡⟨ cong konk₁ $ ualteik k libek vimcu ⟩
-      konk b₁' (cname k₂) b₂ ≡⟨ cong konk₂ $ ualdrop k libek vimcu ⟩
-      konk b₁' (cname k₂) b₂' ≡⟨ sym $ madek k' libek' cname ⟩
+      konk b₁ (cname kₗ) b₂ ≡⟨ cong (flip (konk b₁) b₂) entydus ⟩
+      konk b₁ (cname kₗ') b₂ ≡⟨ cong konk₁ $ ualteik k libek vimcu ⟩
+      konk b₁' (cname kₗ') b₂ ≡⟨ cong konk₂ $ ualdrop k libek vimcu ⟩
+      konk b₁' (cname kₗ') b₂' ≡⟨ sym $ madek k' libek' cname ⟩
       mapₗ cname k' ∎
       where
       cname = Room.cname
       libek = Character.room lb
       libek' = mink libek $ proj₁ $ proj₂ k''
-      k₁ = k ! libek
-      k₂ = k' ! libek'
+      kₗ = k ! libek
+      kₗ' = k' ! libek'
       konk : ∀ {a} → {A : Set a}
            → List A → A → List A → List A
       konk b₁ b₂ b₃ = b₁ Data.List.++ b₂ ∷ b₃
@@ -566,12 +566,12 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
       b₂ = mapₗ cname $ (ℕ.suc $ toℕ libek) ↓ k
       b₁' = mapₗ cname $ (toℕ libek') ↑ k'
       b₂' = mapₗ cname $ (ℕ.suc $ toℕ libek') ↓ k'
-      konk₁ = λ b1 → konk (mapₗ cname b1) (cname k₂) b₂
-      konk₂ = konk b₁' (cname k₂) ∘ mapₗ cname
+      konk₁ = λ b1 → konk (mapₗ cname b1) (cname kₗ') b₂
+      konk₂ = konk b₁' (cname kₗ') ∘ mapₗ cname
       entydus = sym $ begin
-        cname k₂ ≡⟨ cong cname $ proj₂ $ proj₂ k'' ⟩
-        cname (vimcu k₁) ≡⟨ refl ⟩
-        cname k₁ ∎
+        cname kₗ' ≡⟨ cong cname $ proj₂ $ proj₂ k'' ⟩
+        cname (vimcu kₗ) ≡⟨ refl ⟩
+        cname kₗ ∎
       madek : ∀ {a b} → {A : Set a} → {B : Set b}
             → (x : List A)
             → (n : Fin $ length x)
