@@ -95,6 +95,7 @@ open import Data.Bool
 open import Data.List
   using (
     mapMaybe;
+    allFin;
     List;
     _∷_;
     []
@@ -561,7 +562,7 @@ travel? (x₁ ∷ xs₁) = if realShit (travel' xs₁) $ const nothing
           m = "You travel successfully."
       mathch = travelable $ methching $ zipfin $ GameData.rooms q
         where
-        zipfin = λ l → Data.List.zip (Data.List.allFin $ length l) l
+        zipfin = λ l → Data.List.zip (allFin $ length l) l
         methching = filterₗ $ _≟_ x ∘ Room.cname ∘ proj₂
         travelable : List $ F × Room → String ⊎ List F
         travelable [] = inj₁ m
@@ -598,7 +599,7 @@ wield? (x ∷ xs) dang = if (realShit x) (troci xs) nothing
   troci (_ ∷ _ ∷ _) = just $ m , dang
     where
     m = "You are giving me useless information."
-  troci (y ∷ []) with flt $ mapMaybe mapti? $ Data.List.allFin _
+  troci (y ∷ []) with flt $ mapMaybe mapti? $ allFin _
     where
     flt = filterₗ $ _≟_ y ∘ cname ∘ proj₁
       where
