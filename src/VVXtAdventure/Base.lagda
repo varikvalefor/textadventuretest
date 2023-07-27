@@ -125,16 +125,15 @@ ni'o ga jo ko'a goi la'o zoi.\ \B a .zoi.\ ctaipe la'oi .\F{Item}.\ gi\ldots
         \begin{itemize}
 		\item ga je ga jonai ga je ko'e goi la'o zoi.\ \F{proj₁}\ \B s\ .zoi.\ du la'oi .\F{nothing}.\ gi cadga fa lo nu ko'i goi lo nu daspo ja co'e fi lo selsni be ko'a cu rinka lo nu cusku lo me'oi .default.\ gi cadga fa lo nu ko'i rinka lo nu ko'i rinka lo nu cusku lo selvau ja co'e be ko'e gi
 		\item ko'i rinka lo nu lo selsni be ko'a cu binxo ja co'e lo selsni be lo selvau ja co'e be la'o zoi.\ \F{Data.Maybe.map}\ \F{proj₁}\ \B s\ .zoi.\ gi
-        \end{itemize}
+	\end{itemize}
 	\item cadga fa lo nu ga naja ga je lo kelci cu cpedu lo nu skicu lo selsni be ko'a gi curmi lo nu skicu lo selsni be ko'a gi\ldots
 	\begin{itemize}
 	\item ga jonai ga je lo me'oi .inventory.\ be lo kelci xarpre ja co'e cu vasru lo selsni be ko'a gi pilno la'o zoi.\ \F{hlDescr} \B a .zoi.\ gi
-	\item ga jonai ga je ga je cpedu lo nu skicu kei ca lo nu lo kelci xarpre ja co'e cu zvati zo'e poi la'o zoi.\ \B C .zoi.\ mu'oi glibau.\ \F{Room.cname} .glibau.\ lo sinxa be ke'a gi la'o zoi.\ \F{rmDescr} \B a .zoi.\ vasru la'o zoi.\ \B C \Sym , \B d .zoi.\ gi pilno la'o zoi.\ \B d .zoi.\ gi
-		\item pilno la'o zoi.\ \F{dfDescr} \B a .zoi.
+	\item ga jonai ga je ga je cpedu lo nu skicu kei ca lo nu lo kelci xarpre ja co'e cu zvati zo'e poi la'o zoi.\ \B C .zoi.\ mu'oi glibau.\ \F{Room.cname} .glibau.\ lo sinxa be ke'a gi la'o zoi.\ \F{rmDescr} \B a .zoi.\ vasru la'o zoi.\ \B C \Sym , \B d .zoi.\ gi pilno la'o zoi.\ \B d .zoi.\ gi pilno la'o zoi.\ \F{dfDescr} \B a .zoi.
 	\end{itemize}
 \end{itemize}
 
-.i la .varik.\ cu na jinvi le du'u sarcu fa lo nu jmina lo .lojban.\ velcki be la'o zoi.\ \F{Item.yourfloorisnowclean} .zoi.
+.i la .varik.\ cu na jinvi le du'u sarcu fa lo nu ciksi la'o zoi.\ \F{Item.yourfloorisnowclean} .zoi.\ bau la .lojban.
 
 \begin{code}
 record Item : Set
@@ -200,9 +199,8 @@ record Character (q : List Room) : Set
     room : Fin $ Data.List.length q
     inventory : List Item
     wieldedct : Maybe $ ∃ $ isWeapon ∘ lookup inventory
-  wielded = Data.Maybe.map proj₁ wieldedct
-  field
     yourfloorisnowclean : nu,iork $ Data.List.map Item.cname inventory
+  wielded = Data.Maybe.map proj₁ wieldedct
 \end{code}
 
 \subsection{la'oi .\F{GameData}.}
@@ -214,7 +212,7 @@ ni'o ga jo ko'a goi la'o zoi.\ \B a .zoi.\ ctaipe la'oi .\F{GameData} .zoi.\ gi\
         \item la'o zoi.\ \F{Data.List.lookup} (\F{GameData.xebni} \B a) \Sym \$ \F{GameData.player} \B a .zoi.\ velski lo kelci ke xarpre ja co'e po ko'a gi
         \end{itemize}
 
-.i la .varik.\ cu na jinvi le du'u sarcu fa lo nu ciksi la'o zoi.\ \F{GameData.yourfloorisnowclean}\ .zoi.\ ja la'o zoi.\ \F{GameData.travis}\ .zoi.\ bau la .lojban.
+.i la .varik.\ cu na jinvi le du'u sarcu fa lo nu ciksi la'o zoi.\ \F{GameData.yourfloorisnowclean}\ .zoi.\ bau la .lojban.
 
 \begin{code}
 record GameData : Set
@@ -234,7 +232,7 @@ record GameData : Set
 
 ni'o ro da poi ke'a midnoi ja co'e zo'u ga jonai ga je lo se pruce cu mapti da gi da me'oi .\F{just}.\ pruce fi lo ctaipe be la'o zoi.\ \F{String} \Sym × \F{GameData} .zoi.\ be'o noi cagda fa lo nu ciska lo se .orsi be ke'a lo mu'oi glibau.\ standard output .glibau.\ kei je lo nu me'oi .\F{main}.\ pilno lo te .orsi be ke'a gi da du la'oi .\F{nothing}.
 
-.i la'oi .\F{COut}.\ na mutce lo ka ce'u smimlu la'oi .\texttt{cout}.\ po la'o zoi.\ C++ .zoi.\ fo la .varik.
+.i la'oi .\F{COut}.\ na mutce lo ka ce'u smimlu fo la .varik.\ fe la'oi .\texttt{cout}.\ po la'o zoi.\ C++ .zoi.
 
 \begin{code}
 COut = Maybe $ String × GameData

@@ -56,7 +56,7 @@ open import Relation.Binary.PropositionalEquality
 \begin{code}
 colorfun : Item
 colorfun = record {
-  name = "COOL ROCK";
+  name = "COLORFUN";
   cname = "COLORFUN";
   rmDescr = [];
   weapwn = nothing;
