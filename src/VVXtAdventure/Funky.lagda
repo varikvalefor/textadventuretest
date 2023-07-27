@@ -578,10 +578,10 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
             → (_≡_
                 (mapₗ f x)
                 (Data.List._++_
-                  (mapₗ f $ ((toℕ n) ↑ x))
+                  (mapₗ f $ (toℕ n) ↑ x)
                   (_∷_
                     (f $ x ! n)
-                    (mapₗ f $ ((ℕ.suc $ toℕ n) ↓ x)))))
+                    (mapₗ f $ (ℕ.suc $ toℕ n) ↓ x))))
       madek (_ ∷ _) zero _ = refl
       madek (x ∷ xs) (suc n) f = cong (_∷_ $ f x) $ madek xs n f
       ualteik : ∀ {a} → {A : Set a}
