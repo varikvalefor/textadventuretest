@@ -603,7 +603,7 @@ wield? (x ∷ xs) dang = if (realShit x) (troci xs) nothing
     where
     flt = filterₗ $ _≟_ y ∘ cname ∘ proj₁
       where
-      cname = Item.cname ∘ Data.List.lookup inv
+      cname = Item.cname ∘ _!_ inv
     mapti? : _ → Maybe $ Σ (Fin _) $ _≡_ true ∘ wisyj
     mapti? n with true Data.Bool.≟ wisyj n
     ... | yes x = just $ n , x
