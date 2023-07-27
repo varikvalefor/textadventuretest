@@ -354,11 +354,12 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym tivos , refl , teid
         tondus {ℕ.suc m} {ℕ.suc n} refl = ret
           where
           ret = cong ℕ.suc $ tondus {m} {n} refl
-    xil = begin
-      toℕ (mink j xenlen) ≡⟨ mindut j xenlen ⟩
-      toℕ j ≡⟨ sym $ teiklendus xen (toℕ j) tuik ⟩
-      𝓁 x₁ ∎
     subkon = subst (_≡_ _) $ cong (⊃ ∘ flip _↓_ xen') xil
+      where
+      xil = begin
+        toℕ (mink j xenlen) ≡⟨ mindut j xenlen ⟩
+        toℕ j ≡⟨ sym $ teiklendus xen (toℕ j) tuik ⟩
+        𝓁 x₁ ∎
 
   xendj : let iv = Character.inventory in
           iv (xen ! j) ≡ iv (xen' ! mink j xenlen)
