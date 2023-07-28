@@ -429,7 +429,6 @@ smashGeneric q k x j = q' , kus₂ , {!!} , {!!}
   kus = k' ↑ rooms Data.List.++ snikerz ∷ (ℕ.suc k') ↓ rooms
   kus₂ = begin
     𝓁 rooms ≡⟨ cong 𝓁 $ teikdrop rooms k ⟩
-    𝓁 (r₁ ++ₗ k' ↓ rooms) ≡⟨ cong (𝓁 ∘ _++ₗ_ r₁) {!!} ⟩
     𝓁 (r₁ ++ₗ rooms ! k ∷ r₃) ≡⟨ DLP.length-++ r₁ ⟩
     𝓁 r₁ + 𝓁 (rooms ! k ∷ r₃) ≡⟨ refl ⟩
     𝓁 r₁ + ℕ.suc (𝓁 r₃) ≡⟨ refl ⟩
@@ -443,7 +442,11 @@ smashGeneric q k x j = q' , kus₂ , {!!} , {!!}
     teikdrop : ∀ {a} → {A : Set a}
              → (x : List A)
              → (n : Fin $ 𝓁 x)
-             → x ≡ ((toℕ n) ↑ x) ++ₗ ((toℕ n) ↓ x)
+             → (_≡_
+                 x
+                 (_++ₗ_
+                   ((toℕ n) ↑ x)
+                   (x ! n ∷ (ℕ.suc $ toℕ n) ↓ x)))
     teikdrop (x ∷ xs) zero = refl
     teikdrop (x ∷ xs) (suc n) = cong (_∷_ x) $ teikdrop xs n
   upgrayedd : Character rooms → Character kus
