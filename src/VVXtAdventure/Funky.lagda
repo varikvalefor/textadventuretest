@@ -101,6 +101,8 @@ open import Data.List
     []
   )
   renaming (
+    take to _↑_;
+    drop to _↓_;
     _++_ to _++ₗ_;
     lookup to _!_;
     filter to filterₗ
@@ -227,18 +229,16 @@ wieldPawn : (q : GameData)
                    yourfloorisnowclean = ifinc q'}))
             × (_≡_
                 (_++ₗ_
-                  (Data.List.take (toℕ j) $ x q)
-                  (Data.List.drop (ℕ.suc $ toℕ j) $ x q))
+                  ((toℕ j) ↑ x q)
+                  ((ℕ.suc $ toℕ j) ↓ x q))
                 (subst (List ∘ Character) (sym rud)
                   (_++ₗ_
-                    (Data.List.take (toℕ j) $ x q')
-                    (Data.List.drop (ℕ.suc $ toℕ j) $ x q'))))
+                    ((toℕ j) ↑ x q')
+                    ((ℕ.suc $ toℕ j) ↓ x q'))))
 wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
   where
   ⊃ = Data.List.head
   𝓁 = Data.List.length
-  _↓_ = Data.List.drop
-  _↑_ = Data.List.take
 
   xen = GameData.haters gd
   x₁ = (toℕ j) ↑ xen
@@ -463,7 +463,7 @@ ni'o ga jonai ga je la'oi .\F{scream?}.\ djuno pe'a ru'e lo du'u tu'a la'o zoi.\
 kumski? : Com
 kumski? m g = if mapti (just $ vijac , g) nothing
   where
-  mapti = Data.List.take 3 m ≡ᵇ ("LOOK" ∷ "AROUND" ∷ "YOU" ∷ [])
+  mapti = _↑_ 3 m ≡ᵇ ("LOOK" ∷ "AROUND" ∷ "YOU" ∷ [])
   kumfa = GameData.rooms g ! kumfid
     where
     kumfid = Character.room $ GameData.player g
