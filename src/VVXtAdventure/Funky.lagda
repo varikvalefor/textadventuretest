@@ -101,6 +101,7 @@ open import Data.List
     []
   )
   renaming (
+    _++_ to _++ₗ_;
     lookup to _!_;
     filter to filterₗ
   )
@@ -225,11 +226,11 @@ wieldPawn : (q : GameData)
                    player' = mink (GameData.player' q) ℓ;
                    yourfloorisnowclean = ifinc q'}))
             × (_≡_
-                (Data.List._++_
+                (_++ₗ_
                   (Data.List.take (toℕ j) $ x q)
                   (Data.List.drop (ℕ.suc $ toℕ j) $ x q))
                 (subst (List ∘ Character) (sym rud)
-                  (Data.List._++_
+                  (_++ₗ_
                     (Data.List.take (toℕ j) $ x q')
                     (Data.List.drop (ℕ.suc $ toℕ j) $ x q'))))
 wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
@@ -243,7 +244,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
   x₁ = (toℕ j) ↑ xen
   x₂ = record (xen ! j) {wieldedct = just $ i , t}
   x₃ = (ℕ.suc $ toℕ j) ↓ xen
-  xen' = x₁ Data.List.++ x₂ ∷ x₃
+  xen' = x₁ ++ₗ x₂ ∷ x₃
 
   dropkat : ∀ {a} → {A : Set a}
           → (xs ys : List A)
@@ -357,12 +358,11 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
 
   -- | ni'o zo .kond. binxo ja co'e zo .skrud.
   skrud = begin
-    cik ((toℕ j) ↑ xen) (ℕ.suc (toℕ j) ↓ xen) ≡⟨ refl ⟩
-    cik x₁ x₃ ≡⟨ cong (flip cik x₃) $ takedus xen j ⟩
-    cik x₁' x₃ ≡⟨ cong (cik x₁') $ dropydus xen {x₂ ∷ x₃} j ⟩
-    cik x₁' x₃' ∎
+    ((toℕ j) ↑ xen) ++ₗ (ℕ.suc (toℕ j) ↓ xen) ≡⟨ refl ⟩
+    x₁ ++ₗ x₃ ≡⟨ cong (flip _++ₗ_ x₃) $ takedus xen j ⟩
+    x₁' ++ₗ x₃ ≡⟨ cong (_++ₗ_ x₁') $ dropydus xen {x₂ ∷ x₃} j ⟩
+    x₁' ++ₗ x₃' ∎
     where
-    cik = Data.List._++_
     x₁' = (toℕ j) ↑ xen'
     x₃' = (ℕ.suc $ toℕ j) ↓ xen'
     takedus : ∀ {a} → {A : Set a}
@@ -370,7 +370,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
             → {b : List A}
             → (n : Fin $ 𝓁 a)
             → let n' = toℕ n in
-              n' ↑ a ≡ n' ↑ (flip cik b $ n' ↑ a)
+              n' ↑ a ≡ n' ↑ (flip _++ₗ_ b $ n' ↑ a)
     takedus (_ ∷ xs) zero = refl
     takedus (x ∷ xs) (suc n) = cong (_∷_ x) $ takedus xs n
     dropydus : ∀ {a} → {A : Set a}
@@ -380,7 +380,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
              → (n : Fin $ 𝓁 a)
              → let n' = toℕ n in
                let s = ℕ.suc n' in
-               s ↓ a ≡ s ↓ cik (n' ↑ a) (x ∷ s ↓ a)
+               s ↓ a ≡ s ↓ _++ₗ_ (n' ↑ a) (x ∷ s ↓ a)
     dropydus (_ ∷ xs) zero = refl
     dropydus (_ ∷ xs) {b} (suc n) = dropydus xs {b} n
 
