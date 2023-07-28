@@ -388,6 +388,61 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
   gd' = record gd {haters = xen'; player' = p'}
 \end{code}
 
+\section{la'oi .\F{smashGeneric}.}
+ni'o ga jo la'o zoi.\ \B S\ .zoi.\ du la'o zoi.\ \F{smashGeneric}\ \B q \B k \B x \B j\ .zoi.\ gi ga je la'o zoi.\ \F{proj₁}\ \B S\ .zoi.\ smimlu la'o zoi.\ \B q\ .zoi.\ gi ku'i la'o zoi.\ \F{Room.items}\ (\F{GameData.rooms}\ (\F{proj₁}\ \B S) \Sym !\ \F{mink}\ \B k\ (\F{proj₁}\ \Sym \$\ \F{proj₂}\ \B S)) \Sym !\ \F{mink}\ \B x\ (\F{proj₁} \Sym \$\ \F{proj₂}\ \Sym \$\ \F{proj₂}\ \B S) .zoi.\ du lo selvau pe'a be la'o zoi.\ \F{Data.Maybe.map}\ \F{proj₂}\ \Sym \$\ \F{Item.smashInfo}\ \Sym \$\ \F{Room.items}\ (\F{GameData.rooms} \B q\ \Sym !\ \B k) \Sym !\ \B x\ .zoi.
+
+\begin{code}
+smashGeneric : (q : GameData)
+             → let lir = length ∘ Room.items in
+               (k : Fin $ length $ GameData.rooms q)
+             → (x : Fin $ lir $ GameData.rooms q ! k)
+             → let item = Room.items (GameData.rooms q ! k) ! x in
+               Data.Maybe.Is-just $ Item.smashInfo item
+             → Σ GameData $ λ q'
+               → Σ ((_≡_ on (length ∘ GameData.rooms)) q q') $ λ ℓ
+               → Σ (_≡_
+                     (lir $ GameData.rooms q ! k)
+                     (lir $ GameData.rooms q' ! mink k ℓ)) $ λ ℓ₂
+               → let itstes = Room.items $ GameData.rooms q ! k in
+                 let _↑_ = Data.List.take in
+                 let _↓_ = Data.List.drop in
+                 (_≡_
+                   (Data.List.map
+                     just
+                     (Room.items $ GameData.rooms q' ! mink k ℓ))
+                   (Data.List._++_
+                     (Data.List.map just $ (toℕ x) ↑ itstes)
+                     (_∷_
+                       (Data.Maybe.map proj₂ $ Item.smashInfo item)
+                       (Data.List.map
+                         just
+                         ((ℕ.suc $ toℕ x) ↓ itstes)))))
+smashGeneric q k x j = q' , kus₂ , {!!} , {!!}
+  where
+  kus = ual (GameData.rooms q) k {!!}
+  kus₂ = proj₁ $ proj₂ kus
+  upgrayedd : Character $ GameData.rooms q
+            → Character $ proj₁ kus
+  upgrayedd t = record {
+    forename = Character.forename t;
+    surname = Character.surname t;
+    cname = Character.cname t;
+    nicknames = Character.nicknames t;
+    room = mink (Character.room t) kus₂;
+    inventory = Character.inventory t;
+    wieldedct = Character.wieldedct t;
+    yourfloorisnowclean = Character.yourfloorisnowclean t
+    }
+  q' = record q {
+    rooms = proj₁ kus;
+    haters = Data.List.map upgrayedd $ GameData.haters q;
+    player' = mink (GameData.player' q) $ sym plaid;
+    yourfloorisnowclean = {!!}
+    }
+    where
+    plaid = DLP.length-map upgrayedd $ GameData.haters q
+\end{code}
+
 \chapter{le mu'oi glibau.\ high-level .glibau.}
 
 \section{le fancu poi tu'a ke'a na rinka lo nu lo ctaipe be la'oi .\F{GameData}.\ cu na binxo pe'a ru'e}
