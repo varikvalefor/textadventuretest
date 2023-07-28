@@ -472,11 +472,7 @@ takePawn : (q : GameData)
                   (GameData.rooms q')
                   (_++ₗ_
                     (kit ↑ GameData.rooms q)
-                    (_∷_
-                      r'
-                      (_↓_
-                        (ℕ.suc kit)
-                        (GameData.rooms q))))))
+                    (_∷_ r' $ ℕ.suc kit ↓ GameData.rooms q))))
            × let iofink = GameData.yourfloorisnowclean in
              (_≡_
                q'
