@@ -101,6 +101,9 @@ open import Data.List
     []
   )
   renaming (
+    take to _↑_;
+    drop to _↓_;
+    _++_ to _++ₗ_;
     lookup to _!_;
     filter to filterₗ
   )
@@ -225,35 +228,33 @@ wieldPawn : (q : GameData)
                    player' = mink (GameData.player' q) ℓ;
                    yourfloorisnowclean = ifinc q'}))
             × (_≡_
-                (Data.List._++_
-                  (Data.List.take (toℕ j) $ x q)
-                  (Data.List.drop (ℕ.suc $ toℕ j) $ x q))
+                (_++ₗ_
+                  ((toℕ j) ↑ x q)
+                  ((ℕ.suc $ toℕ j) ↓ x q))
                 (subst (List ∘ Character) (sym rud)
-                  (Data.List._++_
-                    (Data.List.take (toℕ j) $ x q')
-                    (Data.List.drop (ℕ.suc $ toℕ j) $ x q'))))
+                  (_++ₗ_
+                    ((toℕ j) ↑ x q')
+                    ((ℕ.suc $ toℕ j) ↓ x q'))))
 wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
   where
   ⊃ = Data.List.head
   𝓁 = Data.List.length
-  _↓_ = Data.List.drop
-  _↑_ = Data.List.take
 
   xen = GameData.haters gd
   x₁ = (toℕ j) ↑ xen
   x₂ = record (xen ! j) {wieldedct = just $ i , t}
   x₃ = (ℕ.suc $ toℕ j) ↓ xen
-  xen' = x₁ Data.List.++ x₂ ∷ x₃
+  xen' = x₁ ++ₗ x₂ ∷ x₃
 
   dropkat : ∀ {a} → {A : Set a}
           → (xs ys : List A)
-          → (𝓁 xs) ↓ (xs Data.List.++ ys) ≡ ys
+          → (𝓁 xs) ↓ (xs ++ₗ ys) ≡ ys
   dropkat [] _ = refl
   dropkat (_ ∷ xs) ys = dropkat xs ys
 
   xenlen = begin
     𝓁 xen ≡⟨ cong 𝓁 $ sym $ DLP.take++drop j' xen ⟩
-    𝓁 (x₁ Data.List.++ d₂) ≡⟨ DLP.length-++ x₁ ⟩
+    𝓁 (x₁ ++ₗ d₂) ≡⟨ DLP.length-++ x₁ ⟩
     𝓁 x₁ + 𝓁 d₂ ≡⟨ cong (_+_ $ 𝓁 x₁) $ DLP.length-drop j' xen ⟩
     𝓁 x₁ + (𝓁 xen ∸ j') ≡⟨ cong (_+_ $ 𝓁 x₁) $ sym xex ⟩
     𝓁 x₁ + 𝓁 (x₂ ∷ x₃) ≡⟨ refl ⟩
@@ -357,12 +358,11 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
 
   -- | ni'o zo .kond. binxo ja co'e zo .skrud.
   skrud = begin
-    cik ((toℕ j) ↑ xen) (ℕ.suc (toℕ j) ↓ xen) ≡⟨ refl ⟩
-    cik x₁ x₃ ≡⟨ cong (flip cik x₃) $ takedus xen j ⟩
-    cik x₁' x₃ ≡⟨ cong (cik x₁') $ dropydus xen {x₂ ∷ x₃} j ⟩
-    cik x₁' x₃' ∎
+    ((toℕ j) ↑ xen) ++ₗ (ℕ.suc (toℕ j) ↓ xen) ≡⟨ refl ⟩
+    x₁ ++ₗ x₃ ≡⟨ cong (flip _++ₗ_ x₃) $ takedus xen j ⟩
+    x₁' ++ₗ x₃ ≡⟨ cong (_++ₗ_ x₁') $ dropydus xen {x₂ ∷ x₃} j ⟩
+    x₁' ++ₗ x₃' ∎
     where
-    cik = Data.List._++_
     x₁' = (toℕ j) ↑ xen'
     x₃' = (ℕ.suc $ toℕ j) ↓ xen'
     takedus : ∀ {a} → {A : Set a}
@@ -370,7 +370,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
             → {b : List A}
             → (n : Fin $ 𝓁 a)
             → let n' = toℕ n in
-              n' ↑ a ≡ n' ↑ (flip cik b $ n' ↑ a)
+              n' ↑ a ≡ n' ↑ (flip _++ₗ_ b $ n' ↑ a)
     takedus (_ ∷ xs) zero = refl
     takedus (x ∷ xs) (suc n) = cong (_∷_ x) $ takedus xs n
     dropydus : ∀ {a} → {A : Set a}
@@ -380,7 +380,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
              → (n : Fin $ 𝓁 a)
              → let n' = toℕ n in
                let s = ℕ.suc n' in
-               s ↓ a ≡ s ↓ cik (n' ↑ a) (x ∷ s ↓ a)
+               s ↓ a ≡ s ↓ _++ₗ_ (n' ↑ a) (x ∷ s ↓ a)
     dropydus (_ ∷ xs) zero = refl
     dropydus (_ ∷ xs) {b} (suc n) = dropydus xs {b} n
 
@@ -518,7 +518,7 @@ ni'o ga jonai ga je la'oi .\F{scream?}.\ djuno pe'a ru'e lo du'u tu'a la'o zoi.\
 kumski? : Com
 kumski? m g = if mapti (just $ vijac , g) nothing
   where
-  mapti = Data.List.take 3 m ≡ᵇ ("LOOK" ∷ "AROUND" ∷ "YOU" ∷ [])
+  mapti = _↑_ 3 m ≡ᵇ ("LOOK" ∷ "AROUND" ∷ "YOU" ∷ [])
   kumfa = GameData.rooms g ! kumfid
     where
     kumfid = Character.room $ GameData.player g
