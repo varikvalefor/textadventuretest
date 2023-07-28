@@ -419,10 +419,34 @@ smashGeneric : (q : GameData)
                          ((ℕ.suc $ toℕ x) ↓ itstes)))))
 smashGeneric q k x j = q' , kus₂ , {!!} , {!!}
   where
-  kus = ual (GameData.rooms q) k {!!}
-  kus₂ = proj₁ $ proj₂ kus
-  upgrayedd : Character $ GameData.rooms q
-            → Character $ proj₁ kus
+  k' = toℕ k
+  rooms = GameData.rooms q
+  snikerz = record (rooms ! k) {items = itstes₂}
+    where
+    itstes = Room.items $ rooms ! k
+    it₂ = proj₂ $ Data.Maybe.to-witness j
+    itstes₂ = proj₁ $ ual itstes x $ const it₂
+  kus = k' ↑ rooms Data.List.++ snikerz ∷ (ℕ.suc k') ↓ rooms
+  kus₂ = begin
+    𝓁 rooms ≡⟨ cong 𝓁 $ teikdrop rooms k ⟩
+    𝓁 (r₁ ++ₗ k' ↓ rooms) ≡⟨ cong (𝓁 ∘ _++ₗ_ r₁) {!!} ⟩
+    𝓁 (r₁ ++ₗ rooms ! k ∷ r₃) ≡⟨ DLP.length-++ r₁ ⟩
+    𝓁 r₁ + 𝓁 (rooms ! k ∷ r₃) ≡⟨ refl ⟩
+    𝓁 r₁ + ℕ.suc (𝓁 r₃) ≡⟨ refl ⟩
+    𝓁 r₁ + 𝓁 (snikerz ∷ r₃) ≡⟨ sym $ DLP.length-++ r₁ ⟩
+    𝓁 (r₁ ++ₗ snikerz ∷ r₃) ≡⟨ refl ⟩
+    𝓁 kus ∎
+    where
+    r₁ = k' ↑ rooms
+    r₃ = (ℕ.suc k') ↓ rooms
+    𝓁 = length
+    teikdrop : ∀ {a} → {A : Set a}
+             → (x : List A)
+             → (n : Fin $ 𝓁 x)
+             → x ≡ ((toℕ n) ↑ x) ++ₗ ((toℕ n) ↓ x)
+    teikdrop (x ∷ xs) zero = refl
+    teikdrop (x ∷ xs) (suc n) = cong (_∷_ x) $ teikdrop xs n
+  upgrayedd : Character rooms → Character kus
   upgrayedd t = record {
     forename = Character.forename t;
     surname = Character.surname t;
@@ -434,7 +458,7 @@ smashGeneric q k x j = q' , kus₂ , {!!} , {!!}
     yourfloorisnowclean = Character.yourfloorisnowclean t
     }
   q' = record q {
-    rooms = proj₁ kus;
+    rooms = kus;
     haters = Data.List.map upgrayedd $ GameData.haters q;
     player' = mink (GameData.player' q) $ sym plaid;
     yourfloorisnowclean = {!!}
