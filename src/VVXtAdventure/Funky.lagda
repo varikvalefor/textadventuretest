@@ -114,6 +114,8 @@ open import Data.List
     []
   )
   renaming (
+    take to _↑_;
+    drop to _↓_;
     _++_ to _++ₗ_;
     lookup to _!_;
     filter to filterₗ
@@ -261,18 +263,16 @@ wieldPawn : (q : GameData)
                    yourfloorisnowclean = ifinc q'}))
             × (_≡_
                 (_++ₗ_
-                  (Data.List.take (toℕ j) $ x q)
-                  (Data.List.drop (ℕ.suc $ toℕ j) $ x q))
+                  ((toℕ j) ↑ x q)
+                  ((ℕ.suc $ toℕ j) ↓ x q))
                 (subst (List ∘ Character) (sym rud)
                   (_++ₗ_
-                    (Data.List.take (toℕ j) $ x q')
-                    (Data.List.drop (ℕ.suc $ toℕ j) $ x q'))))
+                    ((toℕ j) ↑ x q')
+                    ((ℕ.suc $ toℕ j) ↓ x q'))))
 wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
   where
   ⊃ = Data.List.head
   𝓁 = Data.List.length
-  _↓_ = Data.List.drop
-  _↑_ = Data.List.take
 
   xen = GameData.haters gd
   x₁ = (toℕ j) ↑ xen
@@ -282,13 +282,13 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
 
   dropkat : ∀ {a} → {A : Set a}
           → (xs ys : List A)
-          → (𝓁 xs) ↓ (xs Data.List.++ ys) ≡ ys
+          → (𝓁 xs) ↓ (xs ++ₗ ys) ≡ ys
   dropkat [] _ = refl
   dropkat (_ ∷ xs) ys = dropkat xs ys
 
   xenlen = begin
     𝓁 xen ≡⟨ cong 𝓁 $ sym $ DLP.take++drop j' xen ⟩
-    𝓁 (x₁ Data.List.++ d₂) ≡⟨ DLP.length-++ x₁ ⟩
+    𝓁 (x₁ ++ₗ d₂) ≡⟨ DLP.length-++ x₁ ⟩
     𝓁 x₁ + 𝓁 d₂ ≡⟨ cong (_+_ $ 𝓁 x₁) $ DLP.length-drop j' xen ⟩
     𝓁 x₁ + (𝓁 xen ∸ j') ≡⟨ cong (_+_ $ 𝓁 x₁) $ sym xex ⟩
     𝓁 x₁ + 𝓁 (x₂ ∷ x₃) ≡⟨ refl ⟩
@@ -460,10 +460,10 @@ takePawn : (q : GameData)
                   (xen q')
                   (Data.List.map (kumfybi'o q q' r)
                     (_++ₗ_
-                      (Data.List.take (toℕ m) $ xen q)
+                      ((toℕ m) ↑ xen q)
                       (_∷_
                         (kumfybi'o q' q (sym r) k)
-                        (Data.List.drop
+                        (_↓_
                           (ℕ.suc $ toℕ m)
                           (GameData.haters q)))))))
            × (Σ Room $ λ r'
@@ -471,10 +471,10 @@ takePawn : (q : GameData)
                 (_≡_
                   (GameData.rooms q')
                   (_++ₗ_
-                    (Data.List.take kit $ GameData.rooms q)
+                    (kit ↑ GameData.rooms q)
                     (_∷_
                       r'
-                      (Data.List.drop
+                      (_↓_
                         (ℕ.suc kit)
                         (GameData.rooms q))))))
            × let iofink = GameData.yourfloorisnowclean in
@@ -562,8 +562,6 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
       konk : ∀ {a} → {A : Set a}
            → List A → A → List A → List A
       konk a = _++ₗ_ a ∘₂ _∷_
-      _↑_ = Data.List.take
-      _↓_ = Data.List.drop
       b₁ = mapₗ cname $ (toℕ libek) ↑ k
       b₂ = mapₗ cname $ (ℕ.suc $ toℕ libek) ↓ k
       b₁' = mapₗ cname $ (toℕ libek') ↑ k'
@@ -668,8 +666,6 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
       xen' ∎
       where
       _¨_ = Data.List.map
-      _↑_ = Data.List.take
-      _↓_ = Data.List.drop
       likil = lb! (kumbi'o lb)
       likil' = kumfybi'o q' q (sym dus) likil
       konk : ∀ {a} → {A : Set a}
@@ -753,7 +749,7 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
                   (_≡_
                     x
                     (_++ₗ_
-                      (Data.List.take n' x)
+                      (n' ↑ x)
                       (_∷_
                         (x ! n)
                         (Data.List.drop (ℕ.suc n') x))))
@@ -836,7 +832,7 @@ ni'o ga jonai ga je la'oi .\F{scream?}.\ djuno pe'a ru'e lo du'u tu'a la'o zoi.\
 kumski? : Com
 kumski? m g = if mapti (just $ vijac , g) nothing
   where
-  mapti = Data.List.take 3 m ≡ᵇ ("LOOK" ∷ "AROUND" ∷ "YOU" ∷ [])
+  mapti = _↑_ 3 m ≡ᵇ ("LOOK" ∷ "AROUND" ∷ "YOU" ∷ [])
   kumfa = GameData.rooms g ! kumfid
     where
     kumfid = Character.room $ GameData.player g
