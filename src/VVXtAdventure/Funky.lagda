@@ -108,11 +108,13 @@ open import Data.Bool
 open import Data.List
   using (
     mapMaybe;
+    allFin;
     List;
     _∷_;
     []
   )
   renaming (
+    _++_ to _++ₗ_;
     lookup to _!_;
     filter to filterₗ
   )
@@ -258,14 +260,14 @@ wieldPawn : (q : GameData)
                    player' = mink (GameData.player' q) ℓ;
                    yourfloorisnowclean = ifinc q'}))
             × (_≡_
-                (Data.List._++_
+                (_++ₗ_
                   (Data.List.take (toℕ j) $ x q)
                   (Data.List.drop (ℕ.suc $ toℕ j) $ x q))
                 (subst (List ∘ Character) (sym rud)
-                  (Data.List._++_
+                  (_++ₗ_
                     (Data.List.take (toℕ j) $ x q')
                     (Data.List.drop (ℕ.suc $ toℕ j) $ x q'))))
-wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym tivos , refl , teid
+wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
   where
   ⊃ = Data.List.head
   𝓁 = Data.List.length
@@ -276,7 +278,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym tivos , refl , teid
   x₁ = (toℕ j) ↑ xen
   x₂ = record (xen ! j) {wieldedct = just $ i , t}
   x₃ = (ℕ.suc $ toℕ j) ↓ xen
-  xen' = x₁ Data.List.++ x₂ ∷ x₃
+  xen' = x₁ ++ₗ x₂ ∷ x₃
 
   dropkat : ∀ {a} → {A : Set a}
           → (xs ys : List A)
@@ -335,9 +337,9 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym tivos , refl , teid
       ret = cong ℕ.suc $ teiklendus xs n q
     lisuc : ∀ {a} → {A : Set a}
           → (xs : List A)
-          → (n : Fin $ 𝓁 xs)
+          → Fin $ 𝓁 xs
           → Σ ℕ $ _≡_ (𝓁 xs) ∘ ℕ.suc
-    lisuc (_ ∷ xs) j = 𝓁 xs , refl
+    lisuc (_ ∷ xs) _ = 𝓁 xs , refl
     tuik : toℕ j ≤ 𝓁 xen
     tuik = subst (_≤_ _) kix $ DNP.≤-step $ subst (_≥_ _) mijd j'
       where
@@ -376,7 +378,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym tivos , refl , teid
       mapₘ = Data.Maybe.map
       dropsim = sym $ dropkat x₁ $ x₂ ∷ x₃
 
-  tivos = cong u₁ xijred
+  uidus = cong u₁ xijred
     where
     mapₘ = Data.Maybe.map
     u₁ = mapₘ (toℕ ∘ proj₁) ∘ Character.wieldedct
@@ -389,13 +391,13 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym tivos , refl , teid
       just (xen' ! mink j xenlen) ≡⟨ refl ⟩
       just xij ∎
 
-  teid = begin
-    cik ((toℕ j) ↑ xen) (ℕ.suc (toℕ j) ↓ xen) ≡⟨ refl ⟩
-    cik x₁ x₃ ≡⟨ cong (flip cik x₃) $ takedus xen j ⟩
-    cik x₁' x₃ ≡⟨ cong (cik x₁') $ dropydus xen {x₂ ∷ x₃} j ⟩
-    cik x₁' x₃' ∎
+  -- | ni'o zo .kond. binxo ja co'e zo .skrud.
+  skrud = begin
+    ((toℕ j) ↑ xen) ++ₗ (ℕ.suc (toℕ j) ↓ xen) ≡⟨ refl ⟩
+    x₁ ++ₗ x₃ ≡⟨ cong (flip _++ₗ_ x₃) $ takedus xen j ⟩
+    x₁' ++ₗ x₃ ≡⟨ cong (_++ₗ_ x₁') $ dropydus xen {x₂ ∷ x₃} j ⟩
+    x₁' ++ₗ x₃' ∎
     where
-    cik = Data.List._++_
     x₁' = (toℕ j) ↑ xen'
     x₃' = (ℕ.suc $ toℕ j) ↓ xen'
     takedus : ∀ {a} → {A : Set a}
@@ -403,7 +405,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym tivos , refl , teid
             → {b : List A}
             → (n : Fin $ 𝓁 a)
             → let n' = toℕ n in
-              n' ↑ a ≡ n' ↑ (flip cik b $ n' ↑ a)
+              n' ↑ a ≡ n' ↑ (flip _++ₗ_ b $ n' ↑ a)
     takedus (_ ∷ xs) zero = refl
     takedus (x ∷ xs) (suc n) = cong (_∷_ x) $ takedus xs n
     dropydus : ∀ {a} → {A : Set a}
@@ -413,7 +415,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym tivos , refl , teid
              → (n : Fin $ 𝓁 a)
              → let n' = toℕ n in
                let s = ℕ.suc n' in
-               s ↓ a ≡ s ↓ cik (n' ↑ a) (x ∷ s ↓ a)
+               s ↓ a ≡ s ↓ _++ₗ_ (n' ↑ a) (x ∷ s ↓ a)
     dropydus (_ ∷ xs) zero = refl
     dropydus (_ ∷ xs) {b} (suc n) = dropydus xs {b} n
 
@@ -457,7 +459,7 @@ takePawn : (q : GameData)
               → ((_≡_ ⍨)
                   (xen q')
                   (Data.List.map (kumfybi'o q q' r)
-                    (Data.List._++_
+                    (_++ₗ_
                       (Data.List.take (toℕ m) $ xen q)
                       (_∷_
                         (kumfybi'o q' q (sym r) k)
@@ -468,7 +470,7 @@ takePawn : (q : GameData)
               → let kit = toℕ $ room $ xen q ! m in
                 (_≡_
                   (GameData.rooms q')
-                  (Data.List._++_
+                  (_++ₗ_
                     (Data.List.take kit $ GameData.rooms q)
                     (_∷_
                       r'
@@ -559,7 +561,7 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
       kₗ' = k' ! libek'
       konk : ∀ {a} → {A : Set a}
            → List A → A → List A → List A
-      konk a = Data.List._++_ a ∘₂ _∷_
+      konk a = _++ₗ_ a ∘₂ _∷_
       _↑_ = Data.List.take
       _↓_ = Data.List.drop
       b₁ = mapₗ cname $ (toℕ libek) ↑ k
@@ -578,7 +580,7 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
             → (f : A → B)
             → (_≡_
                 (mapₗ f x)
-                (Data.List._++_
+                (_++ₗ_
                   (mapₗ f $ (toℕ n) ↑ x)
                   (_∷_
                     (f $ x ! n)
@@ -656,7 +658,7 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
       konk xenkim (kib likil') xenksim ≡⟨ midkonklikil  ⟩
       konk xenkim likil xenksim ≡⟨ refl ⟩
       klonk xenkim xenksim ≡⟨ sym $ mapimplant xen likil kib m ⟩
-      klonk xenim' xensim' ≡⟨ cong (flip Data.List._++_ _) xenteik ⟩
+      klonk xenim' xensim' ≡⟨ cong (flip _++ₗ_ _) xenteik ⟩
       klonk (m:ℕ ↑ xen') xensim' ≡⟨ cong (klonk $ m:ℕ ↑ xen') xendrop ⟩
       klonk (m:ℕ ↑ xen') ((ℕ.suc m:ℕ) ↓ xen') ≡⟨ refl ⟩
       konk _ likil _ ≡⟨ cong (flip (konk _) _) $ proj₂ $ proj₂ x'' ⟩
@@ -665,7 +667,6 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
       koxonk (m'':ℕ ↑ xen') ((ℕ.suc m'':ℕ) ↓ xen') ≡⟨ xokonkyxen ⟩
       xen' ∎
       where
-      _++ₗ_ = Data.List._++_
       _¨_ = Data.List.map
       _↑_ = Data.List.take
       _↓_ = Data.List.drop
@@ -735,10 +736,10 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
              → (_≡_
                  (_¨_
                    f
-                   (Data.List._++_
+                   (_++ₗ_
                      xs
                      (x ∷ ys)))
-                 (Data.List._++_
+                 (_++ₗ_
                    (f ¨ xs)
                    (f x ∷ f ¨ ys)))
       mapinj [] _ _ = refl
@@ -751,7 +752,7 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
                 → let n' = toℕ n in
                   (_≡_
                     x
-                    (Data.List._++_
+                    (_++ₗ_
                       (Data.List.take n' x)
                       (_∷_
                         (x ! n)
@@ -781,18 +782,17 @@ inspect? (c ∷ f) dang = if methch (getDown f) nothing
   where
   methch = c ≡ᵇ "INSPECT"
   getDown : List String → COut
-  getDown (n ∷ []) = gd' $ filterₗ (_≟_ n ∘ Item.cname) inv
+  getDown (n ∷ []) with filterₗ (_≟_ n ∘ Item.cname) inv
     where
     inv = Character.inventory $ GameData.player dang
-    gd' : List Item → COut
-    gd' (q ∷ []) = just $ Item.hlDescr q , dang
-    gd' (_ ∷ _ ∷ _) = just $ m , dang
-      where
-      m = "You're going to have to be more specific.  \
-          \Sure, I could choose some arbitrary matching \
-          \item, but that would probably piss you off, \
-          \and I'm already insulting you right and left."
-    gd' [] = just $ "I'm not seeing it." , dang
+  ... | [] = just $ "I'm not seeing it." , dang
+  ... | (q ∷ []) = just $ Item.hlDescr q , dang
+  ... | (_ ∷ _ ∷ _) = just $ m , dang
+    where
+    m = "You're going to have to be more specific.  \
+        \Sure, I could choose some arbitrary matching \
+        \item, but that would probably piss you off, \
+        \and I'm already insulting you right and left."
   getDown (_ ∷ _ ∷ _) = just $ m , dang
     where
     m = "I can't handle any more of your inane \
@@ -935,7 +935,7 @@ travel? (x₁ ∷ xs₁) = if realShit (travel' xs₁) $ const nothing
           m = "You travel successfully."
       mathch = travelable $ methching $ zipfin $ GameData.rooms q
         where
-        zipfin = λ l → Data.List.zip (Data.List.allFin $ length l) l
+        zipfin = λ l → Data.List.zip (allFin $ length l) l
         methching = filterₗ $ _≟_ x ∘ Room.cname ∘ proj₂
         travelable : List $ F × Room → String ⊎ List F
         travelable [] = inj₁ m
@@ -945,7 +945,7 @@ travel? (x₁ ∷ xs₁) = if realShit (travel' xs₁) $ const nothing
         travelable (x ∷ xs) = inj₂ $ pj1s $ filterₗ tr $ x ∷ xs
           where
           pj1s = Data.List.map proj₁
-          cnq = λ a b → Room.cname (proj₂ a) ≟ b
+          cnq = _≟_ ∘ Room.cname ∘ proj₂
           tr = λ a → any? (cnq a) $ Room.travis cur
   travel' (_ ∷ _ ∷ _) q = just $ m , q
     where
@@ -972,11 +972,11 @@ wield? (x ∷ xs) dang = if (realShit x) (troci xs) nothing
   troci (_ ∷ _ ∷ _) = just $ m , dang
     where
     m = "You are giving me useless information."
-  troci (y ∷ []) with flt $ mapMaybe mapti? $ Data.List.allFin _
+  troci (y ∷ []) with flt $ mapMaybe mapti? $ allFin _
     where
     flt = filterₗ $ _≟_ y ∘ cname ∘ proj₁
       where
-      cname = Item.cname ∘ Data.List.lookup inv
+      cname = Item.cname ∘ _!_ inv
     mapti? : _ → Maybe $ Σ (Fin _) $ _≡_ true ∘ wisyj
     mapti? n with true Data.Bool.≟ wisyj n
     ... | yes x = just $ n , x
