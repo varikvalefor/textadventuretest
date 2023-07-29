@@ -430,9 +430,9 @@ smashGeneric q k x j = q' , kus₂ , {!!} , {!!}
     𝓁 (r₁ ++ₗ snikerz ∷ r₃) ≡⟨ refl ⟩
     𝓁 kus ∎
     where
+    𝓁 = length
     r₁ = k' ↑ rooms
     r₃ = (ℕ.suc k') ↓ rooms
-    𝓁 = length
     teikdrop : ∀ {a} → {A : Set a}
              → (x : List A)
              → (n : Fin $ 𝓁 x)
