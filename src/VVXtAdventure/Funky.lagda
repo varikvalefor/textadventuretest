@@ -404,8 +404,6 @@ smashGeneric : (q : GameData)
                      (lir $ GameData.rooms q ! k)
                      (lir $ GameData.rooms q' ! mink k ℓ)) $ λ ℓ₂
                → let itstes = Room.items $ GameData.rooms q ! k in
-                 let _↑_ = Data.List.take in
-                 let _↓_ = Data.List.drop in
                  (_≡_
                    (Data.List.map
                      just
