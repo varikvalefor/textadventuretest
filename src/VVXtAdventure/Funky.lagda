@@ -564,10 +564,8 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
       konk a = _++ₗ_ a ∘₂ _∷_
       konk₁ = λ b1 → konk (mapₗ cname b1) (cname kₗ') b₂
       konk₂ = konk b₁' (cname kₗ') ∘ mapₗ cname
-      entydus = sym $ begin
-        cname kₗ' ≡⟨ cong cname $ proj₂ $ proj₂ k'' ⟩
-        cname (vimcu kₗ) ≡⟨ refl ⟩
-        cname kₗ ∎
+      entydus : cname kₗ ≡ cname kₗ'
+      entydus = sym $ cong cname $ proj₂ $ proj₂ k''
       madek : ∀ {a b} → {A : Set a} → {B : Set b}
             → (x : List A)
             → (n : Fin $ length x)
