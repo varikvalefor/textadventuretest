@@ -555,13 +555,13 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
       libek' = mink libek $ proj₁ $ proj₂ k''
       kₗ = k ! libek
       kₗ' = k' ! libek'
-      konk : ∀ {a} → {A : Set a}
-           → List A → A → List A → List A
-      konk a = _++ₗ_ a ∘₂ _∷_
       b₁ = mapₗ cname $ (toℕ libek) ↑ k
       b₂ = mapₗ cname $ (ℕ.suc $ toℕ libek) ↓ k
       b₁' = mapₗ cname $ (toℕ libek') ↑ k'
       b₂' = mapₗ cname $ (ℕ.suc $ toℕ libek') ↓ k'
+      konk : ∀ {a} → {A : Set a}
+           → List A → A → List A → List A
+      konk a = _++ₗ_ a ∘₂ _∷_
       konk₁ = λ b1 → konk (mapₗ cname b1) (cname kₗ') b₂
       konk₂ = konk b₁' (cname kₗ') ∘ mapₗ cname
       entydus = sym $ begin
