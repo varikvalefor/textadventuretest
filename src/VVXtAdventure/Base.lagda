@@ -199,9 +199,8 @@ record Character (q : List Room) : Set
     inventory : List Item
     health : ℚ
     wieldedct : Maybe $ ∃ $ isWeapon ∘ lookup inventory
-  wielded = Data.Maybe.map proj₁ wieldedct
-  field
     yourfloorisnowclean : nu,iork $ Data.List.map Item.cname inventory
+  wielded = Data.Maybe.map proj₁ wieldedct
 \end{code}
 
 \subsection{la'oi .\F{GameData}.}
