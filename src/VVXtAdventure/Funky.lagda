@@ -411,8 +411,18 @@ smashGeneric : (q : GameData)
                      (_∷_
                        (proj₂ $ Data.Maybe.to-witness j)
                        ((ℕ.suc $ toℕ x) ↓ itstes))))
-smashGeneric q k x j = q' , kus₂ , {!!} , {!!}
+smashGeneric q k x j = q' , kus₂ , xindus , {!!}
   where
+  teikdrop : ∀ {a} → {A : Set a}
+           → (x : List A)
+           → (n : Fin $ length x)
+           → (_≡_
+               x
+               (_++ₗ_
+                 ((toℕ n) ↑ x)
+                 (x ! n ∷ (ℕ.suc $ toℕ n) ↓ x)))
+  teikdrop (x ∷ xs) zero = refl
+  teikdrop (x ∷ xs) (suc n) = cong (_∷_ x) $ teikdrop xs n
   k' = toℕ k
   rooms = GameData.rooms q
   snikerz = record (rooms ! k) {items = itstes₂}
@@ -433,16 +443,6 @@ smashGeneric q k x j = q' , kus₂ , {!!} , {!!}
     𝓁 = length
     r₁ = k' ↑ rooms
     r₃ = (ℕ.suc k') ↓ rooms
-    teikdrop : ∀ {a} → {A : Set a}
-             → (x : List A)
-             → (n : Fin $ 𝓁 x)
-             → (_≡_
-                 x
-                 (_++ₗ_
-                   ((toℕ n) ↑ x)
-                   (x ! n ∷ (ℕ.suc $ toℕ n) ↓ x)))
-    teikdrop (x ∷ xs) zero = refl
-    teikdrop (x ∷ xs) (suc n) = cong (_∷_ x) $ teikdrop xs n
   upgrayedd : Character rooms → Character kus
   upgrayedd t = record {
     forename = Character.forename t;
@@ -462,6 +462,65 @@ smashGeneric q k x j = q' , kus₂ , {!!} , {!!}
     }
     where
     plaid = DLP.length-map upgrayedd $ GameData.haters q
+
+  xindus = begin
+    length (Room.items $ rooms ! k) ≡⟨ refl ⟩
+    length i ≡⟨ cong length $ teikdrop i x ⟩
+    length (d₁ ++ₗ i ! x ∷ d₃) ≡⟨ DLP.length-++ d₁ ⟩
+    length d₁ + length (i ! x ∷ d₃) ≡⟨ refl ⟩
+    length d₁ + ℕ.suc (length d₃) ≡⟨ refl ⟩
+    length d₁ + length (j' ∷ d₃) ≡⟨ sym $ DLP.length-++ d₁ ⟩
+    length (d₁ ++ₗ j' ∷ d₃) ≡⟨ cong length $ sym $ ualdos i x $ const j' ⟩
+    length (Room.items snikerz) ≡⟨ cong (length ∘ Room.items) snidus ⟩
+    length (Room.items $ GameData.rooms q' ! mink k kus₂) ∎
+    where
+    i = Room.items $ rooms ! k
+    j' = proj₂ $ Data.Maybe.to-witness j
+    d₁ = (toℕ x) ↑ i
+    d₃ = (ℕ.suc $ toℕ x) ↓ i
+    snidus = begin
+      snikerz ≡⟨ refl ⟩
+      const snikerz (rooms ! k)  ≡⟨ {!!} ⟩
+      GameData.rooms q' ! mink k kus₂ ∎
+      where
+      teikdrop₂ : ∀ {a} → {A : Set a}
+                → (x : List A)
+                → (n : Fin $ length x)
+                → (z : A)
+                → let n' = toℕ n in
+                  (_≡_
+                    (length x)
+                    (length
+                      (n' ↑ x ++ₗ z ∷ (ℕ.suc n') ↓ x)))
+      teikdrop₂ (_ ∷ _) zero _ = refl
+      teikdrop₂ (x ∷ xs) (suc n) z = cong ℕ.suc $ teikdrop₂ xs n z
+      intend : ∀ {a} → {A : Set a}
+             → (x : List A)
+             → (n : Fin $ length x)
+             → (f : A → A)
+             → let n' = toℕ n in
+               (_≡_
+                 (f $ x ! n)
+                 (_!_
+                   (n' ↑ x ++ₗ f (x ! n) ∷ (ℕ.suc n') ↓ x)
+                   (mink
+                     n
+                     (cong length $ teikdrop₂ x n $ f $ x ! n))))
+      intend (_ ∷ _) zero _ = refl
+      intend (x ∷ xs) (suc n) f = {!!}
+    ualdos : ∀ {a} → {A : Set a}
+           → (x : List A)
+           → (n : Fin $ length x)
+           → (f : A → A)
+           → (_≡_
+               (proj₁ $ ual x n f)
+               (_++ₗ_
+                 ((toℕ n) ↑ x)
+                 (_∷_
+                   (f $ x ! n)
+                   ((ℕ.suc $ toℕ n) ↓ x))))
+    ualdos (x ∷ xs) zero _ = refl
+    ualdos (x ∷ xs) (suc n) f = cong (_∷_ x) $ ualdos xs n f
 \end{code}
 
 \chapter{le mu'oi glibau.\ high-level .glibau.}
