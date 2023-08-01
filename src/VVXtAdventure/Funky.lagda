@@ -281,35 +281,26 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
   xent = sym $ subkon $ dropind xen' $ mink j xenlen
     where
     _≤_ = Data.Nat._≤_
-    mindut : {m n : ℕ}
-           → (o : Fin m)
-           → (x : m ≡ n)
-           → toℕ (mink o x) ≡ toℕ o
-    mindut o refl = refl
     dropind : ∀ {a} → {A : Set a}
             → (xs : List A)
             → (n : Fin $ 𝓁 xs)
             → just (xs ! n) ≡ ⊃ ((toℕ n) ↓ xs)
     dropind (x ∷ xs) Fin.zero = refl
     dropind (x ∷ xs) (Fin.suc n) = dropind xs n
-    teiklendus : ∀ {a} → {A : Set a}
-               → (xs : List A)
-               → (n : ℕ)
-               → n ≤ 𝓁 xs
-               → 𝓁 (n ↑ xs) ≡ n
-    teiklendus _ 0 _ = refl
-    teiklendus (x ∷ xs) (ℕ.suc n) (Data.Nat.s≤s q) = ret
-      where
-      ret = cong ℕ.suc $ teiklendus xs n q
-    lisuc : ∀ {a} → {A : Set a}
-          → (xs : List A)
-          → Fin $ 𝓁 xs
-          → Σ ℕ $ _≡_ (𝓁 xs) ∘ ℕ.suc
-    lisuc (_ ∷ xs) _ = 𝓁 xs , refl
+    mindut : {m n : ℕ}
+           → (o : Fin m)
+           → (x : m ≡ n)
+           → toℕ (mink o x) ≡ toℕ o
+    mindut o refl = refl
     tuik : toℕ j ≤ 𝓁 xen
     tuik = subst (_≤_ _) kix $ DNP.≤-step $ subst (_≥_ _) mijd j'
       where
       _≥_ = flip _≤_
+      lisuc : ∀ {a} → {A : Set a}
+            → (xs : List A)
+            → Fin $ 𝓁 xs
+            → Σ ℕ $ _≡_ (𝓁 xs) ∘ ℕ.suc
+      lisuc (_ ∷ xs) _ = 𝓁 xs , refl
       j' = DFP.≤fromℕ $ mink j $ proj₂ $ lisuc xen j
       mijd = mindut j $ proj₂ $ lisuc xen j
       kix : ℕ.suc (toℕ $ Data.Fin.fromℕ _) ≡ 𝓁 xen
@@ -323,6 +314,16 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
       toℕ (mink j xenlen) ≡⟨ mindut j xenlen ⟩
       toℕ j ≡⟨ sym $ teiklendus xen (toℕ j) tuik ⟩
       𝓁 x₁ ∎
+      where
+      teiklendus : ∀ {a} → {A : Set a}
+                 → (xs : List A)
+                 → (n : ℕ)
+                 → n ≤ 𝓁 xs
+                 → 𝓁 (n ↑ xs) ≡ n
+      teiklendus _ 0 _ = refl
+      teiklendus (x ∷ xs) (ℕ.suc n) (Data.Nat.s≤s q) = ret
+        where
+        ret = cong ℕ.suc $ teiklendus xs n q
     subkon = subst (_≡_ _) $ cong (⊃ ∘ flip _↓_ xen') xil
 
   xendj : let iv = Character.inventory in
