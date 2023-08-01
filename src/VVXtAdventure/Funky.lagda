@@ -381,7 +381,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
              → let n' = toℕ n in
                let s = ℕ.suc n' in
                s ↓ a ≡ s ↓ _++ₗ_ (n' ↑ a) (x ∷ s ↓ a)
-    dropydus (_ ∷ xs) zero = refl
+    dropydus (_ ∷ _) zero = refl
     dropydus (_ ∷ xs) {b} (suc n) = dropydus xs {b} n
 
   p' = mink (GameData.player' gd) xenlen
