@@ -539,6 +539,10 @@ travel? (x₁ ∷ xs₁) = if realShit (travel' xs₁) $ const nothing
   travel' [] q = just $ m , q
     where
     m = "Don't tell me to break the rules, fucker!"
+  travel' (_ ∷ _ ∷ _) q = just $ m , q
+    where
+    m = "I strongly doubt that the concept of \"super\
+        \position\" applies to a creature of your mass."
   travel' (x ∷ []) q = maybe just tryfind $ alreadythere?
     where
     F = Fin $ length $ GameData.rooms q
@@ -574,10 +578,6 @@ travel? (x₁ ∷ xs₁) = if realShit (travel' xs₁) $ const nothing
           pj1s = Data.List.map proj₁
           cnq = _≟_ ∘ Room.cname ∘ proj₂
           tr = λ a → any? (cnq a) $ Room.travis cur
-  travel' (_ ∷ _ ∷ _) q = just $ m , q
-    where
-    m = "I strongly doubt that the concept of \"super\
-        \position\" applies to a creature of your mass."
 \end{code}
 
 \section{la'oi .\F{wield?}.}
