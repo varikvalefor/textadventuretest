@@ -566,7 +566,7 @@ travel? (x₁ ∷ xs₁) = if realShit (travel' xs₁) $ const nothing
           m = "You travel successfully."
       mathch = travelable $ methching $ zipfin $ GameData.rooms q
         where
-        zipfin = λ l → Data.List.zip (allFin $ length l) l
+        zipfin = λ l → flip Data.List.zip l $ allFin $ length l
         methching = filterₗ $ _≟_ x ∘ Room.cname ∘ proj₂
         travelable : List $ F × Room → String ⊎ List F
         travelable [] = inj₁ m
