@@ -281,35 +281,26 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
   xent = sym $ subkon $ dropind xen' $ mink j xenlen
     where
     _≤_ = Data.Nat._≤_
-    mindut : {m n : ℕ}
-           → (o : Fin m)
-           → (x : m ≡ n)
-           → toℕ (mink o x) ≡ toℕ o
-    mindut o refl = refl
     dropind : ∀ {a} → {A : Set a}
             → (xs : List A)
             → (n : Fin $ 𝓁 xs)
             → just (xs ! n) ≡ ⊃ ((toℕ n) ↓ xs)
     dropind (x ∷ xs) Fin.zero = refl
     dropind (x ∷ xs) (Fin.suc n) = dropind xs n
-    teiklendus : ∀ {a} → {A : Set a}
-               → (xs : List A)
-               → (n : ℕ)
-               → n ≤ 𝓁 xs
-               → 𝓁 (n ↑ xs) ≡ n
-    teiklendus _ 0 _ = refl
-    teiklendus (x ∷ xs) (ℕ.suc n) (Data.Nat.s≤s q) = ret
-      where
-      ret = cong ℕ.suc $ teiklendus xs n q
-    lisuc : ∀ {a} → {A : Set a}
-          → (xs : List A)
-          → Fin $ 𝓁 xs
-          → Σ ℕ $ _≡_ (𝓁 xs) ∘ ℕ.suc
-    lisuc (_ ∷ xs) _ = 𝓁 xs , refl
+    mindut : {m n : ℕ}
+           → (o : Fin m)
+           → (x : m ≡ n)
+           → toℕ (mink o x) ≡ toℕ o
+    mindut o refl = refl
     tuik : toℕ j ≤ 𝓁 xen
     tuik = subst (_≤_ _) kix $ DNP.≤-step $ subst (_≥_ _) mijd j'
       where
       _≥_ = flip _≤_
+      lisuc : ∀ {a} → {A : Set a}
+            → (xs : List A)
+            → Fin $ 𝓁 xs
+            → Σ ℕ $ _≡_ (𝓁 xs) ∘ ℕ.suc
+      lisuc (_ ∷ xs) _ = 𝓁 xs , refl
       j' = DFP.≤fromℕ $ mink j $ proj₂ $ lisuc xen j
       mijd = mindut j $ proj₂ $ lisuc xen j
       kix : ℕ.suc (toℕ $ Data.Fin.fromℕ _) ≡ 𝓁 xen
@@ -318,14 +309,21 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
         tondus : {m n : ℕ}
                → m ≡ n
                → toℕ (Data.Fin.fromℕ m) ≡ n
-        tondus {ℕ.zero} = id
-        tondus {ℕ.suc m} {ℕ.suc n} refl = ret
-          where
-          ret = cong ℕ.suc $ tondus {m} {n} refl
+        tondus {m} x = subst (_≡_ _) x $ DFP.toℕ-fromℕ m
     xil = begin
       toℕ (mink j xenlen) ≡⟨ mindut j xenlen ⟩
       toℕ j ≡⟨ sym $ teiklendus xen (toℕ j) tuik ⟩
       𝓁 x₁ ∎
+      where
+      teiklendus : ∀ {a} → {A : Set a}
+                 → (xs : List A)
+                 → (n : ℕ)
+                 → n ≤ 𝓁 xs
+                 → 𝓁 (n ↑ xs) ≡ n
+      teiklendus _ 0 _ = refl
+      teiklendus (x ∷ xs) (ℕ.suc n) (Data.Nat.s≤s q) = ret
+        where
+        ret = cong ℕ.suc $ teiklendus xs n q
     subkon = subst (_≡_ _) $ cong (⊃ ∘ flip _↓_ xen') xil
 
   xendj : let iv = Character.inventory in
@@ -381,7 +379,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
              → let n' = toℕ n in
                let s = ℕ.suc n' in
                s ↓ a ≡ s ↓ _++ₗ_ (n' ↑ a) (x ∷ s ↓ a)
-    dropydus (_ ∷ xs) zero = refl
+    dropydus (_ ∷ _) zero = refl
     dropydus (_ ∷ xs) {b} (suc n) = dropydus xs {b} n
 
   p' = mink (GameData.player' gd) xenlen
@@ -518,7 +516,7 @@ smashGeneric q k x j = q' , kus₂ , xindus , {!!}
 \section{le fancu poi tu'a ke'a na rinka lo nu lo ctaipe be la'oi .\F{GameData}.\ cu na binxo pe'a ru'e}
 
 \subsection{la'oi .\F{epicwin?}.}
-ni'o ga jonai ga je tu'a la'o zoi.\ \B a .zoi.\ .indika lo du'u lo kelci cu jinga gi ko'a goi la'o zoi.\ \F{epicwin?} \B m \B a .zoi. du la'o zoi.\ \B m , \B a .zoi.\ gi ko'a du la'oi .\F{nothing}.
+ni'o ga jonai ga je tu'a la'o zoi.\ \B a .zoi.\ .indika lo du'u lo kelci cu jinga gi ko'a goi la'o zoi.\ \F{epicwin?} \B m \B a .zoi. du la'o zoi.\ \F{just} \Sym \$ \B m \Sym , \B a .zoi.\ gi ko'a du la'oi .\F{nothing}.
 
 \begin{code}
 epicwin? : String → GameData → COut
@@ -664,6 +662,10 @@ travel? (x₁ ∷ xs₁) = if realShit (travel' xs₁) $ const nothing
   travel' [] q = just $ m , q
     where
     m = "Don't tell me to break the rules, fucker!"
+  travel' (_ ∷ _ ∷ _) q = just $ m , q
+    where
+    m = "I strongly doubt that the concept of \"super\
+        \position\" applies to a creature of your mass."
   travel' (x ∷ []) q = maybe just tryfind $ alreadythere?
     where
     F = Fin $ length $ GameData.rooms q
@@ -687,7 +689,7 @@ travel? (x₁ ∷ xs₁) = if realShit (travel' xs₁) $ const nothing
           m = "You travel successfully."
       mathch = travelable $ methching $ zipfin $ GameData.rooms q
         where
-        zipfin = λ l → Data.List.zip (allFin $ length l) l
+        zipfin = λ l → flip Data.List.zip l $ allFin $ length l
         methching = filterₗ $ _≟_ x ∘ Room.cname ∘ proj₂
         travelable : List $ F × Room → String ⊎ List F
         travelable [] = inj₁ m
@@ -699,10 +701,6 @@ travel? (x₁ ∷ xs₁) = if realShit (travel' xs₁) $ const nothing
           pj1s = Data.List.map proj₁
           cnq = _≟_ ∘ Room.cname ∘ proj₂
           tr = λ a → any? (cnq a) $ Room.travis cur
-  travel' (_ ∷ _ ∷ _) q = just $ m , q
-    where
-    m = "I strongly doubt that the concept of \"super\
-        \position\" applies to a creature of your mass."
 \end{code}
 
 \section{la'oi .\F{wield?}.}
@@ -726,9 +724,7 @@ wield? (x ∷ xs) dang = if (realShit x) (troci xs) nothing
     m = "You are giving me useless information."
   troci (y ∷ []) with flt $ mapMaybe mapti? $ allFin _
     where
-    flt = filterₗ $ _≟_ y ∘ cname ∘ proj₁
-      where
-      cname = Item.cname ∘ _!_ inv
+    flt = filterₗ $ _≟_ y ∘ Item.cname ∘ _!_ inv ∘ proj₁
     mapti? : _ → Maybe $ Σ (Fin _) $ _≡_ true ∘ wisyj
     mapti? n with true Data.Bool.≟ wisyj n
     ... | yes x = just $ n , x
