@@ -467,7 +467,7 @@ kumski? m g = if mapti (just $ vijac , g) nothing
     kumfid = Character.room $ GameData.player g
   -- | ni'o zo .vijac. cmavlaka'i lu velski ja canlu li'u
   vijac : String
-  vijac = concatₛ $ intersperseₗ "\n\n" le'i-ro-velski
+  vijac = concatₛ $ intersperseₗ "\n\n" le'i-lerpinsle
     where
     intersperseₗ = Data.List.intersperse
     concatₛ = Data.String.concat
@@ -484,7 +484,7 @@ kumski? m g = if mapti (just $ vijac , g) nothing
     ... | (x ∷ xs) = "CONNECTED ROOMS: " ++ concatₛ liste
       where
       liste = intersperseₗ ", " $ x ∷ xs
-    le'i-ro-velski = jaiv ∷ mapₗ velski (Room.items kumfa)
+    le'i-lerpinsle = jaiv ∷ mapₗ velski (Room.items kumfa)
 \end{code}
 
 \subsection{la'oi .\F{scream?}.}
