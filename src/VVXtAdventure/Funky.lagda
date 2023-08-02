@@ -515,7 +515,28 @@ smashGeneric q k x j = q' , kus₂ , xindus , {!!}
         indekonk (_ ∷ _) [] zero = refl
         indekonk (x ∷ xs) [] (suc n) = indekonk xs [] n
         indekonk [] (x ∷ xs) (suc n) = indekonk [] xs n
-        indekonk (_ ∷ xs) t@(x₁ ∷ xs₁) (suc n) = {!!}
+        indekonk (x ∷ xs) t@(x₁ ∷ xs₁) (suc n) = indekonk xs t in'
+          where
+          coerce : ∀ {a} → {A B : Set a} → A ≡ B → A → B
+          coerce refl = id
+          g : ∀ {a} → {A : Set a}
+            → (x z : List A)
+            → (t v : A)
+            → length (x ++ₗ t ∷ z) ≡ length ((v ∷ x) ++ₗ z)
+          g a b t v = begin
+            length (a ++ₗ t ∷ b) ≡⟨ DLP.length-++ a ⟩
+            la + length (t ∷ b) ≡⟨ refl ⟩
+            la + ℕ.suc lb ≡⟨ DNP.+-comm la $ ℕ.suc $ lb ⟩
+            ℕ.suc lb + la ≡⟨ DNP.+-assoc 1 lb la ⟩
+            ℕ.suc (lb + la) ≡⟨ cong ℕ.suc $ DNP.+-comm lb la ⟩
+            ℕ.suc (la + lb) ≡⟨ refl ⟩
+            ℕ.suc la + lb ≡⟨ refl ⟩
+            length (v ∷ a) + lb ≡⟨ sym $ DLP.length-++ $ v ∷ a ⟩
+            length ((v ∷ a) ++ₗ b) ∎
+            where
+            la = length a
+            lb = length b
+          in' = flip coerce n $ cong Fin $ {!!} $ g xs₁ xs x x₁
     ualdos : ∀ {a} → {A : Set a}
            → (x : List A)
            → (n : Fin $ length x)
