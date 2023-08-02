@@ -497,11 +497,14 @@ scream? _ _ = nothing
 \end{code}
 
 \subsection{la'oi .\F{sayless?}.}
-ni'o ga jonai ga je la'o zoi.\ \B a .zoi.\ kunti gi ga je tu'a la'o zoi.\ \B c .zoi.\ .indika le du'u mabla fa lo nu samci'a lo kunti gi ko'a goi la'o zoi.\ \F{sayless?} \B a \B b .zoi.\ du la'o zoi.\ \F{just} \Sym \$ \B c \Sym , \B b .zoi.\ gi ko'a du la'oi .\F{nothing}.
+ni'o ga jonai ga je ga jo co'e gi la'o zoi.\ \B a .zoi.\ kunti gi ga je tu'a la'o zoi.\ \B c .zoi.\ .indika le du'u mabla fa lo nu samci'a lo kunti ja zo'e gi ko'a goi la'o zoi.\ \F{sayless?} \B a \B b .zoi.\ du la'o zoi.\ \F{just} \Sym \$ \B c \Sym , \B b .zoi.\ gi ko'a du la'oi .\F{nothing}.
 
 \begin{code}
 sayless? : List String → GameData → COut
 sayless? [] = just ∘ _,_ "The silent treatment won't work here."
+sayless? ("" ∷ "" ∷ "" ∷ "" ∷ []) = just ∘ _,_ m
+  where
+  m = "Man, what the fuck?"
 sayless? _ = const nothing
 \end{code}
 
