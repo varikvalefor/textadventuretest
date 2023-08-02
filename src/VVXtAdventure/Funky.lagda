@@ -420,7 +420,7 @@ smashGeneric q k x j = q' , kus₂ , xindus , {!!}
                x
                (n' ↑ x ++ₗ z ∷ (ℕ.suc n') ↓ x))
   teikdrop (_ ∷ _) zero _ = refl
-  teikdrop (x ∷ xs) (suc n) z = cong ℕ.suc $ teikdrop xs n z
+  teikdrop (_ ∷ xs) (suc n) z = cong ℕ.suc $ teikdrop xs n z
   k' = toℕ k
   rooms = GameData.rooms q
   snikerz = record (rooms ! k) {items = itstes₂}
