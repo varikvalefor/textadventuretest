@@ -428,7 +428,7 @@ smashGeneric q k x j = q' , kus₂ , xindus , {!!}
     itstes = Room.items $ rooms ! k
     it₂ = proj₂ $ Data.Maybe.to-witness j
     itstes₂ = proj₁ $ ual itstes x $ const it₂
-  kus = k' ↑ rooms Data.List.++ snikerz ∷ (ℕ.suc k') ↓ rooms
+  kus = k' ↑ rooms ++ₗ snikerz ∷ (ℕ.suc k') ↓ rooms
   kus₂ = cong length $ teikdrop rooms k snikerz
   upgrayedd : Character rooms → Character kus
   upgrayedd t = record {
