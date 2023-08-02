@@ -611,6 +611,13 @@ wield? (x ∷ xs) dang = if (realShit x) (troci xs) nothing
     where
     m = "You need to stop chugging PCP or whatever.  \
         \Your hallucinations are pissing me off."
+  ... | (_ ∷ _ ∷ _) = just $ m , dang
+    where
+    m = "Your query matches multiple items, although \
+        \a proof of that your bag only contains items \
+        \which have unique names exists.\n\
+        \Something is mad fucked, and you might \
+        \actually be innocent this time."
   ... | (selpli ∷ []) = just $ wieldMsg , proj₁ wieldData
     where
     wieldMsg = fromMaybe "You wield the weapon." xarcynotci
@@ -621,12 +628,5 @@ wield? (x ∷ xs) dang = if (realShit x) (troci xs) nothing
     wieldData = wieldPawn dang p (proj₁ selpli) $ proj₂ selpli
       where
       p = GameData.player' dang
-  ... | (_ ∷ _ ∷ _) = just $ m , dang
-    where
-    m = "Your query matches multiple items, although \
-        \a proof of that your bag only contains items \
-        \which have unique names exists.\n\
-        \Something is mad fucked, and you might \
-        \actually be innocent this time."
 \end{code}
 \end{document}
