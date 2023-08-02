@@ -565,20 +565,20 @@ travel? (x₁ ∷ xs₁) = if realShit (travel' xs₁) $ const nothing
           where
           q' = movePawn q $ GameData.player' q
           m = "You travel successfully."
-      mathch = travelable $ methching $ zipfin $ GameData.rooms q
+      mathch : String ⊎ List F
+      mathch with methching $ zipfin $ GameData.rooms q
         where
         zipfin = λ l → flip Data.List.zip l $ allFin $ length l
         methching = filterₗ $ _≟_ x ∘ Room.cname ∘ proj₂
-        travelable : List $ F × Room → String ⊎ List F
-        travelable [] = inj₁ m
-          where
-          m = "Did you take your pills this morning?  \
-              \I don't think that that room exists."
-        travelable (x ∷ xs) = inj₂ $ pj1s $ filterₗ tr $ x ∷ xs
-          where
-          pj1s = Data.List.map proj₁
-          cnq = _≟_ ∘ Room.cname ∘ proj₂
-          tr = λ a → any? (cnq a) $ Room.travis cur
+      ... | [] = inj₁ m
+        where
+        m = "Did you take your pills this morning?  \
+            \I don't think that that room exists."
+      ... | (x ∷ xs) = inj₂ $ pj1s $ filterₗ tr $ x ∷ xs
+        where
+        pj1s = Data.List.map proj₁
+        cnq = _≟_ ∘ Room.cname ∘ proj₂
+        tr = λ a → any? (cnq a) $ Room.travis cur
 \end{code}
 
 \section{la'oi .\F{wield?}.}
