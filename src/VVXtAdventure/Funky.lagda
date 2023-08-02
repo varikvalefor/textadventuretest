@@ -430,19 +430,19 @@ smashGeneric q k x j = q' , kus₂ , xindus , {!!}
     itstes = Room.items $ rooms ! k
     it₂ = proj₂ $ Data.Maybe.to-witness j
     itstes₂ = proj₁ $ ual itstes x $ const it₂
+  teikdrop₂ : ∀ {a} → {A : Set a}
+            → (x : List A)
+            → (n : Fin $ length x)
+            → (z : A)
+            → let n' = toℕ n in
+              (_≡_
+                (length x)
+                (length
+                  (n' ↑ x ++ₗ z ∷ (ℕ.suc n') ↓ x)))
+  teikdrop₂ (_ ∷ _) zero _ = refl
+  teikdrop₂ (x ∷ xs) (suc n) z = cong ℕ.suc $ teikdrop₂ xs n z
   kus = k' ↑ rooms Data.List.++ snikerz ∷ (ℕ.suc k') ↓ rooms
-  kus₂ = begin
-    𝓁 rooms ≡⟨ cong 𝓁 $ teikdrop rooms k ⟩
-    𝓁 (r₁ ++ₗ rooms ! k ∷ r₃) ≡⟨ DLP.length-++ r₁ ⟩
-    𝓁 r₁ + 𝓁 (rooms ! k ∷ r₃) ≡⟨ refl ⟩
-    𝓁 r₁ + ℕ.suc (𝓁 r₃) ≡⟨ refl ⟩
-    𝓁 r₁ + 𝓁 (snikerz ∷ r₃) ≡⟨ sym $ DLP.length-++ r₁ ⟩
-    𝓁 (r₁ ++ₗ snikerz ∷ r₃) ≡⟨ refl ⟩
-    𝓁 kus ∎
-    where
-    𝓁 = length
-    r₁ = k' ↑ rooms
-    r₃ = (ℕ.suc k') ↓ rooms
+  kus₂ = cong length $ teikdrop₂ rooms k snikerz
   upgrayedd : Character rooms → Character kus
   upgrayedd t = record {
     forename = Character.forename t;
@@ -480,20 +480,10 @@ smashGeneric q k x j = q' , kus₂ , xindus , {!!}
     d₃ = (ℕ.suc $ toℕ x) ↓ i
     snidus = begin
       snikerz ≡⟨ refl ⟩
-      const snikerz (rooms ! k)  ≡⟨ {!!} ⟩
+      const snikerz (rooms ! k) ≡⟨ intend rooms k $ const snikerz ⟩
+      kus ! mink k kus₂ ≡⟨ refl ⟩
       GameData.rooms q' ! mink k kus₂ ∎
       where
-      teikdrop₂ : ∀ {a} → {A : Set a}
-                → (x : List A)
-                → (n : Fin $ length x)
-                → (z : A)
-                → let n' = toℕ n in
-                  (_≡_
-                    (length x)
-                    (length
-                      (n' ↑ x ++ₗ z ∷ (ℕ.suc n') ↓ x)))
-      teikdrop₂ (_ ∷ _) zero _ = refl
-      teikdrop₂ (x ∷ xs) (suc n) z = cong ℕ.suc $ teikdrop₂ xs n z
       intend : ∀ {a} → {A : Set a}
              → (x : List A)
              → (n : Fin $ length x)
