@@ -149,6 +149,7 @@ open import Truthbrary.Record.LLC
 open import Truthbrary.Category.Monad
 open import Truthbrary.Data.List.Loom
   using (
+    lum;
     ual
   )
 open import Data.List.Relation.Unary.Any
@@ -484,7 +485,37 @@ smashGeneric q k x j = q' , kus₂ , xindus , {!!}
                      n
                      (cong length $ teikdrop x n $ f $ x ! n))))
       intend (_ ∷ _) zero _ = refl
-      intend (x ∷ xs) (suc n) f = {!!}
+      intend p@(x ∷ xs) n@(suc m) f = DMP.just-injective $ begin
+        just (f $ p ! n) ≡⟨ cong just $ sym $ lum p f n ⟩
+        just (_¨_ f p ! n'') ≡⟨ xedrop (f ¨ p) n'' ⟩
+        ⊃ (toℕ n'' ↓ _¨_ f p) ≡⟨ {!!} ⟩
+        ⊃ (toℕ n' ↓ kond) ≡⟨ indekonk kis (n:ℕ ↑ p) n' ⟩
+        just (kond ! n') ∎
+        where
+        _¨_ = Data.List.map
+        ⊃ = Data.List.head
+        n:ℕ = toℕ n
+        kond = n:ℕ ↑ p ++ₗ f (p ! n) ∷ ℕ.suc n:ℕ ↓ p
+        -- | ni'o zo .kisif. cmavlaka'i lu .kond.
+        -- selyli'erafsi li'u
+        kis = f (p ! n) ∷ ℕ.suc n:ℕ ↓ p
+        n' = mink n $ cong length $ teikdrop p n $ f $ p ! n
+        n'' = mink n $ sym $ DLP.length-map f p
+        xedrop : ∀ {a} → {A : Set a}
+               → (x : List A)
+               → (n : Fin $ length x)
+               → just (x ! n) ≡ ⊃ (toℕ n ↓ x)
+        xedrop (_ ∷ _) zero = refl
+        xedrop (x ∷ xs) (suc n) = xedrop xs n
+        indekonk : ∀ {a} → {A : Set a}
+                 → (x z : List A)
+                 → (n : Fin $ length $ z ++ₗ x)
+                 → ⊃ (toℕ n ↓ (z ++ₗ x)) ≡ just ((z ++ₗ x) ! n)
+        indekonk _ (_ ∷ _) zero = refl
+        indekonk (_ ∷ _) [] zero = refl
+        indekonk (x ∷ xs) [] (suc n) = indekonk xs [] n
+        indekonk [] (x ∷ xs) (suc n) = indekonk [] xs n
+        indekonk (_ ∷ xs) t@(x₁ ∷ xs₁) (suc n) = {!!}
     ualdos : ∀ {a} → {A : Set a}
            → (x : List A)
            → (n : Fin $ length x)
