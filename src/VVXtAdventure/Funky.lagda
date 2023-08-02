@@ -414,13 +414,13 @@ smashGeneric q k x j = q' , kus₂ , xindus , {!!}
   teikdrop : ∀ {a} → {A : Set a}
            → (x : List A)
            → (n : Fin $ length x)
-           → (_≡_
+           → (z : A)
+           → let n' = toℕ n in
+             ((_≡_ on length)
                x
-               (_++ₗ_
-                 ((toℕ n) ↑ x)
-                 (x ! n ∷ (ℕ.suc $ toℕ n) ↓ x)))
-  teikdrop (x ∷ xs) zero = refl
-  teikdrop (x ∷ xs) (suc n) = cong (_∷_ x) $ teikdrop xs n
+               (n' ↑ x ++ₗ z ∷ (ℕ.suc n') ↓ x))
+  teikdrop (_ ∷ _) zero _ = refl
+  teikdrop (x ∷ xs) (suc n) z = cong ℕ.suc $ teikdrop xs n z
   k' = toℕ k
   rooms = GameData.rooms q
   snikerz = record (rooms ! k) {items = itstes₂}
@@ -428,18 +428,8 @@ smashGeneric q k x j = q' , kus₂ , xindus , {!!}
     itstes = Room.items $ rooms ! k
     it₂ = proj₂ $ Data.Maybe.to-witness j
     itstes₂ = proj₁ $ ual itstes x $ const it₂
-  teikdrop₂ : ∀ {a} → {A : Set a}
-            → (x : List A)
-            → (n : Fin $ length x)
-            → (z : A)
-            → let n' = toℕ n in
-              ((_≡_ on length)
-                x
-                (n' ↑ x ++ₗ z ∷ (ℕ.suc n') ↓ x))
-  teikdrop₂ (_ ∷ _) zero _ = refl
-  teikdrop₂ (x ∷ xs) (suc n) z = cong ℕ.suc $ teikdrop₂ xs n z
   kus = k' ↑ rooms Data.List.++ snikerz ∷ (ℕ.suc k') ↓ rooms
-  kus₂ = cong length $ teikdrop₂ rooms k snikerz
+  kus₂ = cong length $ teikdrop rooms k snikerz
   upgrayedd : Character rooms → Character kus
   upgrayedd t = record {
     forename = Character.forename t;
@@ -462,7 +452,7 @@ smashGeneric q k x j = q' , kus₂ , xindus , {!!}
 
   xindus = begin
     length (Room.items $ rooms ! k) ≡⟨ refl ⟩
-    length i ≡⟨ cong length $ teikdrop i x ⟩
+    length i ≡⟨ cong length $ teikdrop i x $ i ! x ⟩
     length (d₁ ++ₗ i ! x ∷ d₃) ≡⟨ DLP.length-++ d₁ ⟩
     length d₁ + length (i ! x ∷ d₃) ≡⟨ refl ⟩
     length d₁ + ℕ.suc (length d₃) ≡⟨ refl ⟩
@@ -492,7 +482,7 @@ smashGeneric q k x j = q' , kus₂ , xindus , {!!}
                    (n' ↑ x ++ₗ f (x ! n) ∷ (ℕ.suc n') ↓ x)
                    (mink
                      n
-                     (cong length $ teikdrop₂ x n $ f $ x ! n))))
+                     (cong length $ teikdrop x n $ f $ x ! n))))
       intend (_ ∷ _) zero _ = refl
       intend (x ∷ xs) (suc n) f = {!!}
     ualdos : ∀ {a} → {A : Set a}
