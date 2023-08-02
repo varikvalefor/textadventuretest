@@ -433,10 +433,9 @@ smashGeneric q k x j = q' , kus₂ , xindus , {!!}
             → (n : Fin $ length x)
             → (z : A)
             → let n' = toℕ n in
-              (_≡_
-                (length x)
-                (length
-                  (n' ↑ x ++ₗ z ∷ (ℕ.suc n') ↓ x)))
+              ((_≡_ on length)
+                x
+                (n' ↑ x ++ₗ z ∷ (ℕ.suc n') ↓ x))
   teikdrop₂ (_ ∷ _) zero _ = refl
   teikdrop₂ (x ∷ xs) (suc n) z = cong ℕ.suc $ teikdrop₂ xs n z
   kus = k' ↑ rooms Data.List.++ snikerz ∷ (ℕ.suc k') ↓ rooms
