@@ -59,8 +59,9 @@
 \begin{document}
 \maketitle
 
-\section{le me'oi .abstract.\ ja co'e}
-ni'o la'o zoi.\ \texttt{\cmene}\ .zoi.\ vasru le velcki be lo fancu be fi la'oi .\F{GameData}.\ ja zo'e
+\begin{abstract}
+	\noindent ni'o la'o zoi.\ \texttt{\cmene}\ .zoi.\ vasru le velcki be lo fancu be fi la'oi .\F{GameData}.\ ja zo'e
+\end{abstract}
 
 \section{le me'oi .preamble.\ ja co'e}
 
