@@ -510,7 +510,7 @@ smashGeneric q k x j = q' , kus₂ , xindus , {!!}
         xedrop (_ ∷ _) zero = refl
         xedrop (x ∷ xs) (suc n) = xedrop xs n
         xedus = begin
-          ⊃ (toℕ n'' ↓ _¨_ f p) ≡⟨ cong (flidir $ f ¨ p) $ sym tomin₁ ⟩
+          ⊃ (toℕ n'' ↓ _¨_ f p) ≡⟨ sym $ cong (flidir $ f ¨ p) tomin₁ ⟩
           ⊃ (toℕ n ↓ _¨_ f p) ≡⟨ teikapdus p n f ⟩
           ⊃ (toℕ n ↓ kond) ≡⟨ cong (flidir kond) tomin₂ ⟩
           ⊃ (toℕ n' ↓ kond) ∎
