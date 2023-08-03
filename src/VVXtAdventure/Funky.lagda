@@ -138,6 +138,7 @@ open import Relation.Nullary
 open import VVXtAdventure.Base
 open import Truthbrary.Data.Fin
   using (
+    tomindus;
     mink
   )
 open import Truthbrary.Record.Eq
@@ -488,7 +489,7 @@ smashGeneric q k x j = q' , kus₂ , xindus , {!!}
       intend p@(x ∷ xs) n@(suc m) f = DMP.just-injective $ begin
         just (f $ p ! n) ≡⟨ cong just $ sym $ lum p f n ⟩
         just (_¨_ f p ! n'') ≡⟨ xedrop (f ¨ p) n'' ⟩
-        ⊃ (toℕ n'' ↓ _¨_ f p) ≡⟨ {!!} ⟩
+        ⊃ (toℕ n'' ↓ _¨_ f p) ≡⟨ xedus ⟩
         ⊃ (toℕ n' ↓ kond) ≡⟨ indekonk kis (n:ℕ ↑ p) n' ⟩
         just (kond ! n') ∎
         where
@@ -507,6 +508,26 @@ smashGeneric q k x j = q' , kus₂ , xindus , {!!}
                → just (x ! n) ≡ ⊃ (toℕ n ↓ x)
         xedrop (_ ∷ _) zero = refl
         xedrop (x ∷ xs) (suc n) = xedrop xs n
+        xedus = begin
+          ⊃ (toℕ n'' ↓ _¨_ f p) ≡⟨ cong flidir $ sym tomin₁ ⟩
+          ⊃ (toℕ n ↓ _¨_ f p) ≡⟨ teikapdus p n f ⟩
+          ⊃ (toℕ n ↓ kond) ≡⟨ cong (λ i → ⊃ $ i ↓ kond) tomin₂ ⟩
+          ⊃ (toℕ n' ↓ kond) ∎
+          where
+          flidir = _∘_ ⊃ $ flip _↓_ $ f ¨ p
+          tomin₁ = tomindus n $ sym $ DLP.length-map f p
+          tomin₂ = tomindus n $ cong length $ teikdrop p n $ f $ p ! n
+          teikapdus : ∀ {a} → {A : Set a}
+                    → (x : List A)
+                    → (n : Fin $ length x)
+                    → (f : A → A)
+                    → let k₃ = ℕ.suc (toℕ n) ↓ x in
+                      let k = (toℕ n ↑ x) ++ₗ f (x ! n) ∷ k₃ in
+                      (_≡_
+                        (⊃ $ toℕ n ↓ _¨_ f x)
+                        (⊃ $ toℕ n ↓ k))
+          teikapdus (_ ∷ _) zero _ = refl
+          teikapdus (_ ∷ xs) (suc n) f = teikapdus xs n f
         indekonk : ∀ {a} → {A : Set a}
                  → (x z : List A)
                  → (n : Fin $ length $ z ++ₗ x)
