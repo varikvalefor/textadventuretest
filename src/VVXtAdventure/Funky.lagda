@@ -534,6 +534,7 @@ smashGeneric q k x j = q' , kus₂ , xindus , {!!}
                  → ⊃ (toℕ n ↓ (z ++ₗ x)) ≡ just ((z ++ₗ x) ! n)
         indekonk _ (_ ∷ _) zero = refl
         indekonk (_ ∷ _) [] zero = refl
+        indekonk [] (x ∷ xs) (suc n) = indekonk [] xs n
         indekonk (x ∷ xs) [] (suc n) = indekonk xs [] n
         indekonk (x ∷ xs) t@(x₁ ∷ xs₁) (suc n) = indekonk xs t in'
           where
