@@ -468,6 +468,19 @@ smashGeneric q k x j = q' , kus₂ , xindus , {!!}
     j' = proj₂ $ Data.Maybe.to-witness j
     d₁ = (toℕ x) ↑ i
     d₃ = (ℕ.suc $ toℕ x) ↓ i
+    ualdos : ∀ {a} → {A : Set a}
+           → (x : List A)
+           → (n : Fin $ length x)
+           → (f : A → A)
+           → (_≡_
+               (proj₁ $ ual x n f)
+               (_++ₗ_
+                 ((toℕ n) ↑ x)
+                 (_∷_
+                   (f $ x ! n)
+                   ((ℕ.suc $ toℕ n) ↓ x))))
+    ualdos (x ∷ xs) zero _ = refl
+    ualdos (x ∷ xs) (suc n) f = cong (_∷_ x) $ ualdos xs n f
     snidus = begin
       snikerz ≡⟨ refl ⟩
       const snikerz (rooms ! k) ≡⟨ intend rooms k $ const snikerz ⟩
@@ -535,19 +548,6 @@ smashGeneric q k x j = q' , kus₂ , xindus , {!!}
                  → ⊃ (toℕ n ↓ x) ≡ just (x ! n)
         indekonk (_ ∷ _) zero = refl
         indekonk (x ∷ xs) (suc n) = indekonk xs n
-    ualdos : ∀ {a} → {A : Set a}
-           → (x : List A)
-           → (n : Fin $ length x)
-           → (f : A → A)
-           → (_≡_
-               (proj₁ $ ual x n f)
-               (_++ₗ_
-                 ((toℕ n) ↑ x)
-                 (_∷_
-                   (f $ x ! n)
-                   ((ℕ.suc $ toℕ n) ↓ x))))
-    ualdos (x ∷ xs) zero _ = refl
-    ualdos (x ∷ xs) (suc n) f = cong (_∷_ x) $ ualdos xs n f
 \end{code}
 
 \chapter{le mu'oi glibau.\ high-level .glibau.}
