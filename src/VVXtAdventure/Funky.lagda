@@ -521,6 +521,12 @@ smashGeneric q k x j = q' , kus₂ , xindus , {!!}
                → just (x ! n) ≡ ⊃ (toℕ n ↓ x)
         xedrop (_ ∷ _) zero = refl
         xedrop (x ∷ xs) (suc n) = xedrop xs n
+        indekonk : ∀ {a} → {A : Set a}
+                 → (x : List A)
+                 → (n : Fin $ length x)
+                 → ⊃ (toℕ n ↓ x) ≡ just (x ! n)
+        indekonk (_ ∷ _) zero = refl
+        indekonk (x ∷ xs) (suc n) = indekonk xs n
         xedus = begin
           ⊃ (toℕ n'' ↓ _¨_ f p) ≡⟨ sym $ cong (flidir $ f ¨ p) tomin₁ ⟩
           ⊃ (toℕ n ↓ _¨_ f p) ≡⟨ teikapdus p n f ⟩
@@ -541,12 +547,6 @@ smashGeneric q k x j = q' , kus₂ , xindus , {!!}
                         (⊃ $ toℕ n ↓ k))
           teikapdus (_ ∷ _) zero _ = refl
           teikapdus (_ ∷ xs) (suc n) f = teikapdus xs n f
-        indekonk : ∀ {a} → {A : Set a}
-                 → (x : List A)
-                 → (n : Fin $ length x)
-                 → ⊃ (toℕ n ↓ x) ≡ just (x ! n)
-        indekonk (_ ∷ _) zero = refl
-        indekonk (x ∷ xs) (suc n) = indekonk xs n
 \end{code}
 
 \chapter{le mu'oi glibau.\ high-level .glibau.}
