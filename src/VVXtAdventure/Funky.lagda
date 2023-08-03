@@ -391,6 +391,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
 \section{la'oi .\F{smashGeneric}.}
 ni'o ga jo la'o zoi.\ \B S\ .zoi.\ du la'o zoi.\ \F{smashGeneric}\ \B q \B k \B x \B j\ .zoi.\ gi ga je la'o zoi.\ \F{proj₁}\ \B S\ .zoi.\ smimlu la'o zoi.\ \B q\ .zoi.\ gi ku'i la'o zoi.\ \F{Room.items}\ (\F{GameData.rooms}\ (\F{proj₁}\ \B S) \Sym !\ \F{mink}\ \B k\ (\F{proj₁}\ \Sym \$\ \F{proj₂}\ \B S)) \Sym !\ \F{mink}\ \B x\ (\F{proj₁} \Sym \$\ \F{proj₂}\ \Sym \$\ \F{proj₂}\ \B S) .zoi.\ du lo selvau pe'a be la'o zoi.\ \F{Data.Maybe.map}\ \F{proj₂}\ \Sym \$\ \F{Item.smashInfo}\ \Sym \$\ \F{Room.items}\ (\F{GameData.rooms} \B q\ \Sym !\ \B k) \Sym !\ \B x\ .zoi.
 
+% ni'o xu cadga fa ko'a goi lo nu jmina lo me'oi .newline. lerfu je cu jdikygau fi le ka me'oi .indent. ce'u  .i cumki fa lo nu ko'a filri'a lo nu zabna me'oi .typeset.
 \begin{code}
 smashGeneric : (q : GameData)
              → let lir = length ∘ Room.items in
