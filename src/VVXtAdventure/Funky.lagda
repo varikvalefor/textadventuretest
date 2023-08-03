@@ -491,7 +491,7 @@ smashGeneric q k x j = q' , kus₂ , xindus , {!!}
         just (f $ p ! n) ≡⟨ cong just $ sym $ lum p f n ⟩
         just (_¨_ f p ! n'') ≡⟨ xedrop (f ¨ p) n'' ⟩
         ⊃ (toℕ n'' ↓ _¨_ f p) ≡⟨ xedus ⟩
-        ⊃ (toℕ n' ↓ kond) ≡⟨ indekonk kis (n:ℕ ↑ p) n' ⟩
+        ⊃ (toℕ n' ↓ kond) ≡⟨ indekonk kond n' ⟩
         just (kond ! n') ∎
         where
         _¨_ = Data.List.map
@@ -530,36 +530,11 @@ smashGeneric q k x j = q' , kus₂ , xindus , {!!}
           teikapdus (_ ∷ _) zero _ = refl
           teikapdus (_ ∷ xs) (suc n) f = teikapdus xs n f
         indekonk : ∀ {a} → {A : Set a}
-                 → (x z : List A)
-                 → (n : Fin $ length $ z ++ₗ x)
-                 → ⊃ (toℕ n ↓ (z ++ₗ x)) ≡ just ((z ++ₗ x) ! n)
-        indekonk _ (_ ∷ _) zero = refl
-        indekonk (_ ∷ _) [] zero = refl
-        indekonk [] (x ∷ xs) (suc n) = indekonk [] xs n
-        indekonk (x ∷ xs) [] (suc n) = indekonk xs [] n
-        indekonk (x ∷ xs) t@(x₁ ∷ xs₁) (suc n) = indekonk xs t {!!}
-          where
-          coerce : ∀ {a} → {A B : Set a} → A ≡ B → A → B
-          coerce refl = id
-          g : ∀ {a} → {A : Set a}
-            → (x z : List A)
-            → (t v : A)
-            → length (x ++ₗ t ∷ z) ≡ length ((v ∷ x) ++ₗ z)
-          g a b t v = begin
-            length (a ++ₗ t ∷ b) ≡⟨ DLP.length-++ a ⟩
-            la + length (t ∷ b) ≡⟨ refl ⟩
-            la + ℕ.suc lb ≡⟨ DNP.+-comm la $ ℕ.suc $ lb ⟩
-            ℕ.suc lb + la ≡⟨ DNP.+-assoc 1 lb la ⟩
-            ℕ.suc (lb + la) ≡⟨ cong ℕ.suc $ DNP.+-comm lb la ⟩
-            ℕ.suc (la + lb) ≡⟨ refl ⟩
-            ℕ.suc la + lb ≡⟨ refl ⟩
-            length (v ∷ a) + lb ≡⟨ sym $ DLP.length-++ $ v ∷ a ⟩
-            length ((v ∷ a) ++ₗ b) ∎
-            where
-            la = length a
-            lb = length b
-          n''' : Fin $ length $ (x₁ ∷ xs₁) ++ₗ xs
-          n''' = flip coerce n $ cong Fin $ g xs₁ xs x x₁
+                 → (x : List A)
+                 → (n : Fin $ length x)
+                 → ⊃ (toℕ n ↓ x) ≡ just (x ! n)
+        indekonk (_ ∷ _) zero = refl
+        indekonk (x ∷ xs) (suc n) = indekonk xs n
     ualdos : ∀ {a} → {A : Set a}
            → (x : List A)
            → (n : Fin $ length x)
