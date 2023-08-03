@@ -509,11 +509,10 @@ smashGeneric q k x j = q' , kus₂ , xindus , {!!}
         where
         _¨_ = Data.List.map
         ⊃ = Data.List.head
-        n:ℕ = toℕ n
-        kond = n:ℕ ↑ p ++ₗ f (p ! n) ∷ ℕ.suc n:ℕ ↓ p
+        kond = toℕ n ↑ p ++ₗ f (p ! n) ∷ ℕ.suc (toℕ n) ↓ p
         -- | ni'o zo .kis. cmavlaka'i lu .kond.
         -- selyli'erafsi li'u
-        kis = f (p ! n) ∷ ℕ.suc n:ℕ ↓ p
+        kis = f (p ! n) ∷ ℕ.suc (toℕ n) ↓ p
         n' = mink n $ cong length $ teikdrop p n $ f $ p ! n
         n'' = mink n $ sym $ DLP.length-map f p
         xedrop : ∀ {a} → {A : Set a}
