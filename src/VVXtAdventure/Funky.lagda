@@ -496,7 +496,7 @@ smashGeneric q k x j = q' , kus₂ , xindus , {!!}
         ⊃ = Data.List.head
         n:ℕ = toℕ n
         kond = n:ℕ ↑ p ++ₗ f (p ! n) ∷ ℕ.suc n:ℕ ↓ p
-        -- | ni'o zo .kisif. cmavlaka'i lu .kond.
+        -- | ni'o zo .kis. cmavlaka'i lu .kond.
         -- selyli'erafsi li'u
         kis = f (p ! n) ∷ ℕ.suc n:ℕ ↓ p
         n' = mink n $ cong length $ teikdrop p n $ f $ p ! n
