@@ -504,13 +504,13 @@ smashGeneric q k x j = q' , kus₂ , xindus , {!!}
         just (f $ p ! n) ≡⟨ cong just $ sym $ lum p f n ⟩
         just (_¨_ f p ! n'') ≡⟨ xedrop (f ¨ p) n'' ⟩
         ⊃ (toℕ n'' ↓ _¨_ f p) ≡⟨ xedus ⟩
-        ⊃ (toℕ n' ↓ kond) ≡⟨ indedrop kond n' ⟩
-        just (kond ! n') ∎
+        ⊃ (toℕ n' ↓ konk) ≡⟨ indedrop konk n' ⟩
+        just (konk ! n') ∎
         where
         _¨_ = Data.List.map
         ⊃ = Data.List.head
-        kond = toℕ n ↑ p ++ₗ f (p ! n) ∷ ℕ.suc (toℕ n) ↓ p
-        -- | ni'o zo .kis. cmavlaka'i lu .kond.
+        konk = toℕ n ↑ p ++ₗ f (p ! n) ∷ ℕ.suc (toℕ n) ↓ p
+        -- | ni'o zo .kis. cmavlaka'i lu .konk.
         -- selyli'erafsi li'u
         kis = f (p ! n) ∷ ℕ.suc (toℕ n) ↓ p
         n' = mink n $ cong length $ teikdrop p n $ f $ p ! n
@@ -530,8 +530,8 @@ smashGeneric q k x j = q' , kus₂ , xindus , {!!}
         xedus = begin
           ⊃ (toℕ n'' ↓ _¨_ f p) ≡⟨ sym $ cong (flidir $ f ¨ p) tomin₁ ⟩
           ⊃ (toℕ n ↓ _¨_ f p) ≡⟨ teikapdus p n f ⟩
-          ⊃ (toℕ n ↓ kond) ≡⟨ cong (flidir kond) tomin₂ ⟩
-          ⊃ (toℕ n' ↓ kond) ∎
+          ⊃ (toℕ n ↓ konk) ≡⟨ cong (flidir konk) tomin₂ ⟩
+          ⊃ (toℕ n' ↓ konk) ∎
           where
           flidir = ⊃ ∘₂ flip _↓_
           tomin₁ = tomindus n $ sym $ DLP.length-map f p
