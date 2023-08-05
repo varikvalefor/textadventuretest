@@ -293,8 +293,8 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
            → (x : m ≡ n)
            → toℕ (mink o x) ≡ toℕ o
     mindut o refl = refl
-    tuik : toℕ j ≤ 𝓁 xen
-    tuik = subst (_≤_ _) kix $ DNP.≤-step $ subst (_≥_ _) mijd j'
+    jelis : toℕ j ≤ 𝓁 xen
+    jelis = subst (_≤_ _) kix $ DNP.≤-step $ subst (_≥_ _) mijd j'
       where
       _≥_ = flip _≤_
       lisuc : ∀ {a} → {A : Set a}
@@ -313,7 +313,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
         tondus {m} x = subst (_≡_ _) x $ DFP.toℕ-fromℕ m
     xil = begin
       toℕ (mink j xenlen) ≡⟨ mindut j xenlen ⟩
-      toℕ j ≡⟨ sym $ teiklendus xen (toℕ j) tuik ⟩
+      toℕ j ≡⟨ sym $ teiklendus xen (toℕ j) jelis ⟩
       𝓁 x₁ ∎
       where
       teiklendus : ∀ {a} → {A : Set a}
