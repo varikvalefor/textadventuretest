@@ -249,7 +249,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
 
   dropkat : ∀ {a} → {A : Set a}
           → (xs ys : List A)
-          → (𝓁 xs) ↓ (xs ++ₗ ys) ≡ ys
+          → ys ≡ (𝓁 xs) ↓ (xs ++ₗ ys)
   dropkat [] _ = refl
   dropkat (_ ∷ xs) ys = dropkat xs ys
 
@@ -340,7 +340,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
       just (iv $ xen' ! mink j xenlen) ∎
       where
       mapₘ = Data.Maybe.map
-      dropsim = sym $ dropkat x₁ $ x₂ ∷ x₃
+      dropsim = dropkat x₁ $ x₂ ∷ x₃
 
   uidus = cong u₁ xijred
     where
@@ -350,7 +350,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
     xijred : xij ≡ x₂
     xijred = sym $ DMP.just-injective $ begin
       just x₂ ≡⟨ refl ⟩
-      ⊃ (x₂ ∷ x₃) ≡⟨ cong ⊃ (sym $ dropkat x₁ $ x₂ ∷ x₃) ⟩
+      ⊃ (x₂ ∷ x₃) ≡⟨ cong ⊃ (dropkat x₁ $ x₂ ∷ x₃) ⟩
       ⊃ ((𝓁 x₁) ↓ xen') ≡⟨ xent ⟩
       just (xen' ! mink j xenlen) ≡⟨ refl ⟩
       just xij ∎
