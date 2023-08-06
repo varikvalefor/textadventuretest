@@ -454,7 +454,7 @@ smashGeneric q k x j = q' , kus₂ , xindus , itemstedus
     plaid = DLP.length-map upgrayedd $ GameData.haters q
 
   itemstedus = begin
-    Room.items kumfa ≡⟨ cong Room.items {!!} ⟩
+    Room.items kumfa ≡⟨ sym $ cong Room.items $ implantdus rooms snikerz k ⟩
     Room.items snikerz ≡⟨ ualkonk itstes x $ const x₂ ⟩
     x₁ ++ₗ x₂ ∷ x₃ ∎
     where
@@ -475,6 +475,7 @@ smashGeneric q k x j = q' , kus₂ , xindus , itemstedus
                      (mink n $ teikdrop x n z)))
     implantdus (_ ∷ _) _ zero = refl
     implantdus (x ∷ xs) z (suc n) = {!!}
+    imp = implantdus rooms snikerz k
   xindus = begin
     length (Room.items $ rooms ! k) ≡⟨ refl ⟩
     length i ≡⟨ cong length $ teikdrop i x $ i ! x ⟩
