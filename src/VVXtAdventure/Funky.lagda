@@ -409,10 +409,10 @@ smashGeneric : (q : GameData)
                  (_≡_
                    (Room.items $ GameData.rooms q' ! mink k ℓ)
                    (Data.List._++_
-                     ((toℕ x) ↑ itstes)
+                     (toℕ x ↑ itstes)
                      (_∷_
                        (proj₂ $ Data.Maybe.to-witness j)
-                       ((ℕ.suc $ toℕ x) ↓ itstes))))
+                       (ℕ.suc (toℕ x) ↓ itstes))))
 smashGeneric q k x j = q' , kus₂ , xindus , itemstedus
   where
   teikdrop : ∀ {a} → {A : Set a}
@@ -422,7 +422,7 @@ smashGeneric q k x j = q' , kus₂ , xindus , itemstedus
            → let n' = toℕ n in
              ((_≡_ on length)
                x
-               (n' ↑ x ++ₗ z ∷ (ℕ.suc n') ↓ x))
+               (n' ↑ x ++ₗ z ∷ ℕ.suc n' ↓ x))
   teikdrop (_ ∷ _) zero _ = refl
   teikdrop (_ ∷ xs) (suc n) z = cong ℕ.suc $ teikdrop xs n z
   rooms = GameData.rooms q
@@ -431,7 +431,7 @@ smashGeneric q k x j = q' , kus₂ , xindus , itemstedus
     where
     itstes = Room.items $ rooms ! k
     itstes₂ = proj₁ $ ual itstes x $ const j'
-  kus = toℕ k ↑ rooms ++ₗ snikerz ∷ (ℕ.suc $ toℕ k) ↓ rooms
+  kus = toℕ k ↑ rooms ++ₗ snikerz ∷ ℕ.suc (toℕ k) ↓ rooms
   kus₂ = cong length $ teikdrop rooms k snikerz
   upgrayedd : Character rooms → Character kus
   upgrayedd t = record {
@@ -487,8 +487,8 @@ smashGeneric q k x j = q' , kus₂ , xindus , itemstedus
     length (Room.items $ GameData.rooms q' ! mink k kus₂) ∎
     where
     i = Room.items $ rooms ! k
-    d₁ = (toℕ x) ↑ i
-    d₃ = (ℕ.suc $ toℕ x) ↓ i
+    d₁ = toℕ x ↑ i
+    d₃ = ℕ.suc (toℕ x) ↓ i
     ualdos : ∀ {a} → {A : Set a}
            → (x : List A)
            → (n : Fin $ length x)
@@ -496,10 +496,10 @@ smashGeneric q k x j = q' , kus₂ , xindus , itemstedus
            → (_≡_
                (proj₁ $ ual x n f)
                (_++ₗ_
-                 ((toℕ n) ↑ x)
+                 (toℕ n ↑ x)
                  (_∷_
                    (f $ x ! n)
-                   ((ℕ.suc $ toℕ n) ↓ x))))
+                   (ℕ.suc (toℕ n) ↓ x))))
     ualdos (x ∷ xs) zero _ = refl
     ualdos (x ∷ xs) (suc n) f = cong (_∷_ x) $ ualdos xs n f
     snidus = begin
@@ -516,7 +516,7 @@ smashGeneric q k x j = q' , kus₂ , xindus , itemstedus
                (_≡_
                  (f $ x ! n)
                  (_!_
-                   (n' ↑ x ++ₗ f (x ! n) ∷ (ℕ.suc n') ↓ x)
+                   (n' ↑ x ++ₗ f (x ! n) ∷ ℕ.suc n' ↓ x)
                    (mink
                      n
                      (cong length $ teikdrop x n $ f $ x ! n))))
