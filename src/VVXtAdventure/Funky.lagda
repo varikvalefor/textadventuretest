@@ -432,7 +432,7 @@ smashGeneric q k x j = q' , kus₂ , xindus , itemstedus
     itstes = Room.items $ rooms ! k
     itstes₂ = proj₁ $ ual itstes x $ const j'
   kus = toℕ k ↑ rooms ++ₗ snikerz ∷ ℕ.suc (toℕ k) ↓ rooms
-  kus₂ = cong length $ teikdrop rooms k snikerz
+  kus₂ = teikdrop rooms k snikerz
   upgrayedd : Character rooms → Character kus
   upgrayedd t = record {
     forename = Character.forename t;
@@ -519,7 +519,7 @@ smashGeneric q k x j = q' , kus₂ , xindus , itemstedus
                    (n' ↑ x ++ₗ f (x ! n) ∷ ℕ.suc n' ↓ x)
                    (mink
                      n
-                     (cong length $ teikdrop x n $ f $ x ! n))))
+                     (teikdrop x n $ f $ x ! n))))
       intend (_ ∷ _) zero _ = refl
       intend p@(x ∷ xs) n@(suc m) f = DMP.just-injective $ begin
         just (f $ p ! n) ≡⟨ cong just $ sym $ lum p f n ⟩
@@ -534,7 +534,7 @@ smashGeneric q k x j = q' , kus₂ , xindus , itemstedus
         -- | ni'o zo .kis. cmavlaka'i lu .konk.
         -- selyli'erafsi li'u
         kis = f (p ! n) ∷ ℕ.suc (toℕ n) ↓ p
-        n' = mink n $ cong length $ teikdrop p n $ f $ p ! n
+        n' = mink n $ teikdrop p n $ f $ p ! n
         n'' = mink n $ sym $ DLP.length-map f p
         xedrop : ∀ {a} → {A : Set a}
                → (x : List A)
@@ -556,7 +556,7 @@ smashGeneric q k x j = q' , kus₂ , xindus , itemstedus
           where
           flidir = ⊃ ∘₂ flip _↓_
           tomin₁ = tomindus n $ sym $ DLP.length-map f p
-          tomin₂ = tomindus n $ cong length $ teikdrop p n $ f $ p ! n
+          tomin₂ = tomindus n $ teikdrop p n $ f $ p ! n
           teikapdus : ∀ {a} → {A : Set a}
                     → (x : List A)
                     → (n : Fin $ length x)
