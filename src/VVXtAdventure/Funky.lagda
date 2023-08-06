@@ -150,6 +150,7 @@ open import Truthbrary.Record.LLC
 open import Truthbrary.Category.Monad
 open import Truthbrary.Data.List.Loom
   using (
+    ualkonk;
     lum;
     ual
   )
@@ -412,7 +413,7 @@ smashGeneric : (q : GameData)
                      (_∷_
                        (proj₂ $ Data.Maybe.to-witness j)
                        ((ℕ.suc $ toℕ x) ↓ itstes))))
-smashGeneric q k x j = q' , kus₂ , xindus , {!!}
+smashGeneric q k x j = q' , kus₂ , xindus , itemstedus
   where
   teikdrop : ∀ {a} → {A : Set a}
            → (x : List A)
@@ -452,6 +453,28 @@ smashGeneric q k x j = q' , kus₂ , xindus , {!!}
     where
     plaid = DLP.length-map upgrayedd $ GameData.haters q
 
+  itemstedus = begin
+    Room.items kumfa ≡⟨ cong Room.items {!!} ⟩
+    Room.items snikerz ≡⟨ ualkonk itstes x $ const x₂ ⟩
+    x₁ ++ₗ x₂ ∷ x₃ ∎
+    where
+    itstes = Room.items $ rooms ! k
+    kumfa = GameData.rooms q' ! mink k kus₂
+    x₁ = toℕ x ↑ Room.items (GameData.rooms q ! k)
+    x₂ = proj₂ $ Data.Maybe.to-witness j
+    x₃ = ℕ.suc (toℕ x) ↓ Room.items (GameData.rooms q ! k)
+    implantdus : ∀ {a} → {A : Set a}
+               → (x : List A)
+               → (z : A)
+               → (n : Fin $ length x)
+               → let n' = toℕ n in
+                 (_≡_
+                   z
+                   (_!_
+                     (n' ↑ x ++ₗ z ∷ ℕ.suc n' ↓ x)
+                     (mink n $ teikdrop x n z)))
+    implantdus (_ ∷ _) _ zero = refl
+    implantdus (x ∷ xs) z (suc n) = {!!}
   xindus = begin
     length (Room.items $ rooms ! k) ≡⟨ refl ⟩
     length i ≡⟨ cong length $ teikdrop i x $ i ! x ⟩
