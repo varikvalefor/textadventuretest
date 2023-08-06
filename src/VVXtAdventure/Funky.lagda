@@ -425,11 +425,11 @@ smashGeneric q k x j = q' , kus₂ , xindus , {!!}
   teikdrop (_ ∷ _) zero _ = refl
   teikdrop (_ ∷ xs) (suc n) z = cong ℕ.suc $ teikdrop xs n z
   rooms = GameData.rooms q
+  j' = proj₂ $ Data.Maybe.to-witness j
   snikerz = record (rooms ! k) {items = itstes₂}
     where
     itstes = Room.items $ rooms ! k
-    it₂ = proj₂ $ Data.Maybe.to-witness j
-    itstes₂ = proj₁ $ ual itstes x $ const it₂
+    itstes₂ = proj₁ $ ual itstes x $ const j'
   kus = toℕ k ↑ rooms ++ₗ snikerz ∷ (ℕ.suc $ toℕ k) ↓ rooms
   kus₂ = cong length $ teikdrop rooms k snikerz
   upgrayedd : Character rooms → Character kus
@@ -464,7 +464,6 @@ smashGeneric q k x j = q' , kus₂ , xindus , {!!}
     length (Room.items $ GameData.rooms q' ! mink k kus₂) ∎
     where
     i = Room.items $ rooms ! k
-    j' = proj₂ $ Data.Maybe.to-witness j
     d₁ = (toℕ x) ↑ i
     d₃ = (ℕ.suc $ toℕ x) ↓ i
     ualdos : ∀ {a} → {A : Set a}
