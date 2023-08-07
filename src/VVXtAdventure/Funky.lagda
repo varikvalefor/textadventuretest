@@ -59,8 +59,9 @@
 \begin{document}
 \maketitle
 
-\section{le me'oi .abstract.\ ja co'e}
-ni'o la'o zoi.\ \texttt{\cmene}\ .zoi.\ vasru le velcki be lo fancu be fi la'oi .\F{GameData}.\ ja zo'e
+\begin{abstract}
+	\noindent ni'o la'o zoi.\ \texttt{\cmene}\ .zoi.\ vasru le velcki be lo fancu be fi la'oi .\F{GameData}.\ ja zo'e
+\end{abstract}
 
 \section{le me'oi .preamble.\ ja co'e}
 
@@ -252,7 +253,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
 
   dropkat : ∀ {a} → {A : Set a}
           → (xs ys : List A)
-          → (𝓁 xs) ↓ (xs ++ₗ ys) ≡ ys
+          → ys ≡ (𝓁 xs) ↓ (xs ++ₗ ys)
   dropkat [] _ = refl
   dropkat (_ ∷ xs) ys = dropkat xs ys
 
@@ -285,35 +286,26 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
   xent = sym $ subkon $ dropind xen' $ mink j xenlen
     where
     _≤_ = Data.Nat._≤_
-    mindut : {m n : ℕ}
-           → (o : Fin m)
-           → (x : m ≡ n)
-           → toℕ (mink o x) ≡ toℕ o
-    mindut o refl = refl
     dropind : ∀ {a} → {A : Set a}
             → (xs : List A)
             → (n : Fin $ 𝓁 xs)
             → just (xs ! n) ≡ ⊃ ((toℕ n) ↓ xs)
     dropind (x ∷ xs) Fin.zero = refl
     dropind (x ∷ xs) (Fin.suc n) = dropind xs n
-    teiklendus : ∀ {a} → {A : Set a}
-               → (xs : List A)
-               → (n : ℕ)
-               → n ≤ 𝓁 xs
-               → 𝓁 (n ↑ xs) ≡ n
-    teiklendus _ 0 _ = refl
-    teiklendus (x ∷ xs) (ℕ.suc n) (Data.Nat.s≤s q) = ret
-      where
-      ret = cong ℕ.suc $ teiklendus xs n q
-    lisuc : ∀ {a} → {A : Set a}
-          → (xs : List A)
-          → Fin $ 𝓁 xs
-          → Σ ℕ $ _≡_ (𝓁 xs) ∘ ℕ.suc
-    lisuc (_ ∷ xs) _ = 𝓁 xs , refl
-    tuik : toℕ j ≤ 𝓁 xen
-    tuik = subst (_≤_ _) kix $ DNP.≤-step $ subst (_≥_ _) mijd j'
+    mindut : {m n : ℕ}
+           → (o : Fin m)
+           → (x : m ≡ n)
+           → toℕ (mink o x) ≡ toℕ o
+    mindut o refl = refl
+    jelis : toℕ j ≤ 𝓁 xen
+    jelis = subst (_≤_ _) kix $ DNP.≤-step $ subst (_≥_ _) mijd j'
       where
       _≥_ = flip _≤_
+      lisuc : ∀ {a} → {A : Set a}
+            → (xs : List A)
+            → Fin $ 𝓁 xs
+            → Σ ℕ $ _≡_ (𝓁 xs) ∘ ℕ.suc
+      lisuc (_ ∷ xs) _ = 𝓁 xs , refl
       j' = DFP.≤fromℕ $ mink j $ proj₂ $ lisuc xen j
       mijd = mindut j $ proj₂ $ lisuc xen j
       kix : ℕ.suc (toℕ $ Data.Fin.fromℕ _) ≡ 𝓁 xen
@@ -322,14 +314,21 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
         tondus : {m n : ℕ}
                → m ≡ n
                → toℕ (Data.Fin.fromℕ m) ≡ n
-        tondus {ℕ.zero} = id
-        tondus {ℕ.suc m} {ℕ.suc n} refl = ret
-          where
-          ret = cong ℕ.suc $ tondus {m} {n} refl
+        tondus {m} x = subst (_≡_ _) x $ DFP.toℕ-fromℕ m
     xil = begin
       toℕ (mink j xenlen) ≡⟨ mindut j xenlen ⟩
-      toℕ j ≡⟨ sym $ teiklendus xen (toℕ j) tuik ⟩
+      toℕ j ≡⟨ sym $ teiklendus xen (toℕ j) jelis ⟩
       𝓁 x₁ ∎
+      where
+      teiklendus : ∀ {a} → {A : Set a}
+                 → (xs : List A)
+                 → (n : ℕ)
+                 → n ≤ 𝓁 xs
+                 → 𝓁 (n ↑ xs) ≡ n
+      teiklendus _ 0 _ = refl
+      teiklendus (x ∷ xs) (ℕ.suc n) (Data.Nat.s≤s q) = ret
+        where
+        ret = cong ℕ.suc $ teiklendus xs n q
     subkon = subst (_≡_ _) $ cong (⊃ ∘ flip _↓_ xen') xil
 
   xendj : let iv = Character.inventory in
@@ -345,7 +344,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
       just (iv $ xen' ! mink j xenlen) ∎
       where
       mapₘ = Data.Maybe.map
-      dropsim = sym $ dropkat x₁ $ x₂ ∷ x₃
+      dropsim = dropkat x₁ $ x₂ ∷ x₃
 
   uidus = cong u₁ xijred
     where
@@ -355,7 +354,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
     xijred : xij ≡ x₂
     xijred = sym $ DMP.just-injective $ begin
       just x₂ ≡⟨ refl ⟩
-      ⊃ (x₂ ∷ x₃) ≡⟨ cong ⊃ (sym $ dropkat x₁ $ x₂ ∷ x₃) ⟩
+      ⊃ (x₂ ∷ x₃) ≡⟨ cong ⊃ (dropkat x₁ $ x₂ ∷ x₃) ⟩
       ⊃ ((𝓁 x₁) ↓ xen') ≡⟨ xent ⟩
       just (xen' ! mink j xenlen) ≡⟨ refl ⟩
       just xij ∎
@@ -385,7 +384,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
              → let n' = toℕ n in
                let s = ℕ.suc n' in
                s ↓ a ≡ s ↓ _++ₗ_ (n' ↑ a) (x ∷ s ↓ a)
-    dropydus (_ ∷ xs) zero = refl
+    dropydus (_ ∷ _) zero = refl
     dropydus (_ ∷ xs) {b} (suc n) = dropydus xs {b} n
 
   p' = mink (GameData.player' gd) xenlen
@@ -394,10 +393,10 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
 
 \chapter{le mu'oi glibau.\ high-level .glibau.}
 
-\section{le fancu poi tu'a ke'a na rinka lo nu lo ctaipe be la'oi .\F{GameData}.\ cu na binxo pe'a ru'e}
+\section{le fancu poi ke'a pruce ja co'e zo'e je ko'a goi lo ctaipe be la'oi .GameData.\ ko'a je zo'e}
 
 \subsection{la'oi .\F{epicwin?}.}
-ni'o ga jonai ga je tu'a la'o zoi.\ \B a .zoi.\ .indika lo du'u lo kelci cu jinga gi ko'a goi la'o zoi.\ \F{epicwin?} \B m \B a .zoi. du la'o zoi.\ \B m , \B a .zoi.\ gi ko'a du la'oi .\F{nothing}.
+ni'o ga jonai ga je tu'a la'o zoi.\ \B a .zoi.\ .indika lo du'u lo kelci cu jinga gi ko'a goi la'o zoi.\ \F{epicwin?} \B m \B a .zoi. du la'o zoi.\ \F{just} \Sym \$ \B m \Sym , \B a .zoi.\ gi ko'a du la'oi .\F{nothing}.
 
 \begin{code}
 epicwin? : String → GameData → COut
@@ -473,7 +472,7 @@ kumski? m g = if mapti (just $ vijac , g) nothing
     kumfid = Character.room $ GameData.player g
   -- | ni'o zo .vijac. cmavlaka'i lu velski ja canlu li'u
   vijac : String
-  vijac = concatₛ $ intersperseₗ "\n\n" le'i-ro-velski
+  vijac = concatₛ $ intersperseₗ "\n\n" le'i-lerpinsle
     where
     intersperseₗ = Data.List.intersperse
     concatₛ = Data.String.concat
@@ -490,7 +489,7 @@ kumski? m g = if mapti (just $ vijac , g) nothing
     ... | (x ∷ xs) = "CONNECTED ROOMS: " ++ concatₛ liste
       where
       liste = intersperseₗ ", " $ x ∷ xs
-    le'i-ro-velski = jaiv ∷ mapₗ velski (Room.items kumfa)
+    le'i-lerpinsle = jaiv ∷ mapₗ velski (Room.items kumfa)
 \end{code}
 
 \subsection{la'oi .\F{scream?}.}
@@ -503,11 +502,14 @@ scream? _ _ = nothing
 \end{code}
 
 \subsection{la'oi .\F{sayless?}.}
-ni'o ga jonai ga je la'o zoi.\ \B a .zoi.\ kunti gi ga je tu'a la'o zoi.\ \B c .zoi.\ .indika le du'u mabla fa lo nu samci'a lo kunti gi ko'a goi la'o zoi.\ \F{sayless?} \B a \B b .zoi.\ du la'o zoi.\ \F{just} \Sym \$ \B c \Sym , \B b .zoi.\ gi ko'a du la'oi .\F{nothing}.
+ni'o ga jonai ga je ga jo co'e gi la'o zoi.\ \B a .zoi.\ kunti gi ga je tu'a la'o zoi.\ \B c .zoi.\ .indika le du'u mabla fa lo nu samci'a lo kunti ja zo'e gi ko'a goi la'o zoi.\ \F{sayless?} \B a \B b .zoi.\ du la'o zoi.\ \F{just} \Sym \$ \B c \Sym , \B b .zoi.\ gi ko'a du la'oi .\F{nothing}.
 
 \begin{code}
 sayless? : List String → GameData → COut
 sayless? [] = just ∘ _,_ "The silent treatment won't work here."
+sayless? ("" ∷ "" ∷ "" ∷ "" ∷ []) = just ∘ _,_ m
+  where
+  m = "Man, what the fuck?"
 sayless? _ = const nothing
 \end{code}
 
@@ -530,7 +532,9 @@ lp? ("I'M" ∷ "A" ∷ "WINNER" ∷ []) q = just $ m , q
 lp? _ _ = nothing
 \end{code}
 
-\section{la'oi .\F{travel?}.}
+\section{le fancu poi cumki fa lo nu ke'a pruce ja co'e zo'e je ko'a goi lo ctaipe be la'oi .GameData.\ zo'e je lo na du be ko'a}
+
+\subsection{la'oi .\F{travel?}.}
 ni'o ga jonai ga je la'o zoi.\ \F{travel?} .zoi.\ djuno ja co'e lo du'u lo nu co'e ko'a goi zoi zoi.\ \F{travel?} \B r \B g .zoi.\ cu nu cpedu lo nu lo kelci ke xarpre ja co'e cu klama lo kumfa poi la'o zoi.\ \B K .zoi.\ sinxa ke'a gi ga jonai ga je la'o zoi.\ \F{Room.travis} \Sym \$ \F{Character.room} \Sym \$ \F{GameData.player} \B g .zoi.\ vasru la'o zoi.\ \B K .zoi.\ gi ko'a broda cei sinxa ja co'e lo me'oi .product.\ be lo velski be lo nu klama bei zo'e poi tu'a ke'a .indika lo du'u lo kelci ke xarpre ja co'e cu zvati zo'e poi djica lo nu zvati ke'a xi re gi ko'a broda lo me'oi .product.\ be lo te skuxai ja zo'e bei la'o zoi.\ \B g .zoi.\ gi ko'a broda la'oi .\F{nothing}.
 
 \begin{code}
@@ -543,6 +547,10 @@ travel? (x₁ ∷ xs₁) = if realShit (travel' xs₁) $ const nothing
   travel' [] q = just $ m , q
     where
     m = "Don't tell me to break the rules, fucker!"
+  travel' (_ ∷ _ ∷ _) q = just $ m , q
+    where
+    m = "I strongly doubt that the concept of \"super\
+        \position\" applies to a creature of your mass."
   travel' (x ∷ []) q = maybe just tryfind $ alreadythere?
     where
     F = Fin $ length $ GameData.rooms q
@@ -564,27 +572,23 @@ travel? (x₁ ∷ xs₁) = if realShit (travel' xs₁) $ const nothing
           where
           q' = movePawn q $ GameData.player' q
           m = "You travel successfully."
-      mathch = travelable $ methching $ zipfin $ GameData.rooms q
+      mathch : String ⊎ List F
+      mathch with methching $ zipfin $ GameData.rooms q
         where
-        zipfin = λ l → Data.List.zip (allFin $ length l) l
+        zipfin = λ l → flip Data.List.zip l $ allFin $ length l
         methching = filterₗ $ _≟_ x ∘ Room.cname ∘ proj₂
-        travelable : List $ F × Room → String ⊎ List F
-        travelable [] = inj₁ m
-          where
-          m = "Did you take your pills this morning?  \
-              \I don't think that that room exists."
-        travelable (x ∷ xs) = inj₂ $ pj1s $ filterₗ tr $ x ∷ xs
-          where
-          pj1s = Data.List.map proj₁
-          cnq = _≟_ ∘ Room.cname ∘ proj₂
-          tr = λ a → any? (cnq a) $ Room.travis cur
-  travel' (_ ∷ _ ∷ _) q = just $ m , q
-    where
-    m = "I strongly doubt that the concept of \"super\
-        \position\" applies to a creature of your mass."
+      ... | [] = inj₁ m
+        where
+        m = "Did you take your pills this morning?  \
+            \I don't think that that room exists."
+      ... | (x ∷ xs) = inj₂ $ pj1s $ filterₗ tr $ x ∷ xs
+        where
+        pj1s = Data.List.map proj₁
+        cnq = _≟_ ∘ Room.cname ∘ proj₂
+        tr = λ a → any? (cnq a) $ Room.travis cur
 \end{code}
 
-\section{la'oi .\F{wield?}.}
+\subsection{la'oi .\F{wield?}.}
 ni'o ga jonai ga je ga je la'oi .\F{wield?}.\ djuno pe'a ru'e lo du'u tu'a la'o zoi.\ \B a .zoi.\ .indika lo du'u lo kelci cu djica lo nu ko'a goi lo kelci ke xarpre ja co'e cu me'oi .wield.\ ko'e goi zo'e poi la'o zoi.\ \B c .zoi.\ mu'oi glibau.\ \F{Item.cname} .glibau.\ lo sinxa be ke'a gi ga jonai ga je li pa nilzilcmi lo'i selvau be lo me'oi .inventory.\ be ko'a be'o be'o poi la'o zoi.\ \B c .zoi.\ mu'oi glibau.\ \F{Item.cname} .glibau.\ ke'a je poi curmi lo nu me'oi .wield.\ ke'a gi tu'a la'o zoi.\ \B x .zoi.\ lu'u je tu'a la'o zoi.\ \B y .zoi.\ cu .indika lo du'u ko'a me'oi .wield.\ ko'e gi ko'i goi la'o zoi.\ \F{wield?} \B a \B b .zoi.\ du la'o zoi.\ \F{just} \Sym \$ \B x \Sym , \B y .zoi.\ gi ga je skuxai ja co'e la'o zoi.\ \B x .zoi.\ gi ko'a du la'o zoi.\ \F{just} \Sym \$ \B x \Sym , \B b .zoi.\ gi ko'a du la'oi .\F{nothing}.
 
 \begin{code}
@@ -605,9 +609,7 @@ wield? (x ∷ xs) dang = if (realShit x) (troci xs) nothing
     m = "You are giving me useless information."
   troci (y ∷ []) with flt $ mapMaybe mapti? $ allFin _
     where
-    flt = filterₗ $ _≟_ y ∘ cname ∘ proj₁
-      where
-      cname = Item.cname ∘ _!_ inv
+    flt = filterₗ $ _≟_ y ∘ Item.cname ∘ _!_ inv ∘ proj₁
     mapti? : _ → Maybe $ Σ (Fin _) $ _≡_ true ∘ wisyj
     mapti? n with true Data.Bool.≟ wisyj n
     ... | yes x = just $ n , x
@@ -616,6 +618,13 @@ wield? (x ∷ xs) dang = if (realShit x) (troci xs) nothing
     where
     m = "You need to stop chugging PCP or whatever.  \
         \Your hallucinations are pissing me off."
+  ... | (_ ∷ _ ∷ _) = just $ m , dang
+    where
+    m = "Your query matches multiple items, although \
+        \a proof of that your bag only contains items \
+        \which have unique names exists.\n\
+        \Something is mad fucked, and you might \
+        \actually be innocent this time."
   ... | (selpli ∷ []) = just $ wieldMsg , proj₁ wieldData
     where
     wieldMsg = fromMaybe "You wield the weapon." xarcynotci
@@ -626,13 +635,6 @@ wield? (x ∷ xs) dang = if (realShit x) (troci xs) nothing
     wieldData = wieldPawn dang p (proj₁ selpli) $ proj₂ selpli
       where
       p = GameData.player' dang
-  ... | (_ ∷ _ ∷ _) = just $ m , dang
-    where
-    m = "Your query matches multiple items, although \
-        \a proof of that your bag only contains items \
-        \which have unique names exists.\n\
-        \Something is mad fucked, and you might \
-        \actually be innocent this time."
 \end{code}
 
 \section{la'oi .\F{hitme?}.}
