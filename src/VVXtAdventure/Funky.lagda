@@ -130,6 +130,10 @@ open import Data.Product
     _×_;
     _,_
   )
+open import Data.Rational
+  using (
+    0ℚ
+  )
 open import Relation.Nullary
   using (
     yes;
@@ -629,5 +633,36 @@ wield? (x ∷ xs) dang = if (realShit x) (troci xs) nothing
         \which have unique names exists.\n\
         \Something is mad fucked, and you might \
         \actually be innocent this time."
+\end{code}
+
+\section{la'oi .\F{hitme?}.}
+ni'o ga jonai ga je tu'a la'oi .\B{s}.\ .indika lo du'u djica lo nu xrani ja co'e ko'a goi lo kelci ke xarpre ja co'e pe la'oi .\B{g}.\ gi ga je tu'a la'oi .\B{t}.\ lu'u je tu'a la'o zoi.\ \B{g'}\ .zoi.\ cu .indika lo du'u xrani ko'a gi ko'a goi la'o zoi.\ \F{hitme?} \B s \B g\ .zoi.\ du la'o zoi.\ \F{just} \F \$ \B t \F , \B{g'}\ .zoi.\ gi ko'a du la'oi .\F{nothing}.
+
+\begin{code}
+hitme? : Com
+hitme? ("HIT" ∷ "ME!" ∷ []) g = just $ "BOOM!" , record g {
+  haters = proj₁ u;
+  player' = mink (GameData.player' g) $ proj₁ $ proj₂ u
+  }
+  where
+  u = ual (GameData.haters g) (GameData.player' g) $ λ n → record n {health = 0ℚ}
+hitme? _ _ = nothing
+\end{code}
+
+\chapter{le zmiku}
+ni'o la'au le zmiku li'u vasru le velcki be le fancu poi lo ctaipe be ke'a cu smimlu la'o zoi.\ \F{GameData} \Sym → \F{Maybe} \F \$ \F{String} \F × \F{GameData}\ .zoi.\ jenai poi tu'a ke'a se sarcu lo nu midnoi fi lo kelci
+
+\section{la .\F{zmimrobi'o}.}
+ni'o ga jonai ga je tu'a la'oi .\B{t}.\ .indika ko'a goi lo du'u lo kelci ke xarpre ja co'e cu mrobi'o gi ga je tu'a la'oi .\B{s}.\ .indika ko'a gi ko'a goi la'o zoi.\ \F{zmimrobi'o} \B t\ .zoi.\ du la'o zoi.\ \F{just} \F \$ \B s \F , \B t\ .zoi.\ gi ko'a du la'oi .\F{nothing}.
+
+\begin{code}
+zmimrobi'o : GameData → Maybe $ String × GameData
+zmimrobi'o t = if morsi (just $ "You be dead." , t) nothing
+  where
+  import Data.Integer as ℤ
+  morsi = num lenijmive ℤ.≤ᵇ ℤ.0ℤ
+    where
+    lenijmive = Character.health $ GameData.player t
+    num = Data.Rational.ℚ.numerator
 \end{code}
 \end{document}

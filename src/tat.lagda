@@ -108,12 +108,16 @@ main = run $ lupe initialD
     crock gd s = chews np $ putStrLn m >>ᵢₒ lupe gd
       where
       m = "I don't understand a word you just said."
-      chews : List $ COut × (GameData → IO ⊤) → IO ⊤ → IO ⊤
-      chews ((just (a , b) , f) ∷ _) _ = putStrLn a >>ᵢₒ f b
+      chews : List $ COut × (String → GameData → IO ⊤)
+            → IO ⊤
+            → IO ⊤
+      chews ((just (a , b) , f) ∷ _) _ = f a b
       chews ((nothing , _) ∷ xs) d = chews xs d
       chews [] d = d
-      np = (epicwin? winmsg gd , boob) ∷
-           map (λ f → f s gd , lupe) std
+      np : List $ COut × (String → GameData → IO ⊤)
+      np = (epicwin? winmsg gd , const boob) ∷
+           (zmimrobi'o gd , λ a _ → putStrLn a) ∷
+           map (λ f → f s gd , const lupe) std
         where
         boob = const $ return $ Level.lift ABU.tt
         std = sazycimde ++ gasnu
@@ -124,6 +128,7 @@ main = run $ lupe initialD
                       lp? ∷
                       kumski? ∷
                       invent? ∷
+                      hitme? ∷
                       []
           gasnu = travel? ∷
                   wield? ∷
