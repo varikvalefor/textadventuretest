@@ -645,7 +645,8 @@ hitme? ("HIT" ∷ "ME!" ∷ []) g = just $ "BOOM!" , record g {
   player' = mink (GameData.player' g) $ proj₁ $ proj₂ u
   }
   where
-  u = ual (GameData.haters g) (GameData.player' g) $ λ n → record n {health = 0ℚ}
+  natsuprais = λ n → record n {health = 0ℚ}
+  u = ual (GameData.haters g) (GameData.player' g) natsuprais
 hitme? _ _ = nothing
 \end{code}
 
