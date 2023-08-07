@@ -706,7 +706,6 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
         (toℕ m) ↑ xen' ∎
         where
         ualteik = Truthbrary.Data.List.Loom.ualteik
-      xendrop : xensim' ≡ (ℕ.suc $ toℕ m) ↓ xen'
       xendrop = begin
         xensim' ≡⟨ refl ⟩
         (ℕ.suc $ toℕ m) ↓ xenbis ≡⟨ cong (zunbas xenbis) m≡m' ⟩
