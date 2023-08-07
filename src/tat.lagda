@@ -108,10 +108,6 @@ main = run $ lupe initialD
   lupe : GameData → IO ⊤
   lupe = λ q → fromMaybe (prompt >>ᵢₒ ree >>=ᵢₒ crock q) $ fanmo? q
     where
-    firstJust : ∀ {a} → {A : Set a} → List $ Maybe A → Maybe A
-    firstJust [] = nothing
-    firstJust (just t ∷ _) = just t
-    firstJust (nothing ∷ t) = firstJust t
     fanmo? : GameData → Maybe $ IO ⊤
     fanmo? q = (firstJust
                  (Data.List.map
@@ -119,6 +115,11 @@ main = run $ lupe initialD
                    (zmimrobi'o q ∷
                     epicwin? winmsg q ∷
                     [])))
+      where
+      firstJust : ∀ {a} → {A : Set a} → List $ Maybe A → Maybe A
+      firstJust [] = nothing
+      firstJust (just t ∷ _) = just t
+      firstJust (nothing ∷ t) = firstJust t
 
     prompt = putStrLn "What do you do?"
     ree = words ∘ map toUpper <$> getLine
