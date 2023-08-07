@@ -118,7 +118,7 @@ main = run $ lupe initialD
       np : List $ COut × (String → GameData → IO ⊤)
       np = (epicwin? winmsg gd , const boob) ∷
            (zmimrobi'o gd , putStrLn ∘₂ const) ∷
-           map (λ f → f s gd , const lupe) std
+           map (λ f → f s gd , λ b a → putStrLn b IO.>> lupe a) std
         where
         boob = const $ return $ Level.lift ABU.tt
         std = sazycimde ++ gasnu
