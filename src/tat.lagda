@@ -23,6 +23,7 @@
 \newunicodechar{→}{\ensuremath{\mathnormal{\rightarrow}}}
 \newunicodechar{ᵢ}{\ensuremath{\mathnormal{_i}}}
 \newunicodechar{ₒ}{\ensuremath{\mathnormal{_o}}}
+\newunicodechar{₂}{\ensuremath{\mathnormal{_2}}}
 
 \newcommand\Sym\AgdaSymbol
 \newcommand\D\AgdaDatatype
@@ -116,7 +117,7 @@ main = run $ lupe initialD
       chews [] d = d
       np : List $ COut × (String → GameData → IO ⊤)
       np = (epicwin? winmsg gd , const boob) ∷
-           (zmimrobi'o gd , λ a _ → putStrLn a) ∷
+           (zmimrobi'o gd , putStrLn ∘₂ const) ∷
            map (λ f → f s gd , const lupe) std
         where
         boob = const $ return $ Level.lift ABU.tt
