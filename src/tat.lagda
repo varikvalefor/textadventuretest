@@ -64,6 +64,7 @@ open import Data.List
   )
 open import Data.Maybe
   using (
+    fromMaybe;
     Maybe;
     just;
     nothing
@@ -75,6 +76,7 @@ open import Data.String
   )
 open import Data.Product
   using (
+    proj₁;
     _×_;
     _,_
   )
@@ -101,8 +103,23 @@ open import Relation.Binary.PropositionalEquality
 main : Main
 main = run $ lupe initialD
   where
-  lupe = λ q → prompt >>ᵢₒ ree >>=ᵢₒ crock q
+  -- | ni'o pilno ko'a goi le zo ce'u co'e ki'u le su'u
+  -- tu'a ko'a filri'a lo nu na co'e zo'oi .q.
+  lupe : GameData → IO ⊤
+  lupe = λ q → fromMaybe (prompt >>ᵢₒ ree >>=ᵢₒ crock q) $ fanmo? q
     where
+    firstJust : ∀ {a} → {A : Set a} → List $ Maybe A → Maybe A
+    firstJust [] = nothing
+    firstJust (just t ∷ _) = just t
+    firstJust (nothing ∷ t) = firstJust t
+    fanmo? : GameData → Maybe $ IO ⊤
+    fanmo? q = (firstJust
+                 (Data.List.map
+                   (Data.Maybe.map $ putStrLn ∘ proj₁)
+                   (zmimrobi'o q ∷
+                    epicwin? winmsg q ∷
+                    [])))
+
     prompt = putStrLn "What do you do?"
     ree = words ∘ map toUpper <$> getLine
     crock : GameData → List String → IO ⊤
@@ -116,11 +133,8 @@ main = run $ lupe initialD
       chews ((nothing , _) ∷ xs) d = chews xs d
       chews [] d = d
       np : List $ COut × (String → GameData → IO ⊤)
-      np = (epicwin? winmsg gd , const boob) ∷
-           (zmimrobi'o gd , putStrLn ∘₂ const) ∷
-           map (λ f → f s gd , λ b a → putStrLn b IO.>> lupe a) std
+      np = map (λ f → f s gd , λ b a → putStrLn b IO.>> lupe a) std
         where
-        boob = const $ return $ Level.lift ABU.tt
         std = sazycimde ++ gasnu
           where
           sazycimde = scream? ∷
