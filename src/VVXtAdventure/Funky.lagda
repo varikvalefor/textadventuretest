@@ -474,7 +474,6 @@ smashGeneric q k x j = q' , kus₂ , xindus , itemstedus
                      (mink n $ teikdrop x n z)))
     implantdus (_ ∷ _) _ zero = refl
     implantdus (x ∷ xs) z (suc n) = {!!}
-    imp = implantdus rooms snikerz k
   xindus = begin
     length (Room.items $ rooms ! k) ≡⟨ refl ⟩
     length i ≡⟨ cong length $ teikdrop i x $ i ! x ⟩
