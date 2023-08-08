@@ -402,7 +402,7 @@ smashGeneric : (q : GameData)
              → let item = Room.items (GameData.rooms q ! k) ! x in
                (j : Data.Maybe.Is-just $ Item.smashInfo item)
              → Σ GameData $ λ q'
-               → Σ ((_≡_ on (length ∘ GameData.rooms)) q q') $ λ ℓ
+               → Σ ((_≡_ on length ∘ GameData.rooms) q q') $ λ ℓ
                → Σ (_≡_
                      (lir $ GameData.rooms q ! k)
                      (lir $ GameData.rooms q' ! mink k ℓ)) $ λ ℓ₂
