@@ -516,9 +516,7 @@ smashGeneric q k x j = q' , kus₂ , xindus , itemstedus
                  (f $ x ! n)
                  (_!_
                    (n' ↑ x ++ₗ f (x ! n) ∷ ℕ.suc n' ↓ x)
-                   (mink
-                     n
-                     (teikdrop x n))))
+                   (mink n $ teikdrop x n)))
       intend (_ ∷ _) zero _ = refl
       intend p@(x ∷ xs) n@(suc _) f = DMP.just-injective $ begin
         just (f $ p ! n) ≡⟨ cong just $ sym $ lum p f n ⟩
