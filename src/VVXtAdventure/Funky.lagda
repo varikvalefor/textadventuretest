@@ -419,13 +419,13 @@ smashGeneric q k x j = q' , kus₂ , xindus , itemstedus
   teikdrop : ∀ {a} → {A : Set a}
            → (x : List A)
            → (n : Fin $ length x)
-           → (z : A)
+           → {z : A}
            → let n' = toℕ n in
              ((_≡_ on length)
                x
                (n' ↑ x ++ₗ z ∷ ℕ.suc n' ↓ x))
-  teikdrop (_ ∷ _) zero _ = refl
-  teikdrop (_ ∷ xs) (suc n) z = cong ℕ.suc $ teikdrop xs n z
+  teikdrop (_ ∷ _) zero = refl
+  teikdrop (_ ∷ xs) (suc n) = cong ℕ.suc $ teikdrop xs n
   rooms = GameData.rooms q
   j' = proj₂ $ Data.Maybe.to-witness j
   snikerz = record (rooms ! k) {items = itstes₂}
@@ -433,7 +433,7 @@ smashGeneric q k x j = q' , kus₂ , xindus , itemstedus
     itstes = Room.items $ rooms ! k
     itstes₂ = proj₁ $ ual itstes x $ const j'
   kus = toℕ k ↑ rooms ++ₗ snikerz ∷ ℕ.suc (toℕ k) ↓ rooms
-  kus₂ = teikdrop rooms k snikerz
+  kus₂ = teikdrop rooms k
   upgrayedd : Character rooms → Character kus
   upgrayedd t = record {
     forename = Character.forename t;
@@ -472,12 +472,12 @@ smashGeneric q k x j = q' , kus₂ , xindus , itemstedus
                    z
                    (_!_
                      (n' ↑ x ++ₗ z ∷ ℕ.suc n' ↓ x)
-                     (mink n $ teikdrop x n z)))
+                     (mink n $ teikdrop x n)))
     implantdus (_ ∷ _) _ zero = refl
     implantdus (x ∷ xs) z (suc n) = {!!}
   xindus = begin
     length (Room.items $ rooms ! k) ≡⟨ refl ⟩
-    length i ≡⟨ cong length $ teikdrop i x $ i ! x ⟩
+    length i ≡⟨ cong length $ teikdrop i x ⟩
     length (d₁ ++ₗ i ! x ∷ d₃) ≡⟨ DLP.length-++ d₁ ⟩
     length d₁ + length (i ! x ∷ d₃) ≡⟨ refl ⟩
     length d₁ + length (j' ∷ d₃) ≡⟨ sym $ DLP.length-++ d₁ ⟩
@@ -518,7 +518,7 @@ smashGeneric q k x j = q' , kus₂ , xindus , itemstedus
                    (n' ↑ x ++ₗ f (x ! n) ∷ ℕ.suc n' ↓ x)
                    (mink
                      n
-                     (teikdrop x n $ f $ x ! n))))
+                     (teikdrop x n))))
       intend (_ ∷ _) zero _ = refl
       intend p@(x ∷ xs) n@(suc _) f = DMP.just-injective $ begin
         just (f $ p ! n) ≡⟨ cong just $ sym $ lum p f n ⟩
@@ -530,7 +530,7 @@ smashGeneric q k x j = q' , kus₂ , xindus , itemstedus
         _¨_ = Data.List.map
         ⊃ = Data.List.head
         konk = toℕ n ↑ p ++ₗ f (p ! n) ∷ ℕ.suc (toℕ n) ↓ p
-        n' = mink n $ teikdrop p n $ f $ p ! n
+        n' = mink n $ teikdrop p n
         n'' = mink n $ sym $ DLP.length-map f p
         xedrop : ∀ {a} → {A : Set a}
                → (x : List A)
@@ -552,7 +552,7 @@ smashGeneric q k x j = q' , kus₂ , xindus , itemstedus
           where
           flidir = ⊃ ∘₂ flip _↓_
           tomin₁ = tomindus n $ sym $ DLP.length-map f p
-          tomin₂ = tomindus n $ teikdrop p n $ f $ p ! n
+          tomin₂ = tomindus n $ teikdrop p n
           teikapdus : ∀ {a} → {A : Set a}
                     → (x : List A)
                     → (n : Fin $ length x)
