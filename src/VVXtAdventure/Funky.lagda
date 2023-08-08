@@ -530,9 +530,6 @@ smashGeneric q k x j = q' , kus₂ , xindus , itemstedus
         _¨_ = Data.List.map
         ⊃ = Data.List.head
         konk = toℕ n ↑ p ++ₗ f (p ! n) ∷ ℕ.suc (toℕ n) ↓ p
-        -- | ni'o zo .kis. cmavlaka'i lu .konk.
-        -- selyli'erafsi li'u
-        kis = f (p ! n) ∷ ℕ.suc (toℕ n) ↓ p
         n' = mink n $ teikdrop p n $ f $ p ! n
         n'' = mink n $ sym $ DLP.length-map f p
         xedrop : ∀ {a} → {A : Set a}
