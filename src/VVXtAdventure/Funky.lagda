@@ -461,8 +461,8 @@ smashGeneric q k x j = q' , kus₂ , xindus , itemstedus
     where
     itstes = Room.items $ rooms ! k
     kumfa = GameData.rooms q' ! mink k kus₂
-    x₁ = toℕ x ↑ Room.items (GameData.rooms q ! k)
-    x₃ = ℕ.suc (toℕ x) ↓ Room.items (GameData.rooms q ! k)
+    x₁ = toℕ x ↑ itstes
+    x₃ = ℕ.suc (toℕ x) ↓ itstes
     implantdus : ∀ {a} → {A : Set a}
                → (x : List A)
                → (z : A)
