@@ -480,7 +480,6 @@ smashGeneric q k x j = q' , kus₂ , xindus , itemstedus
     length i ≡⟨ cong length $ teikdrop i x $ i ! x ⟩
     length (d₁ ++ₗ i ! x ∷ d₃) ≡⟨ DLP.length-++ d₁ ⟩
     length d₁ + length (i ! x ∷ d₃) ≡⟨ refl ⟩
-    length d₁ + ℕ.suc (length d₃) ≡⟨ refl ⟩
     length d₁ + length (j' ∷ d₃) ≡⟨ sym $ DLP.length-++ d₁ ⟩
     length (d₁ ++ₗ j' ∷ d₃) ≡⟨ cong length $ sym $ ualdos i x $ const j' ⟩
     length (Room.items snikerz) ≡⟨ cong (length ∘ Room.items) snidus ⟩
