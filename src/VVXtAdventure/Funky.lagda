@@ -455,13 +455,12 @@ smashGeneric q k x j = q' , kus₂ , xindus , itemstedus
 
   itemstedus = begin
     Room.items kumfa ≡⟨ sym $ cong Room.items $ implantdus rooms snikerz k ⟩
-    Room.items snikerz ≡⟨ ualkonk itstes x $ const x₂ ⟩
-    x₁ ++ₗ x₂ ∷ x₃ ∎
+    Room.items snikerz ≡⟨ ualkonk itstes x $ const j' ⟩
+    x₁ ++ₗ j' ∷ x₃ ∎
     where
     itstes = Room.items $ rooms ! k
     kumfa = GameData.rooms q' ! mink k kus₂
     x₁ = toℕ x ↑ Room.items (GameData.rooms q ! k)
-    x₂ = proj₂ $ Data.Maybe.to-witness j
     x₃ = ℕ.suc (toℕ x) ↓ Room.items (GameData.rooms q ! k)
     implantdus : ∀ {a} → {A : Set a}
                → (x : List A)
