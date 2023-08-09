@@ -460,15 +460,14 @@ ni'o ga jonai ga je la'oi .\F{scream?}.\ djuno pe'a ru'e lo du'u tu'a la'o zoi.\
 
 \begin{code}
 kumski? : Com
-kumski? m g = if mapti (just $ vijac , g) nothing
+kumski? m g = if mapti (just $ le'i-velski , g) nothing
   where
   mapti = _↑_ 3 m ≡ᵇ ("LOOK" ∷ "AROUND" ∷ "YOU" ∷ [])
   kumfa = GameData.rooms g ! kumfid
     where
     kumfid = Character.room $ GameData.player g
-  -- | ni'o zo .vijac. cmavlaka'i lu velski ja canlu li'u
-  vijac : String
-  vijac = concatₛ $ intersperseₗ "\n\n" le'i-lerpinsle
+  le'i-velski : String
+  le'i-velski = concatₛ $ intersperseₗ "\n\n" le'i-lerpinsle
     where
     intersperseₗ = Data.List.intersperse
     concatₛ = Data.String.concat
