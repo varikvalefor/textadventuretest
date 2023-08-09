@@ -547,13 +547,13 @@ travel? (x₁ ∷ xs₁) = if realShit (travel' xs₁) $ const nothing
     where
     m = "I strongly doubt that the concept of \"super\
         \position\" applies to a creature of your mass."
-  travel' (x ∷ []) q = maybe just tryfind $ alreadythere?
+  travel' (cname ∷ []) q = maybe just tryfind $ alreadythere?
     where
     F = Fin $ length $ GameData.rooms q
     cur = GameData.rooms q ! Character.room (GameData.player q)
     alreadythere? = if atRoom (just $ m , q) nothing
       where
-      atRoom = x ≡ᵇ Room.cname cur
+      atRoom = cname ≡ᵇ Room.cname cur
       m = "Damn, that's some fast travel.  \
           \You're already there!"
     tryfind = [_,_] (just ∘ flip _,_ q) iusyf mathch
@@ -572,7 +572,7 @@ travel? (x₁ ∷ xs₁) = if realShit (travel' xs₁) $ const nothing
       mathch with methching $ zipfin $ GameData.rooms q
         where
         zipfin = λ l → flip Data.List.zip l $ allFin $ length l
-        methching = filterₗ $ _≟_ x ∘ Room.cname ∘ proj₂
+        methching = filterₗ $ _≟_ cname ∘ Room.cname ∘ proj₂
       ... | [] = inj₁ m
         where
         m = "Did you take your pills this morning?  \
