@@ -137,7 +137,7 @@ main = run $ lupe initialD
         chews ((nothing , _) ∷ xs) d = chews xs d
         chews [] d = d
         np : List $ COut × (String → GameData → IO ⊤)
-        np = map (λ f → f s gd , λ b a → putStrLn b IO.>> lupe a) std
+        np = map (λ f → f s gd , λ b a → putStrLn b >>ᵢₒ lupe a) std
           where
           std = sazycimde ++ gasnu
             where
