@@ -577,11 +577,11 @@ travel? (x₁ ∷ xs₁) = if realShit (travel' xs₁) $ const nothing
         where
         m = "Did you take your pills this morning?  \
             \I don't think that that room exists."
-      ... | (x ∷ xs) = inj₂ $ pj1s $ filterₗ tr $ x ∷ xs
+      ... | (x ∷ xs) = inj₂ $ maproj₁ $ filterₗ tr $ x ∷ xs
         where
-        pj1s = Data.List.map proj₁
+        maproj₁ = Data.List.map proj₁
         cnq = _≟_ ∘ Room.cname ∘ proj₂
-        tr = λ a → any? (cnq a) $ Room.travis cur
+        tr = flip any? (Room.travis cur) ∘ cnq
 \end{code}
 
 \subsection{la'oi .\F{wield?}.}
