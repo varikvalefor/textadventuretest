@@ -106,7 +106,7 @@ main = run $ lupe initialD
   -- | ni'o pilno ko'a goi le zo ce'u co'e ki'u le su'u
   -- tu'a ko'a filri'a lo nu na co'e zo'oi .q.
   lupe : GameData → IO ⊤
-  lupe = λ q → fromMaybe (prompt >>ᵢₒ ree >>=ᵢₒ crock q) $ fanmo? q
+  lupe q = fromMaybe (prompt >>ᵢₒ ree >>=ᵢₒ crock q) $ fanmo? q
     where
     fanmo? : GameData → Maybe $ IO ⊤
     fanmo? q = (firstJust
