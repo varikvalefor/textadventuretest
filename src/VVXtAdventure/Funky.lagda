@@ -414,7 +414,7 @@ smashGeneric : (q : GameData)
                      (_∷_
                        (proj₂ $ Data.Maybe.to-witness j)
                        (ℕ.suc (toℕ x) ↓ itstes))))
-smashGeneric q k x j = q' , kus₂ , xindus , itemstedus
+smashGeneric q k x j = q' , kuslendus , xindus , itemstedus
   where
   teikdrop : ∀ {a} → {A : Set a}
            → (x : List A)
@@ -433,14 +433,14 @@ smashGeneric q k x j = q' , kus₂ , xindus , itemstedus
     itstes = Room.items $ rooms ! k
     itstes₂ = proj₁ $ ual itstes x $ const j'
   kus = toℕ k ↑ rooms ++ₗ snikerz ∷ ℕ.suc (toℕ k) ↓ rooms
-  kus₂ = teikdrop rooms k
+  kuslendus = teikdrop rooms k
   upgrayedd : Character rooms → Character kus
   upgrayedd t = record {
     forename = Character.forename t;
     surname = Character.surname t;
     cname = Character.cname t;
     nicknames = Character.nicknames t;
-    room = mink (Character.room t) kus₂;
+    room = mink (Character.room t) kuslendus;
     inventory = Character.inventory t;
     wieldedct = Character.wieldedct t;
     yourfloorisnowclean = Character.yourfloorisnowclean t
@@ -460,7 +460,7 @@ smashGeneric q k x j = q' , kus₂ , xindus , itemstedus
     toℕ x ↑ itstes ++ₗ j' ∷ ℕ.suc (toℕ x) ↓ itstes ∎
     where
     itstes = Room.items $ rooms ! k
-    ni'oku'a = GameData.rooms q' ! mink k kus₂
+    ni'oku'a = GameData.rooms q' ! mink k kuslendus
     implantdus : ∀ {a} → {A : Set a}
                → (x : List A)
                → (z : A)
@@ -482,7 +482,7 @@ smashGeneric q k x j = q' , kus₂ , xindus , itemstedus
     length d₁ + length (j' ∷ d₃) ≡⟨ sym $ DLP.length-++ d₁ ⟩
     length (d₁ ++ₗ j' ∷ d₃) ≡⟨ cong length $ sym $ ualdos i x $ const j' ⟩
     length (Room.items snikerz) ≡⟨ cong (length ∘ Room.items) snidus ⟩
-    length (Room.items $ GameData.rooms q' ! mink k kus₂) ∎
+    length (Room.items $ GameData.rooms q' ! mink k kuslendus) ∎
     where
     i = Room.items $ rooms ! k
     d₁ = toℕ x ↑ i
@@ -503,8 +503,8 @@ smashGeneric q k x j = q' , kus₂ , xindus , itemstedus
     snidus = begin
       snikerz ≡⟨ refl ⟩
       const snikerz (rooms ! k) ≡⟨ intend rooms k $ const snikerz ⟩
-      kus ! mink k kus₂ ≡⟨ refl ⟩
-      GameData.rooms q' ! mink k kus₂ ∎
+      kus ! mink k kuslendus ≡⟨ refl ⟩
+      GameData.rooms q' ! mink k kuslendus ∎
       where
       intend : ∀ {a} → {A : Set a}
              → (x : List A)
