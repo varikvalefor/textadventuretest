@@ -275,7 +275,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
               → (n : Fin $ 𝓁 x)
               → let n' = toℕ n in
                 ℕ.suc (𝓁 $ ℕ.suc n' ↓ x) ≡ 𝓁 (n' ↓ x)
-      dropsuc (x ∷ xs) (Fin.zero) = refl
+      dropsuc (x ∷ xs) Fin.zero = refl
       dropsuc (x ∷ xs) (Fin.suc n) = dropsuc xs n
 
   xent : ⊃ ((𝓁 x₁) ↓ xen') ≡ just (xen' ! mink j xenlen)
