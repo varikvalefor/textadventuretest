@@ -463,10 +463,10 @@ kumski? : Com
 kumski? m g = if mapti (just $ le'i-velski , g) nothing
   where
   mapti = _↑_ 3 m ≡ᵇ ("LOOK" ∷ "AROUND" ∷ "YOU" ∷ [])
-  kumfa = GameData.rooms g ! Character.room (GameData.player g)
   le'i-velski : String
   le'i-velski = concatₛ $ intersperseₗ "\n\n" le'i-lerpinsle
     where
+    kumfa = GameData.rooms g ! Character.room (GameData.player g)
     intersperseₗ = Data.List.intersperse
     concatₛ = Data.String.concat
     mapₗ = Data.List.map
