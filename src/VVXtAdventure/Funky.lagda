@@ -446,11 +446,11 @@ ni'o ga jonai ga je tu'a la'o zoi.\ \B m\ .zoi.\ .indika lo du'u lo kelci cu dji
 invent? : Com
 invent? ("LIST" ∷ "INVENTORY" ∷ []) g = just $ desk , g
   where
-  desk = concat $ Data.List.intersperse "\n\n" le'i-cname-je-velski
+  desk = concat $ intersperseₗ "\n\n" $ Data.List.map konk items
     where
+    intersperseₗ = Data.List.intersperse
     items = Character.inventory $ GameData.player g
     konk = λ a → Item.cname a ++ ": " ++ Item.hlDescr a
-    le'i-cname-je-velski = Data.List.map konk items
 invent? _ _ = nothing
 \end{code}
 
