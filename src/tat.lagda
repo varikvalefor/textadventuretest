@@ -147,10 +147,10 @@ main = run $ lupe initialD
                         lp? ∷
                         kumski? ∷
                         invent? ∷
-                        hitme? ∷
                         []
             gasnu = travel? ∷
                     wield? ∷
+                    hitme? ∷
                     []
 \end{code}
 \end{document}
