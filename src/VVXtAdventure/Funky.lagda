@@ -480,26 +480,13 @@ smashGeneric q k x j = q' , kuslendus , xindus , itemstedus
     length (d₁ ++ₗ i ! x ∷ d₃) ≡⟨ DLP.length-++ d₁ ⟩
     length d₁ + length (i ! x ∷ d₃) ≡⟨ refl ⟩
     length d₁ + length (j' ∷ d₃) ≡⟨ sym $ DLP.length-++ d₁ ⟩
-    length (d₁ ++ₗ j' ∷ d₃) ≡⟨ cong length $ sym $ ualdos i x $ const j' ⟩
+    length (d₁ ++ₗ j' ∷ d₃) ≡⟨ cong length $ sym $ ualkonk i x $ const j' ⟩
     length (Room.items snikerz) ≡⟨ cong (length ∘ Room.items) snidus ⟩
     length (Room.items $ GameData.rooms q' ! mink k kuslendus) ∎
     where
     i = Room.items $ rooms ! k
     d₁ = toℕ x ↑ i
     d₃ = ℕ.suc (toℕ x) ↓ i
-    ualdos : ∀ {a} → {A : Set a}
-           → (x : List A)
-           → (n : Fin $ length x)
-           → (f : A → A)
-           → (_≡_
-               (proj₁ $ ual x n f)
-               (_++ₗ_
-                 (toℕ n ↑ x)
-                 (_∷_
-                   (f $ x ! n)
-                   (ℕ.suc (toℕ n) ↓ x))))
-    ualdos (x ∷ xs) zero _ = refl
-    ualdos (x ∷ xs) (suc n) f = cong (_∷_ x) $ ualdos xs n f
     snidus = begin
       snikerz ≡⟨ refl ⟩
       const snikerz (rooms ! k) ≡⟨ intend rooms k $ const snikerz ⟩
