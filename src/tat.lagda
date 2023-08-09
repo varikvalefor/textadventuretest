@@ -106,7 +106,7 @@ main = run $ lupe initialD
   -- | ni'o pilno ko'a goi le zo ce'u co'e ki'u le su'u
   -- tu'a ko'a filri'a lo nu na co'e zo'oi .q.
   lupe : GameData → IO ⊤
-  lupe q = fromMaybe (prompt >>ᵢₒ ree >>=ᵢₒ crock q) $ fanmo? q
+  lupe q = fromMaybe (interact q) $ fanmo? q
     where
     fanmo? : GameData → Maybe $ IO ⊤
     fanmo? q = (firstJust
@@ -121,33 +121,36 @@ main = run $ lupe initialD
       firstJust (just t ∷ _) = just t
       firstJust (nothing ∷ t) = firstJust t
 
-    prompt = putStrLn "What do you do?"
-    ree = words ∘ map toUpper <$> getLine
-    crock : GameData → List String → IO ⊤
-    crock gd s = chews np $ putStrLn m >>ᵢₒ lupe gd
+    interact : GameData → IO ⊤
+    interact = λ q → prompt >>ᵢₒ ree >>=ᵢₒ crock q
       where
-      m = "I don't understand a word you just said."
-      chews : List $ COut × (String → GameData → IO ⊤)
-            → IO ⊤
-            → IO ⊤
-      chews ((just (a , b) , f) ∷ _) _ = f a b
-      chews ((nothing , _) ∷ xs) d = chews xs d
-      chews [] d = d
-      np : List $ COut × (String → GameData → IO ⊤)
-      np = map (λ f → f s gd , λ b a → putStrLn b IO.>> lupe a) std
+      prompt = putStrLn "What do you do?"
+      ree = words ∘ map toUpper <$> getLine
+      crock : GameData → List String → IO ⊤
+      crock gd s = chews np $ putStrLn m >>ᵢₒ lupe gd
         where
-        std = sazycimde ++ gasnu
+        m = "I don't understand a word you just said."
+        chews : List $ COut × (String → GameData → IO ⊤)
+              → IO ⊤
+              → IO ⊤
+        chews ((just (a , b) , f) ∷ _) _ = f a b
+        chews ((nothing , _) ∷ xs) d = chews xs d
+        chews [] d = d
+        np : List $ COut × (String → GameData → IO ⊤)
+        np = map (λ f → f s gd , λ b a → putStrLn b IO.>> lupe a) std
           where
-          sazycimde = scream? ∷
-                      sayless? ∷
-                      inspect? ∷
-                      lp? ∷
-                      kumski? ∷
-                      invent? ∷
-                      hitme? ∷
-                      []
-          gasnu = travel? ∷
-                  wield? ∷
-                  []
+          std = sazycimde ++ gasnu
+            where
+            sazycimde = scream? ∷
+                        sayless? ∷
+                        inspect? ∷
+                        lp? ∷
+                        kumski? ∷
+                        invent? ∷
+                        hitme? ∷
+                        []
+            gasnu = travel? ∷
+                    wield? ∷
+                    []
 \end{code}
 \end{document}
