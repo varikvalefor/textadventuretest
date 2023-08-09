@@ -449,9 +449,11 @@ smashGeneric q k x j = q' , kuslendus , xindus , itemstedus
     rooms = kus;
     haters = Data.List.map upgrayedd $ GameData.haters q;
     player' = mink (GameData.player' q) $ sym plaid;
-    yourfloorisnowclean = {!!}
+    yourfloorisnowclean = subst nu,iork {!!} iifink
     }
     where
+    nu,iork = Truthbrary.Record.LLC.nu,iork
+    iifink = GameData.yourfloorisnowclean q
     plaid = DLP.length-map upgrayedd $ GameData.haters q
 
   itemstedus = begin
