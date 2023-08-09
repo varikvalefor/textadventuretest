@@ -457,12 +457,10 @@ smashGeneric q k x j = q' , kus₂ , xindus , itemstedus
   itemstedus = begin
     Room.items ni'oku'a ≡⟨ sym $ cong Room.items snikydus ⟩
     Room.items snikerz ≡⟨ ualkonk itstes x $ const j' ⟩
-    x₁ ++ₗ j' ∷ x₃ ∎
+    toℕ x ↑ itstes ++ₗ j' ∷ ℕ.suc (toℕ x) ↓ itstes ∎
     where
     itstes = Room.items $ rooms ! k
     ni'oku'a = GameData.rooms q' ! mink k kus₂
-    x₁ = toℕ x ↑ itstes
-    x₃ = ℕ.suc (toℕ x) ↓ itstes
     implantdus : ∀ {a} → {A : Set a}
                → (x : List A)
                → (z : A)
