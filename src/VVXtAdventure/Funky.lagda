@@ -444,13 +444,13 @@ ni'o ga jonai ga je tu'a la'o zoi.\ \B m\ .zoi.\ .indika lo du'u lo kelci cu dji
 
 \begin{code}
 invent? : Com
-invent? ("LIST" ∷ "INVENTORY" ∷ []) g = just $ desk , g
+invent? ("LIST" ∷ "INVENTORY" ∷ []) g = just $ desks , g
   where
-  desk = concat $ intersperseₗ "\n\n" $ Data.List.map konk items
+  desks = concat $ intersperseₗ "\n\n" $ Data.List.map desk items
     where
     intersperseₗ = Data.List.intersperse
     items = Character.inventory $ GameData.player g
-    konk = λ a → Item.cname a ++ ": " ++ Item.hlDescr a
+    desk = λ a → Item.cname a ++ ": " ++ Item.hlDescr a
 invent? _ _ = nothing
 \end{code}
 
