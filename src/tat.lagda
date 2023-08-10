@@ -109,17 +109,16 @@ main = run $ lupe initialD
   lupe = λ q → fromMaybe (interact q) $ fanmo? q
     where
     fanmo? : GameData → Maybe $ IO ⊤
-    fanmo? q = (firstJust
-                 (Data.List.map
-                   (Data.Maybe.map $ putStrLn ∘ proj₁)
-                   (zmimrobi'o q ∷
-                    epicwin? winmsg q ∷
-                    [])))
+    fanmo? q = firstJust $ Data.List.map mapti? fancu
       where
       firstJust : ∀ {a} → {A : Set a} → List $ Maybe A → Maybe A
       firstJust [] = nothing
       firstJust (just t ∷ _) = just t
       firstJust (nothing ∷ t) = firstJust t
+      mapti? = Data.Maybe.map $ putStrLn ∘ proj₁
+      fancu = zmimrobi'o q ∷
+              epicwin? winmsg q ∷
+              []
 
     interact : GameData → IO ⊤
     interact = λ q → prompt >>ᵢₒ ree >>=ᵢₒ crock q
@@ -127,8 +126,9 @@ main = run $ lupe initialD
       prompt = putStrLn "What do you do?"
       ree = words ∘ map toUpper <$> getLine
       crock : GameData → List String → IO ⊤
-      crock gd s = chews np $ putStrLn m >>ᵢₒ lupe gd
+      crock gd s = chews np $ mis m gd
         where
+        mis = λ a b → putStrLn a >>ᵢₒ lupe b
         m = "I don't understand a word you just said."
         chews : List $ COut × (String → GameData → IO ⊤)
               → IO ⊤
