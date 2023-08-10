@@ -577,8 +577,7 @@ travel? (x₁ ∷ xs₁) = if realShit (travel' xs₁) $ const nothing
       ... | (x ∷ xs) = inj₂ $ maproj₁ $ filterₗ tr $ x ∷ xs
         where
         maproj₁ = Data.List.map proj₁
-        cnq = _≟_ ∘ Room.cname ∘ proj₂
-        tr = flip any? (Room.travis cur) ∘ cnq
+        tr = flip any? (Room.travis cur) ∘ _≟_ ∘ Room.cname ∘ proj₂
 \end{code}
 
 \subsection{la'oi .\F{wield?}.}
