@@ -445,21 +445,66 @@ smashGeneric q k x j = q' , kuslendus , xindus , itemstedus
     wieldedct = Character.wieldedct t;
     yourfloorisnowclean = Character.yourfloorisnowclean t
     }
-  snikydus : snikerz ≡ kus ! mink k kuslendus
-  snikydus = implantdus rooms snikerz k
+  snidus = begin
+    snikerz ≡⟨ refl ⟩
+    const snikerz (rooms ! k) ≡⟨ intend rooms k $ const snikerz ⟩
+    kus ! mink k kuslendus ∎
     where
-    implantdus : ∀ {a} → {A : Set a}
+    intend : ∀ {a} → {A : Set a}
+           → (x : List A)
+           → (n : Fin $ length x)
+           → (f : A → A)
+           → let n' = toℕ n in
+             (_≡_
+               (f $ x ! n)
+               (_!_
+                 (n' ↑ x ++ₗ f (x ! n) ∷ ℕ.suc n' ↓ x)
+                 (mink n $ teikdrop x n)))
+    intend (_ ∷ _) zero _ = refl
+    intend p@(x ∷ xs) n@(suc _) f = DMP.just-injective $ begin
+      just (f $ p ! n) ≡⟨ cong just $ sym $ lum p f n ⟩
+      just (_¨_ f p ! n'') ≡⟨ xedrop (f ¨ p) n'' ⟩
+      ⊃ (toℕ n'' ↓ _¨_ f p) ≡⟨ xedus ⟩
+      ⊃ (toℕ n' ↓ konk) ≡⟨ indedrop konk n' ⟩
+      just (konk ! n') ∎
+      where
+      _¨_ = Data.List.map
+      ⊃ = Data.List.head
+      konk = toℕ n ↑ p ++ₗ f (p ! n) ∷ ℕ.suc (toℕ n) ↓ p
+      n' = mink n $ teikdrop p n
+      n'' = mink n $ sym $ DLP.length-map f p
+      xedrop : ∀ {a} → {A : Set a}
+             → (x : List A)
+             → (n : Fin $ length x)
+             → just (x ! n) ≡ ⊃ (toℕ n ↓ x)
+      xedrop (_ ∷ _) zero = refl
+      xedrop (x ∷ xs) (suc n) = xedrop xs n
+      indedrop : ∀ {a} → {A : Set a}
                → (x : List A)
-               → (z : A)
                → (n : Fin $ length x)
-               → let n' = toℕ n in
-                 (_≡_
-                   z
-                   (_!_
-                     (n' ↑ x ++ₗ z ∷ ℕ.suc n' ↓ x)
-                     (mink n $ teikdrop x n)))
-    implantdus (_ ∷ _) _ zero = refl
-    implantdus (x ∷ xs) z (suc n) = {!!}
+               → ⊃ (toℕ n ↓ x) ≡ just (x ! n)
+      indedrop (_ ∷ _) zero = refl
+      indedrop (x ∷ xs) (suc n) = indedrop xs n
+      xedus = begin
+        ⊃ (toℕ n'' ↓ _¨_ f p) ≡⟨ sym $ cong (flidir $ f ¨ p) tomin₁ ⟩
+        ⊃ (toℕ n ↓ _¨_ f p) ≡⟨ teikapdus p n f ⟩
+        ⊃ (toℕ n ↓ konk) ≡⟨ cong (flidir konk) tomin₂ ⟩
+        ⊃ (toℕ n' ↓ konk) ∎
+        where
+        flidir = ⊃ ∘₂ flip _↓_
+        tomin₁ = tomindus n $ sym $ DLP.length-map f p
+        tomin₂ = tomindus n $ teikdrop p n
+        teikapdus : ∀ {a} → {A : Set a}
+                  → (x : List A)
+                  → (n : Fin $ length x)
+                  → (f : A → A)
+                  → let k₃ = ℕ.suc (toℕ n) ↓ x in
+                    let k = (toℕ n ↑ x) ++ₗ f (x ! n) ∷ k₃ in
+                    (_≡_
+                      (⊃ $ toℕ n ↓ _¨_ f x)
+                      (⊃ $ toℕ n ↓ k))
+        teikapdus (_ ∷ _) zero _ = refl
+        teikapdus (_ ∷ xs) (suc n) f = teikapdus xs n f
   q' = record q {
     rooms = kus;
     haters = Data.List.map upgrayedd $ GameData.haters q;
@@ -478,7 +523,7 @@ smashGeneric q k x j = q' , kuslendus , xindus , itemstedus
       (c ¨ k₁) ++ₗ c snikerz ∷ (c ¨ k₃) ≡⟨ zunbas ⟩
       (c ¨ k₁') ++ₗ c snikerz ∷ (c ¨ k₃) ≡⟨ pribas ⟩
       (c ¨ k₁') ++ₗ c snikerz ∷ (c ¨ k₃')
-        ≡⟨ cong (λ t → c ¨ k₁' ++ₗ c t ∷ c ¨ k₃') snikydus ⟩
+        ≡⟨ cong (λ t → c ¨ k₁' ++ₗ c t ∷ c ¨ k₃') snidus ⟩
       (c ¨ k₁') ++ₗ c (kus ! k') ∷ (c ¨ k₃')
         ≡⟨ sym $ DLP.map-++-commute c k₁' $ kus ! k' ∷ k₃' ⟩
       c ¨ (k₁' ++ₗ kus ! k' ∷ k₃') ≡⟨ zunbas₂ ⟩
@@ -548,7 +593,7 @@ smashGeneric q k x j = q' , kuslendus , xindus , itemstedus
         dropteikdrop (_ ∷ xs) (suc n) = dropteikdrop xs n
 
   itemstedus = begin
-    Room.items ni'oku'a ≡⟨ sym $ cong Room.items snikydus ⟩
+    Room.items ni'oku'a ≡⟨ sym $ cong Room.items snidus ⟩
     Room.items snikerz ≡⟨ ualkonk itstes x $ const j' ⟩
     toℕ x ↑ itstes ++ₗ j' ∷ ℕ.suc (toℕ x) ↓ itstes ∎
     where
@@ -567,67 +612,6 @@ smashGeneric q k x j = q' , kuslendus , xindus , itemstedus
     i = Room.items $ rooms ! k
     d₁ = toℕ x ↑ i
     d₃ = ℕ.suc (toℕ x) ↓ i
-    snidus = begin
-      snikerz ≡⟨ refl ⟩
-      const snikerz (rooms ! k) ≡⟨ intend rooms k $ const snikerz ⟩
-      kus ! mink k kuslendus ≡⟨ refl ⟩
-      GameData.rooms q' ! mink k kuslendus ∎
-      where
-      intend : ∀ {a} → {A : Set a}
-             → (x : List A)
-             → (n : Fin $ length x)
-             → (f : A → A)
-             → let n' = toℕ n in
-               (_≡_
-                 (f $ x ! n)
-                 (_!_
-                   (n' ↑ x ++ₗ f (x ! n) ∷ ℕ.suc n' ↓ x)
-                   (mink n $ teikdrop x n)))
-      intend (_ ∷ _) zero _ = refl
-      intend p@(x ∷ xs) n@(suc _) f = DMP.just-injective $ begin
-        just (f $ p ! n) ≡⟨ cong just $ sym $ lum p f n ⟩
-        just (_¨_ f p ! n'') ≡⟨ xedrop (f ¨ p) n'' ⟩
-        ⊃ (toℕ n'' ↓ _¨_ f p) ≡⟨ xedus ⟩
-        ⊃ (toℕ n' ↓ konk) ≡⟨ indedrop konk n' ⟩
-        just (konk ! n') ∎
-        where
-        _¨_ = Data.List.map
-        ⊃ = Data.List.head
-        konk = toℕ n ↑ p ++ₗ f (p ! n) ∷ ℕ.suc (toℕ n) ↓ p
-        n' = mink n $ teikdrop p n
-        n'' = mink n $ sym $ DLP.length-map f p
-        xedrop : ∀ {a} → {A : Set a}
-               → (x : List A)
-               → (n : Fin $ length x)
-               → just (x ! n) ≡ ⊃ (toℕ n ↓ x)
-        xedrop (_ ∷ _) zero = refl
-        xedrop (x ∷ xs) (suc n) = xedrop xs n
-        indedrop : ∀ {a} → {A : Set a}
-                 → (x : List A)
-                 → (n : Fin $ length x)
-                 → ⊃ (toℕ n ↓ x) ≡ just (x ! n)
-        indedrop (_ ∷ _) zero = refl
-        indedrop (x ∷ xs) (suc n) = indedrop xs n
-        xedus = begin
-          ⊃ (toℕ n'' ↓ _¨_ f p) ≡⟨ sym $ cong (flidir $ f ¨ p) tomin₁ ⟩
-          ⊃ (toℕ n ↓ _¨_ f p) ≡⟨ teikapdus p n f ⟩
-          ⊃ (toℕ n ↓ konk) ≡⟨ cong (flidir konk) tomin₂ ⟩
-          ⊃ (toℕ n' ↓ konk) ∎
-          where
-          flidir = ⊃ ∘₂ flip _↓_
-          tomin₁ = tomindus n $ sym $ DLP.length-map f p
-          tomin₂ = tomindus n $ teikdrop p n
-          teikapdus : ∀ {a} → {A : Set a}
-                    → (x : List A)
-                    → (n : Fin $ length x)
-                    → (f : A → A)
-                    → let k₃ = ℕ.suc (toℕ n) ↓ x in
-                      let k = (toℕ n ↑ x) ++ₗ f (x ! n) ∷ k₃ in
-                      (_≡_
-                        (⊃ $ toℕ n ↓ _¨_ f x)
-                        (⊃ $ toℕ n ↓ k))
-          teikapdus (_ ∷ _) zero _ = refl
-          teikapdus (_ ∷ xs) (suc n) f = teikapdus xs n f
 \end{code}
 
 \chapter{le mu'oi glibau.\ high-level .glibau.}
