@@ -622,8 +622,7 @@ wield? (x ∷ xs) dang = if (realShit x) (troci xs) nothing
     where
     wieldMsg = fromMaybe "You wield the weapon." xarcynotci
       where
-      items = Character.inventory $ GameData.player dang
-      xarci = Item.weapwn $ items ! proj₁ selpli
+      xarci = Item.weapwn $ inv ! proj₁ selpli
       xarcynotci = xarci Data.Maybe.>>= WeaponInfo.wieldMsg
     wieldData = wieldPawn dang p (proj₁ selpli) $ proj₂ selpli
       where
