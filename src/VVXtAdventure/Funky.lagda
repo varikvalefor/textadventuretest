@@ -278,7 +278,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
               → (n : Fin $ 𝓁 x)
               → let n' = toℕ n in
                 ℕ.suc (𝓁 $ ℕ.suc n' ↓ x) ≡ 𝓁 (n' ↓ x)
-      dropsuc (x ∷ xs) (Fin.zero) = refl
+      dropsuc (x ∷ xs) Fin.zero = refl
       dropsuc (x ∷ xs) (Fin.suc n) = dropsuc xs n
 
   xent : ⊃ ((𝓁 x₁) ↓ xen') ≡ just (xen' ! mink j xenlen)
@@ -609,13 +609,13 @@ ni'o ga jonai ga je tu'a la'o zoi.\ \B m\ .zoi.\ .indika lo du'u lo kelci cu dji
 
 \begin{code}
 invent? : Com
-invent? ("LIST" ∷ "INVENTORY" ∷ []) g = just $ desk , g
+invent? ("LIST" ∷ "INVENTORY" ∷ []) g = just $ desks , g
   where
-  desk = concat $ Data.List.intersperse "\n\n" le'i-cname-je-velski
+  desks = concat $ intersperseₗ "\n\n" $ Data.List.map desk items
     where
+    intersperseₗ = Data.List.intersperse
     items = Character.inventory $ GameData.player g
-    konk = λ a → Item.cname a ++ ": " ++ Item.hlDescr a
-    le'i-cname-je-velski = Data.List.map konk items
+    desk = λ a → Item.cname a ++ ": " ++ Item.hlDescr a
 invent? _ _ = nothing
 \end{code}
 
@@ -625,16 +625,13 @@ ni'o ga jonai ga je la'oi .\F{scream?}.\ djuno pe'a ru'e lo du'u tu'a la'o zoi.\
 
 \begin{code}
 kumski? : Com
-kumski? m g = if mapti (just $ vijac , g) nothing
+kumski? m g = if mapti (just $ le'i-velski , g) nothing
   where
   mapti = _↑_ 3 m ≡ᵇ ("LOOK" ∷ "AROUND" ∷ "YOU" ∷ [])
-  kumfa = GameData.rooms g ! kumfid
+  le'i-velski : String
+  le'i-velski = concatₛ $ intersperseₗ "\n\n" le'i-lerpinsle
     where
-    kumfid = Character.room $ GameData.player g
-  -- | ni'o zo .vijac. cmavlaka'i lu velski ja canlu li'u
-  vijac : String
-  vijac = concatₛ $ intersperseₗ "\n\n" le'i-lerpinsle
-    where
+    kumfa = GameData.rooms g ! Character.room (GameData.player g)
     intersperseₗ = Data.List.intersperse
     concatₛ = Data.String.concat
     mapₗ = Data.List.map
@@ -712,13 +709,13 @@ travel? (x₁ ∷ xs₁) = if realShit (travel' xs₁) $ const nothing
     where
     m = "I strongly doubt that the concept of \"super\
         \position\" applies to a creature of your mass."
-  travel' (x ∷ []) q = maybe just tryfind $ alreadythere?
+  travel' (cname ∷ []) q = maybe just tryfind $ alreadythere?
     where
     F = Fin $ length $ GameData.rooms q
     cur = GameData.rooms q ! Character.room (GameData.player q)
     alreadythere? = if atRoom (just $ m , q) nothing
       where
-      atRoom = x ≡ᵇ Room.cname cur
+      atRoom = cname ≡ᵇ Room.cname cur
       m = "Damn, that's some fast travel.  \
           \You're already there!"
     tryfind = [_,_] (just ∘ flip _,_ q) iusyf mathch
@@ -737,16 +734,15 @@ travel? (x₁ ∷ xs₁) = if realShit (travel' xs₁) $ const nothing
       mathch with methching $ zipfin $ GameData.rooms q
         where
         zipfin = λ l → flip Data.List.zip l $ allFin $ length l
-        methching = filterₗ $ _≟_ x ∘ Room.cname ∘ proj₂
+        methching = filterₗ $ _≟_ cname ∘ Room.cname ∘ proj₂
       ... | [] = inj₁ m
         where
         m = "Did you take your pills this morning?  \
             \I don't think that that room exists."
-      ... | (x ∷ xs) = inj₂ $ pj1s $ filterₗ tr $ x ∷ xs
+      ... | (x ∷ xs) = inj₂ $ maproj₁ $ filterₗ tr $ x ∷ xs
         where
-        pj1s = Data.List.map proj₁
-        cnq = _≟_ ∘ Room.cname ∘ proj₂
-        tr = λ a → any? (cnq a) $ Room.travis cur
+        maproj₁ = Data.List.map proj₁
+        tr = flip any? (Room.travis cur) ∘ _≟_ ∘ Room.cname ∘ proj₂
 \end{code}
 
 \subsection{la'oi .\F{wield?}.}
@@ -772,7 +768,7 @@ wield? (x ∷ xs) dang = if (realShit x) (troci xs) nothing
     where
     flt = filterₗ $ _≟_ y ∘ Item.cname ∘ _!_ inv ∘ proj₁
     mapti? : _ → Maybe $ Σ (Fin _) $ _≡_ true ∘ wisyj
-    mapti? n with true Data.Bool.≟ wisyj n
+    mapti? n with true ≟ wisyj n
     ... | yes x = just $ n , x
     ... | no _ = nothing
   ... | [] = just $ m , dang
@@ -790,8 +786,7 @@ wield? (x ∷ xs) dang = if (realShit x) (troci xs) nothing
     where
     wieldMsg = fromMaybe "You wield the weapon." xarcynotci
       where
-      items = Character.inventory $ GameData.player dang
-      xarci = Item.weapwn $ items ! proj₁ selpli
+      xarci = Item.weapwn $ inv ! proj₁ selpli
       xarcynotci = xarci Data.Maybe.>>= WeaponInfo.wieldMsg
     wieldData = wieldPawn dang p (proj₁ selpli) $ proj₂ selpli
       where
