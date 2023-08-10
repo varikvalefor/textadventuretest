@@ -161,10 +161,15 @@ open import Data.List.Relation.Unary.Any
   )
 open import Relation.Binary.PropositionalEquality
 
+import Agda.Builtin.Unit
+
 import Data.Fin.Properties as DFP
 import Data.Nat.Properties as DNP
 import Data.List.Properties as DLP
 import Data.Maybe.Properties as DMP
+
+import Data.Maybe.Relation.Unary.Any
+
 
 open ≡-Reasoning
 \end{code}
@@ -854,5 +859,44 @@ wield? (x ∷ xs) dang = if (realShit x) (troci xs) nothing
     wieldData = wieldPawn dang p (proj₁ selpli) $ proj₂ selpli
       where
       p = GameData.player' dang
+\end{code}
+
+\subsection{la'oi .\F{smash?}.}
+ni'o ro da poi ke'a co'e zo'u ga jonai ga je djuno pe'a ru'e lo du'u tu'a la'o zoi.\ \B s\ .zoi.\ .indika lo du'u lo kelci cu djica lo nu marxa da gi ga jonai ga je curmi lo nu marxa da gi ga je tu'a la'o zoi.\ \B x\ .zoi.\ lu'u je tu'a je la'o zoi.\ \B z .zoi.\ cu .indika lo du'u marxa da gi ko'a goi la'o zoi.\ \F{smash?} \B s \B g\ .zoi.\ du la'o zoi.\ \F{just} \F \$ \B x \F , \B z\ .zoi.\ gi ga je la'o zoi.\ \B x\ .zoi.\ se skuxai ja co'e gi ko'a du la'o zoi.\ \F{just} \F \$ \B x \F , \B g\ .zoi.\ gi ko'a du la'oi .\F{nothing}.
+
+\begin{code}
+smash? : Com
+smash? [] _ = nothing
+smash? (cmd ∷ arg) g = if realShit (just trySmash) nothing
+  where
+  realShit = cmd ≡ᵇ "SMASH"
+  trySmash : String × GameData
+  trySmash with mapₘ withCname $ headₗ arg
+    where
+    mapₘ = Data.Maybe.map
+    headₗ = Data.List.head
+    withCname = λ t → filterₗ (_≟_ t ∘ Item.cname ∘ proj₁) items
+      where
+      items = (λ x → zipₗ x $ allFin $ length x) $ Room.items kumfa
+        where
+        zipₗ = Data.List.zip
+        kumfa = kumste ! Character.room (GameData.player g)
+          where
+          -- | ni'o filri'a lo nu na me'oi .overfull.
+          kumste = GameData.rooms g
+  ... | nothing = m , g
+    where
+    m = "Yo, B, what do you want to trash?"
+  ... | just [] = m , g
+    where
+    m = "Stop fucking hallucinating."
+  ... | just (x ∷ _) with Item.smashInfo $ proj₁ x
+  ... | nothing = "Can't smash this." , g
+  ... | just (t , q) = smashMsg , smashData
+    where
+    smashMsg = fromMaybe "The item is totes smashed." t
+    smashData = proj₁ $ smashGeneric g kumfa (proj₂ x) {!!}
+      where
+      kumfa = Character.room $ GameData.player g
 \end{code}
 \end{document}
