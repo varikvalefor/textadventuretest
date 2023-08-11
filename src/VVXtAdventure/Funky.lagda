@@ -525,14 +525,12 @@ smashGeneric q k x j = q' , kuslendus , xindus , itemstedus
       c ¨ (k₁ ++ₗ rooms ! k ∷ k₃)
         ≡⟨ DLP.map-++-commute c k₁ $ rooms ! k ∷ k₃ ⟩
       (c ¨ k₁) ++ₗ c (rooms ! k) ∷ (c ¨ k₃) ≡⟨ refl ⟩
-      (c ¨ k₁) ++ₗ c snikerz ∷ (c ¨ k₃) ≡⟨ zunbas ⟩
-      (c ¨ k₁') ++ₗ c snikerz ∷ (c ¨ k₃) ≡⟨ pribas ⟩
-      (c ¨ k₁') ++ₗ c snikerz ∷ (c ¨ k₃')
-        ≡⟨ cong (λ t → c ¨ k₁' ++ₗ c t ∷ c ¨ k₃') snidus ⟩
-      (c ¨ k₁') ++ₗ c (kus ! k') ∷ (c ¨ k₃')
-        ≡⟨ sym $ DLP.map-++-commute c k₁' $ kus ! k' ∷ k₃' ⟩
-      c ¨ (k₁' ++ₗ kus ! k' ∷ k₃') ≡⟨ zunbas₂ ⟩
-      c ¨ (k₁'' ++ₗ kus ! k' ∷ k₃') ≡⟨ pribas₂ ⟩
+      (c ¨ k₁) ++ₗ c snikerz ∷ (c ¨ k₃)
+        ≡⟨ cong (λ t → c ¨ k₁ ++ₗ c t ∷ c ¨ k₃) snidus ⟩
+      (c ¨ k₁) ++ₗ c (kus ! k') ∷ (c ¨ k₃)
+        ≡⟨ sym $ DLP.map-++-commute c k₁ $ kus ! k' ∷ k₃ ⟩
+      c ¨ (k₁ ++ₗ kus ! k' ∷ k₃) ≡⟨ zunbas ⟩
+      c ¨ (k₁'' ++ₗ kus ! k' ∷ k₃) ≡⟨ pribas ⟩
       c ¨ (k₁'' ++ₗ kus ! k' ∷ k₃'')
         ≡⟨ sym $ cong (_¨_ c) $ gogogo kus k' ⟩
       c ¨ kus ∎
@@ -557,19 +555,14 @@ smashGeneric q k x j = q' , kuslendus , xindus , itemstedus
                    (x ! n ∷ ℕ.suc (toℕ n) ↓ x)))
       gogogo (_ ∷ _) zero = refl
       gogogo (x ∷ xs) (suc n) = cong (_∷_ x) $ gogogo xs n
-      zunbas₂ = cong (λ x → c ¨ (x ++ₗ kus ! k' ∷ k₃')) teikdus
+      zunbas = subst (_≡_ _) zunbas₂ $ cong p $ teikteikdrop rooms k
         where
-        teikdus = cong teik  $ tomindus k $ teikdrop rooms k
+        p = λ x → c ¨ (x ++ₗ kus ! k' ∷ k₃)
+        zunbas₂ = cong (λ x → c ¨ (x ++ₗ kus ! k' ∷ k₃)) teikdus
           where
-          teik = flip _↑_ kus
-      pribas₂ = cong (λ x → c ¨ (k₁'' ++ₗ kus ! k' ∷ x)) dropydus
-        where
-        dropydus = cong dropsuk $ tomindus k $ teikdrop rooms k
-          where
-          dropsuk = flip _↓_ kus ∘ ℕ.suc
-      zunbas = cong p $ teikteikdrop rooms k
-        where
-        p = λ x → (c ¨ x) ++ₗ c snikerz ∷ (c ¨ k₃)
+          teikdus = cong teik  $ tomindus k $ teikdrop rooms k
+            where
+            teik = flip _↑_ kus
         teikteikdrop : ∀ {a} → {A : Set a}
                      → (x : List A)
                      → (n : Fin $ length x)
@@ -583,9 +576,14 @@ smashGeneric q k x j = q' , kuslendus , xindus , itemstedus
                              (z ∷ ℕ.suc (toℕ n) ↓ x))))
         teikteikdrop (_ ∷ _) zero = refl
         teikteikdrop (x ∷ xs) (suc n) = cong (_∷_ x) $ teikteikdrop xs n
-      pribas = cong p $ dropteikdrop rooms k
+      pribas = subst (_≡_ _) pribas₂ $ cong p $ dropteikdrop rooms k
         where
-        p = λ x → (c ¨ k₁') ++ₗ c snikerz ∷ (c ¨ x)
+        p = λ x → c ¨ (k₁'' ++ₗ kus ! k' ∷ x)
+        pribas₂ = cong (λ x → c ¨ (k₁'' ++ₗ kus ! k' ∷ x)) dropydus
+          where
+          dropydus = cong dropsuk $ tomindus k $ teikdrop rooms k
+            where
+            dropsuk = flip _↓_ kus ∘ ℕ.suc
         dropteikdrop : ∀ {a} → {A : Set a}
                      → (x : List A)
                      → (n : Fin $ length x)
