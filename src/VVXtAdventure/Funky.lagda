@@ -540,8 +540,6 @@ smashGeneric q k x j = q' , kuslendus , xindus , itemstedus
       k₁ = toℕ k ↑ rooms
       k₃ = ℕ.suc (toℕ k) ↓ rooms
       k' = mink k kuslendus
-      k₁' = flip _↑_ kus $ toℕ k
-      k₃' = flip _↓_ kus $ ℕ.suc $ toℕ k
       k₁'' = flip _↑_ kus $ toℕ k'
       k₃'' = flip _↓_ kus $ ℕ.suc $ toℕ k'
       -- | "Stick together, team."
