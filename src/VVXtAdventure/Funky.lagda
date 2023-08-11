@@ -554,7 +554,7 @@ smashGeneric q k x j = q' , kuslendus , xindus , itemstedus
         p = λ x → _¨_ c $ x ++ₗ kus ! k' ∷ k₃
         zunbas₂ = cong (λ x → c ¨ (x ++ₗ kus ! k' ∷ k₃)) teikdus
           where
-          teikdus = cong teik  $ tomindus k $ teikdrop rooms k
+          teikdus = cong teik $ tomindus k $ teikdrop rooms k
             where
             teik = flip _↑_ kus
         teikteikdrop : ∀ {a} → {A : Set a}
