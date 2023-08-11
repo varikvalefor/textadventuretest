@@ -546,11 +546,7 @@ smashGeneric q k x j = q' , kuslendus , xindus , itemstedus
       gogogo : ∀ {a} → {A : Set a}
              → (x : List A)
              → (n : Fin $ length x)
-             → (_≡_
-                 x
-                 (_++ₗ_
-                   (toℕ n ↑ x)
-                   (x ! n ∷ ℕ.suc (toℕ n) ↓ x)))
+             → x ≡ toℕ n ↑ x ++ₗ x ! n ∷ ℕ.suc (toℕ n) ↓ x
       gogogo (_ ∷ _) zero = refl
       gogogo (x ∷ xs) (suc n) = cong (_∷_ x) $ gogogo xs n
       zunbas = subst (_≡_ _) zunbas₂ $ cong p $ teikteikdrop rooms k
