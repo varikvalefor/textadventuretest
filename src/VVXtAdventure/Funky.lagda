@@ -888,9 +888,9 @@ smash? (cmd ∷ arg) g = if realShit (just trySmash) nothing
     m = "Stop fucking hallucinating."
   ... | just (x ∷ _) with Item.smashInfo $ proj₁ x
   ... | nothing = "Can't smash this." , g
-  ... | just (t , q) = smashMsg , smashData
+  ... | just (t , q) = fromMaybe m t , smashData
     where
-    smashMsg = fromMaybe "The item is totes smashed." t
+    m = "The item is totes smashed."
     smashData = proj₁ $ smashGeneric g kumfid (proj₂ x) {!!}
 \end{code}
 \end{document}
