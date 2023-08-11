@@ -433,10 +433,10 @@ smashGeneric q k x j = q' , kuslendus , xindus , itemstedus
   teikdrop (_ ∷ xs) (suc n) = cong ℕ.suc $ teikdrop xs n
   rooms = GameData.rooms q
   j' = proj₂ $ Data.Maybe.to-witness j
-  snikerz = record (rooms ! k) {items = itstes₂}
+  snikerz = record (rooms ! k) {items = itste₂}
     where
-    itstes = Room.items $ rooms ! k
-    itstes₂ = proj₁ $ ual itstes x $ const j'
+    itste = Room.items $ rooms ! k
+    itste₂ = proj₁ $ ual itste x $ const j'
   kus = toℕ k ↑ rooms ++ₗ snikerz ∷ ℕ.suc (toℕ k) ↓ rooms
   kuslendus = teikdrop rooms k
   upgrayedd : Character rooms → Character kus
