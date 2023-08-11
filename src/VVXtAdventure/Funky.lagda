@@ -867,7 +867,7 @@ smash? : Com
 smash? [] _ = nothing
 smash? (cmd ∷ arg) g = if realShit (just trySmash) nothing
   where
-  k = GameData.player g
+  kumfid = Character.room $ GameData.player g
   realShit = cmd ≡ᵇ "SMASH"
   trySmash : String × GameData
   trySmash with mapₘ withCname $ headₗ arg
@@ -879,7 +879,7 @@ smash? (cmd ∷ arg) g = if realShit (just trySmash) nothing
       items = (λ x → zipₗ x $ allFin $ length x) $ Room.items kumfa
         where
         zipₗ = Data.List.zip
-        kumfa = GameData.rooms g ! Character.room k
+        kumfa = GameData.rooms g ! kumfid
   ... | nothing = m , g
     where
     m = "Yo, B, what do you want to trash?"
@@ -891,8 +891,6 @@ smash? (cmd ∷ arg) g = if realShit (just trySmash) nothing
   ... | just (t , q) = smashMsg , smashData
     where
     smashMsg = fromMaybe "The item is totes smashed." t
-    smashData = proj₁ $ smashGeneric g kumfa (proj₂ x) {!!}
-      where
-      kumfa = Character.room k
+    smashData = proj₁ $ smashGeneric g kumfid (proj₂ x) {!!}
 \end{code}
 \end{document}
