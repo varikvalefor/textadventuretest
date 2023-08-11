@@ -555,7 +555,7 @@ smashGeneric q k x j = q' , kuslendus , xindus , itemstedus
       gogogo (x ∷ xs) (suc n) = cong (_∷_ x) $ gogogo xs n
       zunbas = subst (_≡_ _) zunbas₂ $ cong p $ teikteikdrop rooms k
         where
-        p = λ x → c ¨ (x ++ₗ kus ! k' ∷ k₃)
+        p = λ x → _¨_ c $ x ++ₗ kus ! k' ∷ k₃
         zunbas₂ = cong (λ x → c ¨ (x ++ₗ kus ! k' ∷ k₃)) teikdus
           where
           teikdus = cong teik  $ tomindus k $ teikdrop rooms k
@@ -576,7 +576,7 @@ smashGeneric q k x j = q' , kuslendus , xindus , itemstedus
         teikteikdrop (x ∷ xs) (suc n) = cong (_∷_ x) $ teikteikdrop xs n
       pribas = subst (_≡_ _) pribas₂ $ cong p $ dropteikdrop rooms k
         where
-        p = λ x → c ¨ (k₁'' ++ₗ kus ! k' ∷ x)
+        p = λ x → _¨_ c $ k₁'' ++ₗ kus ! k' ∷ x
         pribas₂ = cong (λ x → c ¨ (k₁'' ++ₗ kus ! k' ∷ x)) dropydus
           where
           dropydus = cong dropsuk $ tomindus k $ teikdrop rooms k
