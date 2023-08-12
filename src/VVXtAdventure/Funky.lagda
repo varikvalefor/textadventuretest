@@ -110,6 +110,7 @@ open import Data.List
   )
 open import Data.Maybe
   using (
+    Is-just;
     is-just;
     fromMaybe;
     maybe;
@@ -133,6 +134,7 @@ open import Data.Product
   )
 open import Relation.Nullary
   using (
+    Dec;
     yes;
     no
   )
@@ -878,11 +880,20 @@ smash? (cmd ∷ arg) g = if realShit (just trySmash) nothing
   ... | just [] = m , g
     where
     m = "Stop fucking hallucinating."
-  ... | just (x ∷ _) with Item.smashInfo $ proj₁ x
-  ... | nothing = "Can't smash this." , g
-  ... | just (t , q) = fromMaybe m t , smashData
+  ... | just (x ∷ _) with smashing-is-just
     where
+    item = itste ! proj₂ x
+      where
+      itste = Room.items $ GameData.rooms g ! Character.room k
+        where
+        k = GameData.player g
+    smashing-is-just : Dec $ Is-just $ Item.smashInfo item
+    smashing-is-just = {!!}
+  ... | (no _) = "Can't smash this." , g
+  ... | (yes j) = fromMaybe m (proj₁ j') , smashData
+    where
+    j' = Data.Maybe.to-witness j
     m = "The item is totes smashed."
-    smashData = proj₁ $ smashGeneric g kumfid (proj₂ x) {!!}
+    smashData = proj₁ $ smashGeneric g kumfid (proj₂ x) j
 \end{code}
 \end{document}
