@@ -881,8 +881,8 @@ smash? (cmd ∷ arg) g = if realShit (just trySmash) nothing
     item = Room.items (GameData.rooms g ! kumfid) ! proj₂ x
     smashing-is-just? : Dec $ Is-just $ Item.smashInfo item
     smashing-is-just? = {!!}
-  ... | (no _) = "Can't smash this." , g
-  ... | (yes j) = fromMaybe m (proj₁ j') , smashData
+  ... | no _ = "Can't smash this." , g
+  ... | yes j = fromMaybe m (proj₁ j') , smashData
     where
     j' = Data.Maybe.to-witness j
     m = "The item is totes smashed."
