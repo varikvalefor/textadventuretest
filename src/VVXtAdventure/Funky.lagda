@@ -874,19 +874,13 @@ smash? (cmd ∷ arg) g = if realShit (just trySmash) nothing
         where
         zipₗ = Data.List.zip
         kumfa = GameData.rooms g ! kumfid
-  ... | nothing = m , g
-    where
-    m = "Yo, B, what do you want to trash?"
-  ... | just [] = m , g
-    where
-    m = "Stop fucking hallucinating."
+  ... | nothing = "Yo, B, what do you want to trash?" , g
+  ... | just [] = "Stop fucking hallucinating." , g
   ... | just (x ∷ _) with smashing-is-just
     where
-    item = itste ! proj₂ x
+    item = Room.items (GameData.rooms g ! Character.room) ! proj₂ x
       where
-      itste = Room.items $ GameData.rooms g ! Character.room k
-        where
-        k = GameData.player g
+      k = GameData.player g
     smashing-is-just : Dec $ Is-just $ Item.smashInfo item
     smashing-is-just = {!!}
   ... | (no _) = "Can't smash this." , g
