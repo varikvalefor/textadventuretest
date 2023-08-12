@@ -472,7 +472,7 @@ smashGeneric q k x j = q' , kuslendus , xindus , itemstedus
       just (f $ p ! n) ≡⟨ cong just $ sym $ lum p f n ⟩
       just (_¨_ f p ! n'') ≡⟨ xedrop (f ¨ p) n'' ⟩
       ⊃ (toℕ n'' ↓ _¨_ f p) ≡⟨ xedus ⟩
-      ⊃ (toℕ n' ↓ konk) ≡⟨ indedrop konk n' ⟩
+      ⊃ (toℕ n' ↓ konk) ≡⟨ sym $ xedrop konk n' ⟩
       just (konk ! n') ∎
       where
       _¨_ = Data.List.map
@@ -486,12 +486,6 @@ smashGeneric q k x j = q' , kuslendus , xindus , itemstedus
              → just (x ! n) ≡ ⊃ (toℕ n ↓ x)
       xedrop (_ ∷ _) zero = refl
       xedrop (x ∷ xs) (suc n) = xedrop xs n
-      indedrop : ∀ {a} → {A : Set a}
-               → (x : List A)
-               → (n : Fin $ length x)
-               → ⊃ (toℕ n ↓ x) ≡ just (x ! n)
-      indedrop (_ ∷ _) zero = refl
-      indedrop (x ∷ xs) (suc n) = indedrop xs n
       xedus = begin
         ⊃ (toℕ n'' ↓ _¨_ f p) ≡⟨ sym $ cong (flidir $ f ¨ p) tomin₁ ⟩
         ⊃ (toℕ n ↓ _¨_ f p) ≡⟨ teikapdus p n f ⟩
