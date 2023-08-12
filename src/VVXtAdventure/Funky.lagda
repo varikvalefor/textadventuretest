@@ -876,11 +876,11 @@ smash? (cmd ∷ arg) g = if realShit (just trySmash) nothing
         kumfa = GameData.rooms g ! kumfid
   ... | nothing = "Yo, B, what do you want to trash?" , g
   ... | just [] = "Stop fucking hallucinating." , g
-  ... | just (x ∷ _) with smashing-is-just
+  ... | just (x ∷ _) with smashing-is-just?
     where
     item = Room.items (GameData.rooms g ! kumfid) ! proj₂ x
-    smashing-is-just : Dec $ Is-just $ Item.smashInfo item
-    smashing-is-just = {!!}
+    smashing-is-just? : Dec $ Is-just $ Item.smashInfo item
+    smashing-is-just? = {!!}
   ... | (no _) = "Can't smash this." , g
   ... | (yes j) = fromMaybe m (proj₁ j') , smashData
     where
