@@ -546,7 +546,7 @@ smashGeneric q k x j = q' , kuslendus , xindus , itemstedus
       zunbas = subst (_≡_ _) zunbas₂ $ cong p $ teikteikdrop rooms k
         where
         p = λ x → _¨_ c $ x ++ₗ kus ! k' ∷ k₃
-        zunbas₂ = cong (λ x → c ¨ (teik x ++ₗ kus ! k' ∷ k₃)) tom
+        zunbas₂ = cong (λ x → _¨_ c $ teik x ++ₗ kus ! k' ∷ k₃) tom
           where
           teik = flip _↑_ kus
           tom = tomindus k $ teikdrop rooms k
@@ -566,7 +566,7 @@ smashGeneric q k x j = q' , kuslendus , xindus , itemstedus
       pribas = subst (_≡_ _) pribas₂ $ cong p $ dropteikdrop rooms k
         where
         p = λ x → _¨_ c $ k₁'' ++ₗ kus ! k' ∷ x
-        pribas₂ = cong (λ x → c ¨ (k₁'' ++ₗ kus ! k' ∷ dropsuk x)) tom
+        pribas₂ = cong (λ x → _¨_ c $ k₁'' ++ₗ kus ! k' ∷ dropsuk x) tom
           where
           tom = tomindus k $ teikdrop rooms k
           dropsuk = flip _↓_ kus ∘ ℕ.suc
