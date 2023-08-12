@@ -878,9 +878,7 @@ smash? (cmd ∷ arg) g = if realShit (just trySmash) nothing
   ... | just [] = "Stop fucking hallucinating." , g
   ... | just (x ∷ _) with smashing-is-just
     where
-    item = Room.items (GameData.rooms g ! Character.room) ! proj₂ x
-      where
-      k = GameData.player g
+    item = Room.items (GameData.rooms g ! kumfid) ! proj₂ x
     smashing-is-just : Dec $ Is-just $ Item.smashInfo item
     smashing-is-just = {!!}
   ... | (no _) = "Can't smash this." , g
