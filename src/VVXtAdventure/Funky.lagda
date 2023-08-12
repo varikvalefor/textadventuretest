@@ -447,15 +447,13 @@ smashGeneric q k x j = q' , kuslendus , xindus , itemstedus
     surname = Character.surname t;
     cname = Character.cname t;
     nicknames = Character.nicknames t;
-    room = mink (Character.room t) kuslendus;
+    room = flip mink kuslendus $ Character.room t;
     inventory = Character.inventory t;
     wieldedct = Character.wieldedct t;
     yourfloorisnowclean = Character.yourfloorisnowclean t
     }
-  snidus = begin
-    snikerz ≡⟨ refl ⟩
-    const snikerz (rooms ! k) ≡⟨ intend rooms k $ const snikerz ⟩
-    kus ! mink k kuslendus ∎
+  snidus : snikerz ≡ kus ! mink k kuslendus
+  snidus = intend rooms k $ const snikerz
     where
     intend : ∀ {a} → {A : Set a}
            → (x : List A)
