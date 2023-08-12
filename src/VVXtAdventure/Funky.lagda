@@ -856,10 +856,8 @@ smash? (cmd ∷ arg) g = if realShit (just trySmash) nothing
   kumfid = Character.room $ GameData.player g
   realShit = cmd ≡ᵇ "SMASH"
   trySmash : String × GameData
-  trySmash with mapₘ withCname $ headₗ arg
+  trySmash with Data.Maybe.map withCname $ Data.List.head arg
     where
-    mapₘ = Data.Maybe.map
-    headₗ = Data.List.head
     withCname = λ t → filterₗ (_≟_ t ∘ Item.cname ∘ proj₁) items
       where
       items = (λ x → zipₗ x $ allFin $ length x) $ Room.items kumfa
