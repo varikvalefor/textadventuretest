@@ -577,7 +577,7 @@ smashGeneric q k x j = q' , kuslendus , xindus , itemstedus
                      → let n' = ℕ.suc (toℕ n) in
                        (_≡_
                          (n' ↓ x)
-                         (n' ↓ (toℕ n ↑ x ++ₗ z ∷ n' ↓ x)))
+                         (_↓_ n' $ toℕ n ↑ x ++ₗ z ∷ n' ↓ x))
         dropteikdrop (_ ∷ _) zero = refl
         dropteikdrop (_ ∷ xs) (suc n) = dropteikdrop xs n
 
