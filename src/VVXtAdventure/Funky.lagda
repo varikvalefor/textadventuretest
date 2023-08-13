@@ -859,9 +859,9 @@ smash? (cmd ∷ arg) g = if realShit (just trySmash) nothing
     where
     withCname = λ t → filterₗ (_≟_ t ∘ Item.cname ∘ proj₁) items
       where
-      items = (λ x → zipₗ x $ allFin $ length x) $ Room.items kumfa
+      items = indice $ Room.items kumfa
         where
-        zipₗ = Data.List.zip
+        indice = λ x → Data.List.zip x $ allFin $ length x
         kumfa = GameData.rooms g ! kumfid
   ... | nothing = "Yo, B, what do you want to trash?" , g
   ... | just [] = "Stop fucking hallucinating." , g
