@@ -468,7 +468,9 @@ smashGeneric q k x j = q' , kuslendus , xindus , itemstedus
     intend p@(x ∷ xs) n@(suc _) f = DMP.just-injective $ begin
       just (f $ p ! n) ≡⟨ cong just $ sym $ lum p f n ⟩
       just (_¨_ f p ! n'') ≡⟨ xedrop (f ¨ p) n'' ⟩
-      ⊃ (toℕ n'' ↓ _¨_ f p) ≡⟨ xedus ⟩
+      ⊃ (toℕ n'' ↓ _¨_ f p) ≡⟨ sym $ cong (flidir $ f ¨ p) tomin₁ ⟩
+      ⊃ (toℕ n ↓ _¨_ f p) ≡⟨ teikapdus p n f ⟩
+      ⊃ (toℕ n ↓ konk) ≡⟨ cong (flidir konk) tomin₂ ⟩
       ⊃ (toℕ n' ↓ konk) ≡⟨ sym $ xedrop konk n' ⟩
       just (konk ! n') ∎
       where
@@ -477,32 +479,26 @@ smashGeneric q k x j = q' , kuslendus , xindus , itemstedus
       konk = toℕ n ↑ p ++ₗ f (p ! n) ∷ ℕ.suc (toℕ n) ↓ p
       n' = mink n $ teikdrop p n
       n'' = mink n $ sym $ DLP.length-map f p
+      flidir = ⊃ ∘₂ flip _↓_
+      tomin₁ = tomindus n $ sym $ DLP.length-map f p
+      tomin₂ = tomindus n $ teikdrop p n
       xedrop : ∀ {a} → {A : Set a}
              → (x : List A)
              → (n : Fin $ length x)
              → just (x ! n) ≡ ⊃ (toℕ n ↓ x)
       xedrop (_ ∷ _) zero = refl
       xedrop (x ∷ xs) (suc n) = xedrop xs n
-      xedus = begin
-        ⊃ (toℕ n'' ↓ _¨_ f p) ≡⟨ sym $ cong (flidir $ f ¨ p) tomin₁ ⟩
-        ⊃ (toℕ n ↓ _¨_ f p) ≡⟨ teikapdus p n f ⟩
-        ⊃ (toℕ n ↓ konk) ≡⟨ cong (flidir konk) tomin₂ ⟩
-        ⊃ (toℕ n' ↓ konk) ∎
-        where
-        flidir = ⊃ ∘₂ flip _↓_
-        tomin₁ = tomindus n $ sym $ DLP.length-map f p
-        tomin₂ = tomindus n $ teikdrop p n
-        teikapdus : ∀ {a} → {A : Set a}
-                  → (x : List A)
-                  → (n : Fin $ length x)
-                  → (f : A → A)
-                  → let k₃ = ℕ.suc (toℕ n) ↓ x in
-                    let k = (toℕ n ↑ x) ++ₗ f (x ! n) ∷ k₃ in
-                    (_≡_
-                      (⊃ $ toℕ n ↓ _¨_ f x)
-                      (⊃ $ toℕ n ↓ k))
-        teikapdus (_ ∷ _) zero _ = refl
-        teikapdus (_ ∷ xs) (suc n) f = teikapdus xs n f
+      teikapdus : ∀ {a} → {A : Set a}
+                → (x : List A)
+                → (n : Fin $ length x)
+                → (f : A → A)
+                → let k₃ = ℕ.suc (toℕ n) ↓ x in
+                  let k = (toℕ n ↑ x) ++ₗ f (x ! n) ∷ k₃ in
+                  (_≡_
+                    (⊃ $ toℕ n ↓ _¨_ f x)
+                    (⊃ $ toℕ n ↓ k))
+      teikapdus (_ ∷ _) zero _ = refl
+      teikapdus (_ ∷ xs) (suc n) f = teikapdus xs n f
   q' = record q {
     rooms = kus;
     haters = Data.List.map upgrayedd $ GameData.haters q;
