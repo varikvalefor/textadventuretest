@@ -139,6 +139,7 @@ open import Data.Product
   using (
     Σ;
     map₂;
+    dmap;
     proj₁;
     proj₂;
     _×_;
@@ -510,7 +511,7 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
   lb! : Character k' → Character k'
   lb! x = record x {
     inventory = sl ∷ Character.inventory x;
-    wieldedct = Data.Maybe.map f $ Character.wieldedct x;
+    wieldedct = Data.Maybe.map (dmap suc id) $ Character.wieldedct x;
     yourfloorisnowclean = iofink
     }
     where
@@ -526,7 +527,6 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
         → s ∉ x
         → nu,iork $ s ∷ x
       f x s n nin = {!!}
-    f = λ (l , k) → Fin.suc l , k
   x'' : Σ (List $ Character k') $ λ x'
         → Σ (length (GameData.haters q) ≡ length x') $ λ ℓ
         → _
