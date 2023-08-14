@@ -254,21 +254,20 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
   dropkat (_ ∷ xs) ys = dropkat xs ys
 
   xenlen = begin
-    𝓁 xen ≡⟨ cong 𝓁 $ sym $ DLP.take++drop j' xen ⟩
+    𝓁 xen ≡⟨ cong 𝓁 $ sym $ DLP.take++drop (toℕ j) xen ⟩
     𝓁 (x₁ ++ₗ d₂) ≡⟨ DLP.length-++ x₁ ⟩
-    𝓁 x₁ + 𝓁 d₂ ≡⟨ cong (_+_ $ 𝓁 x₁) $ DLP.length-drop j' xen ⟩
-    𝓁 x₁ + (𝓁 xen ∸ j') ≡⟨ cong (_+_ $ 𝓁 x₁) $ sym xex ⟩
+    𝓁 x₁ + 𝓁 d₂ ≡⟨ cong (_+_ $ 𝓁 x₁) $ DLP.length-drop (toℕ j) xen ⟩
+    𝓁 x₁ + (𝓁 xen ∸ toℕ j) ≡⟨ cong (_+_ $ 𝓁 x₁) $ sym xex ⟩
     𝓁 x₁ + 𝓁 (x₂ ∷ x₃) ≡⟨ refl ⟩
     𝓁 x₁ + ℕ.suc (𝓁 x₃) ≡⟨ sym $ DLP.length-++ x₁ ⟩
     𝓁 xen' ∎
     where
-    j' = toℕ j
-    d₂ = j' ↓ xen
+    d₂ = toℕ j ↓ xen
     xex = begin
       𝓁 (x₂ ∷ x₃) ≡⟨ refl ⟩
-      ℕ.suc (𝓁 $ ℕ.suc j' ↓ xen) ≡⟨ dropsuc xen j ⟩
-      𝓁 (j' ↓ xen) ≡⟨ DLP.length-drop j' xen ⟩
-      𝓁 xen ∸ j' ∎
+      ℕ.suc (𝓁 $ ℕ.suc (toℕ j) ↓ xen) ≡⟨ dropsuc xen j ⟩
+      𝓁 (toℕ j ↓ xen) ≡⟨ DLP.length-drop (toℕ j) xen ⟩
+      𝓁 xen ∸ toℕ j ∎
       where
       dropsuc : ∀ {a} → {A : Set a}
               → (x : List A)
