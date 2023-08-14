@@ -494,9 +494,7 @@ smashGeneric q k x j = q' , kuslendus , xindus , itemstedus
                 → (f : A → A)
                 → let k₃ = ℕ.suc (toℕ n) ↓ x in
                   let k = (toℕ n ↑ x) ++ₗ f (x ! n) ∷ k₃ in
-                  (_≡_
-                    (⊃ $ toℕ n ↓ _¨_ f x)
-                    (⊃ $ toℕ n ↓ k))
+                  ⊃ (toℕ n ↓ _¨_ f x) ≡ ⊃ (toℕ n ↓ k)
       teikapdus (_ ∷ _) zero _ = refl
       teikapdus (_ ∷ xs) (suc n) f = teikapdus xs n f
   q' = record q {
