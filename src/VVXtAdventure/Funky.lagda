@@ -689,9 +689,8 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
       midkonklikil : (_≡_
                        (konk xenkim (kib likil') xenksim)
                        (konk xenkim likil xenksim))
-      midkonklikil = cong (midkonk xenkim xenksim) midju
+      midkonklikil = cong (flip (konk xenkim) xenksim) midju
         where
-        midkonk = flip ∘ konk
         room = Character.room
         cninykumfa = λ n → record likil {room = n}
         midju : kib likil' ≡ likil
