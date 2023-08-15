@@ -425,7 +425,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
 \end{code}
 
 \section{la'o zoi.\ \F{takePawn}\ .zoi.}
-ni'o tu'a la'o zoi.\ \F{takePawn} \B q \B m \B n .zoi.\ cu .indika lo du'u zo'e ja lo me'oi .inventory.\ be lo selsni be la'o zoi.\ \F{GameData.haters} \B q \Sym ! \B m\ .zoi.\ cu vasru zo'e ja lo selsni be la'o zoi.\ (\F{GameData.itemsInRoomOf} \B q \B m) \Sym ! n\ .zoi... kei je zo'e
+ni'o tu'a la'o zoi.\ \F{takePawn} \B q \B m \B n .zoi.\ cu .indika lo du'u zo'e ja lo me'oi .inventory.\ be lo selsni be la'o zoi.\ \F{GameData.haters} \B q \F !\ \B m\ .zoi.\ cu vasru zo'e ja lo selsni be la'o zoi.\ \Sym(\F{GameData.itemsInRoomOf} \B q \B m\Sym) \F !\ n\ .zoi... kei je zo'e
 
 ni'o la .varik.\ cu na jinvi le du'u sarcu fa lo nu la .varik.\ cu ciksi le me'oi .\AgdaKeyword{private}.\ bau la .lojban.
 
