@@ -994,7 +994,7 @@ wield? (x ∷ xs) dang = if (realShit x) (troci xs) nothing
 \end{code}
 
 \section{la'oi .\F{take?}.}
-ni'o ga jonai ga je djuno pe'a lo du'u tu'a la'o zoi.\ \B s\ .zoi.\ .indika lo du'u lo kelci cu djica lo nu lo me'oi .inventory.\ be ko'a goi lo kelci ke xarpre ja co'e cu vasru ko'e goi lo se mu'oi zoi.\ \F{Item.cname}\ .zoi.\ be la'o zoi.\ \B C\ .zoi.\ gi\ldots
+ni'o ga jonai ga je djuno pe'a lo du'u tu'a la'o zoi.\ \B s\ .zoi.\ .indika lo du'u lo kelci cu djica lo nu lo me'oi .inventory.\ be ko'a goi lo kelci ke xarpre ja co'e cu vasru ko'e goi lo se mu'oi fancu.\ \F{Item.cname}\ .fancu.\ be la'o zoi.\ \B C\ .zoi.\ gi\ldots
 \begin{itemize}
 	\item ga jonai ga je ko'e zasti gi\ldots
 	\begin{itemize}
