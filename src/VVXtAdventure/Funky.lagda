@@ -655,7 +655,7 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
       xen' ∎
       where
       _¨_ = Data.List.map
-      likil = lb! (kumbi'o lb)
+      likil = lb! $ kumbi'o lb
       likil' = kumfybi'o q' q (sym dus) likil
       konk : ∀ {a} → {A : Set a}
            → List A → A → List A → List A
