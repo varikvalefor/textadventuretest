@@ -459,7 +459,8 @@ takePawn : (q : GameData)
              (Σ (Character $ GameData.rooms q') $ λ k
               → ((_≡_ ⍨)
                   (xen q')
-                  (Data.List.map (kumfybi'o q q' r)
+                  (Data.List.map
+                    (kumfybi'o q q' r)
                     (_++ₗ_
                       ((toℕ m) ↑ xen q)
                       (_∷_
