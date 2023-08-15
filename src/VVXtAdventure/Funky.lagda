@@ -1006,6 +1006,24 @@ ni'o ga jonai ga je djuno pe'a lo du'u tu'a la'o zoi.\ \B s\ .zoi.\ .indika lo d
 
 \begin{code}
 take? : Com
-take? = {!!}
+take? ("TAKE" ∷ []) = just ∘ _,_ m
+  where
+  m = "Take your pills, you fucking lunatic."
+take? ("TAKE" ∷ _ ∷ _ ∷ _) = just ∘ _,_ m
+  where
+  m = "I can't permit that you take the entire room."
+take? ("TAKE" ∷ x ∷ []) g with filterₗ methching itste
+  where
+  methching = _≟_ x ∘ Item.cname ∘ proj₁
+  itste = indice $ Room.items $ GameData.rooms g ! kumfid
+    where
+    indice = λ t → Data.List.zip t $ allFin $ length t
+    kumfid = Character.room $ GameData.player g
+... | [] = just $ "You grasp the air... to no avail." , g
+... | (t ∷ _) = just $ m , proj₁ (takePawn g k $ proj₂ t)
+  where
+  k = GameData.player' g
+  m = "You take " ++ Item.cname (proj₁ t) ++ "."
+take? _ _ = nothing
 \end{code}
 \end{document}
