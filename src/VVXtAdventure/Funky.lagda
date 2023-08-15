@@ -992,4 +992,20 @@ wield? (x ∷ xs) dang = if (realShit x) (troci xs) nothing
         \Something is mad fucked, and you might \
         \actually be innocent this time."
 \end{code}
+
+\section{la'oi .\F{take?}.}
+ni'o ga jonai ga je djuno pe'a lo du'u tu'a la'o zoi.\ \B s\ .zoi.\ .indika lo du'u lo kelci cu djica lo nu lo me'oi .inventory.\ be ko'a goi lo kelci ke xarpre ja co'e cu vasru ko'e goi lo se mu'oi zoi.\ \F{Item.cname}\ .zoi.\ be la'o zoi.\ \B C\ .zoi.\ gi\ldots
+\begin{itemize}
+	\item ga jonai ga je ko'e zasti gi\ldots
+	\begin{itemize}
+		\item ga jonai ga je tu'a la'o zoi.\ \B g\ .zoi.\ .indika lo du'u lo me'oi .inventory. be ko'a cu vasru ko'e gi fo'a goi la'o zoi.\ \F{take?} \B s \B g\ .zoi.\ me'oi .\F{just}.\ lo .orsi be lo te skuxai ja co'e bei la'o zoi.\ \B g\ .zoi.\ gi fo'a me'oi .\F{just}.\ lo .orsi be zo'e poi tu'a ke'a .indika ko'i goi lo du'u lo me'oi .inventory.\ be ko'a cu vasru ko'e ku'o bei lo smimlu be la'o zoi.\ \B g\ .zoi.\ be'o poi ku'i tu'a ke'a .indika ko'i gi
+		\item fo'a me'oi .\F{just}.\ lo .orsi be lo te skuxai ja co'e bei la'o zoi.\ \B g\ .zoi.\ gi
+	\end{itemize}
+	\item fo'a du la'oi .\F{nothing}.
+\end{itemize}
+
+\begin{code}
+take? : Com
+take? = {!!}
+\end{code}
 \end{document}
