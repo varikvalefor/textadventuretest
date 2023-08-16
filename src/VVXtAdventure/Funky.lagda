@@ -174,9 +174,9 @@ ni'o tu'a la'o zoi.\ \F{movePawn} \B q \B m \B n .zoi.\ .indika lo du'u lo selsn
 
 \begin{code}
 movePawn : (q : GameData)
-         → (i : Fin $ Data.List.length $ GameData.haters q)
-         → (j : Fin $ Data.List.length $ GameData.rooms q)
-         → let 𝓁 = Data.List.length in
+         → (i : Fin $ length $ GameData.haters q)
+         → (j : Fin $ length $ GameData.rooms q)
+         → let 𝓁 = length in
            let x = GameData.haters in
            let k = Character.room in
            let gek = GameData.rooms in
@@ -207,7 +207,7 @@ ni'o tu'a la'o zoi.\ \F{wieldPawn} \B q \B m \B n \F{refl}\ .zoi.\ .indika lo du
 \begin{code}
 wieldPawn : (q : GameData)
           → let x = GameData.haters in
-            let 𝓁 = Data.List.length in
+            let 𝓁 = length in
             let iv = Character.inventory in
             let ifinc = GameData.yourfloorisnowclean in
             (j : Fin $ 𝓁 $ x q)
@@ -240,7 +240,7 @@ wieldPawn : (q : GameData)
 wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
   where
   ⊃ = Data.List.head
-  𝓁 = Data.List.length
+  𝓁 = length
 
   xen = GameData.haters gd
   x₁ = (toℕ j) ↑ xen
