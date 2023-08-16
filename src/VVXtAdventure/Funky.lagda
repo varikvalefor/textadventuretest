@@ -718,14 +718,8 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
              → {x : A}
              → (f : A → B)
              → (_≡_
-                 (_¨_
-                   f
-                   (_++_
-                     xs
-                     (x ∷ ys)))
-                 (_++_
-                   (f ¨ xs)
-                   (f x ∷ f ¨ ys)))
+                 (f ¨ (xs ++ x ∷ ys))
+                 (f ¨ xs ++ f x ∷ f ¨ ys))
       mapinj [] _ _ = refl
       mapinj (x ∷ xs) ys f = cong (_∷_ $ f x) $ mapinj xs ys f
       xokonkyxen = sym $ konkdus xen' m''
