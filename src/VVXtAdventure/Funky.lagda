@@ -117,7 +117,6 @@ open import Data.List
   renaming (
     take to _↑_;
     drop to _↓_;
-    _++_ to _++ₗ_;
     lookup to _!_;
     filter to filterₗ
   )
@@ -133,6 +132,7 @@ open import Data.Maybe
 open import Data.String
   hiding (
     length;
+    _++_;
     _≤_;
     _≟_
   )
@@ -168,6 +168,7 @@ open import Truthbrary.Record.LLC
   using (
     nu,iork;
     length;
+    _++_;
     _∉_;
     map
   )
@@ -264,11 +265,11 @@ wieldPawn : (q : GameData)
                    player' = mink (GameData.player' q) ℓ;
                    yourfloorisnowclean = ifinc q'}))
             × (_≡_
-                (_++ₗ_
+                (_++_
                   ((toℕ j) ↑ x q)
                   ((ℕ.suc $ toℕ j) ↓ x q))
                 (subst (List ∘ Character) (sym rud)
-                  (_++ₗ_
+                  (_++_
                     ((toℕ j) ↑ x q')
                     ((ℕ.suc $ toℕ j) ↓ x q'))))
 wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
@@ -280,17 +281,17 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
   x₁ = (toℕ j) ↑ xen
   x₂ = record (xen ! j) {wieldedct = just $ i , t}
   x₃ = (ℕ.suc $ toℕ j) ↓ xen
-  xen' = x₁ ++ₗ x₂ ∷ x₃
+  xen' = x₁ ++ x₂ ∷ x₃
 
   dropkat : ∀ {a} → {A : Set a}
           → (xs ys : List A)
-          → ys ≡ (𝓁 xs) ↓ (xs ++ₗ ys)
+          → ys ≡ (𝓁 xs) ↓ (xs ++ ys)
   dropkat [] _ = refl
   dropkat (_ ∷ xs) ys = dropkat xs ys
 
   xenlen = begin
     𝓁 xen ≡⟨ cong 𝓁 $ sym $ DLP.take++drop (toℕ j) xen ⟩
-    𝓁 (x₁ ++ₗ d₂) ≡⟨ DLP.length-++ x₁ ⟩
+    𝓁 (x₁ ++ d₂) ≡⟨ DLP.length-++ x₁ ⟩
     𝓁 x₁ + 𝓁 d₂ ≡⟨ cong (_+_ $ 𝓁 x₁) $ DLP.length-drop (toℕ j) xen ⟩
     𝓁 x₁ + (𝓁 xen ∸ toℕ j) ≡⟨ cong (_+_ $ 𝓁 x₁) $ sym xex ⟩
     𝓁 x₁ + 𝓁 (x₂ ∷ x₃) ≡⟨ refl ⟩
@@ -388,10 +389,10 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
 
   -- | ni'o zo .kond. binxo ja co'e zo .skrud.
   skrud = begin
-    ((toℕ j) ↑ xen) ++ₗ (ℕ.suc (toℕ j) ↓ xen) ≡⟨ refl ⟩
-    x₁ ++ₗ x₃ ≡⟨ cong (flip _++ₗ_ x₃) $ takedus xen j ⟩
-    x₁' ++ₗ x₃ ≡⟨ cong (_++ₗ_ x₁') $ dropydus xen {x₂ ∷ x₃} j ⟩
-    x₁' ++ₗ x₃' ∎
+    ((toℕ j) ↑ xen) ++ (ℕ.suc (toℕ j) ↓ xen) ≡⟨ refl ⟩
+    x₁ ++ x₃ ≡⟨ cong (flip _++_ x₃) $ takedus xen j ⟩
+    x₁' ++ x₃ ≡⟨ cong (_++_ x₁') $ dropydus xen {x₂ ∷ x₃} j ⟩
+    x₁' ++ x₃' ∎
     where
     x₁' = (toℕ j) ↑ xen'
     x₃' = (ℕ.suc $ toℕ j) ↓ xen'
@@ -400,7 +401,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
             → {b : List A}
             → (n : Fin $ 𝓁 a)
             → let n' = toℕ n in
-              n' ↑ a ≡ n' ↑ (flip _++ₗ_ b $ n' ↑ a)
+              n' ↑ a ≡ n' ↑ (flip _++_ b $ n' ↑ a)
     takedus (_ ∷ xs) zero = refl
     takedus (x ∷ xs) (suc n) = cong (_∷_ x) $ takedus xs n
     dropydus : ∀ {a} → {A : Set a}
@@ -410,7 +411,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
              → (n : Fin $ 𝓁 a)
              → let n' = toℕ n in
                let s = ℕ.suc n' in
-               s ↓ a ≡ s ↓ _++ₗ_ (n' ↑ a) (x ∷ s ↓ a)
+               s ↓ a ≡ s ↓ _++_ (n' ↑ a) (x ∷ s ↓ a)
     dropydus (_ ∷ _) zero = refl
     dropydus (_ ∷ xs) {b} (suc n) = dropydus xs {b} n
 
@@ -455,7 +456,7 @@ takePawn : (q : GameData)
                   (xen q')
                   (Data.List.map
                     (kumfybi'o q q' r)
-                    (_++ₗ_
+                    (_++_
                       ((toℕ m) ↑ xen q)
                       (_∷_
                         (kumfybi'o q' q (sym r) k)
@@ -466,7 +467,7 @@ takePawn : (q : GameData)
               → let kit = toℕ $ room $ xen q ! m in
                 (_≡_
                   (GameData.rooms q')
-                  (_++ₗ_
+                  (_++_
                     (kit ↑ GameData.rooms q)
                     (_∷_ r' $ ℕ.suc kit ↓ GameData.rooms q))))
            × let iofink = GameData.yourfloorisnowclean in
@@ -556,7 +557,7 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
       b₂' = mapₗ cname $ (ℕ.suc $ toℕ libek') ↓ k'
       konk : ∀ {a} → {A : Set a}
            → List A → A → List A → List A
-      konk a = _++ₗ_ a ∘₂ _∷_
+      konk a = _++_ a ∘₂ _∷_
       konk₁ = λ b1 → konk (mapₗ cname b1) (cname kₗ') b₂
       konk₂ = konk b₁' (cname kₗ') ∘ mapₗ cname
       entydus : cname kₗ ≡ cname kₗ'
@@ -567,7 +568,7 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
             → (f : A → B)
             → (_≡_
                 (mapₗ f x)
-                (_++ₗ_
+                (_++_
                   (mapₗ f $ (toℕ n) ↑ x)
                   (_∷_
                     (f $ x ! n)
@@ -645,7 +646,7 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
       konk xenkim (kib likil') xenksim ≡⟨ midkonklikil  ⟩
       konk xenkim likil xenksim ≡⟨ refl ⟩
       klonk xenkim xenksim ≡⟨ sym $ mapimplant xen likil kib m ⟩
-      klonk xenim' xensim' ≡⟨ cong (flip _++ₗ_ _) xenteik ⟩
+      klonk xenim' xensim' ≡⟨ cong (flip _++_ _) xenteik ⟩
       klonk (m:ℕ ↑ xen') xensim' ≡⟨ cong (klonk $ m:ℕ ↑ xen') xendrop ⟩
       klonk (m:ℕ ↑ xen') ((ℕ.suc m:ℕ) ↓ xen') ≡⟨ refl ⟩
       konk _ likil _ ≡⟨ cong (flip (konk _) _) $ proj₂ $ proj₂ x'' ⟩
@@ -659,7 +660,7 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
       likil' = kumfybi'o q' q (sym dus) likil
       konk : ∀ {a} → {A : Set a}
            → List A → A → List A → List A
-      konk a b c = a ++ₗ (b ∷ c)
+      konk a b c = a ++ (b ∷ c)
       klonk = flip konk likil
       koxonk = flip konk $ xen' ! mink m dis
       kib = kumfybi'o q q' dus
@@ -719,10 +720,10 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
              → (_≡_
                  (_¨_
                    f
-                   (_++ₗ_
+                   (_++_
                      xs
                      (x ∷ ys)))
-                 (_++ₗ_
+                 (_++_
                    (f ¨ xs)
                    (f x ∷ f ¨ ys)))
       mapinj [] _ _ = refl
@@ -735,7 +736,7 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
                 → let n' = toℕ n in
                   (_≡_
                     x
-                    (_++ₗ_
+                    (_++_
                       (n' ↑ x)
                       (_∷_
                         (x ! n)
