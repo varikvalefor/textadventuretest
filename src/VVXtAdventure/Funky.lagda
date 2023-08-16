@@ -104,7 +104,6 @@ open import Data.List
   renaming (
     take to _↑_;
     drop to _↓_;
-    _++_ to _++ₗ_;
     lookup to _!_;
     filter to filterₗ
   )
@@ -120,6 +119,7 @@ open import Data.Maybe
 open import Data.String
   hiding (
     length;
+    _++_;
     _≤_;
     _≟_
   )
@@ -145,6 +145,7 @@ open import Truthbrary.Record.Eq
 open import Truthbrary.Record.LLC
   using (
     length;
+    _++_;
     map
   )
 open import Truthbrary.Category.Monad
@@ -229,11 +230,11 @@ wieldPawn : (q : GameData)
                    player' = mink (GameData.player' q) ℓ;
                    yourfloorisnowclean = ifinc q'}))
             × (_≡_
-                (_++ₗ_
+                (_++_
                   ((toℕ j) ↑ x q)
                   ((ℕ.suc $ toℕ j) ↓ x q))
                 (subst (List ∘ Character) (sym rud)
-                  (_++ₗ_
+                  (_++_
                     ((toℕ j) ↑ x q')
                     ((ℕ.suc $ toℕ j) ↓ x q'))))
 wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
@@ -245,17 +246,17 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
   x₁ = (toℕ j) ↑ xen
   x₂ = record (xen ! j) {wieldedct = just $ i , t}
   x₃ = (ℕ.suc $ toℕ j) ↓ xen
-  xen' = x₁ ++ₗ x₂ ∷ x₃
+  xen' = x₁ ++ x₂ ∷ x₃
 
   dropkat : ∀ {a} → {A : Set a}
           → (xs ys : List A)
-          → ys ≡ (𝓁 xs) ↓ (xs ++ₗ ys)
+          → ys ≡ (𝓁 xs) ↓ (xs ++ ys)
   dropkat [] _ = refl
   dropkat (_ ∷ xs) ys = dropkat xs ys
 
   xenlen = begin
     𝓁 xen ≡⟨ cong 𝓁 $ sym $ DLP.take++drop (toℕ j) xen ⟩
-    𝓁 (x₁ ++ₗ d₂) ≡⟨ DLP.length-++ x₁ ⟩
+    𝓁 (x₁ ++ d₂) ≡⟨ DLP.length-++ x₁ ⟩
     𝓁 x₁ + 𝓁 d₂ ≡⟨ cong (_+_ $ 𝓁 x₁) $ DLP.length-drop (toℕ j) xen ⟩
     𝓁 x₁ + (𝓁 xen ∸ toℕ j) ≡⟨ cong (_+_ $ 𝓁 x₁) $ sym xex ⟩
     𝓁 x₁ + 𝓁 (x₂ ∷ x₃) ≡⟨ refl ⟩
@@ -353,10 +354,10 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
 
   -- | ni'o zo .kond. binxo ja co'e zo .skrud.
   skrud = begin
-    ((toℕ j) ↑ xen) ++ₗ (ℕ.suc (toℕ j) ↓ xen) ≡⟨ refl ⟩
-    x₁ ++ₗ x₃ ≡⟨ cong (flip _++ₗ_ x₃) $ takedus xen j ⟩
-    x₁' ++ₗ x₃ ≡⟨ cong (_++ₗ_ x₁') $ dropydus xen {x₂ ∷ x₃} j ⟩
-    x₁' ++ₗ x₃' ∎
+    ((toℕ j) ↑ xen) ++ (ℕ.suc (toℕ j) ↓ xen) ≡⟨ refl ⟩
+    x₁ ++ x₃ ≡⟨ cong (flip _++_ x₃) $ takedus xen j ⟩
+    x₁' ++ x₃ ≡⟨ cong (_++_ x₁') $ dropydus xen {x₂ ∷ x₃} j ⟩
+    x₁' ++ x₃' ∎
     where
     x₁' = (toℕ j) ↑ xen'
     x₃' = (ℕ.suc $ toℕ j) ↓ xen'
@@ -365,7 +366,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
             → {b : List A}
             → (n : Fin $ 𝓁 a)
             → let n' = toℕ n in
-              n' ↑ a ≡ n' ↑ (flip _++ₗ_ b $ n' ↑ a)
+              n' ↑ a ≡ n' ↑ (flip _++_ b $ n' ↑ a)
     takedus (_ ∷ xs) zero = refl
     takedus (x ∷ xs) (suc n) = cong (_∷_ x) $ takedus xs n
     dropydus : ∀ {a} → {A : Set a}
@@ -375,7 +376,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
              → (n : Fin $ 𝓁 a)
              → let n' = toℕ n in
                let s = ℕ.suc n' in
-               s ↓ a ≡ s ↓ _++ₗ_ (n' ↑ a) (x ∷ s ↓ a)
+               s ↓ a ≡ s ↓ _++_ (n' ↑ a) (x ∷ s ↓ a)
     dropydus (_ ∷ _) zero = refl
     dropydus (_ ∷ xs) {b} (suc n) = dropydus xs {b} n
 
