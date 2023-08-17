@@ -346,7 +346,6 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
     just x₂ ≡⟨ refl ⟩
     ⊃ (x₂ ∷ x₃) ≡⟨ cong ⊃ (dropkat x₁ $ x₂ ∷ x₃) ⟩
     ⊃ ((𝓁 x₁) ↓ xen') ≡⟨ xent ⟩
-    just (xen' ! mink j xenlen) ≡⟨ refl ⟩
     just (xen' ! mink j xenlen) ∎
     where
     u₁ = Data.Maybe.map (toℕ ∘ proj₁) ∘ Character.wieldedct
