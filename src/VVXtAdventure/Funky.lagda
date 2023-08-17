@@ -349,8 +349,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
     just (xen' ! mink j xenlen) ≡⟨ refl ⟩
     just (xen' ! mink j xenlen) ∎
     where
-    mapₘ = Data.Maybe.map
-    u₁ = mapₘ (toℕ ∘ proj₁) ∘ Character.wieldedct
+    u₁ = Data.Maybe.map (toℕ ∘ proj₁) ∘ Character.wieldedct
 
   -- | ni'o zo .kond. binxo ja co'e zo .skrud.
   skrud = begin
