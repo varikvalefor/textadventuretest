@@ -599,7 +599,7 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
                    → (f : A → A)
                    → (toℕ n) ↑ x ≡ (toℕ n) ↑ proj₁ (ual x n f)
           ualteik₁ (_ ∷ _) zero _ = refl
-          ualteik₁ (x ∷ xs) (suc n) f = cong (_∷_ x) $ ualteik₁ xs n f
+          ualteik₁ (x ∷ xs) (suc n) = cong (_∷_ x) ∘ ualteik₁ xs n
       ualdrop : ∀ {a} → {A : Set a}
               → (x : List A)
               → (n : Fin $ length x)
@@ -624,7 +624,7 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
                    → let n' = ℕ.suc $ toℕ n in
                      n' ↓ x ≡ n' ↓ proj₁ (ual x n f)
           ualdrop₁ (_ ∷ _) zero _ = refl
-          ualdrop₁ (_ ∷ xs) (suc n) f = ualdrop₁ xs n f
+          ualdrop₁ (_ ∷ xs) (suc n) = ualdrop₁ xs n
 
   dus = proj₁ $ proj₂ k''
   dis = proj₁ $ proj₂ x''
