@@ -275,8 +275,8 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
               → (n : Fin $ 𝓁 x)
               → let n' = toℕ n in
                 ℕ.suc (𝓁 $ ℕ.suc n' ↓ x) ≡ 𝓁 (n' ↓ x)
-      dropsuc (x ∷ xs) Fin.zero = refl
-      dropsuc (x ∷ xs) (Fin.suc n) = dropsuc xs n
+      dropsuc (_ ∷ _) Fin.zero = refl
+      dropsuc (_ ∷ xs) (Fin.suc n) = dropsuc xs n
 
   xent : ⊃ ((𝓁 x₁) ↓ xen') ≡ just (xen' ! mink j xenlen)
   xent = sym $ subkon $ dropind xen' $ mink j xenlen
@@ -286,13 +286,13 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
             → (xs : List A)
             → (n : Fin $ 𝓁 xs)
             → just (xs ! n) ≡ ⊃ (toℕ n ↓ xs)
-    dropind (x ∷ xs) Fin.zero = refl
-    dropind (x ∷ xs) (Fin.suc n) = dropind xs n
+    dropind (_ ∷ _) Fin.zero = refl
+    dropind (_ ∷ xs) (Fin.suc n) = dropind xs n
     mindut : {m n : ℕ}
            → (o : Fin m)
            → (x : m ≡ n)
            → toℕ (mink o x) ≡ toℕ o
-    mindut o refl = refl
+    mindut _ refl = refl
     jelis : toℕ j ≤ 𝓁 xen
     jelis = subst (_≤_ _) kix $ DNP.≤-step $ subst (_≥_ _) mijd j'
       where
@@ -322,7 +322,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
                  → n ≤ 𝓁 xs
                  → 𝓁 (n ↑ xs) ≡ n
       teiklendus _ 0 _ = refl
-      teiklendus (x ∷ xs) (ℕ.suc n) (Data.Nat.s≤s q) = ret
+      teiklendus (_ ∷ xs) (ℕ.suc n) (Data.Nat.s≤s q) = ret
         where
         ret = cong ℕ.suc $ teiklendus xs n q
     subkon = subst (_≡_ _) $ cong (⊃ ∘ flip _↓_ xen') xil
