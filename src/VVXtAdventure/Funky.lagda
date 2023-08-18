@@ -354,7 +354,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
   skrud = begin
     ((toℕ j) ↑ xen) ++ (ℕ.suc (toℕ j) ↓ xen) ≡⟨ refl ⟩
     x₁ ++ x₃ ≡⟨ cong (flip _++_ x₃) $ takedus xen j ⟩
-    x₁' ++ x₃ ≡⟨ cong (_++_ x₁') $ dropydus xen {x₂ ∷ x₃} j ⟩
+    x₁' ++ x₃ ≡⟨ cong (_++_ x₁') $ dropydus xen (x₂ ∷ x₃) j ⟩
     x₁' ++ x₃' ∎
     where
     x₁' = (toℕ j) ↑ xen'
@@ -369,14 +369,14 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
     takedus (x ∷ xs) (suc n) = cong (_∷_ x) $ takedus xs n
     dropydus : ∀ {a} → {A : Set a}
              → (a : List A)
-             → {b : List A}
+             → (b : List A)
              → {x : A}
              → (n : Fin $ 𝓁 a)
              → let n' = toℕ n in
                let s = ℕ.suc n' in
                s ↓ a ≡ s ↓ _++_ (n' ↑ a) (x ∷ s ↓ a)
-    dropydus (_ ∷ _) zero = refl
-    dropydus (_ ∷ xs) {b} (suc n) = dropydus xs {b} n
+    dropydus (_ ∷ _) _ zero = refl
+    dropydus (_ ∷ xs) b (suc n) = dropydus xs b n
 
   p' = mink (GameData.player' gd) xenlen
   gd' = record gd {haters = xen'; player' = p'}
