@@ -591,15 +591,7 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
           where
           u = ual x n f
           misuk = tomindus n $ proj₁ $ proj₂ u
-        utz = ualteik₁ x n f
-          where
-          ualteik₁ : ∀ {a} → {A : Set a}
-                   → (x : List A)
-                   → (n : Fin $ length x)
-                   → (f : A → A)
-                   → (toℕ n) ↑ x ≡ (toℕ n) ↑ proj₁ (ual x n f)
-          ualteik₁ (_ ∷ _) zero _ = refl
-          ualteik₁ (x ∷ xs) (suc n) = cong (_∷_ x) ∘ ualteik₁ xs n
+        utz = Truthbrary.Data.List.Loom.ualteik x n f
       ualdrop : ∀ {a} → {A : Set a}
               → (x : List A)
               → (n : Fin $ length x)
@@ -615,16 +607,7 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
         c = cong (flip _↓_ $ proj₁ u) $ tomindus (suc n) uresuk
           where
           uresuk = cong ℕ.suc $ proj₁ $ proj₂ u
-        ud = ualdrop₁ (x ∷ xs) (suc n) f
-          where
-          ualdrop₁ : ∀ {a} → {A : Set a}
-                   → (x : List A)
-                   → (n : Fin $ length x)
-                   → (f : A → A)
-                   → let n' = ℕ.suc $ toℕ n in
-                     n' ↓ x ≡ n' ↓ proj₁ (ual x n f)
-          ualdrop₁ (_ ∷ _) zero _ = refl
-          ualdrop₁ (_ ∷ xs) (suc n) = ualdrop₁ xs n
+        ud = Truthbrary.Data.List.Loom.ualdrop (x ∷ xs) (suc n) f
 
   dus = proj₁ $ proj₂ k''
   dis = proj₁ $ proj₂ x''
