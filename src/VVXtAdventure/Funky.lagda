@@ -485,7 +485,7 @@ ni'o ga jonai ga je la'oi .\F{scream?}.\ djuno pe'a ru'e lo du'u tu'a la'o zoi.\
 
 \begin{code}
 scream? : Com
-scream? ("SCREAM" ∷ []) q = just $ "AARGH!!!" , q
+scream? ("SCREAM" ∷ []) = just ∘ _,_ "AARGH!!!"
 scream? _ _ = nothing
 \end{code}
 
@@ -498,7 +498,7 @@ sayless? [] = just ∘ _,_ "The silent treatment won't work here."
 sayless? ("" ∷ "" ∷ "" ∷ "" ∷ []) = just ∘ _,_ m
   where
   m = "Man, what the fuck?"
-sayless? _ = const nothing
+sayless? _ _ = nothing
 \end{code}
 
 \subsection{la'oi .\F{lp?}.}
@@ -506,7 +506,7 @@ ni'o ga jonai ga je ga je la'o zoi.\ \B c .zoi.\ na vajni gi ko'a goi la'o zoi.\
 
 \begin{code}
 lp? : Com
-lp? ("WHO" ∷ "ARE" ∷ "YOU?" ∷ []) q = just $ m , q
+lp? ("WHO" ∷ "ARE" ∷ "YOU?" ∷ []) = just ∘ _,_ m
   where
   m = "I really want to know."
 lp? ("I'M" ∷ "A" ∷ "WINNER" ∷ []) q = just $ m , q
