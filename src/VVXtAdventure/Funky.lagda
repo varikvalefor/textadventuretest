@@ -585,14 +585,13 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
                 (_≡_
                   ((toℕ n) ↑ x)
                   ((toℕ $ mink n $ proj₁ $ proj₂ u) ↑ proj₁ u))
-      ualteik (_ ∷ _) zero _ = refl
-      ualteik (x ∷ xs) (suc n) f = subst (_≡_ _) kong utz
+      ualteik x n f = subst (_≡_ _) kong utz
         where
         kong = cong (flip _↑_ $ proj₁ u) misuk
           where
-          u = ual (x ∷ xs) (suc n) f
-          misuk = tomindus (suc n) $ proj₁ $ proj₂ u
-        utz = ualteik₁ (x ∷ xs) (suc n) f
+          u = ual x n f
+          misuk = tomindus n $ proj₁ $ proj₂ u
+        utz = ualteik₁ x n f
           where
           ualteik₁ : ∀ {a} → {A : Set a}
                    → (x : List A)
