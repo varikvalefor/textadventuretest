@@ -491,7 +491,7 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
   sl = Room.items (GameData.rooms q ! Character.room lb) ! n
   vimcu = λ x → record x {items = filterₗ nadu $ Room.items x}
     where
-    nadu = Data.Bool._≟_ false ∘ _≡ᵇ_ (Item.cname sl) ∘ Item.cname
+    nadu = _≟_ false ∘ _≡ᵇ_ (Item.cname sl) ∘ Item.cname
   k'' : Σ (List Room) $ λ l
         → Σ (length (GameData.rooms q) ≡ length l) _
   k'' = ual (GameData.rooms q) (Character.room lb) vimcu
