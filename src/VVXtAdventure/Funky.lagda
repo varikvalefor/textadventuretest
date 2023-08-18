@@ -231,26 +231,26 @@ wieldPawn : (q : GameData)
                    yourfloorisnowclean = ifinc q'}))
             × (_≡_
                 (_++_
-                  ((toℕ j) ↑ x q)
-                  ((ℕ.suc $ toℕ j) ↓ x q))
+                  (toℕ j ↑ x q)
+                  (ℕ.suc (toℕ j) ↓ x q))
                 (subst (List ∘ Character) (sym rud)
                   (_++_
-                    ((toℕ j) ↑ x q')
-                    ((ℕ.suc $ toℕ j) ↓ x q'))))
+                    (toℕ j ↑ x q')
+                    (ℕ.suc (toℕ j) ↓ x q'))))
 wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
   where
   ⊃ = Data.List.head
   𝓁 = length
 
   xen = GameData.haters gd
-  x₁ = (toℕ j) ↑ xen
+  x₁ = toℕ j ↑ xen
   x₂ = record (xen ! j) {wieldedct = just $ i , t}
-  x₃ = (ℕ.suc $ toℕ j) ↓ xen
+  x₃ = ℕ.suc (toℕ j) ↓ xen
   xen' = x₁ ++ x₂ ∷ x₃
 
   dropkat : ∀ {a} → {A : Set a}
           → (xs ys : List A)
-          → ys ≡ (𝓁 xs) ↓ (xs ++ ys)
+          → ys ≡ 𝓁 xs ↓ (xs ++ ys)
   dropkat [] _ = refl
   dropkat (_ ∷ xs) ys = dropkat xs ys
 
@@ -285,7 +285,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
     dropind : ∀ {a} → {A : Set a}
             → (xs : List A)
             → (n : Fin $ 𝓁 xs)
-            → just (xs ! n) ≡ ⊃ ((toℕ n) ↓ xs)
+            → just (xs ! n) ≡ ⊃ (toℕ n ↓ xs)
     dropind (x ∷ xs) Fin.zero = refl
     dropind (x ∷ xs) (Fin.suc n) = dropind xs n
     mindut : {m n : ℕ}
@@ -336,7 +336,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
       just (iv $ xen ! j) ≡⟨ refl ⟩
       just (iv x₂) ≡⟨ refl ⟩
       mapₘ iv (⊃ $ x₂ ∷ x₃) ≡⟨ cong (mapₘ iv ∘ ⊃) dropsim ⟩
-      mapₘ iv (⊃ $ (𝓁 x₁) ↓ xen') ≡⟨ cong (mapₘ iv) xent ⟩
+      mapₘ iv (⊃ $ 𝓁 x₁ ↓ xen') ≡⟨ cong (mapₘ iv) xent ⟩
       just (iv $ xen' ! mink j xenlen) ∎
       where
       mapₘ = Data.Maybe.map
@@ -345,20 +345,20 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
   uidus = cong u₁ $ sym $ DMP.just-injective $ begin
     just x₂ ≡⟨ refl ⟩
     ⊃ (x₂ ∷ x₃) ≡⟨ cong ⊃ (dropkat x₁ $ x₂ ∷ x₃) ⟩
-    ⊃ ((𝓁 x₁) ↓ xen') ≡⟨ xent ⟩
+    ⊃ (𝓁 x₁ ↓ xen') ≡⟨ xent ⟩
     just (xen' ! mink j xenlen) ∎
     where
     u₁ = Data.Maybe.map (toℕ ∘ proj₁) ∘ Character.wieldedct
 
   -- | ni'o zo .kond. binxo ja co'e zo .skrud.
   skrud = begin
-    ((toℕ j) ↑ xen) ++ (ℕ.suc (toℕ j) ↓ xen) ≡⟨ refl ⟩
+    (toℕ j ↑ xen) ++ (ℕ.suc (toℕ j) ↓ xen) ≡⟨ refl ⟩
     x₁ ++ x₃ ≡⟨ cong (flip _++_ x₃) $ takedus xen j ⟩
     x₁' ++ x₃ ≡⟨ cong (_++_ x₁') $ dropydus xen (x₂ ∷ x₃) j ⟩
     x₁' ++ x₃' ∎
     where
-    x₁' = (toℕ j) ↑ xen'
-    x₃' = (ℕ.suc $ toℕ j) ↓ xen'
+    x₁' = toℕ j ↑ xen'
+    x₃' = ℕ.suc (toℕ j) ↓ xen'
     takedus : ∀ {a} → {A : Set a}
             → (a : List A)
             → {b : List A}
