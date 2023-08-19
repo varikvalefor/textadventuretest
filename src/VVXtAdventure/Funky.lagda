@@ -532,10 +532,10 @@ travel? (x₁ ∷ xs₁) = if realShit (travel' xs₁) $ const nothing
   where
   realShit = x₁ ≡ᵇ "TRAVEL"
   travel' : Com
-  travel' [] q = just $ m , q
+  travel' [] = just ∘ _,_ m
     where
     m = "Don't tell me to break the rules, fucker!"
-  travel' (_ ∷ _ ∷ _) q = just $ m , q
+  travel' (_ ∷ _ ∷ _) = just ∘ _,_ m
     where
     m = "I strongly doubt that the concept of \"super\
         \position\" applies to a creature of your mass."
