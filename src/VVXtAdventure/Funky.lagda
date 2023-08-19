@@ -403,17 +403,6 @@ inspect? (c ∷ f) dang = if methch (getDown f) nothing
   where
   methch = c ≡ᵇ "INSPECT"
   getDown : List String → COut
-  getDown (n ∷ []) with filterₗ (_≟_ n ∘ Item.cname) inv
-    where
-    inv = Character.inventory $ GameData.player dang
-  ... | [] = just $ "I'm not seeing it." , dang
-  ... | (q ∷ []) = just $ Item.hlDescr q , dang
-  ... | (_ ∷ _ ∷ _) = just $ m , dang
-    where
-    m = "You're going to have to be more specific.  \
-        \Sure, I could choose some arbitrary matching \
-        \item, but that would probably piss you off, \
-        \and I'm already insulting you right and left."
   getDown (_ ∷ _ ∷ _) = just $ m , dang
     where
     m = "I can't handle any more of your inane \
@@ -431,6 +420,17 @@ inspect? (c ∷ f) dang = if methch (getDown f) nothing
   getDown [] = just $ m , dang
     where
     m = "nothing : ∀ {a} → {A : Set a} → Maybe A"
+  getDown (n ∷ []) with filterₗ (_≟_ n ∘ Item.cname) inv
+    where
+    inv = Character.inventory $ GameData.player dang
+  ... | [] = just $ "I'm not seeing it." , dang
+  ... | (q ∷ []) = just $ Item.hlDescr q , dang
+  ... | (_ ∷ _ ∷ _) = just $ m , dang
+    where
+    m = "You're going to have to be more specific.  \
+        \Sure, I could choose some arbitrary matching \
+        \item, but that would probably piss you off, \
+        \and I'm already insulting you right and left."
 inspect? [] _ = nothing
 \end{code}
 
