@@ -252,7 +252,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
           → (xs ys : List A)
           → ys ≡ 𝓁 xs ↓ (xs ++ ys)
   dropkat [] _ = refl
-  dropkat (_ ∷ xs) ys = dropkat xs ys
+  dropkat (_ ∷ xs) = dropkat xs
 
   xenlen = begin
     𝓁 xen ≡⟨ cong 𝓁 $ sym $ DLP.take++drop (toℕ j) xen ⟩
