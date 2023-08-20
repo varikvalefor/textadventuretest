@@ -587,10 +587,10 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
                   ((toℕ $ mink n $ proj₁ $ proj₂ u) ↑ proj₁ u))
       ualteik x n f = subst (_≡_ _) kong utz
         where
-        kong = cong (flip _↑_ $ proj₁ u) misuk
+        kong = cong (flip _↑_ $ proj₁ u) $ tomindus n u₂
           where
           u = ual x n f
-          misuk = tomindus n $ proj₁ $ proj₂ u
+          u₂ = proj₁ $ proj₂ u
         utz = Truthbrary.Data.List.Loom.ualteik x n f
       ualdrop : ∀ {a} → {A : Set a}
               → (x : List A)
