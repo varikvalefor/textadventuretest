@@ -495,7 +495,7 @@ smashGeneric q k x j = q' , kuslendus , xindus , itemstedus
                   let k = (toℕ n ↑ x) ++ₗ f (x ! n) ∷ k₃ in
                   ⊃ (toℕ n ↓ _¨_ f x) ≡ ⊃ (toℕ n ↓ k)
       teikapdus (_ ∷ _) zero _ = refl
-      teikapdus (_ ∷ xs) (suc n) f = teikapdus xs n f
+      teikapdus (_ ∷ xs) (suc n) = teikapdus xs n
   q' = record q {
     rooms = kus;
     haters = Data.List.map upgrayedd $ GameData.haters q;
