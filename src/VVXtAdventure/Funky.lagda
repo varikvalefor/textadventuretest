@@ -378,8 +378,9 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
     dropydus (_ ∷ _) _ zero = refl
     dropydus (_ ∷ xs) b (suc n) = dropydus xs b n
 
-  p' = mink (GameData.player' gd) xenlen
   gd' = record gd {haters = xen'; player' = p'}
+    where
+    p' = mink (GameData.player' gd) xenlen
 \end{code}
 
 \chapter{le mu'oi glibau.\ high-level .glibau.}
