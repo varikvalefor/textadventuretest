@@ -233,7 +233,9 @@ wieldPawn : (q : GameData)
                 (_++_
                   (toℕ j ↑ x q)
                   (ℕ.suc (toℕ j) ↓ x q))
-                (subst (List ∘ Character) (sym rud)
+                (subst
+                  (List ∘ Character)
+                  (sym rud)
                   (_++_
                     (toℕ j ↑ x q')
                     (ℕ.suc (toℕ j) ↓ x q'))))
