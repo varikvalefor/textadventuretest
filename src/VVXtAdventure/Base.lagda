@@ -198,7 +198,7 @@ record Character (q : List Room) : Set
 \end{code}
 
 \subsection{la'oi .\F{GameData}.}
-ni'o ga jo ko'a goi la'o zoi.\ \B a .zoi.\ ctaipe la'oi .\F{GameData} .zoi.\ gi\ldots
+ni'o ga jo ko'a goi la'o zoi.\ \B a .zoi.\ ctaipe la'oi .\F{GameData}.\ gi\ldots
 \begin{itemize}
         \item ga je ga jo la'o zoi.\ \F{GameData.epicwin} \B a .zoi.\ du la'oi .\F{true}.\ gi ga je le kelci cu jinga gi le selkei cu mulno ja co'e gi
         \item ga je la'o zoi.\ \F{GameData.rooms} \B a .zoi.\ liste lo'i velski be lo'i co'e poi cumki fa lo nu zvati ke'a gi
