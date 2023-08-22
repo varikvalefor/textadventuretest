@@ -416,7 +416,7 @@ smashGeneric : (q : GameData)
                → let itstes = Room.items $ GameData.rooms q ! k in
                  (_≡_
                    (Room.items $ GameData.rooms q' ! mink k ℓ)
-                   (Data.List._++_
+                   (_++ₗ_
                      (toℕ x ↑ itstes)
                      (_∷_
                        (proj₂ $ Data.Maybe.to-witness j)
