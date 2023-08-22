@@ -165,7 +165,7 @@ record Room : Set
 \end{code}
 
 \subsection{la'oi .\F{Character}.}
-ni'o ga naja la'o zoi.\ \B K .zoi.\ ctaipe la'o zoi.\ \F{List} \F{Room} .zoi.\ gi la'o zoi.\ \F{Character} \B K .zoi.\ se ctaipe lo sinxa be lo xarpre ja co'e
+ni'o ga jo la'o zoi.\ \B K .zoi.\ ctaipe la'o zoi.\ \F{List} \F{Room} .zoi.\ gi la'o zoi.\ \F{Character} \B K .zoi.\ se ctaipe lo sinxa be lo xarpre ja co'e
 
 .i ga jo la'o zoi.\ \B a .zoi.\ ctaipe la'o zoi.\ \F{Character} \B q .zoi.\ gi\ldots
 \begin{itemize}
