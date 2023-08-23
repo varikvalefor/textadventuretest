@@ -139,6 +139,7 @@ open import Relation.Nullary
 open import VVXtAdventure.Base
 open import Truthbrary.Data.Fin
   using (
+    tomindus;
     mink
   )
 open import Truthbrary.Record.Eq
@@ -290,11 +291,6 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
             → just (xs ! n) ≡ ⊃ (toℕ n ↓ xs)
     dropind (_ ∷ _) zero = refl
     dropind (_ ∷ xs) (suc n) = dropind xs n
-    mindut : {m n : ℕ}
-           → (o : Fin m)
-           → (x : m ≡ n)
-           → toℕ (mink o x) ≡ toℕ o
-    mindut _ refl = refl
     jelis : toℕ j ≤ 𝓁 xen
     jelis = subst (_≤_ _) kix $ DNP.≤-step $ subst (_≥_ _) mijd j'
       where
@@ -305,7 +301,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
             → Σ ℕ $ _≡_ (𝓁 xs) ∘ ℕ.suc
       lisuc (_ ∷ xs) _ = 𝓁 xs , refl
       j' = DFP.≤fromℕ $ mink j $ proj₂ $ lisuc xen j
-      mijd = mindut j $ proj₂ $ lisuc xen j
+      mijd = sym $ tomindus j $ proj₂ $ lisuc xen j
       kix : ℕ.suc (toℕ $ Data.Fin.fromℕ _) ≡ 𝓁 xen
       kix = tondus $ sym $ proj₂ $ lisuc xen j
         where
@@ -314,7 +310,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
                → toℕ (Data.Fin.fromℕ m) ≡ n
         tondus {m} x = subst (_≡_ _) x $ DFP.toℕ-fromℕ m
     xil = begin
-      toℕ (mink j xenlen) ≡⟨ mindut j xenlen ⟩
+      toℕ (mink j xenlen) ≡⟨ sym $ tomindus j xenlen ⟩
       toℕ j ≡⟨ sym $ teiklendus xen (toℕ j) jelis ⟩
       𝓁 x₁ ∎
       where
