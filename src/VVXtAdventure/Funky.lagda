@@ -277,8 +277,8 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
               → (n : Fin $ 𝓁 x)
               → let n' = toℕ n in
                 ℕ.suc (𝓁 $ ℕ.suc n' ↓ x) ≡ 𝓁 (n' ↓ x)
-      dropsuc (_ ∷ _) Fin.zero = refl
-      dropsuc (_ ∷ xs) (Fin.suc n) = dropsuc xs n
+      dropsuc (_ ∷ _) zero = refl
+      dropsuc (_ ∷ xs) (suc n) = dropsuc xs n
 
   xent : ⊃ ((𝓁 x₁) ↓ xen') ≡ just (xen' ! mink j xenlen)
   xent = sym $ subkon $ dropind xen' $ mink j xenlen
@@ -288,8 +288,8 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
             → (xs : List A)
             → (n : Fin $ 𝓁 xs)
             → just (xs ! n) ≡ ⊃ (toℕ n ↓ xs)
-    dropind (_ ∷ _) Fin.zero = refl
-    dropind (_ ∷ xs) (Fin.suc n) = dropind xs n
+    dropind (_ ∷ _) zero = refl
+    dropind (_ ∷ xs) (suc n) = dropind xs n
     mindut : {m n : ℕ}
            → (o : Fin m)
            → (x : m ≡ n)
