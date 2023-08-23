@@ -345,7 +345,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
 
   uidus = cong u₁ $ sym $ DMP.just-injective $ begin
     just x₂ ≡⟨ refl ⟩
-    ⊃ (x₂ ∷ x₃) ≡⟨ cong ⊃ (dropkat x₁ $ x₂ ∷ x₃) ⟩
+    ⊃ (x₂ ∷ x₃) ≡⟨ cong ⊃ $ dropkat x₁ $ x₂ ∷ x₃ ⟩
     ⊃ (𝓁 x₁ ↓ xen') ≡⟨ xent ⟩
     just (xen' ! mink j xenlen) ∎
     where
