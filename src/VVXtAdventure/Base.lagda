@@ -145,7 +145,7 @@ record Item : Set
 \end{code}
 
 \subsection{la'oi .\F{Room}.}
-ni'o ga jo la'o zoi.\ \B S .zoi.\ fa'u ko'a goi la'o zoi.\ \B a .zoi.\ ctaipe la'oi .\F{Set}.\ fa'u la'o zoi.\ \F{Room} \B S .zoi.\ gi\ldots
+ni'o ga jo ko'a goi la'o zoi.\ \B a .zoi.\ ctaipe la'oi .\F{Room}.\ gi\ldots
 \begin{itemize}
 	\item ga je la'o zoi.\ \F{Room.name} \B a .zoi.\ cmene lo selsni be ko'a gi
 	\item ga je cadga fa lo nu lo kelci cu pilno la'o zoi.\ \F{Room.cname} \B a .zoi.\ tu'a ko'a gi
