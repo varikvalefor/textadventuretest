@@ -102,7 +102,7 @@ open import Relation.Binary.PropositionalEquality
 \section{le me'oi .\AgdaKeyword{record}.}
 
 \subsection{la'oi .\F{WeaponInfo}.}
-ni'o ga jo la'o zoi.\ \B a .zoi.\ srana lo selsnu be ko'a goi lo ctaipe be la'oi .\F{Item}.\ gi\ldots
+ni'o ga jo la'o zoi.\ \B a .zoi.\ srana lo selsni be ko'a goi lo ctaipe be la'oi .\F{Item}.\ gi\ldots
 \begin{itemize}
 	\item ga jo la'o zoi.\ \F{WeaponInfo.wieldMsg} \B a .zoi.\ du la'o zoi.\ \F{just} \B b .zoi.\ gi cadga fa lo nu cusku la'o zoi.\ \B b .zoi.\ ca lo nu lo kelci ke xarpre ja co'e cu binxo lo me'oi .wield.\ be ko'a
 \end{itemize}
