@@ -610,9 +610,7 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
   dus = proj₁ $ proj₂ k''
   dis = proj₁ $ proj₂ x''
 
-  nyfin = sym $ cong inv $ proj₂ $ proj₂ x''
-    where
-    inv = Character.inventory
+  nyfin = sym $ cong Character.inventory $ proj₂ $ proj₂ x''
 
   kumdus = xenku'a , ualkonk kumste (Character.room lb) vimcu
     where
