@@ -583,8 +583,8 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
               → (f : A → A)
               → let u = ual x n f in
                 (_≡_
-                  ((toℕ n) ↑ x)
-                  ((toℕ $ mink n $ proj₁ $ proj₂ u) ↑ proj₁ u))
+                  (toℕ n ↑ x)
+                  (toℕ (mink n $ proj₁ $ proj₂ u) ↑ proj₁ u))
       ualteik x n f = subst (_≡_ _) kong utz
         where
         kong = cong (flip _↑_ $ proj₁ u) $ tomindus n u₂
@@ -598,8 +598,8 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
               → (f : A → A)
               → let n' = mink n $ proj₁ $ proj₂ $ ual x n f in
                 (_≡_
-                  ((ℕ.suc $ toℕ n) ↓ x)
-                  ((ℕ.suc $ toℕ n') ↓ proj₁ (ual x n f)))
+                  (ℕ.suc (toℕ n) ↓ x)
+                  (ℕ.suc (toℕ n') ↓ proj₁ (ual x n f)))
       ualdrop (_ ∷ _) zero _ = refl
       ualdrop (x ∷ xs) (suc n) f = subst (_≡_ _) c ud
         where
@@ -632,10 +632,10 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
       klonk xenkim xenksim ≡⟨ sym $ mapimplant xen likil kib m ⟩
       klonk xenim' xensim' ≡⟨ cong (flip _++_ _) xenteik ⟩
       klonk (m:ℕ ↑ xen') xensim' ≡⟨ cong (klonk $ m:ℕ ↑ xen') xendrop ⟩
-      klonk (m:ℕ ↑ xen') ((ℕ.suc m:ℕ) ↓ xen') ≡⟨ refl ⟩
+      klonk (m:ℕ ↑ xen') (ℕ.suc m:ℕ ↓ xen') ≡⟨ refl ⟩
       konk _ likil _ ≡⟨ cong (flip (konk _) _) $ proj₂ $ proj₂ x'' ⟩
-      konk (m:ℕ ↑ xen') (xen' ! m'') ((ℕ.suc m:ℕ) ↓ xen') ≡⟨ refl ⟩
-      koxonk (m:ℕ ↑ xen') ((ℕ.suc m:ℕ) ↓ xen') ≡⟨ koxonkdus ⟩
+      konk (m:ℕ ↑ xen') (xen' ! m'') (ℕ.suc m:ℕ ↓ xen') ≡⟨ refl ⟩
+      koxonk (m:ℕ ↑ xen') (ℕ.suc m:ℕ ↓ xen') ≡⟨ koxonkdus ⟩
       koxonk (m'':ℕ ↑ xen') ((ℕ.suc m'':ℕ) ↓ xen') ≡⟨ xokonkyxen ⟩
       xen' ∎
       where
