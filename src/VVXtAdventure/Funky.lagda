@@ -459,7 +459,7 @@ takePawn : (q : GameData)
                   (Data.List.map
                     (kumfybi'o q q' r)
                     (_++_
-                      ((toℕ m) ↑ xen q)
+                      (toℕ m ↑ xen q)
                       (_∷_
                         (kumfybi'o q' q (sym r) k)
                         (ℕ.suc (toℕ m) ↓ xen q))))))
@@ -541,8 +541,8 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
     entydut = begin
       mapₗ cname k ≡⟨ madek k libek cname ⟩
       konk b₁ (cname kₗ) b₂ ≡⟨ cong (flip (konk b₁) b₂) entydus ⟩
-      konk b₁ (cname kₗ') b₂ ≡⟨ cong konk₁ $ ualteik k libek vimcu ⟩
-      konk b₁' (cname kₗ') b₂ ≡⟨ cong konk₂ $ ualdrop k libek vimcu ⟩
+      konk b₁ (cname kₗ') b₂ ≡⟨ cong konk₁ $ ualteikym k libek vimcu ⟩
+      konk b₁' (cname kₗ') b₂ ≡⟨ cong konk₂ $ ualdropym k libek vimcu ⟩
       konk b₁' (cname kₗ') b₂' ≡⟨ sym $ madek k' libek' cname ⟩
       mapₗ cname k' ∎
       where
@@ -551,10 +551,10 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
       libek' = mink libek $ proj₁ $ proj₂ k''
       kₗ = k ! libek
       kₗ' = k' ! libek'
-      b₁ = mapₗ cname $ (toℕ libek) ↑ k
-      b₂ = mapₗ cname $ (ℕ.suc $ toℕ libek) ↓ k
-      b₁' = mapₗ cname $ (toℕ libek') ↑ k'
-      b₂' = mapₗ cname $ (ℕ.suc $ toℕ libek') ↓ k'
+      b₁ = mapₗ cname $ toℕ libek ↑ k
+      b₂ = mapₗ cname $ ℕ.suc (toℕ libek) ↓ k
+      b₁' = mapₗ cname $ toℕ libek' ↑ k'
+      b₂' = mapₗ cname $ ℕ.suc (toℕ libek') ↓ k'
       konk : ∀ {a} → {A : Set a}
            → List A → A → List A → List A
       konk a = _++_ a ∘₂ _∷_
@@ -569,37 +569,37 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
             → (_≡_
                 (mapₗ f x)
                 (_++_
-                  (mapₗ f $ (toℕ n) ↑ x)
+                  (mapₗ f $ toℕ n ↑ x)
                   (_∷_
                     (f $ x ! n)
                     (mapₗ f $ (ℕ.suc $ toℕ n) ↓ x))))
       madek (_ ∷ _) zero _ = refl
       madek (x ∷ xs) (suc n) f = cong (_∷_ $ f x) $ madek xs n f
-      ualteik : ∀ {a} → {A : Set a}
-              → (x : List A)
-              → (n : Fin $ length x)
-              → (f : A → A)
-              → let u = ual x n f in
-                (_≡_
-                  (toℕ n ↑ x)
-                  (toℕ (mink n $ proj₁ $ proj₂ u) ↑ proj₁ u))
-      ualteik x n f = subst (_≡_ _) kong utz
+      ualteikym : ∀ {a} → {A : Set a}
+                → (x : List A)
+                → (n : Fin $ length x)
+                → (f : A → A)
+                → let u = ual x n f in
+                  (_≡_
+                    (toℕ n ↑ x)
+                    (toℕ (mink n $ proj₁ $ proj₂ u) ↑ proj₁ u))
+      ualteikym x n f = subst (_≡_ _) kong utz
         where
         kong = cong (flip _↑_ $ proj₁ u) $ tomindus n u₂
           where
           u = ual x n f
           u₂ = proj₁ $ proj₂ u
         utz = Truthbrary.Data.List.Loom.ualteik x n f
-      ualdrop : ∀ {a} → {A : Set a}
-              → (x : List A)
-              → (n : Fin $ length x)
-              → (f : A → A)
-              → let n' = mink n $ proj₁ $ proj₂ $ ual x n f in
-                (_≡_
-                  (ℕ.suc (toℕ n) ↓ x)
-                  (ℕ.suc (toℕ n') ↓ proj₁ (ual x n f)))
-      ualdrop (_ ∷ _) zero _ = refl
-      ualdrop (x ∷ xs) (suc n) f = subst (_≡_ _) c ud
+      ualdropym : ∀ {a} → {A : Set a}
+                → (x : List A)
+                → (n : Fin $ length x)
+                → (f : A → A)
+                → let n' = mink n $ proj₁ $ proj₂ $ ual x n f in
+                  (_≡_
+                    (ℕ.suc (toℕ n) ↓ x)
+                    (ℕ.suc (toℕ n') ↓ proj₁ (ual x n f)))
+      ualdropym (_ ∷ _) zero _ = refl
+      ualdropym (x ∷ xs) (suc n) f = subst (_≡_ _) c ud
         where
         u = ual xs n f
         c = cong (flip _↓_ $ proj₁ u) $ tomindus (suc n) uresuk
@@ -632,7 +632,7 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
       konk _ likil _ ≡⟨ cong (flip (konk _) _) $ proj₂ $ proj₂ x'' ⟩
       konk (m:ℕ ↑ xen') (xen' ! m'') (ℕ.suc m:ℕ ↓ xen') ≡⟨ refl ⟩
       koxonk (m:ℕ ↑ xen') (ℕ.suc m:ℕ ↓ xen') ≡⟨ koxonkdus ⟩
-      koxonk (m'':ℕ ↑ xen') ((ℕ.suc m'':ℕ) ↓ xen') ≡⟨ xokonkyxen ⟩
+      koxonk (m'':ℕ ↑ xen') (ℕ.suc m'':ℕ ↓ xen') ≡⟨ xokonkyxen ⟩
       xen' ∎
       where
       _¨_ = Data.List.map
@@ -649,12 +649,12 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
       m'' = mink m dis
       m'':ℕ = toℕ m''
       xenim = m:ℕ ↑ xen
-      xensim = (ℕ.suc m:ℕ) ↓ xen
+      xensim = ℕ.suc m:ℕ ↓ xen
       xenkim = kib ¨ xenim
       xenksim = kib ¨ xensim
       xenbis = kumbi'o ¨ xen
       xenim' = m:ℕ ↑ xenbis
-      xensim' = (ℕ.suc m:ℕ) ↓ xenbis
+      xensim' = ℕ.suc m:ℕ ↓ xenbis
       koxonkdus : (_≡_
                     (koxonk (m:ℕ ↑ xen') (ℕ.suc m:ℕ ↓ xen'))
                     (koxonk (m'':ℕ ↑ xen') (ℕ.suc m'':ℕ ↓ xen')))
@@ -674,20 +674,20 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
       m≡m' = tomindus m $ sym $ DLP.length-map kumbi'o xen
       xenteik = begin
         xenim' ≡⟨ refl ⟩
-        (toℕ m) ↑ xenbis ≡⟨ cong (flip _↑_ xenbis) m≡m' ⟩
-        (toℕ m') ↑ xenbis ≡⟨ ualteik xenbis m' lb! ⟩
-        (toℕ m') ↑ (proj₁ $ ual xenbis m' lb!) ≡⟨ refl ⟩
-        (toℕ m') ↑ xen' ≡⟨ cong (flip _↑_ xen') $ sym m≡m' ⟩
-        (toℕ m) ↑ xen' ∎
+        toℕ m ↑ xenbis ≡⟨ cong (flip _↑_ xenbis) m≡m' ⟩
+        toℕ m' ↑ xenbis ≡⟨ ualteik xenbis m' lb! ⟩
+        toℕ m' ↑ (proj₁ $ ual xenbis m' lb!) ≡⟨ refl ⟩
+        toℕ m' ↑ xen' ≡⟨ cong (flip _↑_ xen') $ sym m≡m' ⟩
+        toℕ m ↑ xen' ∎
         where
         ualteik = Truthbrary.Data.List.Loom.ualteik
       xendrop = begin
         xensim' ≡⟨ refl ⟩
-        (ℕ.suc $ toℕ m) ↓ xenbis ≡⟨ cong (zunbas xenbis) m≡m' ⟩
-        (ℕ.suc $ toℕ m') ↓ xenbis ≡⟨ ualdrop xenbis m' lb! ⟩
-        (ℕ.suc $ toℕ m') ↓ (proj₁ $ ual xenbis m' lb!) ≡⟨ refl ⟩
-        (ℕ.suc $ toℕ m') ↓ xen' ≡⟨ cong (zunbas xen') $ sym m≡m' ⟩
-        (ℕ.suc $ toℕ m) ↓ xen' ∎
+        ℕ.suc (toℕ m) ↓ xenbis ≡⟨ cong (zunbas xenbis) m≡m' ⟩
+        ℕ.suc (toℕ m') ↓ xenbis ≡⟨ ualdrop xenbis m' lb! ⟩
+        ℕ.suc (toℕ m') ↓ (proj₁ $ ual xenbis m' lb!) ≡⟨ refl ⟩
+        ℕ.suc (toℕ m') ↓ xen' ≡⟨ cong (zunbas xen') $ sym m≡m' ⟩
+        ℕ.suc (toℕ m) ↓ xen' ∎
         where
         -- | .i zo .zunbas. cmavlaka'i lu zunle basti
         -- li'u ja zo'e
