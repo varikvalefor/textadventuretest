@@ -281,7 +281,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
       dropsuc (_ ∷ _) zero = refl
       dropsuc (_ ∷ xs) (suc n) = dropsuc xs n
 
-  xent : ⊃ ((𝓁 x₁) ↓ xen') ≡ just (xen' ! mink j xenlen)
+  xent : ⊃ (𝓁 x₁ ↓ xen') ≡ just (xen' ! mink j xenlen)
   xent = sym $ subkon $ dropind xen' $ mink j xenlen
     where
     _≤_ = Data.Nat._≤_
