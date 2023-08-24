@@ -462,9 +462,7 @@ takePawn : (q : GameData)
                       ((toℕ m) ↑ xen q)
                       (_∷_
                         (kumfybi'o q' q (sym r) k)
-                        (_↓_
-                          (ℕ.suc $ toℕ m)
-                          (xen q)))))))
+                        (ℕ.suc (toℕ m) ↓ xen q))))))
            × (Σ Room $ λ r'
               → let kit = toℕ $ room $ xen q ! m in
                 (_≡_
