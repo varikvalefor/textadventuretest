@@ -205,7 +205,7 @@ open ≡-Reasoning
 \chapter{le mu'oi glibau.\ low-level .glibau.}
 
 \section{la'o zoi.\ \F{movePawn} .zoi.}
-ni'o tu'a la'o zoi.\ \F{movePawn} \B q \B m \B n .zoi.\ .indika lo du'u lo selsni be la'o zoi.\ \F{GameData.haters} \B q \Sym ! \B h .zoi.\ cu zvati ko'a goi lo selsni be la'o zoi.\ \F{GameData.rooms} \B q) \Sym ! \B n .zoi.
+ni'o tu'a la'o zoi.\ \F{movePawn} \B q \B m \B n .zoi.\ .indika lo du'u lo selsni be la'o zoi.\ \F{GameData.haters} \B q \F ! \B h .zoi.\ cu zvati ko'a goi lo selsni be la'o zoi.\ \F{GameData.rooms} \B q) \F ! \B n .zoi.
 
 \begin{code}
 movePawn : (q : GameData)
@@ -237,7 +237,7 @@ movePawn gd h r = gd' , refl , proj₁ (proj₂ xat) , rudus , refl
 \end{code}
  
 \section{la'o zoi.\ \F{wieldPawn}\ .zoi.}
-ni'o tu'a la'o zoi.\ \F{wieldPawn} \B q \B m \B n \F{refl}\ .zoi.\ .indika lo du'u zo'e ja lo selsni be la'o zoi.\ \F{GameData.haters} \B q \Sym ! \B m\ .zoi.\ cu me'oi .wield.\ lo selsni be la'o zoi.\ \F{Character.inventory} (\F{GameData.haters} \B q \Sym ! \B m) \Sym ! \B n\ .zoi.
+ni'o tu'a la'o zoi.\ \F{wieldPawn} \B q \B m \B n \F{refl}\ .zoi.\ .indika lo du'u zo'e ja lo selsni be la'o zoi.\ \F{GameData.haters} \B q \F ! \B m .zoi.\ cu me'oi .wield.\ lo selsni be la'o zoi.\ \F{Character.inventory} (\F{GameData.haters} \B q \F ! \B m) \F ! \B n .zoi.
 
 \begin{code}
 wieldPawn : (q : GameData)
@@ -266,30 +266,30 @@ wieldPawn : (q : GameData)
                    yourfloorisnowclean = ifinc q'}))
             × (_≡_
                 (_++_
-                  ((toℕ j) ↑ x q)
-                  ((ℕ.suc $ toℕ j) ↓ x q))
+                  (toℕ j ↑ x q)
+                  (ℕ.suc (toℕ j) ↓ x q))
                 (subst
                   (List ∘ Character)
                   (sym rud)
                   (_++_
-                    ((toℕ j) ↑ x q')
-                    ((ℕ.suc $ toℕ j) ↓ x q'))))
+                    (toℕ j ↑ x q')
+                    (ℕ.suc (toℕ j) ↓ x q'))))
 wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
   where
   ⊃ = Data.List.head
   𝓁 = length
 
   xen = GameData.haters gd
-  x₁ = (toℕ j) ↑ xen
+  x₁ = toℕ j ↑ xen
   x₂ = record (xen ! j) {wieldedct = just $ i , t}
-  x₃ = (ℕ.suc $ toℕ j) ↓ xen
+  x₃ = ℕ.suc (toℕ j) ↓ xen
   xen' = x₁ ++ x₂ ∷ x₃
 
   dropkat : ∀ {a} → {A : Set a}
           → (xs ys : List A)
-          → ys ≡ (𝓁 xs) ↓ (xs ++ ys)
+          → ys ≡ 𝓁 xs ↓ (xs ++ ys)
   dropkat [] _ = refl
-  dropkat (_ ∷ xs) ys = dropkat xs ys
+  dropkat (_ ∷ xs) = dropkat xs
 
   xenlen = begin
     𝓁 xen ≡⟨ cong 𝓁 $ sym $ DLP.take++drop (toℕ j) xen ⟩
@@ -312,24 +312,19 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
               → (n : Fin $ 𝓁 x)
               → let n' = toℕ n in
                 ℕ.suc (𝓁 $ ℕ.suc n' ↓ x) ≡ 𝓁 (n' ↓ x)
-      dropsuc (x ∷ xs) Fin.zero = refl
-      dropsuc (x ∷ xs) (Fin.suc n) = dropsuc xs n
+      dropsuc (_ ∷ _) zero = refl
+      dropsuc (_ ∷ xs) (suc n) = dropsuc xs n
 
-  xent : ⊃ ((𝓁 x₁) ↓ xen') ≡ just (xen' ! mink j xenlen)
+  xent : ⊃ (𝓁 x₁ ↓ xen') ≡ just (xen' ! mink j xenlen)
   xent = sym $ subkon $ dropind xen' $ mink j xenlen
     where
     _≤_ = Data.Nat._≤_
     dropind : ∀ {a} → {A : Set a}
             → (xs : List A)
             → (n : Fin $ 𝓁 xs)
-            → just (xs ! n) ≡ ⊃ ((toℕ n) ↓ xs)
-    dropind (x ∷ xs) Fin.zero = refl
-    dropind (x ∷ xs) (Fin.suc n) = dropind xs n
-    mindut : {m n : ℕ}
-           → (o : Fin m)
-           → (x : m ≡ n)
-           → toℕ (mink o x) ≡ toℕ o
-    mindut o refl = refl
+            → just (xs ! n) ≡ ⊃ (toℕ n ↓ xs)
+    dropind (_ ∷ _) zero = refl
+    dropind (_ ∷ xs) (suc n) = dropind xs n
     jelis : toℕ j ≤ 𝓁 xen
     jelis = subst (_≤_ _) kix $ DNP.≤-step $ subst (_≥_ _) mijd j'
       where
@@ -340,7 +335,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
             → Σ ℕ $ _≡_ (𝓁 xs) ∘ ℕ.suc
       lisuc (_ ∷ xs) _ = 𝓁 xs , refl
       j' = DFP.≤fromℕ $ mink j $ proj₂ $ lisuc xen j
-      mijd = mindut j $ proj₂ $ lisuc xen j
+      mijd = sym $ tomindus j $ proj₂ $ lisuc xen j
       kix : ℕ.suc (toℕ $ Data.Fin.fromℕ _) ≡ 𝓁 xen
       kix = tondus $ sym $ proj₂ $ lisuc xen j
         where
@@ -349,7 +344,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
                → toℕ (Data.Fin.fromℕ m) ≡ n
         tondus {m} x = subst (_≡_ _) x $ DFP.toℕ-fromℕ m
     xil = begin
-      toℕ (mink j xenlen) ≡⟨ mindut j xenlen ⟩
+      toℕ (mink j xenlen) ≡⟨ sym $ tomindus j xenlen ⟩
       toℕ j ≡⟨ sym $ teiklendus xen (toℕ j) jelis ⟩
       𝓁 x₁ ∎
       where
@@ -359,7 +354,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
                  → n ≤ 𝓁 xs
                  → 𝓁 (n ↑ xs) ≡ n
       teiklendus _ 0 _ = refl
-      teiklendus (x ∷ xs) (ℕ.suc n) (Data.Nat.s≤s q) = ret
+      teiklendus (_ ∷ xs) (ℕ.suc n) (Data.Nat.s≤s q) = ret
         where
         ret = cong ℕ.suc $ teiklendus xs n q
     subkon = subst (_≡_ _) $ cong (⊃ ∘ flip _↓_ xen') xil
@@ -372,32 +367,29 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
     x₂d = begin
       just (iv $ xen ! j) ≡⟨ refl ⟩
       just (iv x₂) ≡⟨ refl ⟩
-      mapₘ iv (⊃ $ x₂ ∷ x₃) ≡⟨ cong (mapₘ iv ∘ ⊃) dropsim ⟩
-      mapₘ iv (⊃ $ (𝓁 x₁) ↓ xen') ≡⟨ cong (mapₘ iv) xent ⟩
+      mapₘ iv (⊃ $ x₂ ∷ x₃) ≡⟨ cong (mapₘ iv ∘ ⊃) $ dropkat x₁ _ ⟩
+      mapₘ iv (⊃ $ 𝓁 x₁ ↓ xen') ≡⟨ cong (mapₘ iv) xent ⟩
       just (iv $ xen' ! mink j xenlen) ∎
       where
       mapₘ = Data.Maybe.map
-      dropsim = dropkat x₁ $ x₂ ∷ x₃
 
   uidus = cong u₁ $ sym $ DMP.just-injective $ begin
     just x₂ ≡⟨ refl ⟩
-    ⊃ (x₂ ∷ x₃) ≡⟨ cong ⊃ (dropkat x₁ $ x₂ ∷ x₃) ⟩
-    ⊃ ((𝓁 x₁) ↓ xen') ≡⟨ xent ⟩
-    just (xen' ! mink j xenlen) ≡⟨ refl ⟩
+    ⊃ (x₂ ∷ x₃) ≡⟨ cong ⊃ $ dropkat x₁ $ x₂ ∷ x₃ ⟩
+    ⊃ (𝓁 x₁ ↓ xen') ≡⟨ xent ⟩
     just (xen' ! mink j xenlen) ∎
     where
-    mapₘ = Data.Maybe.map
-    u₁ = mapₘ (toℕ ∘ proj₁) ∘ Character.wieldedct
+    u₁ = Data.Maybe.map (toℕ ∘ proj₁) ∘ Character.wieldedct
 
   -- | ni'o zo .kond. binxo ja co'e zo .skrud.
   skrud = begin
-    ((toℕ j) ↑ xen) ++ (ℕ.suc (toℕ j) ↓ xen) ≡⟨ refl ⟩
+    (toℕ j ↑ xen) ++ (ℕ.suc (toℕ j) ↓ xen) ≡⟨ refl ⟩
     x₁ ++ x₃ ≡⟨ cong (flip _++_ x₃) $ takedus xen j ⟩
-    x₁' ++ x₃ ≡⟨ cong (_++_ x₁') $ dropydus xen {x₂ ∷ x₃} j ⟩
+    x₁' ++ x₃ ≡⟨ cong (_++_ x₁') $ dropydus xen (x₂ ∷ x₃) j ⟩
     x₁' ++ x₃' ∎
     where
-    x₁' = (toℕ j) ↑ xen'
-    x₃' = (ℕ.suc $ toℕ j) ↓ xen'
+    x₁' = toℕ j ↑ xen'
+    x₃' = ℕ.suc (toℕ j) ↓ xen'
     takedus : ∀ {a} → {A : Set a}
             → (a : List A)
             → {b : List A}
@@ -408,17 +400,18 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
     takedus (x ∷ xs) (suc n) = cong (_∷_ x) $ takedus xs n
     dropydus : ∀ {a} → {A : Set a}
              → (a : List A)
-             → {b : List A}
+             → (b : List A)
              → {x : A}
              → (n : Fin $ 𝓁 a)
              → let n' = toℕ n in
                let s = ℕ.suc n' in
                s ↓ a ≡ s ↓ _++_ (n' ↑ a) (x ∷ s ↓ a)
-    dropydus (_ ∷ _) zero = refl
-    dropydus (_ ∷ xs) {b} (suc n) = dropydus xs {b} n
+    dropydus (_ ∷ _) _ zero = refl
+    dropydus (_ ∷ xs) b (suc n) = dropydus xs b n
 
-  p' = mink (GameData.player' gd) xenlen
   gd' = record gd {haters = xen'; player' = p'}
+    where
+    p' = mink (GameData.player' gd) xenlen
 \end{code}
 
 \section{la'o zoi.\ \F{takePawn}\ .zoi.}
@@ -724,7 +717,7 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
 \section{le fancu poi ke'a pruce ja co'e zo'e je ko'a goi lo ctaipe be la'oi .GameData.\ ko'a je zo'e}
 
 \subsection{la'oi .\F{epicwin?}.}
-ni'o ga jonai ga je tu'a la'o zoi.\ \B a .zoi.\ .indika lo du'u lo kelci cu jinga gi ko'a goi la'o zoi.\ \F{epicwin?} \B m \B a .zoi. du la'o zoi.\ \F{just} \Sym \$ \B m \Sym , \B a .zoi.\ gi ko'a du la'oi .\F{nothing}.
+ni'o ga jonai ga je tu'a la'o zoi.\ \B a .zoi.\ .indika lo du'u lo kelci cu jinga gi ko'a goi la'o zoi.\ \F{epicwin?} \B m \B a .zoi.\ du la'o zoi.\ \F{just} \F \$ \B m \F , \B a .zoi.\ gi ko'a du la'oi .\F{nothing}.
 
 \begin{code}
 epicwin? : String → GameData → COut
@@ -732,7 +725,15 @@ epicwin? m g = if (GameData.epicwin g) (just $ m , g) nothing
 \end{code}
 
 \subsection{la'oi .\F{inspect?}.}
-ni'o ga jonai ga je ga je la'oi .\F{inspect?}.\ djuno pe'a ru'e lo du'u tu'a la'o zoi.\ \B a .zoi.\ .indika lo du'u djica lo nu skicu la'o zoi.\ B b .zoi.\ gi cumki fa lo nu skicu la'o zoi.\ \B b .zoi.\ gi ga je la'o zoi.\ \B q .zoi.\ velski la'o zoi.\ \B b .zoi.\ gi ko'a goi la'o zoi.\ \F{inspect?} \B a \B{godDamn} .zoi.\ du la'o zoi.\ \F{just} \Sym \$ \B b \Sym , \B{godDamn} .zoi.\ gi ga jonai ga je la'oi .\F{inspect?}.\ djuno pe'a ru'e lo du'u la'o zoi.\ \B a .zoi.\ mabla gi ga je la'o zoi.\ \B i .zoi.\ te skuxai gi ko'a du la'o zoi.\ \F{just} \Sym \$ \B i \Sym , \B{godDamn} .zoi.\ gi ko'a du la'oi .\F{nothing}.
+ni'o ga jonai ga je ga je la'oi .\F{inspect?}.\ djuno pe'a ru'e lo du'u tu'a la'o zoi.\ \B a .zoi.\ .indika lo du'u djica lo nu skicu la'o zoi.\ B b .zoi.\ gi cumki fa lo nu skicu la'o zoi.\ \B b .zoi.\ gi
+\begin{itemize}
+	\item ga je la'o zoi.\ \B q .zoi.\ velski la'o zoi.\ \B b .zoi.\ gi ko'a goi la'o zoi.\ \F{inspect?} \B a \B{godDamn} .zoi.\ du la'o zoi.\ \F{just} \F \$ \B q \F , \B{godDamn} .zoi.\ gi
+	\item ga jonai ga je la'oi .\F{inspect?}.\ djuno pe'a ru'e lo du'u la'o zoi.\ \B a .zoi.\ mabla gi\ldots
+	\begin{itemize}
+		\item ga je la'o zoi.\ \B i .zoi.\ te skuxai gi ko'a du la'o zoi.\ \F{just} \F \$ \B i \F , \B{godDamn} .zoi.\ gi
+		\item ko'a du la'oi .\F{nothing}.
+	\end{itemize}
+\end{itemize}
 
 \begin{code}
 inspect? : Com
@@ -740,17 +741,6 @@ inspect? (c ∷ f) dang = if methch (getDown f) nothing
   where
   methch = c ≡ᵇ "INSPECT"
   getDown : List String → COut
-  getDown (n ∷ []) with filterₗ (_≟_ n ∘ Item.cname) inv
-    where
-    inv = Character.inventory $ GameData.player dang
-  ... | [] = just $ "I'm not seeing it." , dang
-  ... | (q ∷ []) = just $ Item.hlDescr q , dang
-  ... | (_ ∷ _ ∷ _) = just $ m , dang
-    where
-    m = "You're going to have to be more specific.  \
-        \Sure, I could choose some arbitrary matching \
-        \item, but that would probably piss you off, \
-        \and I'm already insulting you right and left."
   getDown (_ ∷ _ ∷ _) = just $ m , dang
     where
     m = "I can't handle any more of your inane \
@@ -768,11 +758,22 @@ inspect? (c ∷ f) dang = if methch (getDown f) nothing
   getDown [] = just $ m , dang
     where
     m = "nothing : ∀ {a} → {A : Set a} → Maybe A"
+  getDown (n ∷ []) with filterₗ (_≟_ n ∘ Item.cname) inv
+    where
+    inv = Character.inventory $ GameData.player dang
+  ... | [] = just $ "I'm not seeing it." , dang
+  ... | (q ∷ []) = just $ Item.hlDescr q , dang
+  ... | (_ ∷ _ ∷ _) = just $ m , dang
+    where
+    m = "You're going to have to be more specific.  \
+        \Sure, I could choose some arbitrary matching \
+        \item, but that would probably piss you off, \
+        \and I'm already insulting you right and left."
 inspect? [] _ = nothing
 \end{code}
 
 \subsection{la'oi .\F{invent?}.}
-ni'o ga jonai ga je tu'a la'o zoi.\ \B m\ .zoi.\ .indika lo du'u lo kelci cu djica lo nu skicu lo selvau be ko'a goi lo me'oi .inventory.\ be lo kelci ke xarpre ja co'e gi ga je la'o zoi.\ \B s\ .zoi.\ vasru lo velski be lo ro selvau be ko'a gi ko'e goi la'o zoi.\ \F{invent?} \B \B g\ .zoi.\ du la'o zoi.\ \F{just} \Sym \$ \B s \Sym , \B g .zoi.\ gi ko'e du la'oi .\F{nothing}.
+ni'o ga jonai ga je tu'a la'o zoi.\ \B m\ .zoi.\ .indika lo du'u lo kelci cu djica lo nu skicu lo selvau be ko'a goi lo me'oi .inventory.\ be lo kelci ke xarpre ja co'e gi ga je la'o zoi.\ \B s\ .zoi.\ vasru lo velski be lo ro selvau be ko'a gi ko'e goi la'o zoi.\ \F{invent?} \B \B g\ .zoi.\ du la'o zoi.\ \F{just} \F \$ \B s \F , \B g .zoi.\ gi ko'e du la'oi .\F{nothing}.
 
 \begin{code}
 invent? : Com
@@ -788,7 +789,7 @@ invent? _ _ = nothing
 
 \subsection{la'oi .\F{kumski?}.}
 
-ni'o ga jonai ga je la'oi .\F{scream?}.\ djuno pe'a ru'e lo du'u tu'a la'o zoi.\ \B a .zoi.\ .indika lo du'u lo kelci cu djica lo nu tcidu ko'a goi lo velski be lo selvau be lo kumfa poi la'o zoi.\ \B b\ .zoi.\ .indika lo du'u ke'a zasti gi ga je la'o zoi.\ \B v .zoi.\ vasru lo velcki be ko'a gi ko'e goi la'o zoi.\ \F{kumski?} \B a \B b\ .zoi.\ du la'o zoi.\ \F{just} \Sym \$ \B v \Sym , \B b\ .zoi.\ gi ko'e du la'oi .\F{nothing}.
+ni'o ga jonai ga je la'oi .\F{scream?}.\ djuno pe'a ru'e lo du'u tu'a la'o zoi.\ \B a .zoi.\ .indika lo du'u lo kelci cu djica lo nu tcidu ko'a goi lo velski be lo selvau be lo kumfa poi la'o zoi.\ \B b\ .zoi.\ .indika lo du'u ke'a zasti gi ga je la'o zoi.\ \B v .zoi.\ vasru lo velcki be ko'a gi ko'e goi la'o zoi.\ \F{kumski?} \B a \B b\ .zoi.\ du la'o zoi.\ \F{just} \F \$ \B v \F , \B b\ .zoi.\ gi ko'e du la'oi .\F{nothing}.
 
 \begin{code}
 kumski? : Com
@@ -818,16 +819,16 @@ kumski? m g = if mapti (just $ le'i-velski , g) nothing
 \end{code}
 
 \subsection{la'oi .\F{scream?}.}
-ni'o ga jonai ga je la'oi .\F{scream?}.\ djuno pe'a ru'e lo du'u tu'a la'o zoi.\ \B a .zoi.\ .indika lo du'u lo kelci cu djica lo nu krixa fa ko'a goi lo krixa ke xarpre ja co'e po la'o zoi.\ \B b .zoi.\ gi ga je tu'a la'o zoi.\ \B c .zoi.\ .indika lo du'u ko'a krixa gi ko'e goi la'o zoi.\ \F{scream?} \B a \B b .zoi.\ du la'o zoi.\ \F{just} \Sym \$ c \Sym , b .zoi.\ gi ko'e du la'oi .\F{nothing}.
+ni'o ga jonai ga je la'oi .\F{scream?}.\ djuno pe'a ru'e lo du'u tu'a la'o zoi.\ \B a .zoi.\ .indika lo du'u lo kelci cu djica lo nu krixa fa ko'a goi lo krixa ke xarpre ja co'e po la'o zoi.\ \B b .zoi.\ gi ga je tu'a la'o zoi.\ \B c .zoi.\ .indika lo du'u ko'a krixa gi ko'e goi la'o zoi.\ \F{scream?} \B a \B b .zoi.\ du la'o zoi.\ \F{just} \F \$ c \F , b .zoi.\ gi ko'e du la'oi .\F{nothing}.
 
 \begin{code}
 scream? : Com
-scream? ("SCREAM" ∷ []) q = just $ "AARGH!!!" , q
+scream? ("SCREAM" ∷ []) = just ∘ _,_ "AARGH!!!"
 scream? _ _ = nothing
 \end{code}
 
 \subsection{la'oi .\F{sayless?}.}
-ni'o ga jonai ga je ga jo co'e gi la'o zoi.\ \B a .zoi.\ kunti gi ga je tu'a la'o zoi.\ \B c .zoi.\ .indika le du'u mabla fa lo nu samci'a lo kunti ja zo'e gi ko'a goi la'o zoi.\ \F{sayless?} \B a \B b .zoi.\ du la'o zoi.\ \F{just} \Sym \$ \B c \Sym , \B b .zoi.\ gi ko'a du la'oi .\F{nothing}.
+ni'o ga jonai ga je ga jo co'e gi la'o zoi.\ \B a .zoi.\ kunti gi ga je tu'a la'o zoi.\ \B c .zoi.\ .indika le du'u mabla fa lo nu samci'a lo kunti ja zo'e gi ko'a goi la'o zoi.\ \F{sayless?} \B a \B b .zoi.\ du la'o zoi.\ \F{just} \F \$ \B c \F , \B b .zoi.\ gi ko'a du la'oi .\F{nothing}.
 
 \begin{code}
 sayless? : List String → GameData → COut
@@ -835,7 +836,7 @@ sayless? [] = just ∘ _,_ "The silent treatment won't work here."
 sayless? ("" ∷ "" ∷ "" ∷ "" ∷ []) = just ∘ _,_ m
   where
   m = "Man, what the fuck?"
-sayless? _ = const nothing
+sayless? _ _ = nothing
 \end{code}
 
 \subsection{la'oi .\F{lp?}.}
@@ -843,7 +844,7 @@ ni'o ga jonai ga je ga je la'o zoi.\ \B c .zoi.\ na vajni gi ko'a goi la'o zoi.\
 
 \begin{code}
 lp? : Com
-lp? ("WHO" ∷ "ARE" ∷ "YOU?" ∷ []) q = just $ m , q
+lp? ("WHO" ∷ "ARE" ∷ "YOU?" ∷ []) = just ∘ _,_ m
   where
   m = "I really want to know."
 lp? ("I'M" ∷ "A" ∷ "WINNER" ∷ []) q = just $ m , q
@@ -860,7 +861,15 @@ lp? _ _ = nothing
 \section{le fancu poi cumki fa lo nu ke'a pruce ja co'e zo'e je ko'a goi lo ctaipe be la'oi .GameData.\ zo'e je lo na du be ko'a}
 
 \subsection{la'oi .\F{travel?}.}
-ni'o ga jonai ga je la'o zoi.\ \F{travel?} .zoi.\ djuno ja co'e lo du'u lo nu co'e ko'a goi zoi zoi.\ \F{travel?} \B r \B g .zoi.\ cu nu cpedu lo nu lo kelci ke xarpre ja co'e cu klama lo kumfa poi la'o zoi.\ \B K .zoi.\ sinxa ke'a gi ga jonai ga je la'o zoi.\ \F{Room.travis} \Sym \$ \F{Character.room} \Sym \$ \F{GameData.player} \B g .zoi.\ vasru la'o zoi.\ \B K .zoi.\ gi ko'a broda cei sinxa ja co'e lo me'oi .product.\ be lo velski be lo nu klama bei zo'e poi tu'a ke'a .indika lo du'u lo kelci ke xarpre ja co'e cu zvati zo'e poi djica lo nu zvati ke'a xi re gi ko'a broda lo me'oi .product.\ be lo te skuxai ja zo'e bei la'o zoi.\ \B g .zoi.\ gi ko'a broda la'oi .\F{nothing}.
+ni'o ga jonai ga je la'o zoi.\ \F{travel?} .zoi.\ djuno ja co'e lo du'u lo nu co'e ko'a goi zoi zoi.\ \F{travel?} \B r \B g .zoi.\ cu nu cpedu lo nu lo kelci ke xarpre ja co'e cu klama lo kumfa poi la'o zoi.\ \B K .zoi.\ sinxa ke'a gi\ldots
+\begin{itemize}
+	\item ga jonai ga je la'o zoi.\ \F{Room.travis} \F \$ \F{Character.room} \F \$ \F{GameData.player} \B g .zoi.\ vasru lo mu'oi glibau.\ \F{Room.cname}\ .glibau.\ be la'o zoi.\ \B K .zoi.\ gi\ldots
+	\begin{itemize}
+		\item ko'a broda cei sinxa ja co'e lo me'oi .product.\ be lo velski be lo nu klama bei zo'e poi tu'a ke'a .indika lo du'u lo kelci ke xarpre ja co'e cu zvati zo'e poi djica lo nu zvati ke'a xi re gi
+		\item ko'a broda lo me'oi .product.\ be lo te skuxai ja zo'e bei la'o zoi.\ \B g .zoi.
+	\end{itemize}
+	\item gi ko'a broda la'oi .\F{nothing}.
+\end{itemize}
 
 \begin{code}
 travel? : Com
@@ -869,10 +878,10 @@ travel? (x₁ ∷ xs₁) = if realShit (travel' xs₁) $ const nothing
   where
   realShit = x₁ ≡ᵇ "TRAVEL"
   travel' : Com
-  travel' [] q = just $ m , q
+  travel' [] = just ∘ _,_ m
     where
     m = "Don't tell me to break the rules, fucker!"
-  travel' (_ ∷ _ ∷ _) q = just $ m , q
+  travel' (_ ∷ _ ∷ _) = just ∘ _,_ m
     where
     m = "I strongly doubt that the concept of \"super\
         \position\" applies to a creature of your mass."
@@ -913,7 +922,7 @@ travel? (x₁ ∷ xs₁) = if realShit (travel' xs₁) $ const nothing
 \end{code}
 
 \subsection{la'oi .\F{wield?}.}
-ni'o ga jonai ga je ga je la'oi .\F{wield?}.\ djuno pe'a ru'e lo du'u tu'a la'o zoi.\ \B a .zoi.\ .indika lo du'u lo kelci cu djica lo nu ko'a goi lo kelci ke xarpre ja co'e cu me'oi .wield.\ ko'e goi zo'e poi la'o zoi.\ \B c .zoi.\ mu'oi glibau.\ \F{Item.cname} .glibau.\ lo sinxa be ke'a gi ga jonai ga je li pa nilzilcmi lo'i selvau be lo me'oi .inventory.\ be ko'a be'o be'o poi la'o zoi.\ \B c .zoi.\ mu'oi glibau.\ \F{Item.cname} .glibau.\ ke'a je poi curmi lo nu me'oi .wield.\ ke'a gi tu'a la'o zoi.\ \B x .zoi.\ lu'u je tu'a la'o zoi.\ \B y .zoi.\ cu .indika lo du'u ko'a me'oi .wield.\ ko'e gi ko'i goi la'o zoi.\ \F{wield?} \B a \B b .zoi.\ du la'o zoi.\ \F{just} \Sym \$ \B x \Sym , \B y .zoi.\ gi ga je skuxai ja co'e la'o zoi.\ \B x .zoi.\ gi ko'a du la'o zoi.\ \F{just} \Sym \$ \B x \Sym , \B b .zoi.\ gi ko'a du la'oi .\F{nothing}.
+ni'o ga jonai ga je ga je la'oi .\F{wield?}.\ djuno pe'a ru'e lo du'u tu'a la'o zoi.\ \B a .zoi.\ .indika lo du'u lo kelci cu djica lo nu ko'a goi lo kelci ke xarpre ja co'e cu me'oi .wield.\ ko'e goi zo'e poi la'o zoi.\ \B c .zoi.\ mu'oi glibau.\ \F{Item.cname} .glibau.\ lo sinxa be ke'a gi ga jonai ga je li pa nilzilcmi lo'i selvau be lo me'oi .inventory.\ be ko'a be'o be'o poi la'o zoi.\ \B c .zoi.\ mu'oi glibau.\ \F{Item.cname} .glibau.\ ke'a je poi curmi lo nu me'oi .wield.\ ke'a gi tu'a la'o zoi.\ \B x .zoi.\ lu'u je tu'a la'o zoi.\ \B y .zoi.\ cu .indika lo du'u ko'a me'oi .wield.\ ko'e gi ko'i goi la'o zoi.\ \F{wield?} \B a \B b .zoi.\ du la'o zoi.\ \F{just} \F \$ \B x \F , \B y .zoi.\ gi ga je skuxai ja co'e la'o zoi.\ \B x .zoi.\ gi ko'a du la'o zoi.\ \F{just} \F \$ \B x \F , \B b .zoi.\ gi ko'a du la'oi .\F{nothing}.
 
 \begin{code}
 wield? : Com
