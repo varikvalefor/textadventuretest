@@ -60,6 +60,7 @@ colorfun = record {
   cname = "COLORFUN";
   rmDescr = [];
   weapwn = nothing;
+  smashInfo = nothing;
   yourfloorisnowclean = refl;
   hlDescr = m;
   dfDescr = m}
@@ -78,6 +79,7 @@ defstick = record {
   rmDescr = [];
   yourfloorisnowclean = refl;
   weapwn = just wi;
+  smashInfo = nothing;
   dfDescr = "You see the stick which is dropped by you.";
   hlDescr = m}
   where
@@ -104,6 +106,7 @@ macguffin = record {
   rmDescr = [];
   yourfloorisnowclean = refl;
   weapwn = nothing;
+  smashInfo = nothing;
   dfDescr = "You see a coupon (for a leafblower) \
             \which is ludicrously detailed.";
   hlDescr = m}
