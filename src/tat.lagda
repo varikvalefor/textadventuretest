@@ -137,6 +137,7 @@ main = run $ snurytcati >>ᵢₒ lupe initialD
                       []
           gasnu = travel? ∷
                   wield? ∷
+                  smash? ∷
                   []
 \end{code}
 \end{document}
