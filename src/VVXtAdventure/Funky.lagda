@@ -868,7 +868,7 @@ smash? (cmd ∷ arg) g = if realShit (just trySmash) nothing
     item = Room.items (GameData.rooms g ! kumfid) ! proj₂ x
     smashing-is-just? : Dec $ Is-just $ Item.smashInfo item
     smashing-is-just? with Item.smashInfo item
-    ... | (just q) = yes $ DMA-just Agda.Builtin.Unit.tt
+    ... | (just _) = yes $ DMA-just Agda.Builtin.Unit.tt
       where
       DMA-just = Data.Maybe.Relation.Unary.Any.Any.just
     ... | nothing = no $ λ ()
