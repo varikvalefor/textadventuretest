@@ -122,10 +122,10 @@ main = run $ snurytcati >>ᵢₒ lupe initialD
       chews ((just (a , b) , f) ∷ _) _ = putStrLn a >>ᵢₒ f b
       chews ((nothing , _) ∷ xs) d = chews xs d
       chews [] d = d
-      np = (epicwin? winmsg gd , boob) ∷
+      np = (epicwin? winmsg gd , const boob) ∷
            map (λ f → f s gd , lupe) std
         where
-        boob = const $ return $ Level.lift ABU.tt
+        boob = return $ Level.lift ABU.tt
         std = sazycimde ++ gasnu
           where
           sazycimde = scream? ∷
