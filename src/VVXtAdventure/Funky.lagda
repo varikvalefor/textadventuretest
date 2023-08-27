@@ -171,7 +171,7 @@ import Data.Nat.Properties as DNP
 import Data.List.Properties as DLP
 import Data.Maybe.Properties as DMP
 
-import Data.Maybe.Relation.Unary.Any
+import Data.Maybe.Relation.Unary.Any as DMA
 
 
 open ≡-Reasoning
@@ -869,9 +869,7 @@ smash? (cmd ∷ arg) g = if realShit (just trySmash) nothing
     smashing-is-just? : Dec $ Is-just $ Item.smashInfo item
     smashing-is-just? with Item.smashInfo item
     ... | nothing = no $ λ ()
-    ... | just _ = yes $ DMA-just Agda.Builtin.Unit.tt
-      where
-      DMA-just = Data.Maybe.Relation.Unary.Any.Any.just
+    ... | just _ = yes $ DMA.just Agda.Builtin.Unit.tt
   ... | no _ = "Can't smash this." , g
   ... | yes j = fromMaybe m (proj₁ j') , smashData
     where
