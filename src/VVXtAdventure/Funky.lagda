@@ -263,12 +263,12 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
     𝓁 (x₁ ++ d₂) ≡⟨ DLP.length-++ x₁ ⟩
     𝓁 x₁ + 𝓁 d₂ ≡⟨ cong (_+_ $ 𝓁 x₁) $ DLP.length-drop (toℕ j) xen ⟩
     𝓁 x₁ + (𝓁 xen ∸ toℕ j) ≡⟨ cong (_+_ $ 𝓁 x₁) $ sym xex ⟩
-    𝓁 x₁ + 𝓁 (x₂ ∷ x₃) ≡⟨ refl ⟩
     𝓁 x₁ + ℕ.suc (𝓁 x₃) ≡⟨ sym $ DLP.length-++ x₁ ⟩
     𝓁 xen' ∎
     where
     d₂ = toℕ j ↓ xen
     xex = begin
+      ℕ.suc (𝓁 x₃) ≡⟨ refl ⟩
       𝓁 (x₂ ∷ x₃) ≡⟨ refl ⟩
       ℕ.suc (𝓁 $ ℕ.suc (toℕ j) ↓ xen) ≡⟨ dropsuc xen j ⟩
       𝓁 (toℕ j ↓ xen) ≡⟨ DLP.length-drop (toℕ j) xen ⟩
