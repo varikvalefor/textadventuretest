@@ -477,7 +477,7 @@ kumski? m g = if mapti (just $ le'i-velski , g) nothing
       velski : Item → String
       velski z with filterₗ methch $ Item.rmDescr z
         where
-        methch = λ a → proj₁ a ≟ Room.cname kumfa
+        methch = _≟_ (Room.cname kumfa) ∘ proj₁
       ... | [] = Item.cname z ++ ": " ++ Item.dfDescr z
       ... | (x ∷ _) = Item.cname z ++ ": " ++ proj₂ x
       jaiv : String
