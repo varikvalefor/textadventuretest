@@ -473,19 +473,20 @@ kumski? m g = if mapti (just $ le'i-velski , g) nothing
     kumfa = GameData.rooms g ! Character.room (GameData.player g)
     concatₛ = Data.String.concat
     mapₗ = Data.List.map
-    velski : Item → String
-    velski z with filterₗ methch $ Item.rmDescr z
-      where
-      methch = λ a → proj₁ a ≟ Room.cname kumfa
-    ... | [] = Item.cname z ++ ": " ++ Item.dfDescr z
-    ... | (x ∷ _) = Item.cname z ++ ": " ++ proj₂ x
-    jaiv : String
-    jaiv with Room.travis kumfa
-    ... | [] = "This room is completely isolated.  GFL."
-    ... | (x ∷ xs) = "CONNECTED ROOMS: " ++ concatₛ liste
-      where
-      liste = intersperse ", " $ x ∷ xs
     le'i-lerpinsle = jaiv ∷ mapₗ velski (Room.items kumfa)
+      where
+      velski : Item → String
+      velski z with filterₗ methch $ Item.rmDescr z
+        where
+        methch = λ a → proj₁ a ≟ Room.cname kumfa
+      ... | [] = Item.cname z ++ ": " ++ Item.dfDescr z
+      ... | (x ∷ _) = Item.cname z ++ ": " ++ proj₂ x
+      jaiv : String
+      jaiv with Room.travis kumfa
+      ... | [] = "This room is completely isolated.  GFL."
+      ... | (x ∷ xs) = "CONNECTED ROOMS: " ++ concatₛ liste
+        where
+        liste = intersperse ", " $ x ∷ xs
 \end{code}
 
 \subsection{la'oi .\F{scream?}.}
