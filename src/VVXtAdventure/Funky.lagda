@@ -95,6 +95,7 @@ open import Data.Bool
   )
 open import Data.List
   using (
+    intersperse;
     mapMaybe;
     allFin;
     List;
@@ -118,6 +119,7 @@ open import Data.Maybe
   )
 open import Data.String
   hiding (
+    intersperse;
     length;
     _++_;
     _≤_;
@@ -449,9 +451,8 @@ ni'o ga jonai ga je tu'a la'o zoi.\ \B m\ .zoi.\ .indika lo du'u lo kelci cu dji
 invent? : Com
 invent? ("LIST" ∷ "INVENTORY" ∷ []) g = just $ desks , g
   where
-  desks = concat $ intersperseₗ "\n\n" $ Data.List.map desk items
+  desks = concat $ intersperse "\n\n" $ Data.List.map desk items
     where
-    intersperseₗ = Data.List.intersperse
     items = Character.inventory $ GameData.player g
     desk = λ a → Item.cname a ++ ": " ++ Item.hlDescr a
 invent? _ _ = nothing
@@ -467,10 +468,9 @@ kumski? m g = if mapti (just $ le'i-velski , g) nothing
   where
   mapti = _↑_ 3 m ≡ᵇ ("LOOK" ∷ "AROUND" ∷ "YOU" ∷ [])
   le'i-velski : String
-  le'i-velski = concatₛ $ intersperseₗ "\n\n" le'i-lerpinsle
+  le'i-velski = concatₛ $ intersperse "\n\n" le'i-lerpinsle
     where
     kumfa = GameData.rooms g ! Character.room (GameData.player g)
-    intersperseₗ = Data.List.intersperse
     concatₛ = Data.String.concat
     mapₗ = Data.List.map
     velski : Item → String
@@ -484,7 +484,7 @@ kumski? m g = if mapti (just $ le'i-velski , g) nothing
     ... | [] = "This room is completely isolated.  GFL."
     ... | (x ∷ xs) = "CONNECTED ROOMS: " ++ concatₛ liste
       where
-      liste = intersperseₗ ", " $ x ∷ xs
+      liste = intersperse ", " $ x ∷ xs
     le'i-lerpinsle = jaiv ∷ mapₗ velski (Room.items kumfa)
 \end{code}
 
