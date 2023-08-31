@@ -415,8 +415,8 @@ inspect? (c ∷ f) dang = if methch (getDown f) nothing
     m = "I can't handle any more of your inane \
         \gibberish.\n\
         \If you want to search for multiple things, \
-        \then tell me the shortnames of the things \
-        \individually.\n\
+        \then individually state the shortnames of \
+        \the things.\n\
         \Alternatively, you might have tried to \
         \search for a full name which contains \
         \multiple spaces, which is illegal.  \
