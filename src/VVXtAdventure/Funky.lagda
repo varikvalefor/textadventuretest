@@ -418,7 +418,7 @@ inspect? (c ∷ f) dang = if methch (getDown f) nothing
         \then individually state the shortnames of \
         \the things.\n\
         \Alternatively, you might have tried to \
-        \search for a full name which contains \
+        \search for a cname which contains \
         \multiple spaces, which is illegal.  \
         \Do it $n$ more times, and I will send the \
         \police to your doorstep.  I'm trying to \
