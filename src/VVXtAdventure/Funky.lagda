@@ -482,9 +482,9 @@ kumski? m g = if mapti (just $ le'i-velski , g) nothing
       jaiv : String
       jaiv with Room.travis kumfa
       ... | [] = "This room is completely isolated.  GFL."
-      ... | (x ∷ xs) = "CONNECTED ROOMS: " ++ concatₛ liste
+      ... | x@(_ ∷ _) = "CONNECTED ROOMS: " ++ concatₛ liste
         where
-        liste = intersperse ", " $ x ∷ xs
+        liste = intersperse ", " x
 \end{code}
 
 \subsection{la'oi .\F{scream?}.}
