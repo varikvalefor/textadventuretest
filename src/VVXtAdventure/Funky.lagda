@@ -467,7 +467,6 @@ kumski? : Com
 kumski? m g = if mapti (just $ le'i-velski , g) nothing
   where
   mapti = _↑_ 3 m ≡ᵇ ("LOOK" ∷ "AROUND" ∷ "YOU" ∷ [])
-  le'i-velski : String
   le'i-velski = concatₛ $ intersperse "\n\n" le'i-lerpinsle
     where
     kumfa = GameData.rooms g ! Character.room (GameData.player g)
