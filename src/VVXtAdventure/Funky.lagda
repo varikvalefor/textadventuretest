@@ -472,8 +472,7 @@ kumski? m g = if mapti (just $ le'i-velski , g) nothing
     where
     kumfa = GameData.rooms g ! Character.room (GameData.player g)
     concatₛ = Data.String.concat
-    mapₗ = Data.List.map
-    le'i-lerpinsle = jaiv ∷ mapₗ velski (Room.items kumfa)
+    le'i-lerpinsle = jaiv ∷ Data.List.map velski (Room.items kumfa)
       where
       velski : Item → String
       velski z with filterₗ methch $ Item.rmDescr z
