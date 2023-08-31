@@ -419,7 +419,8 @@ inspect? (c ∷ f) dang = if methch (getDown f) nothing
         \the things.\n\
         \Alternatively, you might have tried to \
         \search for a cname which contains \
-        \multiple spaces, which is illegal.  \
+        \multiple spaces.  But illegal is that a \
+        \cname contains multiple spaces.\
         \Do it $n$ more times, and I will send the \
         \police to your doorstep.  I'm trying to \
         \help you, but you're really testing my \
