@@ -115,8 +115,8 @@ main = run $ IO.lift nurtcati >>ᵢₒ lupe initialD
       m = "I don't understand a word you just said."
       chews : List $ COut × (GameData → IO ⊤) → IO ⊤ → IO ⊤
       chews ((just (a , b) , f) ∷ _) _ = putStrLn a >>ᵢₒ f b
-      chews ((nothing , _) ∷ xs) d = chews xs d
-      chews [] d = d
+      chews ((nothing , _) ∷ xs) = chews xs
+      chews [] = id
       np = (epicwin? winmsg gd , const boob) ∷
            map (λ f → f s gd , lupe) std
         where
