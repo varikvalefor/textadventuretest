@@ -99,11 +99,11 @@ open import Relation.Binary.PropositionalEquality
 \begin{code}
 {-# NON_TERMINATING #-}
 main : Main
-main = run $ IO.lift snurytcati >>ᵢₒ lupe initialD
+main = run $ IO.lift nurtcati >>ᵢₒ lupe initialD
   where
-  postulate snurytcati : ABIO.IO ABU.⊤
+  postulate nurtcati : ABIO.IO ABU.⊤
   {-# FOREIGN GHC import System.OpenBSD.Plegg #-}
-  {-# COMPILE GHC snurytcati = plegg [Stdio] >> univac #-}
+  {-# COMPILE GHC nurtcati = plegg [Stdio] >> univac #-}
 
   lupe = λ q → prompt >>ᵢₒ ree >>=ᵢₒ crock q
     where
