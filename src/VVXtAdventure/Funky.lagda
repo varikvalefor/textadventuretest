@@ -84,6 +84,12 @@ open import Data.Nat
     ℕ
   )
 open import Data.Sum
+  using (
+    [_,_];
+    inj₁;
+    inj₂;
+    _⊎_
+  )
 open import Function
 open import Data.Bool
   using (
@@ -142,6 +148,10 @@ open import Truthbrary.Data.Fin
     mink
   )
 open import Truthbrary.Record.Eq
+  using (
+    _≡ᵇ_;
+    _≟_
+  )
 open import Truthbrary.Record.LLC
   using (
     length;
@@ -149,6 +159,9 @@ open import Truthbrary.Record.LLC
     map
   )
 open import Truthbrary.Category.Monad
+  using (
+    _>>=_
+  )
 open import Truthbrary.Data.List.Loom
   using (
     ual
