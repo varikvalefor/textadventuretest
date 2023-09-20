@@ -215,7 +215,7 @@ wieldPawn : (q : GameData)
             let iv = Character.inventory in
             let ifinc = GameData.yourfloorisnowclean in
             (j : Fin $ 𝓁 $ x q)
-          → (i : Fin $ 𝓁 $ Character.inventory $ x q ! j)
+          → (i : Fin $ 𝓁 $ iv $ x q ! j)
           → (_≡_ true $ is-just $ Item.weapwn $ iv (x q ! j) ! i)
           → Σ GameData $ λ q'
             → Σ (𝓁 (x q) ≡ 𝓁 (x q')) $ λ ℓ
