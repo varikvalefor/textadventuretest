@@ -86,12 +86,12 @@ open import Data.Nat
 open import Data.Sum
 open import Function
 open import Data.Bool
+  using (
+    Bool;
+    true
+  )
   renaming (
     if_then_else_ to if
-  )
-  hiding (
-    _≤_;
-    _≟_
   )
 open import Data.List
   using (
@@ -118,12 +118,9 @@ open import Data.Maybe
     nothing
   )
 open import Data.String
-  hiding (
-    intersperse;
-    length;
-    _++_;
-    _≤_;
-    _≟_
+  using (
+    String;
+    concat
   )
 open import Data.Product
   using (
