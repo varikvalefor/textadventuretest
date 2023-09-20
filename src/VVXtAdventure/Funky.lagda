@@ -368,8 +368,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
     takedus (_ ∷ xs) zero = refl
     takedus (x ∷ xs) (suc n) = cong (_∷_ x) $ takedus xs n
     dropydus : ∀ {a} → {A : Set a}
-             → (a : List A)
-             → (b : List A)
+             → (a b : List A)
              → {x : A}
              → (n : Fin $ 𝓁 a)
              → let n' = toℕ n in
