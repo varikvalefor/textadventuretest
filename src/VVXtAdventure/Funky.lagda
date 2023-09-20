@@ -460,7 +460,7 @@ ni'o ga jonai ga je tu'a la'o zoi.\ \B m\ .zoi.\ .indika lo du'u lo kelci cu dji
 invent? : Com
 invent? ("LIST" ∷ "INVENTORY" ∷ []) g = just $ desks , g
   where
-  desks = concat $ intersperse "\n\n" $ Data.List.map desk items
+  desks = concat $ intersperse "\n\n" $ map desk items
     where
     items = Character.inventory $ GameData.player g
     desk = λ a → Item.cname a ++ ": " ++ Item.hlDescr a
@@ -480,7 +480,7 @@ kumski? m g = if mapti (just $ le'i-velski , g) nothing
     where
     kumfa = GameData.rooms g ! Character.room (GameData.player g)
     concatₛ = Data.String.concat
-    le'i-lerpinsle = jaiv ∷ Data.List.map velski (Room.items kumfa)
+    le'i-lerpinsle = jaiv ∷ map velski (Room.items kumfa)
       where
       velski : Item → String
       velski z with filterₗ methch $ Item.rmDescr z
@@ -596,7 +596,7 @@ travel? (x₁ ∷ xs₁) = if realShit (travel' xs₁) $ const nothing
             \I don't think that that room exists."
       ... | (x ∷ xs) = inj₂ $ maproj₁ $ filterₗ tr $ x ∷ xs
         where
-        maproj₁ = Data.List.map proj₁
+        maproj₁ = map proj₁
         tr = flip any? (Room.travis cur) ∘ _≟_ ∘ Room.cname ∘ proj₂
 \end{code}
 
