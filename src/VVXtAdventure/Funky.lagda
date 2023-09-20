@@ -594,9 +594,8 @@ travel? (x₁ ∷ xs₁) = if realShit (travel' xs₁) $ const nothing
         where
         m = "Did you take your pills this morning?  \
             \I don't think that that room exists."
-      ... | (x ∷ xs) = inj₂ $ maproj₁ $ filterₗ tr $ x ∷ xs
+      ... | (x ∷ xs) = inj₂ $ map proj₁ $ filterₗ tr $ x ∷ xs
         where
-        maproj₁ = map proj₁
         tr = flip any? (Room.travis cur) ∘ _≟_ ∘ Room.cname ∘ proj₂
 \end{code}
 
