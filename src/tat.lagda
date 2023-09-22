@@ -23,6 +23,7 @@
 \newunicodechar{→}{\ensuremath{\mathnormal{\rightarrow}}}
 \newunicodechar{ᵢ}{\ensuremath{\mathnormal{_i}}}
 \newunicodechar{ₒ}{\ensuremath{\mathnormal{_o}}}
+\newunicodechar{₂}{\ensuremath{\mathnormal{_2}}}
 
 \newcommand\Sym\AgdaSymbol
 \newcommand\D\AgdaDatatype
@@ -63,6 +64,7 @@ open import Data.List
   )
 open import Data.Maybe
   using (
+    fromMaybe;
     Maybe;
     just;
     nothing
@@ -74,6 +76,7 @@ open import Data.String
   )
 open import Data.Product
   using (
+    proj₁;
     _×_;
     _,_
   )
@@ -104,33 +107,51 @@ main = run $ IO.lift nurtcati >>ᵢₒ lupe initialD
   {-# FOREIGN GHC import System.OpenBSD.Plegg #-}
   {-# COMPILE GHC nurtcati = plegg [Stdio] >> univac #-}
 
-  lupe = λ q → prompt >>ᵢₒ ree >>=ᵢₒ crock q
+  lupe = λ q → fromMaybe (interact q) $ fanmo? q
     where
-    prompt = putStrLn "What do you do?"
-    ree = words ∘ map toUpper <$> getLine
-    crock : GameData → List String → IO ⊤
-    crock gd s = chews np $ putStrLn m >>ᵢₒ lupe gd
+    fanmo? : GameData → Maybe $ IO ⊤
+    fanmo? q = firstJust $ Data.List.map mapti? fancu
       where
-      m = "I don't understand a word you just said."
-      chews : List $ COut × (GameData → IO ⊤) → IO ⊤ → IO ⊤
-      chews ((just (a , b) , f) ∷ _) _ = putStrLn a >>ᵢₒ f b
-      chews ((nothing , _) ∷ xs) = chews xs
-      chews [] = id
-      np = (epicwin? winmsg gd , const boob) ∷
-           map (λ f → f s gd , lupe) std
+      firstJust : ∀ {a} → {A : Set a} → List $ Maybe A → Maybe A
+      firstJust [] = nothing
+      firstJust (just t ∷ _) = just t
+      firstJust (nothing ∷ t) = firstJust t
+      mapti? = Data.Maybe.map $ putStrLn ∘ proj₁
+      fancu = zmimrobi'o q ∷
+              epicwin? winmsg q ∷
+              []
+
+    interact : GameData → IO ⊤
+    interact = λ q → prompt >>ᵢₒ ree >>=ᵢₒ crock q
+      where
+      prompt = putStrLn "What do you do?"
+      ree = words ∘ map toUpper <$> getLine
+      crock : GameData → List String → IO ⊤
+      crock gd s = chews np $ mis m gd
         where
-        boob = return $ Level.lift ABU.tt
-        std = sazycimde ++ gasnu
+        mis = λ a b → putStrLn a >>ᵢₒ lupe b
+        m = "I don't understand a word you just said."
+        chews : List $ COut × (String → GameData → IO ⊤)
+              → IO ⊤
+              → IO ⊤
+        chews ((just (a , b) , f) ∷ _) _ = f a b
+        chews ((nothing , _) ∷ xs) = chews xs
+        chews [] = id
+        np : List $ COut × (String → GameData → IO ⊤)
+        np = map (λ f → f s gd , λ a b → putStrLn a >>ᵢₒ lupe b) std
           where
-          sazycimde = scream? ∷
-                      sayless? ∷
-                      inspect? ∷
-                      lp? ∷
-                      kumski? ∷
-                      invent? ∷
-                      []
-          gasnu = travel? ∷
-                  wield? ∷
-                  []
+          std = sazycimde ++ gasnu
+            where
+            sazycimde = scream? ∷
+                        sayless? ∷
+                        inspect? ∷
+                        lp? ∷
+                        kumski? ∷
+                        invent? ∷
+                        []
+            gasnu = travel? ∷
+                    wield? ∷
+                    hitme? ∷
+                    []
 \end{code}
 \end{document}

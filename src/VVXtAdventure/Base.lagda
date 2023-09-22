@@ -84,6 +84,10 @@ open import Data.Product
     ∃;
     Σ
   )
+open import Data.Rational
+  using (
+    ℚ
+  )
 open import Truthbrary.Record.Eq
   using (
   )
@@ -175,6 +179,7 @@ ni'o ga jo la'o zoi.\ \B K .zoi.\ ctaipe la'o zoi.\ \F{List} \F{Room} .zoi.\ gi 
 	\item ga je la'o zoi.\ \F{Character.nicknames} \B a .zoi.\ liste lo'i datcme be ko'a gi
 	\item ga je tu'a la'o zoi.\ \B a .zoi.\ .indika lo du'u ko'a zvati lo selsni be la'o zoi.\ \F{lookup} \B q \F \$ \F{Character.room} \B a .zoi.\ gi
 	\item ga je la'o zoi.\ \F{Character.inventory} \B a .zoi.\ liste lo'i ro se ralte be lo selsni be ko'a gi
+	\item ga je la'o zoi.\ \F{Character.health}\ \B a\ zoi.\ ni ko'a na morsi kei ja cu co'e gi
         \item ga naja la'o zoi.\ \B i .zoi.\ du la'o zoi.\ \F{Character.inventory} \B a .zoi.\footnote{ni'o pilno zo'e pe zo du mu'i le su'u djica lo nu lo me'oi .hbox.\ cu na me'oi .overfull.}\ gi la'o zoi.\ \F{Data.Maybe.map} (\F{lookup} \B i) \Sym \$ \F{Character.wielded} \B a .zoi.\ du la'oi .\F{nothing}.\ jonai cu me'oi .\F{just}.\ lo sinxa be lo se me'oi .wield.\ be ko'a
 \end{itemize}
 
@@ -192,6 +197,7 @@ record Character (q : List Room) : Set
     nicknames : List String
     room : Fin $ Data.List.length q
     inventory : List Item
+    health : ℚ
     wieldedct : Maybe $ ∃ $ isWeapon ∘ lookup inventory
     yourfloorisnowclean : nu,iork $ Data.List.map Item.cname inventory
   wielded = Data.Maybe.map proj₁ wieldedct

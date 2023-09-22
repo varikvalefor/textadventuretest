@@ -81,6 +81,9 @@ open import Relation.Binary.PropositionalEquality
   using (
     refl
   )
+
+import Data.Integer as ℤ
+import Data.Rational as ℚ
 \end{code}
 
 \section{le tolsti co'e}
@@ -181,6 +184,7 @@ initialD = record {
     surname = "TUBMANN";
     cname = "XITAS";
     nicknames = "THE O.G. MEATBALL" ∷ [];
+    health = ℤ.1ℤ ℚ./ 1;
     room = Data.Fin.zero;
     inventory = defstick ∷ [];
     wieldedct = nothing;
