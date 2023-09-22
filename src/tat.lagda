@@ -43,6 +43,7 @@
 
 import Level
 import Data.Fin
+import Agda.Builtin.IO as ABIO
 import Agda.Builtin.Unit as ABU
 
 open import IO
@@ -101,11 +102,12 @@ open import Relation.Binary.PropositionalEquality
 \begin{code}
 {-# NON_TERMINATING #-}
 main : Main
-main = run $ lupe initialD
+main = run $ IO.lift nurtcati >>ᵢₒ lupe initialD
   where
-  -- | ni'o pilno ko'a goi le zo ce'u co'e ki'u le su'u
-  -- tu'a ko'a filri'a lo nu na co'e zo'oi .q.
-  lupe : GameData → IO ⊤
+  postulate nurtcati : ABIO.IO ABU.⊤
+  {-# FOREIGN GHC import System.OpenBSD.Plegg #-}
+  {-# COMPILE GHC nurtcati = plegg [Stdio] >> univac #-}
+
   lupe = λ q → fromMaybe (interact q) $ fanmo? q
     where
     fanmo? : GameData → Maybe $ IO ⊤
@@ -134,8 +136,8 @@ main = run $ lupe initialD
               → IO ⊤
               → IO ⊤
         chews ((just (a , b) , f) ∷ _) _ = f a b
-        chews ((nothing , _) ∷ xs) d = chews xs d
-        chews [] d = d
+        chews ((nothing , _) ∷ xs) = chews xs
+        chews [] = id
         np : List $ COut × (String → GameData → IO ⊤)
         np = map (λ f → f s gd , λ a b → putStrLn a >>ᵢₒ lupe b) std
           where
