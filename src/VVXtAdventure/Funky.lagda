@@ -92,22 +92,24 @@ open import Data.Nat
   )
 open import Data.Sum
   using (
-    _⊎_;
+    [_,_];
     inj₁;
     inj₂;
-    [_,_]
+    _⊎_
   )
 open import Function
 open import Data.Bool
+  using (
+    false;
+    Bool;
+    true
+  )
   renaming (
     if_then_else_ to if
   )
-  hiding (
-    _≤_;
-    _≟_
-  )
 open import Data.List
   using (
+    intersperse;
     mapMaybe;
     allFin;
     List;
@@ -130,11 +132,9 @@ open import Data.Maybe
     nothing
   )
 open import Data.String
-  hiding (
-    length;
-    _++_;
-    _≤_;
-    _≟_
+  using (
+    String;
+    concat
   )
 open import Data.Product
   using (
@@ -145,6 +145,10 @@ open import Data.Product
     proj₂;
     _×_;
     _,_
+  )
+open import Data.Rational
+  using (
+    0ℚ
   )
 open import Relation.Unary
   using (
@@ -164,6 +168,11 @@ open import Truthbrary.Data.Fin
     mink
   )
 open import Truthbrary.Record.Eq
+  using (
+    _≡ᵇ_;
+    _≟_;
+    Eq
+  )
 open import Truthbrary.Record.LLC
   using (
     nu,iork;
@@ -171,6 +180,10 @@ open import Truthbrary.Record.LLC
     _++_;
     _∉_;
     map
+  )
+open import Truthbrary.Category.Monad
+  using (
+    _>>=_
   )
 open import Truthbrary.Data.List.Loom
   using (
@@ -203,6 +216,7 @@ open ≡-Reasoning
 \end{code}
 
 \chapter{le mu'oi glibau.\ low-level .glibau.}
+ni'o la'au le mu'oi glibau.\ low-level .glibau.\ li'u vasru le velcki be le fancu poi ke'a pruce ja co'e zo'e je lo ctaipe be la'oi .\F{GameData}.\ lo ctaipe be la'oi .\F{GameData}.\ je lo ctaipe be zo'e ja lo su'u dunli
 
 \section{la'o zoi.\ \F{movePawn} .zoi.}
 ni'o tu'a la'o zoi.\ \F{movePawn} \B q \B m \B n .zoi.\ .indika lo du'u lo selsni be la'o zoi.\ \F{GameData.haters} \B q \F ! \B h .zoi.\ cu zvati ko'a goi lo selsni be la'o zoi.\ \F{GameData.rooms} \B q) \F ! \B n .zoi.
@@ -296,12 +310,12 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
     𝓁 (x₁ ++ d₂) ≡⟨ DLP.length-++ x₁ ⟩
     𝓁 x₁ + 𝓁 d₂ ≡⟨ cong (_+_ $ 𝓁 x₁) $ DLP.length-drop (toℕ j) xen ⟩
     𝓁 x₁ + (𝓁 xen ∸ toℕ j) ≡⟨ cong (_+_ $ 𝓁 x₁) $ sym xex ⟩
-    𝓁 x₁ + 𝓁 (x₂ ∷ x₃) ≡⟨ refl ⟩
     𝓁 x₁ + ℕ.suc (𝓁 x₃) ≡⟨ sym $ DLP.length-++ x₁ ⟩
     𝓁 xen' ∎
     where
     d₂ = toℕ j ↓ xen
     xex = begin
+      ℕ.suc (𝓁 x₃) ≡⟨ refl ⟩
       𝓁 (x₂ ∷ x₃) ≡⟨ refl ⟩
       ℕ.suc (𝓁 $ ℕ.suc (toℕ j) ↓ xen) ≡⟨ dropsuc xen j ⟩
       𝓁 (toℕ j ↓ xen) ≡⟨ DLP.length-drop (toℕ j) xen ⟩
@@ -399,8 +413,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
     takedus (_ ∷ xs) zero = refl
     takedus (x ∷ xs) (suc n) = cong (_∷_ x) $ takedus xs n
     dropydus : ∀ {a} → {A : Set a}
-             → (a : List A)
-             → (b : List A)
+             → (a b : List A)
              → {x : A}
              → (n : Fin $ 𝓁 a)
              → let n' = toℕ n in
@@ -435,6 +448,7 @@ private
     cname = Character.cname x;
     nicknames = Character.nicknames x;
     inventory = Character.inventory x;
+    health = Character.health x;
     wieldedct =  Character.wieldedct x;
     yourfloorisnowclean = Character.yourfloorisnowclean x}
 
@@ -746,11 +760,12 @@ inspect? (c ∷ f) dang = if methch (getDown f) nothing
     m = "I can't handle any more of your inane \
         \gibberish.\n\
         \If you want to search for multiple things, \
-        \then tell me the shortnames of the things \
-        \individually.\n\
+        \then individually state the shortnames of \
+        \the things.\n\
         \Alternatively, you might have tried to \
-        \search for a full name which contains \
-        \multiple spaces, which is illegal.  \
+        \search for a cname which contains \
+        \multiple spaces.  But illegal is that a \
+        \cname contains multiple spaces.\
         \Do it $n$ more times, and I will send the \
         \police to your doorstep.  I'm trying to \
         \help you, but you're really testing my \
@@ -779,9 +794,8 @@ ni'o ga jonai ga je tu'a la'o zoi.\ \B m\ .zoi.\ .indika lo du'u lo kelci cu dji
 invent? : Com
 invent? ("LIST" ∷ "INVENTORY" ∷ []) g = just $ desks , g
   where
-  desks = concat $ intersperseₗ "\n\n" $ Data.List.map desk items
+  desks = concat $ intersperse "\n\n" $ map desk items
     where
-    intersperseₗ = Data.List.intersperse
     items = Character.inventory $ GameData.player g
     desk = λ a → Item.cname a ++ ": " ++ Item.hlDescr a
 invent? _ _ = nothing
@@ -796,26 +810,24 @@ kumski? : Com
 kumski? m g = if mapti (just $ le'i-velski , g) nothing
   where
   mapti = _↑_ 3 m ≡ᵇ ("LOOK" ∷ "AROUND" ∷ "YOU" ∷ [])
-  le'i-velski : String
-  le'i-velski = concatₛ $ intersperseₗ "\n\n" le'i-lerpinsle
+  le'i-velski = concatₛ $ intersperse "\n\n" le'i-lerpinsle
     where
     kumfa = GameData.rooms g ! Character.room (GameData.player g)
-    intersperseₗ = Data.List.intersperse
     concatₛ = Data.String.concat
-    mapₗ = Data.List.map
-    velski : Item → String
-    velski z with filterₗ methch $ Item.rmDescr z
+    le'i-lerpinsle = jaiv ∷ map velski (Room.items kumfa)
       where
-      methch = λ a → proj₁ a ≟ Room.cname kumfa
-    ... | [] = Item.cname z ++ ": " ++ Item.dfDescr z
-    ... | (x ∷ _) = Item.cname z ++ ": " ++ proj₂ x
-    jaiv : String
-    jaiv with Room.travis kumfa
-    ... | [] = "This room is completely isolated.  GFL."
-    ... | (x ∷ xs) = "CONNECTED ROOMS: " ++ concatₛ liste
-      where
-      liste = intersperseₗ ", " $ x ∷ xs
-    le'i-lerpinsle = jaiv ∷ mapₗ velski (Room.items kumfa)
+      velski : Item → String
+      velski z with filterₗ methch $ Item.rmDescr z
+        where
+        methch = _≟_ (Room.cname kumfa) ∘ proj₁
+      ... | [] = Item.cname z ++ ": " ++ Item.dfDescr z
+      ... | (x ∷ _) = Item.cname z ++ ": " ++ proj₂ x
+      jaiv : String
+      jaiv with Room.travis kumfa
+      ... | [] = "This room is completely isolated.  GFL."
+      ... | x@(_ ∷ _) = "CONNECTED ROOMS: " ++ concatₛ liste
+        where
+        liste = intersperse ", " x
 \end{code}
 
 \subsection{la'oi .\F{scream?}.}
@@ -859,13 +871,14 @@ lp? _ _ = nothing
 \end{code}
 
 \section{le fancu poi cumki fa lo nu ke'a pruce ja co'e zo'e je ko'a goi lo ctaipe be la'oi .GameData.\ zo'e je lo na du be ko'a}
+ni'o la .varik.\ cu jinvi le du'u zabna fa le su'u cmene ko'a goi la'u le fancu poi cumki fa lo nu ke'a pruce ja co'e zo'e je ko'a goi lo ctaipe be la'oi .GameData.\ zo'e je lo na du be ko'a li'u kei kei je le du'u tu'a ko'a filri'a lo nu jimpe fi ko'e goi le se cmene be ko'a  .i ku'i ga naja na jimpe fi ko'e gi cumki fa lo nu filri'a lo nu jimpe fi ko'e kei fa le se du'u ko'e vasru le velcki be le fancu poi lo nu zabna fa lo se pruce be ke'a cu se cumki lo nu tu'a lo te pruce ja co'e be ke'a cu .indika lo na se .indika tu'a lo se pruce be ke'a
 
 \subsection{la'oi .\F{travel?}.}
-ni'o ga jonai ga je la'o zoi.\ \F{travel?} .zoi.\ djuno ja co'e lo du'u lo nu co'e ko'a goi zoi zoi.\ \F{travel?} \B r \B g .zoi.\ cu nu cpedu lo nu lo kelci ke xarpre ja co'e cu klama lo kumfa poi la'o zoi.\ \B K .zoi.\ sinxa ke'a gi\ldots
+ni'o ga jonai ga je la'o zoi.\ \F{travel?} .zoi.\ djuno ja co'e lo du'u lo nu co'e ko'a goi zoi zoi.\ \F{travel?} \B r \B g .zoi.\ cu nu cpedu lo nu ko'e goi lo kelci ke xarpre ja co'e cu klama lo kumfa poi la'o zoi.\ \B K .zoi.\ sinxa ke'a gi\ldots
 \begin{itemize}
 	\item ga jonai ga je la'o zoi.\ \F{Room.travis} \F \$ \F{Character.room} \F \$ \F{GameData.player} \B g .zoi.\ vasru lo mu'oi glibau.\ \F{Room.cname}\ .glibau.\ be la'o zoi.\ \B K .zoi.\ gi\ldots
 	\begin{itemize}
-		\item ko'a broda cei sinxa ja co'e lo me'oi .product.\ be lo velski be lo nu klama bei zo'e poi tu'a ke'a .indika lo du'u lo kelci ke xarpre ja co'e cu zvati zo'e poi djica lo nu zvati ke'a xi re gi
+		\item ko'a broda cei sinxa ja co'e lo me'oi .product.\ be lo velski be lo nu klama bei zo'e poi tu'a ke'a .indika lo du'u ko'e zvati zo'e poi djica lo nu zvati ke'a xi re gi
 		\item ko'a broda lo me'oi .product.\ be lo te skuxai ja zo'e bei la'o zoi.\ \B g .zoi.
 	\end{itemize}
 	\item gi ko'a broda la'oi .\F{nothing}.
@@ -915,9 +928,8 @@ travel? (x₁ ∷ xs₁) = if realShit (travel' xs₁) $ const nothing
         where
         m = "Did you take your pills this morning?  \
             \I don't think that that room exists."
-      ... | (x ∷ xs) = inj₂ $ maproj₁ $ filterₗ tr $ x ∷ xs
+      ... | (x ∷ xs) = inj₂ $ map proj₁ $ filterₗ tr $ x ∷ xs
         where
-        maproj₁ = Data.List.map proj₁
         tr = flip any? (Room.travis cur) ∘ _≟_ ∘ Room.cname ∘ proj₂
 \end{code}
 
@@ -1001,5 +1013,37 @@ take? ("TAKE" ∷ x ∷ []) g with filterₗ methching itste
   k = GameData.player' g
   m = "You take " ++ Item.cname (proj₁ t) ++ "."
 take? _ _ = nothing
+\end{code}
+
+\section{la'oi .\F{hitme?}.}
+ni'o ga jonai ga je tu'a la'oi .\B{s}.\ .indika lo du'u djica lo nu xrani ja co'e ko'a goi lo kelci ke xarpre ja co'e pe la'oi .\B{g}.\ gi ga je tu'a la'oi .\B{t}.\ lu'u je tu'a la'o zoi.\ \B{g'}\ .zoi.\ cu .indika lo du'u xrani ko'a gi ko'a goi la'o zoi.\ \F{hitme?} \B s \B g\ .zoi.\ du la'o zoi.\ \F{just} \F \$ \B t \F , \B{g'}\ .zoi.\ gi ko'a du la'oi .\F{nothing}.
+
+\begin{code}
+hitme? : Com
+hitme? ("HIT" ∷ "ME!" ∷ []) g = just $ "BOOM!" , record g {
+  haters = proj₁ u;
+  player' = mink (GameData.player' g) $ proj₁ $ proj₂ u
+  }
+  where
+  natsuprais = λ n → record n {health = 0ℚ}
+  u = ual (GameData.haters g) (GameData.player' g) natsuprais
+hitme? _ _ = nothing
+\end{code}
+
+\chapter{le zmiku}
+ni'o la'au le zmiku li'u vasru le velcki be le fancu poi lo ctaipe be ke'a cu smimlu la'o zoi.\ \F{GameData} \Sym → \F{Maybe} \F \$ \F{String} \F × \F{GameData}\ .zoi.\ jenai poi tu'a ke'a se sarcu lo nu midnoi fi lo kelci
+
+\section{la .\F{zmimrobi'o}.}
+ni'o ga jonai ga je tu'a la'oi .\B{t}.\ .indika ko'a goi lo du'u lo kelci ke xarpre ja co'e cu morsi gi ga je tu'a la'oi .\B{s}.\ .indika ko'a gi ko'a goi la'o zoi.\ \F{zmimrobi'o} \B t\ .zoi.\ du la'o zoi.\ \F{just} \F \$ \B s \F , \B t\ .zoi.\ gi ko'a du la'oi .\F{nothing}.
+
+\begin{code}
+zmimrobi'o : GameData → Maybe $ String × GameData
+zmimrobi'o t = if morsi (just $ "You be dead." , t) nothing
+  where
+  morsi = num lenijmive ℤ.≤ᵇ ℤ.0ℤ
+    where
+    import Data.Integer as ℤ
+    lenijmive = Character.health $ GameData.player t
+    num = Data.Rational.ℚ.numerator
 \end{code}
 \end{document}
