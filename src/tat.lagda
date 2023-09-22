@@ -51,7 +51,6 @@ open import IO
     _>>=_ to _>>=ᵢₒ_
   )
 open import Function
-open import Data.Bool
 open import Data.Char
   using (
     toUpper
