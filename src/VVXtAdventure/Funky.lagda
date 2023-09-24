@@ -1011,7 +1011,7 @@ take? ("TAKE" ∷ x ∷ []) g with filterₗ methching itste
 ... | (t ∷ _) = just $ m , proj₁ (takePawn g k $ proj₂ t)
   where
   k = GameData.player' g
-  m = "You take " ++ Item.cname (proj₁ t) ++ "."
+  m = "You take the " ++ Item.name (proj₁ t) ++ "."
 take? _ _ = nothing
 \end{code}
 
