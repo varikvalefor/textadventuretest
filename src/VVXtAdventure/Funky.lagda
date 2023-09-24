@@ -531,8 +531,7 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
         → nu,iork $ s ∷ x
       f x s n nin = {!!}
   x'' : Σ (List $ Character k') $ λ x'
-        → Σ (length (GameData.haters q) ≡ length x') $ λ ℓ
-        → _
+        → Σ (length (GameData.haters q) ≡ length x') _
   x'' = ualmap (GameData.haters q) kumbi'o lb! m
   q' = record {
     epicwin = GameData.epicwin q;
