@@ -189,7 +189,7 @@ open ≡-Reasoning
 ni'o la'au le mu'oi glibau.\ low-level .glibau.\ li'u vasru le velcki be le fancu poi ke'a pruce ja co'e zo'e je lo ctaipe be la'oi .\F{GameData}.\ lo ctaipe be la'oi .\F{GameData}.\ je lo ctaipe be zo'e ja lo su'u dunli
 
 \section{la'o zoi.\ \F{movePawn} .zoi.}
-ni'o tu'a la'o zoi.\ \F{movePawn} \B q \B m \B n .zoi.\ .indika lo du'u lo selsni be la'o zoi.\ \F{GameData.haters} \B q \OpF ! \B h .zoi.\ cu zvati ko'a goi lo selsni be la'o zoi.\ \F{GameData.rooms} \B q) \OpF ! \B n .zoi.
+ni'o tu'a la'o zoi.\ \F{movePawn} \B q \B m \B n .zoi.\ .indika lo du'u lo selsni be la'o zoi.\ \F{GameData.haters} \B q \OpF !\ \B h .zoi.\ cu zvati ko'a goi lo selsni be la'o zoi.\ \F{GameData.rooms} \B q) \OpF !\ \B n .zoi.
 
 \begin{code}
 movePawn : (q : GameData)
@@ -221,7 +221,7 @@ movePawn gd h r = gd' , refl , proj₁ (proj₂ xat) , rudus , refl
 \end{code}
  
 \section{la'o zoi.\ \F{wieldPawn}\ .zoi.}
-ni'o tu'a la'o zoi.\ \F{wieldPawn} \B q \B m \B n \F{refl}\ .zoi.\ .indika lo du'u zo'e ja lo selsni be la'o zoi.\ \F{GameData.haters} \B q \OpF ! \B m .zoi.\ cu me'oi .wield.\ lo selsni be la'o zoi.\ \F{Character.inventory} \Sym(\F{GameData.haters} \B q \OpF ! \B m\Sym) \OpF ! \B n .zoi.
+ni'o tu'a la'o zoi.\ \F{wieldPawn} \B q \B m \B n \F{refl}\ .zoi.\ .indika lo du'u zo'e ja lo selsni be la'o zoi.\ \F{GameData.haters} \B q \OpF !\ \B m .zoi.\ cu me'oi .wield.\ lo selsni be la'o zoi.\ \F{Character.inventory} \Sym(\F{GameData.haters} \B q \OpF !\ \B m\Sym) \OpF !\ \B n .zoi.
 
 \begin{code}
 wieldPawn : (q : GameData)
