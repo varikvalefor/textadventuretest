@@ -21,6 +21,7 @@
 \newunicodechar{ₗ}{\ensuremath{\mathnormal{_l}}}
 \newunicodechar{∈}{\ensuremath{\mathnormal{\in}}}
 \newunicodechar{∃}{\ensuremath{\mathnormal{\exists}}}
+\newunicodechar{ℚ}{\ensuremath{\mathnormal{\mathbb Q}}}
 
 \newcommand\Sym\AgdaSymbol
 \newcommand\D\AgdaDatatype
