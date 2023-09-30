@@ -82,7 +82,6 @@ open import Relation.Binary.PropositionalEquality
     refl
   )
 
-import Data.Integer as ℤ
 import Data.Rational as ℚ
 \end{code}
 
@@ -184,7 +183,7 @@ initialD = record {
     surname = "TUBMANN";
     cname = "XITAS";
     nicknames = "THE O.G. MEATBALL" ∷ [];
-    health = ℤ.1ℤ ℚ./ 1;
+    health = ℚ.1ℚ;
     room = Data.Fin.zero;
     inventory = defstick ∷ [];
     wieldedct = nothing;
