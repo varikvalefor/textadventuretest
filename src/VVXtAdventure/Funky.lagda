@@ -591,9 +591,9 @@ travel? (x₁ ∷ xs₁) = if realShit (travel' xs₁) $ const nothing
           q' = movePawn q $ GameData.player' q
           m = "You travel successfully."
       mathch : String ⊎ List F
-      mathch with methching $ zipfin $ GameData.rooms q
+      mathch with methching $ indice $ GameData.rooms q
         where
-        zipfin = λ l → flip Data.List.zip l $ allFin $ length l
+        indice = λ l → flip Data.List.zip l $ allFin $ length l
         methching = filterₗ $ _≟_ cname ∘ Room.cname ∘ proj₂
       ... | [] = inj₁ m
         where
