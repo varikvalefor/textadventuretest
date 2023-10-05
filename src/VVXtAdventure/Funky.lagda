@@ -569,7 +569,7 @@ travel? (x₁ ∷ xs₁) = if realShit (travel' xs₁) $ const nothing
     where
     m = "I strongly doubt that the concept of \"super\
         \position\" applies to a creature of your mass."
-  travel' (cname ∷ []) q = maybe just tryfind $ alreadythere?
+  travel' (cname ∷ []) q = maybe just faktoi $ alreadythere?
     where
     F = Fin $ length $ GameData.rooms q
     cur = GameData.rooms q ! Character.room (GameData.player q)
@@ -578,7 +578,7 @@ travel? (x₁ ∷ xs₁) = if realShit (travel' xs₁) $ const nothing
       atRoom = cname ≡ᵇ Room.cname cur
       m = "Damn, that's some fast travel.  \
           \You're already there!"
-    tryfind = [_,_] (just ∘ flip _,_ q) iusyf mathch
+    faktoi = [_,_] (just ∘ flip _,_ q) iusyf mathch
       where
       -- | We'll just have to live with that possibility.
       iusyf = maybe youse fail ∘ Data.List.head
