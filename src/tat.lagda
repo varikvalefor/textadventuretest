@@ -113,9 +113,7 @@ main = run $ IO.lift nurtcati >>ᵢₒ lupe initialD
     fanmo? q = firstJust $ Data.List.map mapti? fancu
       where
       firstJust : ∀ {a} → {A : Set a} → List $ Maybe A → Maybe A
-      firstJust [] = nothing
-      firstJust (just t ∷ _) = just t
-      firstJust (nothing ∷ t) = firstJust t
+      firstJust = Data.List.head ∘ Data.List.mapMaybe id
       mapti? = Data.Maybe.map $ putStrLn ∘ proj₁
       fancu = zmimrobi'o q ∷
               epicwin? winmsg q ∷
