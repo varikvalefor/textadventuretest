@@ -47,8 +47,6 @@ ni'o la'o zoi.\ \cmene{}\ .zoi.\ vasru le velcki be le kelci datni be le me'oi .
 
 module TestAdventure.WYCT where
 
-import Data.Fin
-
 open import Data.Bool
   using (
     true;
@@ -82,6 +80,7 @@ open import Relation.Binary.PropositionalEquality
     refl
   )
 
+import Data.Fin
 import Data.Rational as ℚ
 \end{code}
 
