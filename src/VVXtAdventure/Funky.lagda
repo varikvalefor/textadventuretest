@@ -326,17 +326,17 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
         tondus : {m n : ℕ}
                → m ≡ n
                → toℕ (Data.Fin.fromℕ m) ≡ n
-        tondus {m} x = subst (_≡_ _) x $ DFP.toℕ-fromℕ m
+        tondus x = subst (_≡_ _) x $ DFP.toℕ-fromℕ _
     xil = begin
       toℕ (mink j xenlen) ≡⟨ sym $ tomindus j xenlen ⟩
-      toℕ j ≡⟨ sym $ teiklendus xen (toℕ j) jelis ⟩
+      toℕ j ≡⟨ teiklendus xen (toℕ j) jelis ⟩
       𝓁 x₁ ∎
       where
       teiklendus : ∀ {a} → {A : Set a}
                  → (xs : List A)
                  → (n : ℕ)
                  → n ≤ 𝓁 xs
-                 → 𝓁 (n ↑ xs) ≡ n
+                 → n ≡ 𝓁 (n ↑ xs)
       teiklendus _ 0 _ = refl
       teiklendus (_ ∷ xs) (ℕ.suc n) (Data.Nat.s≤s q) = ret
         where
