@@ -107,8 +107,8 @@ open import Relation.Binary.PropositionalEquality
 
 \section{le me'oi .\AgdaKeyword{record}.}
 
-\subsection{la'oi .\F{WeaponInfo}.}
-ni'o ga jo la'o zoi.\ \B a .zoi.\ srana lo selsni be ko'a goi lo ctaipe be la'oi .\F{Item}.\ gi\ldots
+\subsection{la'oi .\AgdaRecord{WeaponInfo}.}
+ni'o ga jo la'o zoi.\ \B a .zoi.\ srana lo selsni be ko'a goi lo ctaipe be la'oi .\AgdaRecord{Item}.\ gi\ldots
 \begin{itemize}
 	\item ga jo la'o zoi.\ \F{WeaponInfo.wieldMsg} \B a .zoi.\ du la'o zoi.\ \F{just} \B b .zoi.\ gi cadga fa lo nu cusku la'o zoi.\ \B b .zoi.\ ca lo nu lo kelci ke xarpre ja co'e cu binxo lo me'oi .wield.\ be ko'a
 \end{itemize}
@@ -120,9 +120,9 @@ record WeaponInfo : Set
     wieldMsg : Maybe String
 \end{code}
 
-\subsection{la'oi .\F{Item}.}
+\subsection{la'oi .\AgdaRecord{Item}.}
 
-ni'o ga jo ko'a goi la'o zoi.\ \B a .zoi.\ ctaipe la'oi .\F{Item}.\ gi\ldots
+ni'o ga jo ko'a goi la'o zoi.\ \B a .zoi.\ ctaipe la'oi .\AgdaRecord{Item}.\ gi\ldots
 \begin{itemize}
 	\item ga je la'o zoi.\ \F{Item.name} \B a .zoi.\ mu'oi glibau.\ display name .glibau.\ ko'a gi
 	\item ga je ga je ko'e goi la'o zoi.\ \F{Item.cname} \B a .zoi.\ cmene ko'a gi cadga fa lo nu lo kelci cu pilno ko'e tu'a ko'a gi
@@ -150,8 +150,8 @@ record Item : Set
     yourfloorisnowclean : nu,iork $ Data.List.map proj₁ rmDescr
 \end{code}
 
-\subsection{la'oi .\F{Room}.}
-ni'o ga jo ko'a goi la'o zoi.\ \B a .zoi.\ ctaipe la'oi .\F{Room}.\ gi\ldots
+\subsection{la'oi .\AgdaRecord{Room}.}
+ni'o ga jo ko'a goi la'o zoi.\ \B a .zoi.\ ctaipe la'oi .\AgdaRecord{Room}.\ gi\ldots
 \begin{itemize}
 	\item ga je la'o zoi.\ \F{Room.name} \B a .zoi.\ cmene lo selsni be ko'a gi
 	\item ga je cadga fa lo nu lo kelci cu pilno la'o zoi.\ \F{Room.cname} \B a .zoi.\ tu'a ko'a gi
@@ -170,10 +170,10 @@ record Room : Set
     travis : List String
 \end{code}
 
-\subsection{la'oi .\F{Character}.}
-ni'o ga jo la'o zoi.\ \B K .zoi.\ ctaipe la'o zoi.\ \F{List} \F{Room} .zoi.\ gi la'o zoi.\ \F{Character} \B K .zoi.\ se ctaipe lo sinxa be lo xarpre ja co'e
+\subsection{la'oi .\AgdaRecord{Character}.}
+ni'o ga jo la'o zoi.\ \B K .zoi.\ ctaipe la'o zoi.\ \F{List} \AgdaRecord{Room} .zoi.\ gi la'o zoi.\ \AgdaRecord{Character} \B K .zoi.\ se ctaipe lo sinxa be lo xarpre ja co'e
 
-.i ga jo la'o zoi.\ \B a .zoi.\ ctaipe la'o zoi.\ \F{Character} \B q .zoi.\ gi\ldots
+.i ga jo la'o zoi.\ \B a .zoi.\ ctaipe la'o zoi.\ \AgdaRecord{Character} \B q .zoi.\ gi\ldots
 \begin{itemize}
 	\item ga je la'o zoi.\ \F{Character.forename} \B a .zoi.\ du'acme ko'a goi lo selsni be la'o zoi.\ \B a .zoi.\ gi
 	\item ga je la'o zoi.\ \F{Character.surname} \B a .zoi.\ lazme'e ko'a gi
@@ -205,8 +205,8 @@ record Character (q : List Room) : Set
   wielded = Data.Maybe.map proj₁ wieldedct
 \end{code}
 
-\subsection{la'oi .\F{GameData}.}
-ni'o ga jo ko'a goi la'o zoi.\ \B a .zoi.\ ctaipe la'oi .\F{GameData}.\ gi\ldots
+\subsection{la'oi .\AgdaRecord{GameData}.}
+ni'o ga jo ko'a goi la'o zoi.\ \B a .zoi.\ ctaipe la'oi .\AgdaRecord{GameData}.\ gi\ldots
 \begin{itemize}
         \item ga je ga jo la'o zoi.\ \F{GameData.epicwin} \B a .zoi.\ du la'oi .\F{true}.\ gi ga je le kelci cu jinga gi le selkei cu mulno ja co'e gi
         \item ga je la'o zoi.\ \F{GameData.rooms} \B a .zoi.\ liste lo'i sinxa be lo'i co'e poi cumki fa lo nu zvati ke'a gi
