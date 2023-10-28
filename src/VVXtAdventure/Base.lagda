@@ -110,7 +110,7 @@ open import Relation.Binary.PropositionalEquality
 \subsection{la'oi .\AgdaRecord{WeaponInfo}.}
 ni'o ga jo la'o zoi.\ \B a .zoi.\ srana lo selsni be ko'a goi lo ctaipe be la'oi .\AgdaRecord{Item}.\ gi\ldots
 \begin{itemize}
-	\item ga jo la'o zoi.\ \F{WeaponInfo.wieldMsg} \B a .zoi.\ du la'o zoi.\ \F{just} \B b .zoi.\ gi cadga fa lo nu cusku la'o zoi.\ \B b .zoi.\ ca lo nu lo kelci ke xarpre ja co'e cu binxo lo me'oi .wield.\ be ko'a
+	\item ga jo la'o zoi.\ \F{WeaponInfo.wieldMsg} \B a .zoi.\ du la'o zoi.\ \AgdaInductiveConstructor{just} \B b .zoi.\ gi cadga fa lo nu cusku la'o zoi.\ \B b .zoi.\ ca lo nu lo kelci ke xarpre ja co'e cu binxo lo me'oi .wield.\ be ko'a
 \end{itemize}
 
 \begin{code}
@@ -126,7 +126,7 @@ ni'o ga jo ko'a goi la'o zoi.\ \B a .zoi.\ ctaipe la'oi .\AgdaRecord{Item}.\ gi\
 \begin{itemize}
 	\item ga je la'o zoi.\ \F{Item.name} \B a .zoi.\ mu'oi glibau.\ display name .glibau.\ ko'a gi
 	\item ga je ga je ko'e goi la'o zoi.\ \F{Item.cname} \B a .zoi.\ cmene ko'a gi cadga fa lo nu lo kelci cu pilno ko'e tu'a ko'a gi
-        \item ga je ga jonai ga je ko'a sinxa lo me'oi .weapon.\ gi ko'e goi la'o zoi.\ \F{weapwn} \B a .zoi.\ me'oi .\F{just}.\ lo velski be ko'a gi ko'e du la'oi .\F{nothing}.\ gi
+        \item ga je ga jonai ga je ko'a sinxa lo me'oi .weapon.\ gi ko'e goi la'o zoi.\ \F{weapwn} \B a .zoi.\ me'oi .\AgdaInductiveConstructor{just}.\ lo velski be ko'a gi ko'e du la'oi .\AgdaInductiveConstructor{nothing}.\ gi
 	\item cadga fa lo nu ga naja ga je lo kelci cu cpedu lo nu skicu lo selsni be ko'a gi curmi lo nu skicu lo selsni be ko'a gi\ldots
 	\begin{itemize}
 		\item ga jonai ga je lo me'oi .inventory.\ be lo kelci xarpre ja co'e cu vasru lo selsni be ko'a gi pilno la'o zoi.\ \F{hlDescr} \B a .zoi.\ gi
@@ -182,7 +182,7 @@ ni'o ga jo la'o zoi.\ \B K .zoi.\ ctaipe la'o zoi.\ \D{List} \AgdaRecord{Room} .
 	\item ga je tu'a la'o zoi.\ \B a .zoi.\ .indika lo du'u ko'a zvati lo selsni be la'o zoi.\ \F{lookup} \B q \OpF \$ \F{Character.room} \B a .zoi.\ gi
 	\item ga je la'o zoi.\ \F{Character.inventory} \B a .zoi.\ liste lo'i ro se ralte be lo selsni be ko'a gi
 	\item ga je la'o zoi.\ \F{Character.health}\ \B a\ zoi.\ ni ko'a na morsi kei ja cu co'e gi
-        \item ga naja la'o zoi.\ \B i .zoi.\ du la'o zoi.\ \F{Character.inventory} \B a .zoi.\footnote{ni'o pilno zo'e pe zo du mu'i le su'u djica lo nu lo me'oi .hbox.\ cu na me'oi .overfull.}\ gi la'o zoi.\ \F{Data.Maybe.map} \Sym(\F{lookup} \B i\Sym) \OpF \$ \F{Character.wielded} \B a .zoi.\ du la'oi .\F{nothing}.\ jonai cu me'oi .\F{just}.\ lo sinxa be lo se me'oi .wield.\ be ko'a
+        \item ga naja la'o zoi.\ \B i .zoi.\ du la'o zoi.\ \F{Character.inventory} \B a .zoi.\footnote{ni'o pilno zo'e pe zo du mu'i le su'u djica lo nu lo me'oi .hbox.\ cu na me'oi .overfull.}\ gi la'o zoi.\ \F{Data.Maybe.map} \Sym(\F{lookup} \B i\Sym) \OpF \$ \F{Character.wielded} \B a .zoi.\ du la'oi .\AgdaInductiveConstructor{nothing}.\ jonai cu me'oi .\AgdaInductiveConstructor{just}.\ lo sinxa be lo se me'oi .wield.\ be ko'a
 \end{itemize}
 
 .i la .varik.\ cu na jinvi le du'u sarcu fa lo nu jmina lo .lojban.\ velcki be la'o zoi.\ \F{Character.yourfloorisnowclean} .zoi.
@@ -208,7 +208,7 @@ record Character (q : List Room) : Set
 \subsection{la'oi .\AgdaRecord{GameData}.}
 ni'o ga jo ko'a goi la'o zoi.\ \B a .zoi.\ ctaipe la'oi .\AgdaRecord{GameData}.\ gi\ldots
 \begin{itemize}
-        \item ga je ga jo la'o zoi.\ \F{GameData.epicwin} \B a .zoi.\ du la'oi .\F{true}.\ gi ga je le kelci cu jinga gi le selkei cu mulno ja co'e gi
+        \item ga je ga jo la'o zoi.\ \F{GameData.epicwin} \B a .zoi.\ du la'oi .\AgdaInductiveConstructor{true}.\ gi ga je le kelci cu jinga gi le selkei cu mulno ja co'e gi
         \item ga je la'o zoi.\ \F{GameData.rooms} \B a .zoi.\ liste lo'i sinxa be lo'i co'e poi cumki fa lo nu zvati ke'a gi
         \item ga je la'o zoi.\ \F{GameData.haters} \B a .zoi.\ liste lo'i sinxa be lo'i xarpre ja co'e po ko'a gi
         \item la'o zoi.\ \F{GameData.player} \B a .zoi.\ sinxa lo kelci ke xarpre ja co'e po ko'a gi
@@ -232,7 +232,7 @@ record GameData : Set
 
 \subsection{la'oi .\F{COut}.}
 
-ni'o ro da poi ke'a midnoi ja co'e zo'u ga jonai ga je lo se pruce cu mapti da gi da me'oi .\F{just}.\ pruce fi lo ctaipe be la'o zoi.\ \F{String} \OpF × \F{GameData} .zoi.\ be'o noi cagda fa lo nu ciska lo se .orsi be ke'a lo mu'oi glibau.\ standard output .glibau.\ kei je lo nu me'oi .\F{main}.\ pilno lo te .orsi be ke'a gi da du la'oi .\F{nothing}.
+ni'o ro da poi ke'a midnoi ja co'e zo'u ga jonai ga je lo se pruce cu mapti da gi da me'oi .\AgdaInductiveConstructor{just}.\ pruce fi lo ctaipe be la'o zoi.\ \F{String} \OpF × \F{GameData} .zoi.\ be'o noi cagda fa lo nu ciska lo se .orsi be ke'a lo mu'oi glibau.\ standard output .glibau.\ kei je lo nu me'oi .\F{main}.\ pilno lo te .orsi be ke'a gi da du la'oi .\AgdaInductiveConstructor{nothing}.
 
 .i la'oi .\F{COut}.\ na mutce lo ka ce'u smimlu fo la .varik.\ fe la'oi .\texttt{cout}.\ po la'o zoi.\ C++ .zoi.
 
