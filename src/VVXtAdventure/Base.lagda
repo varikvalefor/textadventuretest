@@ -171,7 +171,7 @@ record Room : Set
 \end{code}
 
 \subsection{la'oi .\AgdaRecord{Character}.}
-ni'o ga jo la'o zoi.\ \B K .zoi.\ ctaipe la'o zoi.\ \F{List} \AgdaRecord{Room} .zoi.\ gi la'o zoi.\ \AgdaRecord{Character} \B K .zoi.\ se ctaipe lo sinxa be lo xarpre ja co'e
+ni'o ga jo la'o zoi.\ \B K .zoi.\ ctaipe la'o zoi.\ \D{List} \AgdaRecord{Room} .zoi.\ gi la'o zoi.\ \AgdaRecord{Character} \B K .zoi.\ se ctaipe lo sinxa be lo xarpre ja co'e
 
 .i ga jo la'o zoi.\ \B a .zoi.\ ctaipe la'o zoi.\ \AgdaRecord{Character} \B q .zoi.\ gi\ldots
 \begin{itemize}
