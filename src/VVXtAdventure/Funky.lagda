@@ -549,10 +549,10 @@ ni'o ga jonai ga je la'o zoi.\ \F{travel?} .zoi.\ djuno ja co'e lo du'u lo nu co
 \begin{itemize}
 	\item ga jonai ga je la'o zoi.\ \AgdaField{Room.travis} \OpF \$ \AgdaField{Character.room} \OpF \$ \AgdaField{GameData.player} \B g .zoi.\ vasru lo mu'oi glibau.\ \AgdaField{Room.cname}\ .glibau.\ be la'o zoi.\ \B K .zoi.\ gi\ldots
 	\begin{itemize}
-		\item ko'a broda cei sinxa ja co'e lo me'oi .product.\ be lo velski be lo nu klama bei zo'e poi tu'a ke'a .indika lo du'u ko'e zvati zo'e poi djica lo nu zvati ke'a xi re gi
-		\item ko'a broda lo me'oi .product.\ be lo te skuxai ja zo'e bei la'o zoi.\ \B g .zoi.
+		\item ko'a du lo me'oi .product.\ be lo velski be lo nu klama bei zo'e poi tu'a ke'a .indika lo du'u ko'e zvati zo'e poi djica lo nu zvati ke'a xi re gi
+		\item ko'a me'oi .product.\ lo te skuxai ja zo'e la'o zoi.\ \B g .zoi.
 	\end{itemize}
-	\item gi ko'a broda la'oi .\AgdaInductiveConstructor{nothing}.
+	\item gi ko'a du la'oi .\AgdaInductiveConstructor{nothing}.
 \end{itemize}
 
 \begin{code}
