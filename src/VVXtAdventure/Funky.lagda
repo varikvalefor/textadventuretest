@@ -474,7 +474,7 @@ invent? _ _ = nothing
 
 \subsection{la'oi .\F{kumski?}.}
 
-ni'o ga jonai ga je la'oi .\F{scream?}.\ djuno pe'a ru'e lo du'u tu'a la'o zoi.\ \B a .zoi.\ .indika lo du'u lo kelci cu djica lo nu tcidu ko'a goi lo velski be lo selvau be lo kumfa poi la'o zoi.\ \B b\ .zoi.\ .indika lo du'u ke'a zasti gi ga je la'o zoi.\ \B v .zoi.\ vasru lo velcki be ko'a gi ko'e goi la'o zoi.\ \F{kumski?} \B a \B b\ .zoi.\ du la'o zoi.\ \AgdaInductiveConstructor{nothing} \OpF \$ \B v \OpF , \B b\ .zoi.\ gi ko'e du la'oi .\AgdaInductiveConstructor{nothing}.
+ni'o ga jonai ga je la'oi .\F{scream?}.\ djuno pe'a ru'e lo du'u tu'a la'o zoi.\ \B a .zoi.\ .indika lo du'u lo kelci cu djica lo nu tcidu ko'a goi lo velski be lo selvau be lo kumfa poi la'o zoi.\ \B b\ .zoi.\ .indika lo du'u ke'a zasti gi ga je la'o zoi.\ \B v .zoi.\ vasru lo velcki be ko'a gi ko'e goi la'o zoi.\ \F{kumski?} \B a \B b\ .zoi.\ du la'o zoi.\ \AgdaInductiveConstructor{just} \OpF \$ \B v \OpF , \B b\ .zoi.\ gi ko'e du la'oi .\AgdaInductiveConstructor{nothing}.
 
 \begin{code}
 kumski? : Com
