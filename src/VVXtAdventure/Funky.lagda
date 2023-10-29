@@ -459,7 +459,7 @@ inspect? [] _ = nothing
 \end{code}
 
 \subsection{la'oi .\F{invent?}.}
-ni'o ga jonai ga je tu'a la'o zoi.\ \B m\ .zoi.\ .indika lo du'u lo kelci cu djica lo nu skicu lo selvau be ko'a goi lo me'oi .inventory.\ be lo kelci ke xarpre ja co'e gi ga je la'o zoi.\ \B s\ .zoi.\ vasru lo velski be lo ro selvau be ko'a gi ko'e goi la'o zoi.\ \F{invent?} \B \B g\ .zoi.\ du la'o zoi.\ \AgdaInductiveConstructor{nothing} \OpF \$ \B s \OpF , \B g .zoi.\ gi ko'e du la'oi .\AgdaInductiveConstructor{nothing}.
+ni'o ga jonai ko'e goi la'o zoi.\ \F{invent?} \B \B g\ .zoi.\ du la'oi .\AgdaInductiveConstructor{nothing}.\ gi ga je tu'a la'o zoi.\ \B m\ .zoi.\ .indika lo du'u lo kelci cu djica lo nu skicu lo selvau be ko'a goi lo me'oi .inventory.\ be lo kelci ke xarpre ja co'e gi ga je la'o zoi.\ \B s\ .zoi.\ vasru lo velski be lo ro selvau be ko'a gi ko'e du la'o zoi.\ \AgdaInductiveConstructor{nothing} \OpF \$ \B s \OpF , \B g .zoi.
 
 \begin{code}
 invent? : Com
