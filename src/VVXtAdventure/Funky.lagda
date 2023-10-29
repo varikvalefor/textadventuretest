@@ -415,7 +415,7 @@ ni'o ga jonai ga je ga je la'oi .\F{inspect?}.\ djuno pe'a ru'e lo du'u tu'a la'
 	\item ga je la'o zoi.\ \B q .zoi.\ velski la'o zoi.\ \B b .zoi.\ gi ko'a goi la'o zoi.\ \F{inspect?} \B a \B{godDamn} .zoi.\ du la'o zoi.\ \AgdaInductiveConstructor{nothing} \OpF \$ \B q \OpF , \B{godDamn} .zoi.\ gi
 	\item ga jonai ga je la'oi .\F{inspect?}.\ djuno pe'a ru'e lo du'u la'o zoi.\ \B a .zoi.\ mabla gi\ldots
 	\begin{itemize}
-		\item ga je la'o zoi.\ \B i .zoi.\ te skuxai gi ko'a du la'o zoi.\ \AgdaInductiveConstructor{nothing} \OpF \$ \B i \OpF , \B{godDamn} .zoi.\ gi
+		\item ga je la'o zoi.\ \B i .zoi.\ te skuxai gi ko'a du la'o zoi.\ \AgdaInductiveConstructor{just} \OpF \$ \B i \OpF , \B{godDamn} .zoi.\ gi
 		\item ko'a du la'oi .\AgdaInductiveConstructor{nothing}.
 	\end{itemize}
 \end{itemize}
