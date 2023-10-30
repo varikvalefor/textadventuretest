@@ -232,7 +232,7 @@ record GameData : Set
 
 \subsection{la'oi .\F{COut}.}
 
-ni'o ro da poi ke'a midnoi ja co'e zo'u ga jonai da du la'oi .\AgdaInductiveConstructor{nothing}.\ gi ga je lo se pruce cu mapti da gi da me'oi .\AgdaInductiveConstructor{just}.\ pruce fi lo ctaipe be la'o zoi.\ \AgdaPostulate{String} \OpF × \AgdaRecord{GameData} .zoi.\ be'o noi cagda fa lo nu ciska lo se .orsi be ke'a lo mu'oi glibau.\ standard output .glibau.\ kei je lo nu me'oi .\F{main}.\ pilno lo te .orsi be ke'a
+ni'o ro da poi ke'a midnoi ja co'e zo'u ga jonai da du la'oi .\AgdaInductiveConstructor{nothing}.\ gi ga je lo se pruce cu mapti da gi da me'oi .\AgdaInductiveConstructor{just}.\ pruce fi lo ctaipe be la'o zoi.\ \AgdaPostulate{String} \OpF × \AgdaRecord{GameData} .zoi.\ be'o noi cagda fa lo nu ciska lo te .orsi be ke'a lo mu'oi glibau.\ standard output .glibau.\ kei je lo nu me'oi .\F{main}.\ pilno lo ve .orsi be ke'a
 
 .i la'oi .\F{COut}.\ na mutce lo ka ce'u smimlu fo la .varik.\ fe la'oi .\texttt{cout}.\ po la'o zoi.\ C++ .zoi.
 
