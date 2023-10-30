@@ -412,7 +412,7 @@ epicwin? m g = if (GameData.epicwin g) (just $ m , g) nothing
 \subsection{la'oi .\F{inspect?}.}
 ni'o ga jonai ga je ga je la'oi .\F{inspect?}.\ djuno pe'a ru'e lo du'u tu'a la'o zoi.\ \B a .zoi.\ .indika lo du'u djica lo nu skicu la'o zoi.\ B b .zoi.\ gi cumki fa lo nu skicu la'o zoi.\ \B b .zoi.\ gi
 \begin{itemize}
-	\item ga je la'o zoi.\ \B q .zoi.\ velski la'o zoi.\ \B b .zoi.\ gi ko'a goi la'o zoi.\ \F{inspect?} \B a \B{godDamn} .zoi.\ du la'o zoi.\ \AgdaInductiveConstructor{nothing} \OpF \$ \B q \OpF , \B{godDamn} .zoi.\ gi
+	\item ga je la'o zoi.\ \B q .zoi.\ velski la'o zoi.\ \B b .zoi.\ gi ko'a goi la'o zoi.\ \F{inspect?} \B a \B{godDamn} .zoi.\ du la'o zoi.\ \AgdaInductiveConstructor{just} \OpF \$ \B q \OpF , \B{godDamn} .zoi.\ gi
 	\item ga jonai ga je la'oi .\F{inspect?}.\ djuno pe'a ru'e lo du'u la'o zoi.\ \B a .zoi.\ mabla gi\ldots
 	\begin{itemize}
 		\item ga je la'o zoi.\ \B i .zoi.\ te skuxai gi ko'a du la'o zoi.\ \AgdaInductiveConstructor{just} \OpF \$ \B i \OpF , \B{godDamn} .zoi.\ gi
@@ -459,7 +459,7 @@ inspect? [] _ = nothing
 \end{code}
 
 \subsection{la'oi .\F{invent?}.}
-ni'o ga jonai la'oi .\AgdaInductiveConstructor{nothing}.\ du ko'e goi la'o zoi.\ \F{invent?} \B \B g\ .zoi.\ gi ga je tu'a la'o zoi.\ \B m\ .zoi.\ .indika lo du'u lo kelci cu djica lo nu skicu lo selvau be ko'a goi lo me'oi .inventory.\ be lo kelci ke xarpre ja co'e gi ga je la'o zoi.\ \B s\ .zoi.\ vasru lo velski be lo ro selvau be ko'a gi ko'e du la'o zoi.\ \AgdaInductiveConstructor{nothing} \OpF \$ \B s \OpF , \B g .zoi.
+ni'o ga jonai la'oi .\AgdaInductiveConstructor{nothing}.\ du ko'e goi la'o zoi.\ \F{invent?} \B \B g\ .zoi.\ gi ga je tu'a la'o zoi.\ \B m\ .zoi.\ .indika lo du'u lo kelci cu djica lo nu skicu lo selvau be ko'a goi lo me'oi .inventory.\ be lo kelci ke xarpre ja co'e gi ga je la'o zoi.\ \B s\ .zoi.\ vasru lo velski be lo ro selvau be ko'a gi ko'e du la'o zoi.\ \AgdaInductiveConstructor{just} \OpF \$ \B s \OpF , \B g .zoi.
 
 \begin{code}
 invent? : Com
@@ -502,7 +502,7 @@ kumski? m g = if mapti (just $ le'i-velski , g) nothing
 \end{code}
 
 \subsection{la'oi .\F{scream?}.}
-ni'o ga jonai ga je la'oi .\F{scream?}.\ djuno pe'a ru'e lo du'u tu'a la'o zoi.\ \B a .zoi.\ .indika lo du'u lo kelci cu djica lo nu krixa fa ko'a goi lo krixa ke xarpre ja co'e po la'o zoi.\ \B b .zoi.\ gi ga je tu'a la'o zoi.\ \B c .zoi.\ .indika lo du'u ko'a krixa gi ko'e goi la'o zoi.\ \F{scream?} \B a \B b .zoi.\ du la'o zoi.\ \AgdaInductiveConstructor{nothing} \OpF \$ c \OpF , b .zoi.\ gi ko'e du la'oi .\AgdaInductiveConstructor{nothing}.
+ni'o ga jonai ga je la'oi .\F{scream?}.\ djuno pe'a ru'e lo du'u tu'a la'o zoi.\ \B a .zoi.\ .indika lo du'u lo kelci cu djica lo nu krixa fa ko'a goi lo krixa ke xarpre ja co'e po la'o zoi.\ \B b .zoi.\ gi ga je tu'a la'o zoi.\ \B c .zoi.\ .indika lo du'u ko'a krixa gi ko'e goi la'o zoi.\ \F{scream?} \B a \B b .zoi.\ du la'o zoi.\ \AgdaInductiveConstructor{just} \OpF \$ c \OpF , b .zoi.\ gi ko'e du la'oi .\AgdaInductiveConstructor{nothing}.
 
 \begin{code}
 scream? : Com
@@ -511,7 +511,7 @@ scream? _ _ = nothing
 \end{code}
 
 \subsection{la'oi .\F{sayless?}.}
-ni'o ga jonai ga je ga jo co'e gi la'o zoi.\ \B a .zoi.\ kunti gi ga je tu'a la'o zoi.\ \B c .zoi.\ .indika le du'u mabla fa lo nu samci'a lo kunti ja zo'e gi ko'a goi la'o zoi.\ \F{sayless?} \B a \B b .zoi.\ du la'o zoi.\ \AgdaInductiveConstructor{nothing} \OpF \$ \B c \OpF , \B b .zoi.\ gi ko'a du la'oi .\AgdaInductiveConstructor{nothing}.
+ni'o ga jonai ga je ga jo co'e gi la'o zoi.\ \B a .zoi.\ kunti gi ga je tu'a la'o zoi.\ \B c .zoi.\ .indika le du'u mabla fa lo nu samci'a lo kunti ja zo'e gi ko'a goi la'o zoi.\ \F{sayless?} \B a \B b .zoi.\ du la'o zoi.\ \AgdaInductiveConstructor{just} \OpF \$ \B c \OpF , \B b .zoi.\ gi ko'a du la'oi .\AgdaInductiveConstructor{nothing}.
 
 \begin{code}
 sayless? : List String → GameData → COut
@@ -605,7 +605,7 @@ travel? (x₁ ∷ xs₁) = if realShit (travel' xs₁) $ const nothing
 \end{code}
 
 \subsection{la'oi .\F{wield?}.}
-ni'o ga jonai ga je ga je la'oi .\F{wield?}.\ djuno pe'a ru'e lo du'u tu'a la'o zoi.\ \B a .zoi.\ .indika lo du'u lo kelci cu djica lo nu ko'a goi lo kelci ke xarpre ja co'e cu me'oi .wield.\ ko'e goi zo'e poi la'o zoi.\ \B c .zoi.\ mu'oi glibau.\ \AgdaField{Item.cname} .glibau.\ lo sinxa be ke'a gi ga jonai ga je li pa nilzilcmi lo'i selvau be lo me'oi .inventory.\ be ko'a be'o be'o poi la'o zoi.\ \B c .zoi.\ mu'oi glibau.\ \AgdaField{Item.cname} .glibau.\ ke'a je poi curmi lo nu me'oi .wield.\ ke'a gi tu'a la'o zoi.\ \B x .zoi.\ lu'u je tu'a la'o zoi.\ \B y .zoi.\ cu .indika lo du'u ko'a me'oi .wield.\ ko'e gi ko'i goi la'o zoi.\ \F{wield?} \B a \B b .zoi.\ du la'o zoi.\ \AgdaInductiveConstructor{nothing} \OpF \$ \B x \OpF , \B y .zoi.\ gi ga je skuxai ja co'e la'o zoi.\ \B x .zoi.\ gi ko'a du la'o zoi.\ \AgdaInductiveConstructor{nothing} \OpF \$ \B x \OpF , \B b .zoi.\ gi ko'a du la'oi .\AgdaInductiveConstructor{nothing}.
+ni'o ga jonai ga je ga je la'oi .\F{wield?}.\ djuno pe'a ru'e lo du'u tu'a la'o zoi.\ \B a .zoi.\ .indika lo du'u lo kelci cu djica lo nu ko'a goi lo kelci ke xarpre ja co'e cu me'oi .wield.\ ko'e goi zo'e poi la'o zoi.\ \B c .zoi.\ mu'oi glibau.\ \AgdaField{Item.cname} .glibau.\ lo sinxa be ke'a gi ga jonai ga je li pa nilzilcmi lo'i selvau be lo me'oi .inventory.\ be ko'a be'o be'o poi la'o zoi.\ \B c .zoi.\ mu'oi glibau.\ \AgdaField{Item.cname} .glibau.\ ke'a je poi curmi lo nu me'oi .wield.\ ke'a gi tu'a la'o zoi.\ \B x .zoi.\ lu'u je tu'a la'o zoi.\ \B y .zoi.\ cu .indika lo du'u ko'a me'oi .wield.\ ko'e gi ko'i goi la'o zoi.\ \F{wield?} \B a \B b .zoi.\ du la'o zoi.\ \AgdaInductiveConstructor{just} \OpF \$ \B x \OpF , \B y .zoi.\ gi ga je skuxai ja co'e la'o zoi.\ \B x .zoi.\ gi ko'a du la'o zoi.\ \AgdaInductiveConstructor{just} \OpF \$ \B x \OpF , \B b .zoi.\ gi ko'a du la'oi .\AgdaInductiveConstructor{nothing}.
 
 \begin{code}
 wield? : Com
@@ -653,7 +653,7 @@ wield? (x ∷ xs) dang = if (realShit x) (troci xs) nothing
 \end{code}
 
 \section{la'oi .\F{hitme?}.}
-ni'o ga jonai ga je tu'a la'oi .\B{s}.\ .indika lo du'u djica lo nu xrani ja co'e ko'a goi lo kelci ke xarpre ja co'e pe la'oi .\B{g}.\ gi ga je tu'a la'oi .\B{t}.\ lu'u je tu'a la'o zoi.\ \B{g'}\ .zoi.\ cu .indika lo du'u xrani ko'a gi ko'a goi la'o zoi.\ \F{hitme?} \B s \B g\ .zoi.\ du la'o zoi.\ \AgdaInductiveConstructor{nothing} \OpF \$ \B t \OpF , \B{g'}\ .zoi.\ gi ko'a du la'oi .\AgdaInductiveConstructor{nothing}.
+ni'o ga jonai ga je tu'a la'oi .\B{s}.\ .indika lo du'u djica lo nu xrani ja co'e ko'a goi lo kelci ke xarpre ja co'e pe la'oi .\B{g}.\ gi ga je tu'a la'oi .\B{t}.\ lu'u je tu'a la'o zoi.\ \B{g'}\ .zoi.\ cu .indika lo du'u xrani ko'a gi ko'a goi la'o zoi.\ \F{hitme?} \B s \B g\ .zoi.\ du la'o zoi.\ \AgdaInductiveConstructor{just} \OpF \$ \B t \OpF , \B{g'}\ .zoi.\ gi ko'a du la'oi .\AgdaInductiveConstructor{nothing}.
 
 \begin{code}
 hitme? : Com
@@ -671,7 +671,7 @@ hitme? _ _ = nothing
 ni'o la'au le zmiku li'u vasru le velcki be le fancu poi lo ctaipe be ke'a cu smimlu la'o zoi.\ \F{GameData} \Sym → \F{Maybe} \OpF \$ \F{String} \F × \F{GameData}\ .zoi.\ jenai poi tu'a ke'a se sarcu lo nu midnoi fi lo kelci
 
 \section{la .\F{zmimrobi'o}.}
-ni'o ga jonai ga je tu'a la'oi .\B{t}.\ .indika ko'a goi lo du'u lo kelci ke xarpre ja co'e cu morsi gi ga je tu'a la'oi .\B{s}.\ .indika ko'a gi ko'a goi la'o zoi.\ \F{zmimrobi'o} \B t\ .zoi.\ du la'o zoi.\ \AgdaInductiveConstructor{nothing} \OpF \$ \B s \OpF , \B t\ .zoi.\ gi ko'a du la'oi .\AgdaInductiveConstructor{nothing}.
+ni'o ga jonai ga je tu'a la'oi .\B{t}.\ .indika ko'a goi lo du'u lo kelci ke xarpre ja co'e cu morsi gi ga je tu'a la'oi .\B{s}.\ .indika ko'a gi ko'a goi la'o zoi.\ \F{zmimrobi'o} \B t\ .zoi.\ du la'o zoi.\ \AgdaInductiveConstructor{just} \OpF \$ \B s \OpF , \B t\ .zoi.\ gi ko'a du la'oi .\AgdaInductiveConstructor{nothing}.
 
 \begin{code}
 zmimrobi'o : GameData → Maybe $ String × GameData
