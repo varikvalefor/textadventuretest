@@ -341,7 +341,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
       teiklendus (_ ∷ xs) (ℕ.suc n) (Data.Nat.s≤s q) = ret
         where
         ret = cong ℕ.suc $ teiklendus xs n q
-    subkon = subst (_≡_ _) $ cong (⊃ ∘ flip _↓_ xen') xil
+    subkon = subst (_≡_ _) $ cong (⊃ ∘ _↓ xen') xil
 
   xendj : let iv = Character.inventory in
           iv (xen ! j) ≡ iv (xen' ! mink j xenlen)
@@ -368,7 +368,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
   -- | ni'o zo .kond. binxo ja co'e zo .skrud.
   skrud = begin
     (toℕ j ↑ xen) ++ (ℕ.suc (toℕ j) ↓ xen) ≡⟨ refl ⟩
-    x₁ ++ x₃ ≡⟨ cong (flip _++_ x₃) $ takedus xen j ⟩
+    x₁ ++ x₃ ≡⟨ cong (_++ x₃) $ takedus xen j ⟩
     x₁' ++ x₃ ≡⟨ cong (_++_ x₁') $ dropydus xen (x₂ ∷ x₃) j ⟩
     x₁' ++ x₃' ∎
     where
@@ -379,7 +379,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
             → {b : List A}
             → (n : Fin $ 𝓁 a)
             → let n' = toℕ n in
-              n' ↑ a ≡ n' ↑ (flip _++_ b $ n' ↑ a)
+              n' ↑ a ≡ n' ↑ (_++ b $ n' ↑ a)
     takedus (_ ∷ xs) zero = refl
     takedus (x ∷ xs) (suc n) = cong (_∷_ x) $ takedus xs n
     dropydus : ∀ {a} → {A : Set a}
