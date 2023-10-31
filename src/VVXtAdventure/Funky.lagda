@@ -523,7 +523,7 @@ sayless? _ _ = nothing
 \end{code}
 
 \subsection{la'oi .\F{lp?}.}
-ni'o ga jonai ga je ga je la'o zoi.\ \B c .zoi.\ na vajni gi ko'a goi la'o zoi.\ \F{lp?} \B a \B b .zoi.\ du la'o zoi.\ \AgdaInductiveConstructor{nothing} \B c \B b .zoi.\ gi ko'a du la'oi .\AgdaInductiveConstructor{nothing}.
+ni'o ga jonai la'oi .\AgdaInductiveConstructor{nothing}.\ du ko'a goi la'o zoi.\ \F{lp?} \B a \B b .zoi.\ gi ga je ga je la'o zoi.\ \B c .zoi.\ na vajni gi ko'a du la'o zoi.\ \AgdaInductiveConstructor{nothing} \B c \B b .zoi.
 
 \begin{code}
 lp? : Com
