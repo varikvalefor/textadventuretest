@@ -310,9 +310,8 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
     dropind (_ ∷ _) zero = refl
     dropind (_ ∷ xs) (suc n) = dropind xs n
     jelis : toℕ j ≤ 𝓁 xen
-    jelis = subst (_≤_ _) kix $ DNP.≤-step $ subst (_≥_ _) mijd j'
+    jelis = subst₂ _≤_ mijd kix $ DNP.≤-step j'
       where
-      _≥_ = flip _≤_
       lisuc : ∀ {a} → {A : Set a}
             → (xs : List A)
             → Fin $ 𝓁 xs
