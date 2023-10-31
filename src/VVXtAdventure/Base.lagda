@@ -179,7 +179,7 @@ ni'o ga jo la'o zoi.\ \B K .zoi.\ ctaipe la'o zoi.\ \D{List} \AgdaRecord{Room} .
 	\item ga je la'o zoi.\ \AgdaField{Character.surname} \B a .zoi.\ lazme'e ko'a gi
 	\item ga je la'o zoi.\ \AgdaField{Character.cname} \B a .zoi.\ du lo cmene be ko'a be'o poi cadga fa lo nu lo kelci cu pilno ke'a tu'a ko'a gi
 	\item ga je la'o zoi.\ \AgdaField{Character.nicknames} \B a .zoi.\ liste lo'i datcme be ko'a gi
-	\item ga je tu'a la'o zoAgdaField.\ \B a .zoi.\ .indika lo du'u ko'a zvati lo selsni be la'o zoi.\ \F{lookup} \B q \OpF \$ \AgdaField{Character.room} \B a .zoi.\ gi
+	\item ga je tu'a la'o zoi.\ \AgdaField.\ \B a .zoi.\ .indika lo du'u ko'a zvati lo selsni be la'o zoi.\ \F{lookup} \B q \OpF \$ \AgdaField{Character.room} \B a .zoi.\ gi
 	\item ga je la'o zoi.\ \AgdaField{Character.inventory} \B a .zoi.\ liste lo'i ro se ralte be lo selsni be ko'a gi
 	\item ga je la'o zoi.\ \AgdaField{Character.health}\ \B a\ zoi.\ ni ko'a na morsi kei ja cu co'e gi
         \item ga naja la'o zoi.\ \B i .zoi.\ du la'o zoi.\ \AgdaField{Character.inventory} \B a .zoi.\footnote{ni'o pilno zo'e pe zo du mu'i le su'u djica lo nu lo me'oi .hbox.\ cu na me'oi .overfull.}\ gi la'o zoi.\ \F{Data.Maybe.map} \Sym(\F{lookup} \B i\Sym) \OpF \$ \AgdaField{Character.wielded} \B a .zoi.\ du la'oi .\AgdaInductiveConstructor{nothing}.\ jonai cu me'oi .\AgdaInductiveConstructor{just}.\ lo sinxa be lo se me'oi .wield.\ be ko'a
