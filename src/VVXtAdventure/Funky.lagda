@@ -667,7 +667,7 @@ hitme? _ _ = nothing
 \end{code}
 
 \chapter{le zmiku}
-ni'o la'au le zmiku li'u vasru le velcki be le fancu poi lo se ctaipe be ke'a cu smimlu la'o zoi.\ \F{GameData} \Sym → \F{Maybe} \OpF \$ \F{String} \F × \F{GameData}\ .zoi.\ jenai poi tu'a ke'a se sarcu lo nu midnoi fi lo kelci
+ni'o la'au le zmiku li'u vasru le velcki be le fancu poi ke'a ctaipe lo smimlu be la'o zoi.\ \F{GameData} \Sym → \F{Maybe} \OpF \$ \F{String} \F × \F{GameData}\ .zoi.\ jenai poi tu'a ke'a se sarcu lo nu midnoi fi lo kelci
 
 \section{la .\F{zmimrobi'o}.}
 ni'o ga jonai ga je tu'a la'oi .\B{t}.\ .indika ko'a goi lo du'u lo kelci ke xarpre ja co'e cu morsi gi ga je tu'a la'oi .\B{s}.\ .indika ko'a gi ko'a goi la'o zoi.\ \F{zmimrobi'o} \B t\ .zoi.\ du la'o zoi.\ \AgdaInductiveConstructor{just} \OpF \$ \B s \OpF , \B t\ .zoi.\ gi ko'a du la'oi .\AgdaInductiveConstructor{nothing}.
