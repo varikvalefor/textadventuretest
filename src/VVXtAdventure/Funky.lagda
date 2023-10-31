@@ -676,10 +676,9 @@ ni'o ga jonai ga je tu'a la'oi .\B{t}.\ .indika ko'a goi lo du'u lo kelci ke xar
 zmimrobi'o : GameData → Maybe $ String × GameData
 zmimrobi'o t = if morsi (just $ "You be dead." , t) nothing
   where
-  morsi = num lenijmive ℤ.≤ᵇ ℤ.0ℤ
+  morsi = Data.Rational.ℚ.numerator lenijmive ℤ.≤ᵇ ℤ.0ℤ
     where
     import Data.Integer as ℤ
     lenijmive = Character.health $ GameData.player t
-    num = Data.Rational.ℚ.numerator
 \end{code}
 \end{document}
