@@ -129,8 +129,8 @@ ni'o ga jo ko'a goi la'o zoi.\ \B a .zoi.\ ctaipe la'oi .\AgdaRecord{Item}.\ gi\
 	\item ga je ga jonai ga je ko'a sinxa lo me'oi .weapon.\ gi ko'e goi la'o zoi.\ \AgdaField{Item.weapwn} \B a .zoi.\ me'oi .\AgdaInductiveConstructor{just}.\ lo velski be ko'a gi ko'e du la'oi .\AgdaInductiveConstructor{nothing}.\ gi
 	\item cadga fa lo nu ga naja ga je lo kelci cu cpedu lo nu skicu lo selsni be ko'a gi curmi lo nu skicu lo selsni be ko'a gi\ldots
 	\begin{itemize}
-		\item ga jonai ga je lo me'oi .inventory.\ be lo kelci xarpre ja co'e cu vasru lo selsni be ko'a gi pilno la'o zoi.\ \AgdaField{Item.hlDescr} \B a .zoi.\ gi
-		\item ga jonai ga je cpedu lo nu skicu kei ca lo nu lo kelci xarpre ja co'e cu zvati zo'e poi la'o zoi.\ \B C .zoi.\ mu'oi glibau.\ \AgdaField{Room.cname} .glibau.\ lo sinxa be ke'a gi ga je la'o zoi.\ \AgdaField{Item.rmDescr} \B a .zoi.\ vasru la'o zoi.\ \B C \OpF , \B d .zoi.\ gi pilno la'o zoi.\ \B d .zoi.\ gi
+		\item ga jonai ga je lo me'oi .inventory.\ be lo kelci ke xarpre ja co'e cu vasru lo selsni be ko'a gi pilno la'o zoi.\ \AgdaField{Item.hlDescr} \B a .zoi.\ gi
+		\item ga jonai ga je cpedu lo nu skicu kei ca lo nu lo kelci ke xarpre ja co'e cu zvati zo'e poi la'o zoi.\ \B C .zoi.\ mu'oi glibau.\ \AgdaField{Room.cname} .glibau.\ lo sinxa be ke'a gi ga je la'o zoi.\ \AgdaField{Item.rmDescr} \B a .zoi.\ vasru la'o zoi.\ \B C \OpF , \B d .zoi.\ gi pilno la'o zoi.\ \B d .zoi.\ gi
 		\item pilno la'o zoi.\ \AgdaField{Item.dfDescr} \B a .zoi.
 	\end{itemize}
 \end{itemize}
