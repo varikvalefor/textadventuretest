@@ -212,7 +212,7 @@ ni'o ga jo ko'a goi la'o zoi.\ \B a .zoi.\ ctaipe la'oi .\AgdaRecord{GameData}.\
         \item ga je la'o zoi.\ \AgdaField{GameData.rooms} \B a .zoi.\ liste lo'i sinxa be lo'i co'e poi cumki fa lo nu zvati ke'a gi
         \item ga je la'o zoi.\ \AgdaField{GameData.haters} \B a .zoi.\ liste lo'i sinxa be lo'i xarpre ja co'e po ko'a gi
         \item la'o zoi.\ \AgdaField{GameData.player} \B a .zoi.\ sinxa lo kelci ke xarpre ja co'e po ko'a gi
-        \end{itemize}
+\end{itemize}
 
 .i la .varik.\ cu na jinvi le du'u sarcu fa lo nu ciksi la'o zoi.\ \AgdaField{GameData.yourfloorisnowclean}\ .zoi.\ bau la .lojban.
 
