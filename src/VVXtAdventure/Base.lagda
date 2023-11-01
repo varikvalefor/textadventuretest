@@ -126,7 +126,7 @@ ni'o ga jo ko'a goi la'o zoi.\ \B a .zoi.\ ctaipe la'oi .\AgdaRecord{Item}.\ gi\
 \begin{itemize}
 	\item ga je la'o zoi.\ \AgdaField{Item.name} \B a .zoi.\ mu'oi glibau.\ display name .glibau.\ ko'a gi
 	\item ga je ga je ko'e goi la'o zoi.\ \AgdaField{Item.cname} \B a .zoi.\ cmene ko'a gi cadga fa lo nu lo kelci cu pilno ko'e tu'a ko'a gi
-        \item ga je ga jonai ga je ko'a sinxa lo me'oi .weapon.\ gi ko'e goi la'o zoi.\ \AgdaField{Item.weapwn} \B a .zoi.\ me'oi .\AgdaInductiveConstructor{just}.\ lo velski be ko'a gi ko'e du la'oi .\AgdaInductiveConstructor{nothing}.\ gi
+	\item ga je ga jonai ga je ko'a sinxa lo me'oi .weapon.\ gi ko'e goi la'o zoi.\ \AgdaField{Item.weapwn} \B a .zoi.\ me'oi .\AgdaInductiveConstructor{just}.\ lo velski be ko'a gi ko'e du la'oi .\AgdaInductiveConstructor{nothing}.\ gi
 	\item cadga fa lo nu ga naja ga je lo kelci cu cpedu lo nu skicu lo selsni be ko'a gi curmi lo nu skicu lo selsni be ko'a gi\ldots
 	\begin{itemize}
 		\item ga jonai ga je lo me'oi .inventory.\ be lo kelci xarpre ja co'e cu vasru lo selsni be ko'a gi pilno la'o zoi.\ \AgdaField{Item.hlDescr} \B a .zoi.\ gi
@@ -155,7 +155,7 @@ ni'o ga jo ko'a goi la'o zoi.\ \B a .zoi.\ ctaipe la'oi .\AgdaRecord{Room}.\ gi\
 \begin{itemize}
 	\item ga je la'o zoi.\ \AgdaField{Room.name} \B a .zoi.\ cmene lo selsni be ko'a gi
 	\item ga je cadga fa lo nu lo kelci cu pilno la'o zoi.\ \AgdaField{Room.cname} \B a .zoi.\ tu'a ko'a gi
-        \item ga je ga jo curmi lo nu sampu klama lo selsni be ko'a lo selsni be la'o zoi.\ \B q .zoi.\ gi la'o zoi.\ \AgdaField{Room.travis} \B a .zoi.\ vasru lo mu'oi glibau.\ \AgdaField{Room.cname}\ .glibau.\ be la'o zoi.\ \B q .zoi.\ gi
+	\item ga je ga jo curmi lo nu sampu klama lo selsni be ko'a lo selsni be la'o zoi.\ \B q .zoi.\ gi la'o zoi.\ \AgdaField{Room.travis} \B a .zoi.\ vasru lo mu'oi glibau.\ \AgdaField{Room.cname}\ .glibau.\ be la'o zoi.\ \B q .zoi.\ gi
 	\item la'o zoi.\ \AgdaField{Room.items} \B a .zoi.\ liste lo'i selvau be lo selsni be ko'a be'o poi ke'a ba'e na prenu
 \end{itemize}
 
@@ -182,7 +182,7 @@ ni'o ga jo la'o zoi.\ \B K .zoi.\ ctaipe la'o zoi.\ \D{List} \AgdaRecord{Room} .
 	\item ga je tu'a la'o zoi.\ \AgdaField{Character.room}\ \B a .zoi.\ .indika lo du'u ko'a zvati lo selsni be la'o zoi.\ \F{lookup} \B q \OpF \$ \AgdaField{Character.room} \B a .zoi.\ gi
 	\item ga je la'o zoi.\ \AgdaField{Character.inventory} \B a .zoi.\ liste lo'i ro se ralte be lo selsni be ko'a gi
 	\item ga je la'o zoi.\ \AgdaField{Character.health}\ \B a\ zoi.\ co'e ja cu ni ko'a na morsi gi
-        \item ga naja la'o zoi.\ \B i .zoi.\ du la'o zoi.\ \AgdaField{Character.inventory} \B a .zoi.\footnote{ni'o pilno zo'e pe zo du mu'i le su'u djica lo nu lo me'oi .hbox.\ cu na me'oi .overfull.}\ gi la'o zoi.\ \F{Data.Maybe.map} \Sym(\F{lookup} \B i\Sym) \OpF \$ \AgdaField{Character.wielded} \B a .zoi.\ du la'oi .\AgdaInductiveConstructor{nothing}.\ jonai cu me'oi .\AgdaInductiveConstructor{just}.\ lo sinxa be lo se me'oi .wield.\ be ko'a
+	\item ga naja la'o zoi.\ \B i .zoi.\ du la'o zoi.\ \AgdaField{Character.inventory} \B a .zoi.\footnote{ni'o pilno zo'e pe zo du mu'i le su'u djica lo nu lo me'oi .hbox.\ cu na me'oi .overfull.}\ gi la'o zoi.\ \F{Data.Maybe.map} \Sym(\F{lookup} \B i\Sym) \OpF \$ \AgdaField{Character.wielded} \B a .zoi.\ du la'oi .\AgdaInductiveConstructor{nothing}.\ jonai cu me'oi .\AgdaInductiveConstructor{just}.\ lo sinxa be lo se me'oi .wield.\ be ko'a
 \end{itemize}
 
 .i la .varik.\ cu na jinvi le du'u sarcu fa lo nu ciksi la'o zoi.\ \AgdaField{Character.yourfloorisnowclean} .zoi.\ bau la .lojban.
@@ -208,10 +208,10 @@ record Character (q : List Room) : Set
 \subsection{la'oi .\AgdaRecord{GameData}.}
 ni'o ga jo ko'a goi la'o zoi.\ \B a .zoi.\ ctaipe la'oi .\AgdaRecord{GameData}.\ gi\ldots
 \begin{itemize}
-        \item ga je ga jo la'o zoi.\ \AgdaField{GameData.epicwin} \B a .zoi.\ du la'oi .\AgdaInductiveConstructor{true}.\ gi ga je le kelci cu jinga gi le selkei cu mulno ja co'e gi
-        \item ga je la'o zoi.\ \AgdaField{GameData.rooms} \B a .zoi.\ liste lo'i sinxa be lo'i co'e poi cumki fa lo nu zvati ke'a gi
-        \item ga je la'o zoi.\ \AgdaField{GameData.haters} \B a .zoi.\ liste lo'i sinxa be lo'i xarpre ja co'e po ko'a gi
-        \item la'o zoi.\ \AgdaField{GameData.player} \B a .zoi.\ sinxa lo kelci ke xarpre ja co'e po ko'a gi
+	\item ga je ga jo la'o zoi.\ \AgdaField{GameData.epicwin} \B a .zoi.\ du la'oi .\AgdaInductiveConstructor{true}.\ gi ga je le kelci cu jinga gi le selkei cu mulno ja co'e gi
+	\item ga je la'o zoi.\ \AgdaField{GameData.rooms} \B a .zoi.\ liste lo'i sinxa be lo'i co'e poi cumki fa lo nu zvati ke'a gi
+	\item ga je la'o zoi.\ \AgdaField{GameData.haters} \B a .zoi.\ liste lo'i sinxa be lo'i xarpre ja co'e po ko'a gi
+	\item la'o zoi.\ \AgdaField{GameData.player} \B a .zoi.\ sinxa lo kelci ke xarpre ja co'e po ko'a gi
 \end{itemize}
 
 .i la .varik.\ cu na jinvi le du'u sarcu fa lo nu ciksi la'o zoi.\ \AgdaField{GameData.yourfloorisnowclean}\ .zoi.\ bau la .lojban.
