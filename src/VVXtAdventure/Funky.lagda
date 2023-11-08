@@ -577,7 +577,7 @@ travel? (x₁ ∷ xs₁) = if realShit (travel' xs₁) $ const nothing
       atRoom = cname ≡ᵇ Room.cname cur
       m = "Damn, that's some fast travel.  \
           \You're already there!"
-    faktoi = [_,_] (just ∘ flip _,_ q) iusyf mathch
+    faktoi = [_,_] (just ∘ (_, q)) iusyf mathch
       where
       -- | We'll just have to live with that possibility.
       iusyf = maybe youse fail ∘ Data.List.head
