@@ -17,7 +17,7 @@
 \newunicodechar{ℕ}{\ensuremath{\mathnormal{\mathbb N}}}
 \newunicodechar{∷}{\ensuremath{\mathnormal\Colon}}
 \newunicodechar{∘}{\ensuremath{\mathnormal{\circ}}}
-\newunicodechar{∀}{\ensuremath{\forall}}
+\newunicodechar{∀}{\ensuremath{\mathnormal{\forall}}}
 \newunicodechar{⊤}{\ensuremath{\mathnormal{\top}}}
 \newunicodechar{λ}{\ensuremath{\mathnormal{\lambda}}}
 \newunicodechar{→}{\ensuremath{\mathnormal{\rightarrow}}}
@@ -30,7 +30,7 @@
 \newcommand\F\AgdaFunction
 \newcommand\B\AgdaBound
 
-\title{le me'oi .Agda.\ versiio be la .tat.\ noi ke'a selci'a capli'u samselkei}
+\title{le me'oi .Agda.\ versiio be la .tat.\ noi ke'a samselkei je cu frafi'a le bebna}
 \author{la .varik.\ .VALefor.}
 
 \begin{document}
@@ -113,9 +113,7 @@ main = run $ IO.lift nurtcati >>ᵢₒ lupe initialD
     fanmo? q = firstJust $ Data.List.map mapti? fancu
       where
       firstJust : ∀ {a} → {A : Set a} → List $ Maybe A → Maybe A
-      firstJust [] = nothing
-      firstJust (just t ∷ _) = just t
-      firstJust (nothing ∷ t) = firstJust t
+      firstJust = Data.List.head ∘ Data.List.mapMaybe id
       mapti? = Data.Maybe.map $ putStrLn ∘ proj₁
       fancu = zmimrobi'o q ∷
               epicwin? winmsg q ∷

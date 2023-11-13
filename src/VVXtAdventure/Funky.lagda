@@ -223,7 +223,7 @@ open ≡-Reasoning
 ni'o la'au le mu'oi glibau.\ low-level .glibau.\ li'u vasru le velcki be le fancu poi ke'a pruce ja co'e zo'e je lo ctaipe be la'oi .\F{GameData}.\ lo ctaipe be la'oi .\F{GameData}.\ je lo ctaipe be zo'e ja lo su'u dunli
 
 \section{la'o zoi.\ \F{movePawn} .zoi.}
-ni'o tu'a la'o zoi.\ \F{movePawn} \B q \B m \B n .zoi.\ .indika lo du'u lo selsni be la'o zoi.\ \F{GameData.haters} \B q \OpF !\ \B h .zoi.\ cu zvati ko'a goi lo selsni be la'o zoi.\ \F{GameData.rooms} \B q) \OpF !\ \B n .zoi.
+ni'o tu'a la'o zoi.\ \F{movePawn} \B q \B m \B n .zoi.\ .indika lo du'u lo selsni be la'o zoi.\ \AgdaField{GameData.haters} \B q \OpF !\ \B h .zoi.\ cu zvati ko'a goi lo selsni be la'o zoi.\ \AgdaField{GameData.rooms} \B q) \OpF !\ \B n .zoi.
 
 \begin{code}
 movePawn : (q : GameData)
@@ -255,7 +255,7 @@ movePawn gd h r = gd' , refl , proj₁ (proj₂ xat) , rudus , refl
 \end{code}
  
 \section{la'o zoi.\ \F{wieldPawn}\ .zoi.}
-ni'o tu'a la'o zoi.\ \F{wieldPawn} \B q \B m \B n \F{refl}\ .zoi.\ .indika lo du'u zo'e ja lo selsni be la'o zoi.\ \F{GameData.haters} \B q \OpF !\ \B m .zoi.\ cu me'oi .wield.\ lo selsni be la'o zoi.\ \F{Character.inventory} \Sym(\F{GameData.haters} \B q \OpF !\ \B m\Sym) \OpF !\ \B n .zoi.
+ni'o tu'a la'o zoi.\ \F{wieldPawn} \B q \B m \B n \AgdaInductiveConstructor{refl}\ .zoi.\ .indika lo du'u zo'e ja lo selsni be la'o zoi.\ \AgdaField{GameData.haters} \B q \OpF !\ \B m .zoi.\ cu me'oi .wield.\ lo selsni be la'o zoi.\ \AgdaField{Character.inventory} \Sym(\AgdaField{GameData.haters} \B q \OpF !\ \B m\Sym) \OpF !\ \B n .zoi.
 
 \begin{code}
 wieldPawn : (q : GameData)
@@ -312,8 +312,8 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
   xenlen = begin
     𝓁 xen ≡⟨ cong 𝓁 $ sym $ DLP.take++drop (toℕ j) xen ⟩
     𝓁 (x₁ ++ d₂) ≡⟨ DLP.length-++ x₁ ⟩
-    𝓁 x₁ + 𝓁 d₂ ≡⟨ cong (_+_ $ 𝓁 x₁) $ DLP.length-drop (toℕ j) xen ⟩
-    𝓁 x₁ + (𝓁 xen ∸ toℕ j) ≡⟨ cong (_+_ $ 𝓁 x₁) $ sym xex ⟩
+    𝓁 x₁ + 𝓁 d₂ ≡⟨ cong (𝓁 x₁ +_) $ DLP.length-drop (toℕ j) xen ⟩
+    𝓁 x₁ + (𝓁 xen ∸ toℕ j) ≡⟨ cong (𝓁 x₁ +_) $ sym xex ⟩
     𝓁 x₁ + ℕ.suc (𝓁 x₃) ≡⟨ sym $ DLP.length-++ x₁ ⟩
     𝓁 xen' ∎
     where
@@ -344,9 +344,8 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
     dropind (_ ∷ _) zero = refl
     dropind (_ ∷ xs) (suc n) = dropind xs n
     jelis : toℕ j ≤ 𝓁 xen
-    jelis = subst (_≤_ _) kix $ DNP.≤-step $ subst (_≥_ _) mijd j'
+    jelis = subst₂ _≤_ mijd kix $ DNP.≤-step j'
       where
-      _≥_ = flip _≤_
       lisuc : ∀ {a} → {A : Set a}
             → (xs : List A)
             → Fin $ 𝓁 xs
@@ -360,22 +359,22 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
         tondus : {m n : ℕ}
                → m ≡ n
                → toℕ (Data.Fin.fromℕ m) ≡ n
-        tondus {m} x = subst (_≡_ _) x $ DFP.toℕ-fromℕ m
+        tondus x = subst (_≡_ _) x $ DFP.toℕ-fromℕ _
     xil = begin
       toℕ (mink j xenlen) ≡⟨ sym $ tomindus j xenlen ⟩
-      toℕ j ≡⟨ sym $ teiklendus xen (toℕ j) jelis ⟩
+      toℕ j ≡⟨ teiklendus xen (toℕ j) jelis ⟩
       𝓁 x₁ ∎
       where
       teiklendus : ∀ {a} → {A : Set a}
                  → (xs : List A)
                  → (n : ℕ)
                  → n ≤ 𝓁 xs
-                 → 𝓁 (n ↑ xs) ≡ n
+                 → n ≡ 𝓁 (n ↑ xs)
       teiklendus _ 0 _ = refl
       teiklendus (_ ∷ xs) (ℕ.suc n) (Data.Nat.s≤s q) = ret
         where
         ret = cong ℕ.suc $ teiklendus xs n q
-    subkon = subst (_≡_ _) $ cong (⊃ ∘ flip _↓_ xen') xil
+    subkon = subst (_≡_ _) $ cong (⊃ ∘ _↓ xen') xil
 
   xendj : let iv = Character.inventory in
           iv (xen ! j) ≡ iv (xen' ! mink j xenlen)
@@ -402,7 +401,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
   -- | ni'o zo .kond. binxo ja co'e zo .skrud.
   skrud = begin
     (toℕ j ↑ xen) ++ (ℕ.suc (toℕ j) ↓ xen) ≡⟨ refl ⟩
-    x₁ ++ x₃ ≡⟨ cong (flip _++_ x₃) $ takedus xen j ⟩
+    x₁ ++ x₃ ≡⟨ cong (_++ x₃) $ takedus xen j ⟩
     x₁' ++ x₃ ≡⟨ cong (_++_ x₁') $ dropydus xen (x₂ ∷ x₃) j ⟩
     x₁' ++ x₃' ∎
     where
@@ -413,7 +412,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
             → {b : List A}
             → (n : Fin $ 𝓁 a)
             → let n' = toℕ n in
-              n' ↑ a ≡ n' ↑ (flip _++_ b $ n' ↑ a)
+              n' ↑ a ≡ n' ↑ (_++ b $ n' ↑ a)
     takedus (_ ∷ xs) zero = refl
     takedus (x ∷ xs) (suc n) = cong (_∷_ x) $ takedus xs n
     dropydus : ∀ {a} → {A : Set a}
@@ -734,7 +733,7 @@ takePawn q m n = q' , dus , dis , xendus , kumdus , refl , nyfin
 \section{le fancu poi ke'a pruce ja co'e zo'e je ko'a goi lo ctaipe be la'oi .GameData.\ ko'a je zo'e}
 
 \subsection{la'oi .\F{epicwin?}.}
-ni'o ga jonai ga je tu'a la'o zoi.\ \B a .zoi.\ .indika lo du'u lo kelci cu jinga gi ko'a goi la'o zoi.\ \F{epicwin?} \B m \B a .zoi.\ du la'o zoi.\ \F{just} \OpF \$ \B m \OpF , \B a .zoi.\ gi ko'a du la'oi .\F{nothing}.
+ni'o ga jonai la'oi .\AgdaInductiveConstructor{nothing}.\ du ko'a goi la'o zoi.\ \F{epicwin?} \B m \B a .zoi.\ gi ga je tu'a la'o zoi.\ \B a .zoi.\ .indika lo du'u lo kelci cu jinga gi ko'a du la'o zoi.\ \AgdaInductiveConstructor{just} \OpF \$ \B m \OpF , \B a .zoi.
 
 \begin{code}
 epicwin? : String → GameData → COut
@@ -744,11 +743,11 @@ epicwin? m g = if (GameData.epicwin g) (just $ m , g) nothing
 \subsection{la'oi .\F{inspect?}.}
 ni'o ga jonai ga je ga je la'oi .\F{inspect?}.\ djuno pe'a ru'e lo du'u tu'a la'o zoi.\ \B a .zoi.\ .indika lo du'u djica lo nu skicu la'o zoi.\ B b .zoi.\ gi cumki fa lo nu skicu la'o zoi.\ \B b .zoi.\ gi
 \begin{itemize}
-	\item ga je la'o zoi.\ \B q .zoi.\ velski la'o zoi.\ \B b .zoi.\ gi ko'a goi la'o zoi.\ \F{inspect?} \B a \B{godDamn} .zoi.\ du la'o zoi.\ \F{just} \OpF \$ \B q \OpF , \B{godDamn} .zoi.\ gi
+	\item ga je la'o zoi.\ \B q .zoi.\ velski la'o zoi.\ \B b .zoi.\ gi ko'a goi la'o zoi.\ \F{inspect?} \B a \B{godDamn} .zoi.\ du la'o zoi.\ \AgdaInductiveConstructor{just} \OpF \$ \B q \OpF , \B{godDamn} .zoi.\ gi
 	\item ga jonai ga je la'oi .\F{inspect?}.\ djuno pe'a ru'e lo du'u la'o zoi.\ \B a .zoi.\ mabla gi\ldots
 	\begin{itemize}
-		\item ga je la'o zoi.\ \B i .zoi.\ te skuxai gi ko'a du la'o zoi.\ \F{just} \OpF \$ \B i \OpF , \B{godDamn} .zoi.\ gi
-		\item ko'a du la'oi .\F{nothing}.
+		\item ga je la'o zoi.\ \B i .zoi.\ te skuxai gi ko'a du la'o zoi.\ \AgdaInductiveConstructor{just} \OpF \$ \B i \OpF , \B{godDamn} .zoi.\ gi
+		\item ko'a du la'oi .\AgdaInductiveConstructor{nothing}.
 	\end{itemize}
 \end{itemize}
 
@@ -791,7 +790,7 @@ inspect? [] _ = nothing
 \end{code}
 
 \subsection{la'oi .\F{invent?}.}
-ni'o ga jonai ga je tu'a la'o zoi.\ \B m\ .zoi.\ .indika lo du'u lo kelci cu djica lo nu skicu lo selvau be ko'a goi lo me'oi .inventory.\ be lo kelci ke xarpre ja co'e gi ga je la'o zoi.\ \B s\ .zoi.\ vasru lo velski be lo ro selvau be ko'a gi ko'e goi la'o zoi.\ \F{invent?} \B \B g\ .zoi.\ du la'o zoi.\ \F{just} \OpF \$ \B s \OpF , \B g .zoi.\ gi ko'e du la'oi .\F{nothing}.
+ni'o ga jonai la'oi .\AgdaInductiveConstructor{nothing}.\ du ko'e goi la'o zoi.\ \F{invent?} \B \B g\ .zoi.\ gi ga je tu'a la'o zoi.\ \B m\ .zoi.\ .indika lo du'u lo kelci cu djica lo nu skicu lo selvau be ko'a goi lo me'oi .inventory.\ be lo kelci ke xarpre ja co'e gi ga je la'o zoi.\ \B s\ .zoi.\ vasru lo velski be lo ro selvau be ko'a gi ko'e du la'o zoi.\ \AgdaInductiveConstructor{just} \OpF \$ \B s \OpF , \B g .zoi.
 
 \begin{code}
 invent? : Com
@@ -806,7 +805,7 @@ invent? _ _ = nothing
 
 \subsection{la'oi .\F{kumski?}.}
 
-ni'o ga jonai ga je la'oi .\F{scream?}.\ djuno pe'a ru'e lo du'u tu'a la'o zoi.\ \B a .zoi.\ .indika lo du'u lo kelci cu djica lo nu tcidu ko'a goi lo velski be lo selvau be lo kumfa poi la'o zoi.\ \B b\ .zoi.\ .indika lo du'u ke'a zasti gi ga je la'o zoi.\ \B v .zoi.\ vasru lo velcki be ko'a gi ko'e goi la'o zoi.\ \F{kumski?} \B a \B b\ .zoi.\ du la'o zoi.\ \F{just} \OpF \$ \B v \OpF , \B b\ .zoi.\ gi ko'e du la'oi .\F{nothing}.
+ni'o ga jonai la'oi .\AgdaInductiveConstructor{nothing}.\ du ko'e goi la'o zoi.\ \F{kumski?} \B a \B b\ .zoi.\ gi ga je la'o zoi.\ \B v .zoi.\ vasru lo velcki be ko'a gi ga je ko'e du la'o zoi.\ \AgdaInductiveConstructor{just} \OpF \$ \B v \OpF , \B b\ .zoi.\ gi la'oi .\F{kumski?}.\ djuno pe'a ru'e lo du'u tu'a la'o zoi.\ \B a .zoi.\ .indika lo du'u lo kelci cu djica lo nu tcidu ko'a goi lo velski be lo selvau be lo kumfa poi la'o zoi.\ \B b\ .zoi.\ .indika lo du'u ke'a zasti
 
 \begin{code}
 kumski? : Com
@@ -834,7 +833,7 @@ kumski? m g = if mapti (just $ le'i-velski , g) nothing
 \end{code}
 
 \subsection{la'oi .\F{scream?}.}
-ni'o ga jonai ga je la'oi .\F{scream?}.\ djuno pe'a ru'e lo du'u tu'a la'o zoi.\ \B a .zoi.\ .indika lo du'u lo kelci cu djica lo nu krixa fa ko'a goi lo krixa ke xarpre ja co'e po la'o zoi.\ \B b .zoi.\ gi ga je tu'a la'o zoi.\ \B c .zoi.\ .indika lo du'u ko'a krixa gi ko'e goi la'o zoi.\ \F{scream?} \B a \B b .zoi.\ du la'o zoi.\ \F{just} \OpF \$ c \OpF , b .zoi.\ gi ko'e du la'oi .\F{nothing}.
+ni'o ga jonai ga je la'oi .\F{scream?}.\ djuno pe'a ru'e lo du'u tu'a la'o zoi.\ \B a .zoi.\ .indika lo du'u lo kelci cu djica lo nu krixa fa ko'a goi lo krixa ke xarpre ja co'e po la'o zoi.\ \B b .zoi.\ gi ga je tu'a la'o zoi.\ \B c .zoi.\ .indika lo du'u ko'a krixa gi ko'e goi la'o zoi.\ \F{scream?} \B a \B b .zoi.\ du la'o zoi.\ \AgdaInductiveConstructor{just} \OpF \$ c \OpF , b .zoi.\ gi ko'e du la'oi .\AgdaInductiveConstructor{nothing}.
 
 \begin{code}
 scream? : Com
@@ -843,7 +842,7 @@ scream? _ _ = nothing
 \end{code}
 
 \subsection{la'oi .\F{sayless?}.}
-ni'o ga jonai ga je ga jo co'e gi la'o zoi.\ \B a .zoi.\ kunti gi ga je tu'a la'o zoi.\ \B c .zoi.\ .indika le du'u mabla fa lo nu samci'a lo kunti ja zo'e gi ko'a goi la'o zoi.\ \F{sayless?} \B a \B b .zoi.\ du la'o zoi.\ \F{just} \OpF \$ \B c \OpF , \B b .zoi.\ gi ko'a du la'oi .\F{nothing}.
+ni'o ga jonai la'oi .\AgdaInductiveConstructor{nothing}.\ du ko'a goi la'o zoi.\ \F{sayless?} \B a \B b .zoi.\ gi ga je co'e gi la'o zoi.\ \B a .zoi.\ kunti gi ga je tu'a la'o zoi.\ \B c .zoi.\ .indika le du'u mabla fa lo nu samci'a lo kunti ja zo'e gi ko'a du la'o zoi.\ \AgdaInductiveConstructor{just} \OpF \$ \B c \OpF , \B b .zoi.
 
 \begin{code}
 sayless? : List String → GameData → COut
@@ -855,7 +854,7 @@ sayless? _ _ = nothing
 \end{code}
 
 \subsection{la'oi .\F{lp?}.}
-ni'o ga jonai ga je ga je la'o zoi.\ \B c .zoi.\ na vajni gi ko'a goi la'o zoi.\ \F{lp?} \B a \B b .zoi.\ du la'o zoi.\ \F{just} \B c \B b .zoi.\ gi ko'a du la'oi .\F{nothing}.
+ni'o ga jonai la'oi .\AgdaInductiveConstructor{nothing}.\ du ko'a goi la'o zoi.\ \F{lp?} \B a \B b .zoi.\ gi ga je ga je la'o zoi.\ \B c .zoi.\ na vajni gi ko'a du la'o zoi.\ \AgdaInductiveConstructor{nothing} \B c \B b .zoi.
 
 \begin{code}
 lp? : Com
@@ -874,17 +873,17 @@ lp? _ _ = nothing
 \end{code}
 
 \section{le fancu poi cumki fa lo nu ke'a pruce ja co'e zo'e je ko'a goi lo ctaipe be la'oi .GameData.\ zo'e je lo na du be ko'a}
-ni'o la .varik.\ cu jinvi le du'u zabna fa le su'u cmene ko'a goi la'u le fancu poi cumki fa lo nu ke'a pruce ja co'e zo'e je ko'a goi lo ctaipe be la'oi .GameData.\ zo'e je lo na du be ko'a li'u kei kei je le du'u tu'a ko'a filri'a lo nu jimpe fi ko'e goi le se cmene be ko'a  .i ku'i ga naja na jimpe fi ko'e gi cumki fa lo nu filri'a lo nu jimpe fi ko'e kei fa le se du'u ko'e vasru le velcki be le fancu poi lo nu zabna fa lo se pruce be ke'a cu se cumki lo nu tu'a lo te pruce ja co'e be ke'a cu .indika lo na se .indika tu'a lo se pruce be ke'a
+ni'o la .varik.\ cu jinvi le du'u zabna fa le su'u cmene ko'a goi la'u le fancu poi cumki fa lo nu ke'a pruce ja co'e zo'e je ko'a goi lo ctaipe be la'oi .GameData.\ zo'e je lo na du be ko'a li'u kei kei je le du'u tu'a ko'a filri'a lo nu jimpe fi ko'e goi le se cmene be ko'a  .i ku'i ga naja na jimpe fi ko'e gi cumki fa lo nu filri'a lo nu jimpe fi ko'e kei fa tu'a le se du'u ko'e vasru le velcki be le fancu poi lo nu zabna fa lo se pruce be ke'a cu se cumki lo nu tu'a lo te pruce ja co'e be ke'a cu .indika lo na se .indika tu'a lo se pruce be ke'a
 
 \subsection{la'oi .\F{travel?}.}
-ni'o ga jonai ga je la'o zoi.\ \F{travel?} .zoi.\ djuno ja co'e lo du'u lo nu co'e ko'a goi zoi zoi.\ \F{travel?} \B r \B g .zoi.\ cu nu cpedu lo nu ko'e goi lo kelci ke xarpre ja co'e cu klama lo kumfa poi la'o zoi.\ \B K .zoi.\ sinxa ke'a gi\ldots
+ni'o ga jonai ga je la'o zoi.\ \F{travel?} .zoi.\ djuno ja co'e lo du'u tu'a ko'a goi zoi zoi.\ \F{travel?} \B r \B g .zoi.\ cu nu cpedu lo nu ko'e goi lo kelci ke xarpre ja co'e cu klama lo kumfa poi la'o zoi.\ \B K .zoi.\ sinxa ke'a gi\ldots
 \begin{itemize}
-	\item ga jonai ga je la'o zoi.\ \F{Room.travis} \OpF \$ \F{Character.room} \OpF \$ \F{GameData.player} \B g .zoi.\ vasru lo mu'oi glibau.\ \F{Room.cname}\ .glibau.\ be la'o zoi.\ \B K .zoi.\ gi\ldots
+	\item ga jonai ga je la'o zoi.\ \AgdaField{Room.travis} \OpF \$ \AgdaField{Character.room} \OpF \$ \AgdaField{GameData.player} \B g .zoi.\ vasru lo mu'oi glibau.\ \AgdaField{Room.cname}\ .glibau.\ be la'o zoi.\ \B K .zoi.\ gi\ldots
 	\begin{itemize}
-		\item ko'a broda cei sinxa ja co'e lo me'oi .product.\ be lo velski be lo nu klama bei zo'e poi tu'a ke'a .indika lo du'u ko'e zvati zo'e poi djica lo nu zvati ke'a xi re gi
-		\item ko'a broda lo me'oi .product.\ be lo te skuxai ja zo'e bei la'o zoi.\ \B g .zoi.
+		\item ko'a du lo me'oi .product.\ be lo velski be lo nu klama bei zo'e poi tu'a ke'a .indika lo du'u ko'e zvati zo'e poi djica lo nu zvati ke'a xi re gi
+		\item ko'a me'oi .product.\ lo te skuxai ja zo'e la'o zoi.\ \B g .zoi.
 	\end{itemize}
-	\item gi ko'a broda la'oi .\F{nothing}.
+	\item gi ko'a du la'oi .\AgdaInductiveConstructor{nothing}.
 \end{itemize}
 
 \begin{code}
@@ -901,7 +900,7 @@ travel? (x₁ ∷ xs₁) = if realShit (travel' xs₁) $ const nothing
     where
     m = "I strongly doubt that the concept of \"super\
         \position\" applies to a creature of your mass."
-  travel' (cname ∷ []) q = maybe just tryfind $ alreadythere?
+  travel' (cname ∷ []) q = maybe just faktoi $ alreadythere?
     where
     F = Fin $ length $ GameData.rooms q
     cur = GameData.rooms q ! Character.room (GameData.player q)
@@ -910,7 +909,7 @@ travel? (x₁ ∷ xs₁) = if realShit (travel' xs₁) $ const nothing
       atRoom = cname ≡ᵇ Room.cname cur
       m = "Damn, that's some fast travel.  \
           \You're already there!"
-    tryfind = [_,_] (just ∘ flip _,_ q) iusyf mathch
+    faktoi = [_,_] (just ∘ (_, q)) iusyf mathch
       where
       -- | We'll just have to live with that possibility.
       iusyf = maybe youse fail ∘ Data.List.head
@@ -923,9 +922,9 @@ travel? (x₁ ∷ xs₁) = if realShit (travel' xs₁) $ const nothing
           q' = movePawn q $ GameData.player' q
           m = "You travel successfully."
       mathch : String ⊎ List F
-      mathch with methching $ zipfin $ GameData.rooms q
+      mathch with methching $ indice $ GameData.rooms q
         where
-        zipfin = λ l → flip Data.List.zip l $ allFin $ length l
+        indice = λ l → flip Data.List.zip l $ allFin $ length l
         methching = filterₗ $ _≟_ cname ∘ Room.cname ∘ proj₂
       ... | [] = inj₁ m
         where
@@ -937,7 +936,7 @@ travel? (x₁ ∷ xs₁) = if realShit (travel' xs₁) $ const nothing
 \end{code}
 
 \subsection{la'oi .\F{wield?}.}
-ni'o ga jonai ga je ga je la'oi .\F{wield?}.\ djuno pe'a ru'e lo du'u tu'a la'o zoi.\ \B a .zoi.\ .indika lo du'u lo kelci cu djica lo nu ko'a goi lo kelci ke xarpre ja co'e cu me'oi .wield.\ ko'e goi zo'e poi la'o zoi.\ \B c .zoi.\ mu'oi glibau.\ \F{Item.cname} .glibau.\ lo sinxa be ke'a gi ga jonai ga je li pa nilzilcmi lo'i selvau be lo me'oi .inventory.\ be ko'a be'o be'o poi la'o zoi.\ \B c .zoi.\ mu'oi glibau.\ \F{Item.cname} .glibau.\ ke'a je poi curmi lo nu me'oi .wield.\ ke'a gi tu'a la'o zoi.\ \B x .zoi.\ lu'u je tu'a la'o zoi.\ \B y .zoi.\ cu .indika lo du'u ko'a me'oi .wield.\ ko'e gi ko'i goi la'o zoi.\ \F{wield?} \B a \B b .zoi.\ du la'o zoi.\ \F{just} \OpF \$ \B x \OpF , \B y .zoi.\ gi ga je skuxai ja co'e la'o zoi.\ \B x .zoi.\ gi ko'a du la'o zoi.\ \F{just} \OpF \$ \B x \OpF , \B b .zoi.\ gi ko'a du la'oi .\F{nothing}.
+ni'o ga jonai la'oi .\AgdaInductiveConstructor{nothing}.\ du ko'i goi la'o zoi.\ \F{wield?} \B a \B b\ .zoi.\ gi ga je la'oi .\F{wield?}.\ djuno pe'a ru'e lo du'u tu'a la'o zoi.\ \B a .zoi.\ .indika lo du'u lo kelci cu djica lo nu ko'a goi lo kelci ke xarpre ja co'e cu me'oi .wield.\ ko'e goi zo'e poi la'o zoi.\ \B c .zoi.\ mu'oi glibau.\ \AgdaField{Item.cname} .glibau.\ lo sinxa be ke'a gi ga jonai ga je skuxai ja co'e la'o zoi.\ \B x .zoi.\ gi ko'i du la'o zoi.\ \AgdaInductiveConstructor{just} \OpF \$ \B x \OpF , \B b .zoi.\ gi ga je li pa nilzilcmi lo'i selvau be lo me'oi .inventory.\ be ko'a be'o be'o poi la'o zoi.\ \B c .zoi.\ mu'oi glibau.\ \AgdaField{Item.cname} .glibau.\ ke'a je poi curmi lo nu me'oi .wield.\ ke'a gi ga je tu'a la'o zoi.\ \B x .zoi.\ lu'u je tu'a la'o zoi.\ \B y .zoi.\ cu .indika lo du'u ko'a me'oi .wield.\ ko'e gi ko'i du la'o zoi.\ \AgdaInductiveConstructor{just} \OpF \$ \B x \OpF , \B y .zoi.
 
 \begin{code}
 wield? : Com
@@ -1019,7 +1018,7 @@ take? _ _ = nothing
 \end{code}
 
 \section{la'oi .\F{hitme?}.}
-ni'o ga jonai ga je tu'a la'oi .\B{s}.\ .indika lo du'u djica lo nu xrani ja co'e ko'a goi lo kelci ke xarpre ja co'e pe la'oi .\B{g}.\ gi ga je tu'a la'oi .\B{t}.\ lu'u je tu'a la'o zoi.\ \B{g'}\ .zoi.\ cu .indika lo du'u xrani ko'a gi ko'a goi la'o zoi.\ \F{hitme?} \B s \B g\ .zoi.\ du la'o zoi.\ \F{just} \OpF \$ \B t \OpF , \B{g'}\ .zoi.\ gi ko'a du la'oi .\F{nothing}.
+ni'o ga jonai ga je tu'a la'oi .\B{s}.\ .indika lo du'u djica lo nu xrani ja co'e ko'a goi lo kelci ke xarpre ja co'e pe la'oi .\B{g}.\ gi ga je tu'a la'oi .\B{t}.\ lu'u je tu'a la'o zoi.\ \B{g'}\ .zoi.\ cu .indika lo du'u xrani ko'a gi ko'a goi la'o zoi.\ \F{hitme?} \B s \B g\ .zoi.\ du la'o zoi.\ \AgdaInductiveConstructor{just} \OpF \$ \B t \OpF , \B{g'}\ .zoi.\ gi ko'a du la'oi .\AgdaInductiveConstructor{nothing}.
 
 \begin{code}
 hitme? : Com
@@ -1034,19 +1033,18 @@ hitme? _ _ = nothing
 \end{code}
 
 \chapter{le zmiku}
-ni'o la'au le zmiku li'u vasru le velcki be le fancu poi lo ctaipe be ke'a cu smimlu la'o zoi.\ \F{GameData} \Sym → \F{Maybe} \OpF \$ \F{String} \F × \F{GameData}\ .zoi.\ jenai poi tu'a ke'a se sarcu lo nu midnoi fi lo kelci
+ni'o la'au le zmiku li'u vasru le velcki be le fancu poi ke'a ctaipe lo smimlu be la'o zoi.\ \F{GameData} \Sym → \F{Maybe} \OpF \$ \F{String} \OpF × \F{GameData}\ .zoi.\ jenai poi tu'a ke'a se sarcu lo nu midnoi fi lo kelci
 
 \section{la .\F{zmimrobi'o}.}
-ni'o ga jonai ga je tu'a la'oi .\B{t}.\ .indika ko'a goi lo du'u lo kelci ke xarpre ja co'e cu morsi gi ga je tu'a la'oi .\B{s}.\ .indika ko'a gi ko'a goi la'o zoi.\ \F{zmimrobi'o} \B t\ .zoi.\ du la'o zoi.\ \F{just} \OpF \$ \B s \OpF , \B t\ .zoi.\ gi ko'a du la'oi .\F{nothing}.
+ni'o ga jonai ga je tu'a la'oi .\B{t}.\ .indika ko'a goi lo du'u lo kelci ke xarpre ja co'e cu morsi gi ga je tu'a la'oi .\B{s}.\ .indika ko'a gi ko'a goi la'o zoi.\ \F{zmimrobi'o} \B t\ .zoi.\ du la'o zoi.\ \AgdaInductiveConstructor{just} \OpF \$ \B s \OpF , \B t\ .zoi.\ gi ko'a du la'oi .\AgdaInductiveConstructor{nothing}.
 
 \begin{code}
 zmimrobi'o : GameData → Maybe $ String × GameData
 zmimrobi'o t = if morsi (just $ "You be dead." , t) nothing
   where
-  morsi = num lenijmive ℤ.≤ᵇ ℤ.0ℤ
+  morsi = Data.Rational.ℚ.numerator lenijmive ℤ.≤ᵇ ℤ.0ℤ
     where
     import Data.Integer as ℤ
     lenijmive = Character.health $ GameData.player t
-    num = Data.Rational.ℚ.numerator
 \end{code}
 \end{document}
