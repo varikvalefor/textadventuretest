@@ -156,7 +156,8 @@ ni'o ga jo ko'a goi la'o zoi.\ \B a .zoi.\ ctaipe la'oi .\AgdaRecord{Room}.\ gi\
 	\item ga je la'o zoi.\ \AgdaField{Room.name} \B a .zoi.\ cmene lo selsni be ko'a gi
 	\item ga je cadga fa lo nu lo kelci cu pilno la'o zoi.\ \AgdaField{Room.cname} \B a .zoi.\ tu'a ko'a gi
 	\item ga je ga jo curmi lo nu sampu klama lo selsni be ko'a lo selsni be la'o zoi.\ \B q .zoi.\ gi la'o zoi.\ \AgdaField{Room.travis} \B a .zoi.\ vasru lo mu'oi glibau.\ \AgdaField{Room.cname}\ .glibau.\ be la'o zoi.\ \B q .zoi.\ gi
-	\item la'o zoi.\ \AgdaField{Room.items} \B a .zoi.\ liste lo'i selvau be lo selsni be ko'a be'o poi ke'a ba'e na prenu
+	\item ga je la'o zoi.\ \AgdaField{Room.items} \B a .zoi.\ liste lo'i selvau be lo selsni be ko'a be'o poi ke'a ba'e na prenu gi
+	\item la'o zoi.\ \AgdaField{Room.velski} \B a .zoi.\ velski lo selsni be ko'a
 \end{itemize}
 
 \begin{code}
@@ -168,6 +169,7 @@ record Room : Set
     cname : String
     items : List Item
     travis : List String
+    velski : String
 \end{code}
 
 \subsection{la'oi .\AgdaRecord{Character}.}

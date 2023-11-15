@@ -97,14 +97,23 @@ rooms = dingyliv ∷ dingycos ∷ []
     name = "BROOM CLOSET";
     cname = "DINGYLIVCLST";
     travis = "DINGYLIVRM" ∷ [];
-    items = []
+    items = [];
+    velski = "This broom closet is attached to your \
+             \living room.  The ceiling is low, the room \
+             \has a low area, and the walls are not even \
+             \parallel.  What fucking idiot builds a room \
+             \which is this shit?"
     }
   dingyliv : Room
   dingyliv = record {
     name = "A DINGY LIVING ROOM";
     cname = "DINGYLIVRM";
     travis = "DINGYLIVCLST" ∷ [];
-    items = lamp ∷ table ∷ colorfun ∷ []}
+    items = lamp ∷ table ∷ colorfun ∷ [];
+    velski = "This room marks the beginning of this \
+             \part of your adventure.  The carpet \
+             \could use a good cleaning, and that \
+             \wallpaper is just rancid."}
     where
     table : Item
     table = record {
