@@ -105,7 +105,7 @@ main = run $ IO.lift nurtcati >>ᵢₒ lupe initialD
   where
   postulate nurtcati : ABIO.IO ABU.⊤
   {-# FOREIGN GHC import System.OpenBSD.Plegg #-}
-  {-# COMPILE GHC nurtcati = plegg [Stdio] >> univac #-}
+  {-# COMPILE GHC nurtcati = plegg [Stdio] >> univac [] #-}
 
   lupe = λ q → fromMaybe (interact q) $ fanmo? q
     where

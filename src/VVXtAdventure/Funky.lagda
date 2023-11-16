@@ -82,6 +82,7 @@ open import Data.Nat
   using (
     _∸_;
     _+_;
+    suc;
     ℕ
   )
 open import Data.Sum
@@ -251,13 +252,13 @@ wieldPawn : (q : GameData)
             × (_≡_
                 (_++_
                   (toℕ j ↑ x q)
-                  (ℕ.suc (toℕ j) ↓ x q))
+                  (suc (toℕ j) ↓ x q))
                 (subst
                   (List ∘ Character)
                   (sym rud)
                   (_++_
                     (toℕ j ↑ x q')
-                    (ℕ.suc (toℕ j) ↓ x q'))))
+                    (suc (toℕ j) ↓ x q'))))
 wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
   where
   ⊃ = Data.List.head
@@ -266,7 +267,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
   xen = GameData.haters gd
   x₁ = toℕ j ↑ xen
   x₂ = record (xen ! j) {wieldedct = just $ i , t}
-  x₃ = ℕ.suc (toℕ j) ↓ xen
+  x₃ = suc (toℕ j) ↓ xen
   xen' = x₁ ++ x₂ ∷ x₃
 
   dropkat : ∀ {a} → {A : Set a}
@@ -280,14 +281,14 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
     𝓁 (x₁ ++ d₂) ≡⟨ DLP.length-++ x₁ ⟩
     𝓁 x₁ + 𝓁 d₂ ≡⟨ cong (𝓁 x₁ +_) $ DLP.length-drop (toℕ j) xen ⟩
     𝓁 x₁ + (𝓁 xen ∸ toℕ j) ≡⟨ cong (𝓁 x₁ +_) $ sym xex ⟩
-    𝓁 x₁ + ℕ.suc (𝓁 x₃) ≡⟨ sym $ DLP.length-++ x₁ ⟩
+    𝓁 x₁ + suc (𝓁 x₃) ≡⟨ sym $ DLP.length-++ x₁ ⟩
     𝓁 xen' ∎
     where
     d₂ = toℕ j ↓ xen
     xex = begin
-      ℕ.suc (𝓁 x₃) ≡⟨ refl ⟩
+      suc (𝓁 x₃) ≡⟨ refl ⟩
       𝓁 (x₂ ∷ x₃) ≡⟨ refl ⟩
-      ℕ.suc (𝓁 $ ℕ.suc (toℕ j) ↓ xen) ≡⟨ dropsuc xen j ⟩
+      suc (𝓁 $ suc (toℕ j) ↓ xen) ≡⟨ dropsuc xen j ⟩
       𝓁 (toℕ j ↓ xen) ≡⟨ DLP.length-drop (toℕ j) xen ⟩
       𝓁 xen ∸ toℕ j ∎
       where
@@ -295,7 +296,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
               → (x : List A)
               → (n : Fin $ 𝓁 x)
               → let n' = toℕ n in
-                ℕ.suc (𝓁 $ ℕ.suc n' ↓ x) ≡ 𝓁 (n' ↓ x)
+                suc (𝓁 $ suc n' ↓ x) ≡ 𝓁 (n' ↓ x)
       dropsuc (_ ∷ _) zero = refl
       dropsuc (_ ∷ xs) (suc n) = dropsuc xs n
 
@@ -315,11 +316,11 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
       lisuc : ∀ {a} → {A : Set a}
             → (xs : List A)
             → Fin $ 𝓁 xs
-            → Σ ℕ $ _≡_ (𝓁 xs) ∘ ℕ.suc
+            → Σ ℕ $ _≡_ (𝓁 xs) ∘ suc
       lisuc (_ ∷ xs) _ = 𝓁 xs , refl
       j' = DFP.≤fromℕ $ mink j $ proj₂ $ lisuc xen j
       mijd = sym $ tomindus j $ proj₂ $ lisuc xen j
-      kix : ℕ.suc (toℕ $ Data.Fin.fromℕ _) ≡ 𝓁 xen
+      kix : suc (toℕ $ Data.Fin.fromℕ _) ≡ 𝓁 xen
       kix = tondus $ sym $ proj₂ $ lisuc xen j
         where
         tondus : {m n : ℕ}
@@ -337,9 +338,9 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
                  → n ≤ 𝓁 xs
                  → n ≡ 𝓁 (n ↑ xs)
       teiklendus _ 0 _ = refl
-      teiklendus (_ ∷ xs) (ℕ.suc n) (Data.Nat.s≤s q) = ret
+      teiklendus (_ ∷ xs) (suc n) (Data.Nat.s≤s q) = ret
         where
-        ret = cong ℕ.suc $ teiklendus xs n q
+        ret = cong suc $ teiklendus xs n q
     subkon = subst (_≡_ _) $ cong (⊃ ∘ _↓ xen') xil
 
   xendj : let iv = Character.inventory in
@@ -366,13 +367,13 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
 
   -- | ni'o zo .kond. binxo ja co'e zo .skrud.
   skrud = begin
-    (toℕ j ↑ xen) ++ (ℕ.suc (toℕ j) ↓ xen) ≡⟨ refl ⟩
+    (toℕ j ↑ xen) ++ (suc (toℕ j) ↓ xen) ≡⟨ refl ⟩
     x₁ ++ x₃ ≡⟨ cong (_++ x₃) $ takedus xen j ⟩
     x₁' ++ x₃ ≡⟨ cong (_++_ x₁') $ dropydus xen (x₂ ∷ x₃) j ⟩
     x₁' ++ x₃' ∎
     where
     x₁' = toℕ j ↑ xen'
-    x₃' = ℕ.suc (toℕ j) ↓ xen'
+    x₃' = suc (toℕ j) ↓ xen'
     takedus : ∀ {a} → {A : Set a}
             → (a : List A)
             → {b : List A}
@@ -386,7 +387,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
              → {x : A}
              → (n : Fin $ 𝓁 a)
              → let n' = toℕ n in
-               let s = ℕ.suc n' in
+               let s = suc n' in
                s ↓ a ≡ s ↓ _++_ (n' ↑ a) (x ∷ s ↓ a)
     dropydus (_ ∷ _) _ zero = refl
     dropydus (_ ∷ xs) b (suc n) = dropydus xs b n
