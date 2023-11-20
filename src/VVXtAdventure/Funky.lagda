@@ -627,7 +627,7 @@ wield? (x ∷ xs) dang = if (realShit x) (troci xs) nothing
   troci (y ∷ []) with flt $ mapMaybe mapti? $ allFin _
     where
     flt = filterₗ $ _≟_ y ∘ Item.cname ∘ _!_ inv ∘ proj₁
-    mapti? : _ → Maybe $ Σ (Fin _) $ _≡_ true ∘ wisyj
+    mapti? : _ → Maybe $ Σ _ $ _≡_ true ∘ wisyj
     mapti? n = Data.Maybe.map (n ,_) $ decToMaybe $ true ≟ wisyj n
   ... | [] = just $ m , dang
     where
