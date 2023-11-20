@@ -267,7 +267,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
   xen = GameData.haters gd
   x₁ = toℕ j ↑ xen
   x₂ = record (xen ! j) {wieldedct = just $ i , t}
-  x₃ = suc (toℕ j) ↓ xen
+  x₃ = _↓ xen $ suc $ toℕ j
   xen' = x₁ ++ x₂ ∷ x₃
 
   dropkat : ∀ {a} → {A : Set a}
