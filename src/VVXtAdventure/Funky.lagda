@@ -73,10 +73,10 @@ module VVXtAdventure.Funky where
 
 open import Data.Fin
   using (
-    Fin;
-    suc;
+    zero;
     toℕ;
-    zero
+    Fin;
+    suc
   )
 open import Data.Nat
   using (
@@ -118,13 +118,13 @@ open import Data.List
   )
 open import Data.Maybe
   using (
-    is-just;
-    fromMaybe;
-    maybe;
-    Maybe;
-    just;
     decToMaybe;
-    nothing
+    fromMaybe;
+    nothing;
+    is-just;
+    Maybe;
+    maybe;
+    just
   )
 open import Data.String
   using (
@@ -133,11 +133,11 @@ open import Data.String
   )
 open import Data.Product
   using (
-    Σ;
     proj₁;
     proj₂;
     _×_;
-    _,_
+    _,_;
+    Σ
   )
 open import Data.Rational
   using (
