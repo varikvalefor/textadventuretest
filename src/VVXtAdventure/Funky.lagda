@@ -123,6 +123,7 @@ open import Data.Maybe
     maybe;
     Maybe;
     just;
+    decToMaybe;
     nothing
   )
 open import Data.String
@@ -627,9 +628,7 @@ wield? (x ∷ xs) dang = if (realShit x) (troci xs) nothing
     where
     flt = filterₗ $ _≟_ y ∘ Item.cname ∘ _!_ inv ∘ proj₁
     mapti? : _ → Maybe $ Σ (Fin _) $ _≡_ true ∘ wisyj
-    mapti? n with true ≟ wisyj n
-    ... | yes x = just $ n , x
-    ... | no _ = nothing
+    mapti? n = Data.Maybe.map (n ,_) $ decToMaybe $ true ≟ wisyj n
   ... | [] = just $ m , dang
     where
     m = "You need to stop chugging PCP or whatever.  \
