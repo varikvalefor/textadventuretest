@@ -248,7 +248,7 @@ wieldPawn : (q : GameData)
                 (record q {
                    rooms = GameData.rooms q';
                    haters = GameData.haters q';
-                   player' = mink (GameData.player' q) ℓ;
+                   player' = flip mink ℓ $ GameData.player' q;
                    yourfloorisnowclean = ifinc q'}))
             × (_≡_
                 (_++_
