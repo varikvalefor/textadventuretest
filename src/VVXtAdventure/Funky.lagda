@@ -327,7 +327,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
         where
         tondus : {m n : ℕ}
                → m ≡ n
-               → toℕ (Data.Fin.fromℕ m) ≡ n
+               → _≡ n $ toℕ $ Data.Fin.fromℕ m
         tondus x = subst (_≡_ _) x $ DFP.toℕ-fromℕ _
     xil = begin
       toℕ (mink j xenlen) ≡⟨ sym $ tomindus j xenlen ⟩
