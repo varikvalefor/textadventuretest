@@ -133,6 +133,7 @@ open import Data.String
   )
 open import Data.Product
   using (
+    uncurry;
     proj₁;
     proj₂;
     _×_;
@@ -646,7 +647,7 @@ wield? (x ∷ xs) dang = if (realShit x) (troci xs) nothing
       where
       xarci = Item.weapwn $ inv ! proj₁ selpli
       xarcynotci = xarci Data.Maybe.>>= WeaponInfo.wieldMsg
-    wieldData = wieldPawn dang p (proj₁ selpli) $ proj₂ selpli
+    wieldData = uncurry (wieldPawn dang p) selpli
       where
       p = GameData.player' dang
 \end{code}
