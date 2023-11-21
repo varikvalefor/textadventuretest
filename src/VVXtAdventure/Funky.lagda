@@ -629,7 +629,7 @@ wield? (x ∷ xs) dang = if (realShit x) (troci xs) nothing
     where
     flt = filterₗ $ _≟_ y ∘ Item.cname ∘ _!_ inv ∘ proj₁
     mapti? : _ → Maybe $ Σ _ $ _≡_ true ∘ wisyj
-    mapti? n = Data.Maybe.map (n ,_) $ decToMaybe $ true ≟ wisyj n
+    mapti? n = Data.Maybe.map (n ,_) $ decToMaybe $ _ ≟ _
   ... | [] = just $ m , dang
     where
     m = "You need to stop chugging PCP or whatever.  \
