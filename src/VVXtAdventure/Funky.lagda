@@ -138,6 +138,7 @@ open import Data.Product
     proj₂;
     _×_;
     _,_;
+    ∃;
     Σ
   )
 open import Data.Rational
@@ -628,7 +629,7 @@ wield? (x ∷ xs) dang = if (realShit x) (troci xs) nothing
   troci (y ∷ []) with flt $ mapMaybe mapti? $ allFin _
     where
     flt = filterₗ $ _≟_ y ∘ Item.cname ∘ _!_ inv ∘ proj₁
-    mapti? : _ → Maybe $ Σ _ $ _≡_ true ∘ wisyj
+    mapti? : _ → Maybe $ ∃ $ _≡_ true ∘ wisyj
     mapti? n = Data.Maybe.map (n ,_) $ decToMaybe $ _ ≟ _
   ... | [] = just $ m , dang
     where
