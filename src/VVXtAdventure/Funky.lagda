@@ -615,7 +615,7 @@ wield? [] = const nothing
 wield? (x ∷ xs) dang = if (realShit x) (troci xs) nothing
   where
   inv = Character.inventory $ GameData.player dang
-  wisyj = Data.Maybe.is-just ∘ Item.weapwn ∘ _!_ inv
+  wisyj = is-just ∘ Item.weapwn ∘ _!_ inv
   realShit = _≡ᵇ_ "WIELD"
   troci : List String → Maybe $ String × GameData
   troci [] = just $ m , dang
