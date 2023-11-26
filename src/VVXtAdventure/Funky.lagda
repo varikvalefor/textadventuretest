@@ -19,8 +19,8 @@
 \newunicodechar{⊤}{\ensuremath{\mathnormal{\top}}}
 \newunicodechar{λ}{\ensuremath{\mathnormal{\lambda}}}
 \newunicodechar{→}{\ensuremath{\mathnormal{\rightarrow}}}
-\newunicodechar{⦃}{\ensuremath{\mathnormal{\lbrace\!\lbrace}}}
-\newunicodechar{⦄}{\ensuremath{\mathnormal{\rbrace\!\rbrace}}}
+\newunicodechar{⦃}{\ensuremath{\mathnormal{\lbrace\hspace{-0.3em}|}}}
+\newunicodechar{⦄}{\ensuremath{\mathnormal{|\hspace{-0.3em}\rbrace}}}
 \newunicodechar{ₗ}{\ensuremath{\mathnormal{_l}}}
 \newunicodechar{ₛ}{\ensuremath{\mathnormal{_s}}}
 \newunicodechar{ᵢ}{\ensuremath{\mathnormal{_i}}}
