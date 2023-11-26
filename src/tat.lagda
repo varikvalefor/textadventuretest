@@ -110,14 +110,15 @@ main = run $ IO.lift nurtcati >>ᵢₒ lupe initialD
   lupe = λ q → fromMaybe (interact q) $ fanmo? q
     where
     fanmo? : GameData → Maybe $ IO ⊤
-    fanmo? q = firstJust $ Data.List.map mapti? fancu
+    fanmo? = firstJust ∘ Data.List.map mapti? ∘ fancu
       where
       firstJust : ∀ {a} → {A : Set a} → List $ Maybe A → Maybe A
       firstJust = Data.List.head ∘ Data.List.mapMaybe id
       mapti? = Data.Maybe.map $ putStrLn ∘ proj₁
-      fancu = zmimrobi'o q ∷
-              epicwin? winmsg q ∷
-              []
+      fancu : GameData → List COut
+      fancu q = zmimrobi'o q ∷
+                epicwin? winmsg q ∷
+                []
 
     interact : GameData → IO ⊤
     interact = λ q → prompt >>ᵢₒ ree >>=ᵢₒ crock q
