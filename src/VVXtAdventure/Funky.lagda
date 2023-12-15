@@ -377,7 +377,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
   skrud = begin
     (toℕ j ↑ xen) ++ (suc (toℕ j) ↓ xen) ≡⟨ refl ⟩
     x₁ ++ x₃ ≡⟨ cong (_++ x₃) $ takedus xen j ⟩
-    x₁' ++ x₃ ≡⟨ cong (_++_ x₁') $ dropydus xen (x₂ ∷ x₃) j ⟩
+    x₁' ++ x₃ ≡⟨ cong (x₁' ++_) $ dropydus xen (x₂ ∷ x₃) j ⟩
     x₁' ++ x₃' ∎
     where
     x₁' = toℕ j ↑ xen'
