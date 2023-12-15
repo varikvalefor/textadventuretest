@@ -46,6 +46,7 @@
 \newunicodechar{𝓁}{\ensuremath{\mathnormal{\mathcal{l}}}}
 \newunicodechar{ℓ}{\ensuremath{\mathnormal{\ell}}}
 \newunicodechar{⊃}{\ensuremath{\mathnormal{\supset}}}
+\newunicodechar{▹}{\ensuremath{\mathnormal{\triangleright}}}
 
 \newcommand\Sym\AgdaSymbol
 \newcommand\D\AgdaDatatype
@@ -94,6 +95,9 @@ open import Data.Sum
     _⊎_
   )
 open import Function
+  renaming (
+    _|>_ to _▹_
+  )
 open import Data.Bool
   using (
     Bool;
@@ -208,7 +212,7 @@ movePawn : (q : GameData)
            → Σ (𝓁 (gek q) ≡ 𝓁 (gek q')) $ λ ℓ
            → Σ (𝓁 (x q) ≡ 𝓁 (x q')) $ λ ℓ₂
            → let uil = ual (x q) i $ λ x → record x {room = j} in
-             j ≡ mink (k $ x q' ! mink i ℓ₂) (sym ℓ)
+             j ≡ (x q' ! mink i ℓ₂ ▹ k ▹ flip mink (sym ℓ))
              -- | .i xu ti ronsa
            × let uil₂ = proj₁ $ proj₂ uil in
              (_≡_
