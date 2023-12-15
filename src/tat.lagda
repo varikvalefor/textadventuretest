@@ -133,9 +133,9 @@ main = run $ IO.lift nurtcati >>ᵢₒ lupe initialD
         chews : List $ COut × (String → GameData → IO ⊤)
               → IO ⊤
               → IO ⊤
-        chews ((just (a , b) , f) ∷ _) _ = f a b
-        chews ((nothing , _) ∷ xs) = chews xs
         chews [] = id
+        chews ((nothing , _) ∷ xs) = chews xs
+        chews ((just (a , b) , f) ∷ _) _ = f a b
         np : List $ COut × (String → GameData → IO ⊤)
         np = map (λ f → f s gd , λ a b → putStrLn a >>ᵢₒ lupe b) std
           where
