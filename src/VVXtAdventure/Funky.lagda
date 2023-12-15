@@ -381,7 +381,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
     x₁' ++ x₃' ∎
     where
     x₁' = toℕ j ↑ xen'
-    x₃' = suc (toℕ j) ↓ xen'
+    x₃' = _↓ xen' $ suc $ toℕ j
     takedus : ∀ {a} → {A : Set a}
             → (a : List A)
             → {b : List A}
