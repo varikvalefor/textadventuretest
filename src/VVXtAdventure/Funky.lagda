@@ -375,7 +375,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
 
   -- | ni'o zo .kond. binxo ja co'e zo .skrud.
   skrud = begin
-    (toℕ j ↑ xen) ++ (suc (toℕ j) ↓ xen) ≡⟨ refl ⟩
+    (toℕ j ↑ xen) ++ (_↓ xen $ suc $ toℕ j) ≡⟨ refl ⟩
     x₁ ++ x₃ ≡⟨ cong (_++ x₃) $ takedus xen j ⟩
     x₁' ++ x₃ ≡⟨ cong (x₁' ++_) $ dropydus xen (x₂ ∷ x₃) j ⟩
     x₁' ++ x₃' ∎
