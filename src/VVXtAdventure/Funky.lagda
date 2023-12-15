@@ -576,7 +576,7 @@ travel? (x₁ ∷ xs₁) = if realShit (travel' xs₁) $ const nothing
   travel' (cname ∷ []) q = maybe just faktoi $ alreadythere?
     where
     F = Fin $ length $ GameData.rooms q
-    cur = GameData.rooms q ! Character.room (GameData.player q)
+    cur = GameData.rooms q !_ $ Character.room $ GameData.player q
     alreadythere? = if atRoom (just $ m , q) nothing
       where
       atRoom = cname ≡ᵇ Room.cname cur
