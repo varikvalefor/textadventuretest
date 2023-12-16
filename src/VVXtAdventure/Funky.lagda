@@ -98,6 +98,14 @@ open import Function
   renaming (
     _|>_ to _▹_
   )
+  using (
+    const;
+    _on_;
+    flip;
+    _∘_;
+    _$_;
+    id
+  )
 open import Data.Bool
   using (
     Bool;
