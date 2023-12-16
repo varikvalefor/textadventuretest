@@ -374,7 +374,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
     where
     u₁ = Data.Maybe.map (toℕ ∘ proj₁) ∘ Character.wieldedct
 
-  -- | ni'o zo .kond. binxo ja co'e zo .skrud.
+  -- | ni'o zo .kond. basti zo .skrud.
   skrud = begin
     (toℕ j ↑ xen) ++ (_↓ xen $ suc $ toℕ j) ≡⟨ refl ⟩
     x₁ ++ x₃ ≡⟨ cong (_++ x₃) $ takedus xen j ⟩
