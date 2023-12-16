@@ -81,9 +81,11 @@ open import Data.String
   )
 open import Data.Product
   using (
+    uncurry;
     proj₁;
     _×_;
-    _,_
+    _,_;
+    ∃
   )
 open import Algebra.Core
   using (
@@ -150,9 +152,9 @@ main = run $ IO.lift nurtcati >>ᵢₒ lupe initialD
               → {C : (x : A) → B x → Set c}
               → (List
                   (_×_
-                    (Maybe $ Data.Product.∃ B)
+                    (Maybe $ ∃ B)
                     ((x : A) → (z : B x) → C x z)))
-              → Op₁ $ Data.Product.∃ $ Data.Product.uncurry C
+              → Op₁ $ ∃ $ uncurry C
         chews [] = id
         chews ((nothing , _) ∷ xs) = chews xs
         chews ((just (a , b) , f) ∷ _) _ = (a , b) , f a b
