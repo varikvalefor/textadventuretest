@@ -136,17 +136,23 @@ main = run $ IO.lift nurtcati >>ᵢₒ lupe initialD
       prompt = putStrLn "What do you do?"
       ree = words ∘ map toUpper <$> getLine
       crock : GameData → List String → IO ⊤
-      crock gd s = chews np $ mis m gd
+      crock gd s = Data.Product.proj₂ $ chews np $ ("" , gd) , mis m gd
         where
         mis = λ a b → putStrLn a >>ᵢₒ lupe b
         m = "I don't understand a word you just said."
-        chews : ∀ {a b c} → {A : Set a} → {B : Set b} → {C : Set c}
-             → List $ Maybe (A × B) × (A → B → C)
-             → C
-             → C
+        chews : ∀ {a b c}
+              → {A : Set a}
+              → {B : A → Set b}
+              → {C : (x : A) → B x → Set c}
+              → (List
+                  (_×_
+                    (Maybe $ Data.Product.∃ B)
+                    ((x : A) → (z : B x) → C x z)))
+              → Data.Product.∃ $ Data.Product.uncurry C
+              → Data.Product.∃ $ Data.Product.uncurry C
         chews [] = id
         chews ((nothing , _) ∷ xs) = chews xs
-        chews ((just (a , b) , f) ∷ _) _ = f a b
+        chews ((just (a , b) , f) ∷ _) _ = (a , b) , f a b
         np : List $ COut × (String → GameData → IO ⊤)
         np = map (λ f → f s gd , λ a b → putStrLn a >>ᵢₒ lupe b) std
           where
