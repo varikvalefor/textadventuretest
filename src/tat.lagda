@@ -52,6 +52,11 @@ open import IO
     _>>=_ to _>>=ᵢₒ_
   )
 open import Function
+  using (
+    _∘_;
+    _$_;
+    id
+  )
 open import Data.Char
   using (
     toUpper
@@ -84,7 +89,12 @@ open import TestAdventure.WYCT
 open import VVXtAdventure.Base
 open import VVXtAdventure.Funky
 open import Truthbrary.Record.Eq
+  using (
+  )
 open import Data.Unit.Polymorphic
+  using (
+    ⊤
+  )
 open import Truthbrary.Record.LLC
   using (
     _++_;
