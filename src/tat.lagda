@@ -85,6 +85,10 @@ open import Data.Product
     _×_;
     _,_
   )
+open import Algebra.Core
+  using (
+    Op₁
+  )
 open import TestAdventure.WYCT
 open import VVXtAdventure.Base
 open import VVXtAdventure.Funky
@@ -148,8 +152,7 @@ main = run $ IO.lift nurtcati >>ᵢₒ lupe initialD
                   (_×_
                     (Maybe $ Data.Product.∃ B)
                     ((x : A) → (z : B x) → C x z)))
-              → Data.Product.∃ $ Data.Product.uncurry C
-              → Data.Product.∃ $ Data.Product.uncurry C
+              → Op₁ $ Data.Product.∃ $ Data.Product.uncurry C
         chews [] = id
         chews ((nothing , _) ∷ xs) = chews xs
         chews ((just (a , b) , f) ∷ _) _ = (a , b) , f a b
