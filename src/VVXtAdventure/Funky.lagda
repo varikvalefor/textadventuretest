@@ -261,13 +261,13 @@ wieldPawn : (q : GameData)
             × (_≡_
                 (_++_
                   (toℕ j ↑ x q)
-                  (suc (toℕ j) ↓ x q))
+                  (_↓ x q $ suc $ toℕ j))
                 (subst
                   (List ∘ Character)
                   (sym rud)
                   (_++_
                     (toℕ j ↑ x q')
-                    (suc (toℕ j) ↓ x q'))))
+                    (_↓ x q' $ suc $ toℕ j))))
 wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
   where
   ⊃ = Data.List.head
