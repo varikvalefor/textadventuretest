@@ -212,7 +212,8 @@ movePawn : (q : GameData)
            → Σ (𝓁 (gek q) ≡ 𝓁 (gek q')) $ λ ℓ
            → Σ (𝓁 (x q) ≡ 𝓁 (x q')) $ λ ℓ₂
            → j ≡ (x q' ! mink i ℓ₂ ▹ k ▹ flip mink (sym ℓ))
-             -- | .i xu ti ronsa
+             -- | .i xu ronsa fa le ctaipe be le su'u
+             -- la'o zoi. q' .zoi. dunli
            × let uil = ual (x q) i $ λ x → record x {room = j} in
              let uil₂ = proj₁ $ proj₂ uil in
              (_≡_
