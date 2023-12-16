@@ -140,9 +140,10 @@ main = run $ IO.lift nurtcati >>ᵢₒ lupe initialD
         where
         mis = λ a b → putStrLn a >>ᵢₒ lupe b
         m = "I don't understand a word you just said."
-        chews : List $ COut × (String → GameData → IO ⊤)
-              → IO ⊤
-              → IO ⊤
+        chews : ∀ {a b c} → {A : Set a} → {B : Set b} → {C : Set c}
+             → List $ Maybe (A × B) × (A → B → C)
+             → C
+             → C
         chews [] = id
         chews ((nothing , _) ∷ xs) = chews xs
         chews ((just (a , b) , f) ∷ _) _ = f a b
