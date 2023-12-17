@@ -112,6 +112,22 @@ open import Relation.Binary.PropositionalEquality
   )
 \end{code}
 
+\section{la'o zoi.\ \F{fanmo?}\ .zoi.}
+ni'o ga jonai la'oi .\AgdaInductiveConstructor{nothing}.\ du ko'a goi la'o zoi.\ \F{fanmo?}\ \B x .zoi.\ gi ga je .indika ko'e goi le du'u lo kelci ke xarpre ja co'e cu morsi ja cu co'e gi ko'a me'oi .\AgdaInductiveConstructor{just}.\ zo'e poi tu'a ke'a .indika ko'e
+
+\begin{code}
+fanmo? : ∀ {a} → GameData → Maybe $ IO {a} ⊤
+fanmo? = firstJust ∘ Data.List.map mapti? ∘ fancu
+  where
+  firstJust : ∀ {a} → {A : Set a} → List $ Maybe A → Maybe A
+  firstJust = Data.List.head ∘ Data.List.mapMaybe id
+  mapti? = Data.Maybe.map $ putStrLn ∘ proj₁
+  fancu : GameData → List COut
+  fancu q = zmimrobi'o q ∷
+            epicwin? winmsg q ∷
+            []
+\end{code}
+
 \section{la'oi .\F{main}.}
 
 \begin{code}
@@ -125,17 +141,6 @@ main = run $ IO.lift nurtcati >>ᵢₒ lupe initialD
 
   lupe = λ q → fromMaybe (interact q) $ fanmo? q
     where
-    fanmo? : GameData → Maybe $ IO ⊤
-    fanmo? = firstJust ∘ Data.List.map mapti? ∘ fancu
-      where
-      firstJust : ∀ {a} → {A : Set a} → List $ Maybe A → Maybe A
-      firstJust = Data.List.head ∘ Data.List.mapMaybe id
-      mapti? = Data.Maybe.map $ putStrLn ∘ proj₁
-      fancu : GameData → List COut
-      fancu q = zmimrobi'o q ∷
-                epicwin? winmsg q ∷
-                []
-
     interact : GameData → IO ⊤
     interact = λ q → prompt >>ᵢₒ ree >>=ᵢₒ crock q
       where
