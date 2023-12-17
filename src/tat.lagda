@@ -146,17 +146,16 @@ main = run $ IO.lift nurtcati >>ᵢₒ lupe initialD
         where
         mis = λ a b → putStrLn a >>ᵢₒ lupe b
         m = "I don't understand a word you just said."
-        chews : ∀ {a b c}
+        chews : ∀ {a b}
               → {A : Set a}
               → {B : A → Set b}
-              → {C : (x : A) → B x → Set c}
-              → List (Maybe (∃ B) × ((x : A) → (z : B x) → C x z))
-              → Op₁ $ ∃ $ uncurry C
+              → List (Maybe A × ((x : A) → B x))
+              → Op₁ $ ∃ B
         chews [] = id
         chews ((nothing , _) ∷ xs) = chews xs
-        chews ((just (a , b) , f) ∷ _) _ = (a , b) , f a b
-        np : List $ COut × (String → GameData → IO ⊤)
-        np = map (λ f → f s gd , λ a b → putStrLn a >>ᵢₒ lupe b) std
+        chews ((just b , f) ∷ _) _ = b , f b
+        np : List $ COut × (String × GameData → IO ⊤)
+        np = map (λ f → f s gd , λ (a , b) → putStrLn a >>ᵢₒ lupe b) std
           where
           std = sazycimde ++ gasnu
             where
