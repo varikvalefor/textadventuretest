@@ -18,11 +18,13 @@
 \newunicodechar{∷}{\ensuremath{\mathnormal\Colon}}
 \newunicodechar{∘}{\ensuremath{\mathnormal{\circ}}}
 \newunicodechar{∀}{\ensuremath{\mathnormal{\forall}}}
+\newunicodechar{∃}{\ensuremath{\mathnormal{\exists}}}
 \newunicodechar{⊤}{\ensuremath{\mathnormal{\top}}}
 \newunicodechar{λ}{\ensuremath{\mathnormal{\lambda}}}
 \newunicodechar{→}{\ensuremath{\mathnormal{\rightarrow}}}
 \newunicodechar{ᵢ}{\ensuremath{\mathnormal{_i}}}
 \newunicodechar{ₒ}{\ensuremath{\mathnormal{_o}}}
+\newunicodechar{₁}{\ensuremath{\mathnormal{_1}}}
 \newunicodechar{₂}{\ensuremath{\mathnormal{_2}}}
 
 \newcommand\Sym\AgdaSymbol
