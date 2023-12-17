@@ -150,10 +150,7 @@ main = run $ IO.lift nurtcati >>ᵢₒ lupe initialD
               → {A : Set a}
               → {B : A → Set b}
               → {C : (x : A) → B x → Set c}
-              → (List
-                  (_×_
-                    (Maybe $ ∃ B)
-                    ((x : A) → (z : B x) → C x z)))
+              → List (Maybe (∃ B) × ((x : A) → (z : B x) → C x z))
               → Op₁ $ ∃ $ uncurry C
         chews [] = id
         chews ((nothing , _) ∷ xs) = chews xs
