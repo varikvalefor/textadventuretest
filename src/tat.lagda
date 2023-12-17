@@ -156,7 +156,7 @@ main = run $ IO.lift nurtcati >>ᵢₒ lupe initialD
         chews ((nothing , _) ∷ xs) = chews xs
         chews ((just b , f) ∷ _) _ = b , f b
         np : List $ COut × (String × GameData → IO ⊤)
-        np = map (λ f → f s gd , λ (a , b) → putStrLn a >>ᵢₒ lupe b) std
+        np = map (λ f → f s gd , uncurry mis) std
           where
           std = sazycimde ++ gasnu
             where
