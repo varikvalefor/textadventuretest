@@ -147,7 +147,7 @@ main = run $ IO.lift nurtcati >>ᵢₒ lupe initialD
         mis = λ a b → putStrLn a >>ᵢₒ lupe b
         naj = "I don't understand a word you just said."
         chews : ∀ {a b} → {A : Set a} → {B : A → Set b}
-              → List (Maybe A × ((x : A) → B x))
+              → List $ Maybe A × ((x : A) → B x)
               → Op₁ $ ∃ B
         chews [] = id
         chews ((nothing , _) ∷ xs) = chews xs
