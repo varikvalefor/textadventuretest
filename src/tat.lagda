@@ -142,10 +142,10 @@ main = run $ IO.lift nurtcati >>ᵢₒ lupe initialD
       prompt = putStrLn "What do you do?"
       ree = words ∘ map toUpper <$> getLine
       crock : GameData → List String → IO ⊤
-      crock gd s = proj₂ $ chews np $ ("" , gd) , mis m gd
+      crock gd s = proj₂ $ chews np $ ("" , gd) , mis naj gd
         where
         mis = λ a b → putStrLn a >>ᵢₒ lupe b
-        m = "I don't understand a word you just said."
+        naj = "I don't understand a word you just said."
         chews : ∀ {a b} → {A : Set a} → {B : A → Set b}
               → List (Maybe A × ((x : A) → B x))
               → Op₁ $ ∃ B
