@@ -97,9 +97,6 @@ open import Algebra.Core
 open import TestAdventure.WYCT
 open import VVXtAdventure.Base
 open import VVXtAdventure.Funky
-open import Truthbrary.Record.Eq
-  using (
-  )
 open import Data.Unit.Polymorphic
   using (
     ⊤
