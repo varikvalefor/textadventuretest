@@ -149,6 +149,7 @@ open import Data.Product
     uncurry;
     proj₁;
     proj₂;
+    <_,_>;
     _×_;
     _,_;
     ∃;
@@ -547,9 +548,9 @@ lp? : Com
 lp? ("WHO" ∷ "ARE" ∷ "YOU?" ∷ []) = just ∘ _,_ m
   where
   m = "I really want to know."
-lp? ("I'M" ∷ "A" ∷ "WINNER" ∷ []) q = just $ m , q
+lp? ("I'M" ∷ "A" ∷ "WINNER" ∷ []) = just ∘ < m , id >
   where
-  m = if (GameData.epicwin q) m₁ m₂
+  m = λ q → if (GameData.epicwin q) m₁ m₂
     where
     m₁ = "I just can't argue with that."
     m₂ = "Actually, refl is a proof of GameData.epicwin \
