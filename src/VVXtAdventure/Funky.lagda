@@ -334,7 +334,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
       lisuc : ∀ {a} → {A : Set a}
             → (xs : List A)
             → Fin $ 𝓁 xs
-            → Σ ℕ $ _∘ suc $ 𝓁 xs ≡_
+            → ∃ $ _∘ suc $ 𝓁 xs ≡_
       lisuc (_ ∷ xs) _ = 𝓁 xs , refl
       j' = DFP.≤fromℕ $ mink j $ proj₂ $ lisuc xen j
       mijd = sym $ tomindus j $ proj₂ $ lisuc xen j
