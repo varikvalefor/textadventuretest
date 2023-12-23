@@ -52,6 +52,7 @@ open import Relation.Binary.PropositionalEquality
 \section{le ctaipe be la'oi .\F{Item}.}
 
 \subsection{la'oi .\F{colorfun}.}
+ni'o zo'oi .COLOUR.\ selneimau fi la .varik.\ldots jenai ku'i cu cmene le samselkei\ldots pe'a sai noi ke'a selcme zoi glibau.\ Color Fun .glibau.
 
 \begin{code}
 colorfun : Item
