@@ -110,7 +110,7 @@ macguffin = record {
   where
   m = "You hold a coupon for a \"super-bitchin' XL \
       \DAX and BLEXER High-Throughput Leafblower \
-      \476.5: Beefcake Edition\".  Most men whom \
+      \476.5: Beefcake Edition\".  Most prenu whom \
       \you know insist that the naming scheme is a \
       \bit ridiculous... but can still respect the \
       \perceived quality of DAX AND BLEXER's \
