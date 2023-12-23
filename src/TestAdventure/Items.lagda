@@ -88,7 +88,7 @@ defstick = record {
       \reason, you absolutely refuse to let go of \
       \this stick.  You insist that this stick shall \
       \SOMEDAY be useful.  But I'll be honest.  \
-      \Everyone in a 100-yard radius doubts your \
+      \Everyone within a 100-yard radius doubts your \
       \inane claim... but welcomes that you \
       \demonstrate that we are wrong."
 \end{code}
