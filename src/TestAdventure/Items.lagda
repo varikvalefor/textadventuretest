@@ -15,7 +15,7 @@
 \newcommand\F\AgdaFunction
 \newcommand\B\AgdaBound
 
-\newcommand\kulmodis{\textttt{TestAdventure.Items}}
+\newcommand\kulmodis{\texttt{TestAdventure.Items}}
 
 \title{la'o zoi.\ \texttt{\cmene} .zoi.}
 \author{la .varik.\ .VALefor.}
