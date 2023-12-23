@@ -17,7 +17,7 @@
 
 \newcommand\kulmodis{\texttt{TestAdventure.Items}}
 
-\title{la'o zoi.\ \texttt{\cmene} .zoi.}
+\title{la'o zoi.\ \texttt{\kulmodis} .zoi.}
 \author{la .varik.\ .VALefor.}
 \begin{document}
 \maketitle
