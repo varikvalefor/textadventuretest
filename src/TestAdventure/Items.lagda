@@ -68,7 +68,7 @@ colorfun = record {
 \end{code}
 
 \subsection{la'oi .\F{defstick}.}
-ni'o ko'a goi la'oi .\F{defstick}.\ grana  .i ca lo nu tolsti kei ko'a selvau le me'oi .inventory.\ be le kelci ke xarpre ja co'e pe la'oi .TestAventure.
+ni'o grana fa ko'a goi la'oi .\F{defstick}.  .i ca lo nu tolsti kei ko'a selvau le me'oi .inventory.\ be le kelci ke xarpre ja co'e pe la'oi .TestAventure.
 
 \begin{code}
 defstick : Item
