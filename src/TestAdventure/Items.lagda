@@ -49,7 +49,7 @@ open import Relation.Binary.PropositionalEquality
   )
 \end{code}
 
-\section{le ctaipe be la'oi .\F{Item}.
+\section{le ctaipe be la'oi .\F{Item}.}
 
 \subsection{la'oi .\F{colorfun}.}
 
