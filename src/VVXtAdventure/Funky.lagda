@@ -22,12 +22,12 @@
 \newunicodechar{∃}{\ensuremath{\mathnormal{\exists}}}
 \newunicodechar{⦃}{\ensuremath{\mathnormal{\lbrace\hspace{-0.3em}|}}}
 \newunicodechar{⦄}{\ensuremath{\mathnormal{|\hspace{-0.3em}\rbrace}}}
-\newunicodechar{ₗ}{\ensuremath{\mathnormal{_{\AgdaFontStyle l}}}}
-\newunicodechar{ₛ}{\ensuremath{\mathnormal{_{\AgdaFontStyle s}}}}
-\newunicodechar{ᵢ}{\ensuremath{\mathnormal{_{\AgdaFontStyle i}}}}
-\newunicodechar{ₒ}{\ensuremath{\mathnormal{_{\AgdaFontStyle o}}}}
-\newunicodechar{ᵘ}{\ensuremath{\mathnormal{^{\AgdaFontStyle u}}}}
-\newunicodechar{ᵥ}{\ensuremath{\mathnormal{_{\AgdaFontStyle v}}}}
+\newunicodechar{ₗ}{\ensuremath{\mathnormal{_\AgdaFontStyle{l}}}}
+\newunicodechar{ₛ}{\ensuremath{\mathnormal{_\AgdaFontStyle{s}}}}
+\newunicodechar{ᵢ}{\ensuremath{\mathnormal{_\AgdaFontStyle{i}}}}
+\newunicodechar{ₒ}{\ensuremath{\mathnormal{_\AgdaFontStyle{o}}}}
+\newunicodechar{ᵘ}{\ensuremath{\mathnormal{^\AgdaFontStyle{u}}}}
+\newunicodechar{ᵥ}{\ensuremath{\mathnormal{_\AgdaFontStyle{v}}}}
 \newunicodechar{₁}{\ensuremath{\mathnormal{_1}}}
 \newunicodechar{₂}{\ensuremath{\mathnormal{_2}}}
 \newunicodechar{₃}{\ensuremath{\mathnormal{_3}}}
@@ -36,7 +36,7 @@
 \newunicodechar{∧}{\ensuremath{\mathnormal{\land}}}
 \newunicodechar{≤}{\ensuremath{\mathnormal{\leq}}}
 \newunicodechar{≥}{\ensuremath{\mathnormal{\geq}}}
-\newunicodechar{ᵇ}{\ensuremath{\mathnormal{^{\AgdaFontStyle b}}}}
+\newunicodechar{ᵇ}{\ensuremath{\mathnormal{^\AgdaFontStyle{b}}}}
 \newunicodechar{ₘ}{\ensuremath{\mathnormal{_m}}}
 \newunicodechar{≟}{\ensuremath{\mathnormal{\stackrel{?}{=}}}}
 \newunicodechar{∸}{\ensuremath{\mathnormal{\divdot}}}
