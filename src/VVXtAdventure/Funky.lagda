@@ -494,7 +494,7 @@ smashGeneric q k x j = q' , kuslendus , xindus , itemstedus
     intend p n f = DMP.just-injective $ begin
       just (f $ p ! n) ≡⟨ cong just $ sym $ lum p f n ⟩
       just (_¨_ f p ! n'') ≡⟨ xedrop (f ¨ p) n'' ⟩
-      ⊃ (toℕ n'' ↓ _¨_ f p) ≡⟨ sym $ cong (flidir $ f ¨ p) tomin₁ ⟩
+      ⊃ (toℕ n'' ↓ _¨_ f p) ≡⟨ sym $ cong (flidir _) tomin₁ ⟩
       ⊃ (toℕ n ↓ _¨_ f p) ≡⟨ teikapdus p n f ⟩
       ⊃ (toℕ n ↓ konk) ≡⟨ cong (flidir konk) tomin₂ ⟩
       ⊃ (toℕ n' ↓ konk) ≡⟨ sym $ xedrop konk n' ⟩
