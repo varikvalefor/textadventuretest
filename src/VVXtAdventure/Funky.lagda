@@ -901,13 +901,13 @@ smash? (cmd ∷ arg) g = if realShit (just trySmash) nothing
         indice = λ x → Data.List.zip x $ allFin $ length x
   ... | nothing = "Yo, B, what do you want to trash?" , g
   ... | just [] = "Stop fucking hallucinating." , g
-  ... | just (x ∷ _) with smashing-is-just?
+  ... | just (x ∷ _) with is-just? $ Item.smashInfo item
     where
     item = Room.items (GameData.rooms g ! kumfid) ! proj₂ x
-    smashing-is-just? : Dec $ Is-just $ Item.smashInfo item
-    smashing-is-just? with Item.smashInfo item
-    ... | nothing = no $ λ ()
-    ... | just _ = yes $ DMA.just _
+    is-just? : ∀ {a} → {A : Set a}
+             → (x : Maybe A) → Dec $ Is-just x
+    is-just? nothing = no $ λ ()
+    is-just? (just _) = yes $ DMA.just _
   ... | no _ = "Can't smash this." , g
   ... | yes j = fromMaybe m (proj₁ j') , smashData
     where
