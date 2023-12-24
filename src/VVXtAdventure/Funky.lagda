@@ -456,9 +456,7 @@ smashGeneric q k x j = q' , kuslendus , xindus , itemstedus
            → (n : Fin $ length x)
            → {z : A}
            → let n' = toℕ n in
-             ((_≡_ on length)
-               x
-               (n' ↑ x ++ z ∷ suc n' ↓ x))
+             ((_≡_ on length) x $ n' ↑ x ++ z ∷ suc n' ↓ x)
   teikdrop (_ ∷ _) zero = refl
   teikdrop (_ ∷ xs) (suc n) = cong suc $ teikdrop xs n
   rooms = GameData.rooms q
