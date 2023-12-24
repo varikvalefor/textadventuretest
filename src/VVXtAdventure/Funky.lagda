@@ -553,6 +553,10 @@ smashGeneric q k x j = q' , kuslendus , xindus , itemstedus
       k₁ = toℕ k ↑ rooms
       k₃ = suc (toℕ k) ↓ rooms
       k' = mink k kuslendus
+      -- | ni'o pilno le re broda cei me'oi .apostrophe. ki'u
+      -- le su'u pilno le pa broda tu'a la'o zoi. k' .zoi.
+      -- noi zo'e pe ke'a drata zo'e pe la'o zoi. k₃'' .zoi.
+      -- je zo'e
       k₁'' = _↑ kus $ toℕ k'
       k₃'' = _↓ kus $ suc $ toℕ k'
       midun : ∀ {a} → {A : Set a}
