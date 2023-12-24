@@ -536,7 +536,7 @@ smashGeneric q k x j = q' , kuslendus , xindus , itemstedus
     iifink = GameData.yourfloorisnowclean q
     plaid = DLP.length-map upgrayedd $ GameData.haters q
     cnastedus = begin
-      c ¨ rooms ≡⟨ cong (_¨_ c) $ gogogo rooms k ⟩
+      c ¨ rooms ≡⟨ cong (_¨_ c) $ midun rooms k ⟩
       c ¨ (k₁ ++ rooms ! k ∷ k₃)
         ≡⟨ DLP.map-++-commute c k₁ $ rooms ! k ∷ k₃ ⟩
       (c ¨ k₁) ++ c (rooms ! k) ∷ (c ¨ k₃) ≡⟨ refl ⟩
@@ -547,7 +547,7 @@ smashGeneric q k x j = q' , kuslendus , xindus , itemstedus
       c ¨ (k₁ ++ kus ! k' ∷ k₃) ≡⟨ zunbas ⟩
       c ¨ (k₁'' ++ kus ! k' ∷ k₃) ≡⟨ pribas ⟩
       c ¨ (k₁'' ++ kus ! k' ∷ k₃'')
-        ≡⟨ sym $ cong (_¨_ c) $ gogogo kus k' ⟩
+        ≡⟨ sym $ cong (_¨_ c) $ midun kus k' ⟩
       c ¨ kus ∎
       where
       c = Room.cname
@@ -557,13 +557,12 @@ smashGeneric q k x j = q' , kuslendus , xindus , itemstedus
       k' = mink k kuslendus
       k₁'' = flip _↑_ kus $ toℕ k'
       k₃'' = flip _↓_ kus $ suc $ toℕ k'
-      -- | "Stick together, team."
-      gogogo : ∀ {a} → {A : Set a}
-             → (x : List A)
-             → (n : Fin $ length x)
-             → x ≡ toℕ n ↑ x ++ x ! n ∷ suc (toℕ n) ↓ x
-      gogogo (_ ∷ _) zero = refl
-      gogogo (x ∷ xs) (suc n) = cong (_∷_ x) $ gogogo xs n
+      midun : ∀ {a} → {A : Set a}
+            → (x : List A)
+            → (n : Fin $ length x)
+            → x ≡ toℕ n ↑ x ++ x ! n ∷ suc (toℕ n) ↓ x
+      midun (_ ∷ _) zero = refl
+      midun (x ∷ xs) (suc n) = cong (_∷_ x) $ midun xs n
       zunbas = subst (_≡_ _) zunbas₂ $ cong p $ teikteikdrop rooms k
         where
         p = λ x → _¨_ c $ x ++ kus ! k' ∷ k₃
