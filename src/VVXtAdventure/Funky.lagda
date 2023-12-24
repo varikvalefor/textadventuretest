@@ -340,23 +340,6 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
     dropind (_ ∷ xs) (suc n) = dropind xs n
     subkon = subst (_≡_ _) $ cong (⊃ ∘ _↓ xen') xil
       where
-      jelis : toℕ j ≤ 𝓁 xen
-      jelis = subst₂ _≤_ mijd kix $ DNP.≤-step j'
-        where
-        lisuc : ∀ {a} → {A : Set a}
-              → (xs : List A)
-              → Fin $ 𝓁 xs
-              → ∃ $ _∘ suc $ 𝓁 xs ≡_
-        lisuc (_ ∷ xs) _ = 𝓁 xs , refl
-        j' = DFP.≤fromℕ $ mink j $ proj₂ $ lisuc xen j
-        mijd = sym $ tomindus j $ proj₂ $ lisuc xen j
-        kix : suc (toℕ $ Data.Fin.fromℕ _) ≡ 𝓁 xen
-        kix = tondus $ sym $ proj₂ $ lisuc xen j
-          where
-          tondus : {m n : ℕ}
-                 → m ≡ n
-                 → _≡ n $ toℕ $ Data.Fin.fromℕ m
-          tondus x = subst (_≡_ _) x $ DFP.toℕ-fromℕ _
       xil = begin
         toℕ (mink j xenlen) ≡⟨ sym $ tomindus j xenlen ⟩
         toℕ j ≡⟨ teiklendus xen (toℕ j) jelis ⟩
@@ -371,6 +354,23 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
         teiklendus (_ ∷ xs) (suc n) (Data.Nat.s≤s q) = ret
           where
           ret = cong suc $ teiklendus xs n q
+        jelis : toℕ j ≤ 𝓁 xen
+        jelis = subst₂ _≤_ mijd kix $ DNP.≤-step j'
+          where
+          lisuc : ∀ {a} → {A : Set a}
+                → (xs : List A)
+                → Fin $ 𝓁 xs
+                → ∃ $ _∘ suc $ 𝓁 xs ≡_
+          lisuc (_ ∷ xs) _ = 𝓁 xs , refl
+          j' = DFP.≤fromℕ $ mink j $ proj₂ $ lisuc xen j
+          mijd = sym $ tomindus j $ proj₂ $ lisuc xen j
+          kix : suc (toℕ $ Data.Fin.fromℕ _) ≡ 𝓁 xen
+          kix = tondus $ sym $ proj₂ $ lisuc xen j
+            where
+            tondus : {m n : ℕ}
+                   → m ≡ n
+                   → _≡ n $ toℕ $ Data.Fin.fromℕ m
+            tondus x = subst (_≡_ _) x $ DFP.toℕ-fromℕ _
 
   xendj : let iv = Character.inventory in
           iv (xen ! j) ≡ iv (xen' ! mink j xenlen)
