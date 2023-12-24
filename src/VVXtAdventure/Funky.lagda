@@ -534,16 +534,20 @@ smashGeneric q k x j = q' , kuslendus , xindus , itemstedus
     iifink = GameData.yourfloorisnowclean q
     plaid = DLP.length-map upgrayedd $ GameData.haters q
     cnastedus = begin
-      c ¨ rooms ≡⟨ cong (_¨_ c) $ midun rooms k ⟩
+      c ¨ rooms
+        ≡⟨ cong (_¨_ c) $ midun rooms k ⟩
       c ¨ (k₁ ++ rooms ! k ∷ k₃)
         ≡⟨ DLP.map-++-commute c k₁ $ rooms ! k ∷ k₃ ⟩
-      (c ¨ k₁) ++ c (rooms ! k) ∷ (c ¨ k₃) ≡⟨ refl ⟩
+      (c ¨ k₁) ++ c (rooms ! k) ∷ (c ¨ k₃)
+        ≡⟨ refl ⟩
       (c ¨ k₁) ++ c snikerz ∷ (c ¨ k₃)
         ≡⟨ cong (λ t → c ¨ k₁ ++ c t ∷ c ¨ k₃) snidus ⟩
       (c ¨ k₁) ++ c (kus ! k') ∷ (c ¨ k₃)
         ≡⟨ sym $ DLP.map-++-commute c k₁ $ kus ! k' ∷ k₃ ⟩
-      c ¨ (k₁ ++ kus ! k' ∷ k₃) ≡⟨ zunbas ⟩
-      c ¨ (k₁'' ++ kus ! k' ∷ k₃) ≡⟨ pribas ⟩
+      c ¨ (k₁ ++ kus ! k' ∷ k₃)
+        ≡⟨ zunbas ⟩
+      c ¨ (k₁'' ++ kus ! k' ∷ k₃)
+        ≡⟨ pribas ⟩
       c ¨ (k₁'' ++ kus ! k' ∷ k₃'')
         ≡⟨ sym $ cong (_¨_ c) $ midun kus k' ⟩
       c ¨ kus ∎
