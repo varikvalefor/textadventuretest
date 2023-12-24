@@ -47,8 +47,6 @@ ni'o la'o zoi.\ \cmene{}\ .zoi.\ vasru le velcki be le kelci datni be le me'oi .
 
 module TestAdventure.WYCT where
 
-import Data.Fin
-
 open import Data.Bool
   using (
     true;
@@ -81,6 +79,9 @@ open import Relation.Binary.PropositionalEquality
   using (
     refl
   )
+
+import Data.Fin
+import Data.Rational as ℚ
 \end{code}
 
 \section{le tolsti co'e}
@@ -183,6 +184,7 @@ initialD = record {
     surname = "TUBMANN";
     cname = "XITAS";
     nicknames = "THE O.G. MEATBALL" ∷ [];
+    health = ℚ.1ℚ;
     room = Data.Fin.zero;
     inventory = defstick ∷ [];
     wieldedct = nothing;

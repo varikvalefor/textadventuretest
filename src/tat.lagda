@@ -17,19 +17,22 @@
 \newunicodechar{ℕ}{\ensuremath{\mathnormal{\mathbb N}}}
 \newunicodechar{∷}{\ensuremath{\mathnormal\Colon}}
 \newunicodechar{∘}{\ensuremath{\mathnormal{\circ}}}
-\newunicodechar{∀}{\ensuremath{\forall}}
+\newunicodechar{∀}{\ensuremath{\mathnormal{\forall}}}
+\newunicodechar{∃}{\ensuremath{\mathnormal{\exists}}}
 \newunicodechar{⊤}{\ensuremath{\mathnormal{\top}}}
 \newunicodechar{λ}{\ensuremath{\mathnormal{\lambda}}}
 \newunicodechar{→}{\ensuremath{\mathnormal{\rightarrow}}}
 \newunicodechar{ᵢ}{\ensuremath{\mathnormal{_i}}}
 \newunicodechar{ₒ}{\ensuremath{\mathnormal{_o}}}
+\newunicodechar{₁}{\ensuremath{\mathnormal{_1}}}
+\newunicodechar{₂}{\ensuremath{\mathnormal{_2}}}
 
 \newcommand\Sym\AgdaSymbol
 \newcommand\D\AgdaDatatype
 \newcommand\F\AgdaFunction
 \newcommand\B\AgdaBound
 
-\title{le me'oi .Agda.\ versiio be la .tat.\ noi ke'a selci'a capli'u samselkei}
+\title{le me'oi .Agda.\ versiio be la .tat.\ noi ke'a samselkei je cu frafi'a le bebna}
 \author{la .varik.\ .VALefor.}
 
 \begin{document}
@@ -51,7 +54,11 @@ open import IO
     _>>=_ to _>>=ᵢₒ_
   )
 open import Function
-open import Data.Bool
+  using (
+    _∘_;
+    _$_;
+    id
+  )
 open import Data.Char
   using (
     toUpper
@@ -64,6 +71,7 @@ open import Data.List
   )
 open import Data.Maybe
   using (
+    fromMaybe;
     Maybe;
     just;
     nothing
@@ -75,14 +83,24 @@ open import Data.String
   )
 open import Data.Product
   using (
+    uncurry;
+    proj₂;
+    proj₁;
     _×_;
-    _,_
+    _,_;
+    ∃
+  )
+open import Algebra.Core
+  using (
+    Op₁
   )
 open import TestAdventure.WYCT
 open import VVXtAdventure.Base
 open import VVXtAdventure.Funky
-open import Truthbrary.Record.Eq
 open import Data.Unit.Polymorphic
+  using (
+    ⊤
+  )
 open import Truthbrary.Record.LLC
   using (
     _++_;
@@ -94,50 +112,67 @@ open import Relation.Binary.PropositionalEquality
   )
 \end{code}
 
+\section{la'o zoi.\ \F{fanmo?}\ .zoi.}
+ni'o ga jonai la'oi .\AgdaInductiveConstructor{nothing}.\ du ko'a goi la'o zoi.\ \F{fanmo?}\ \B x .zoi.\ gi ga je .indika ko'e goi le du'u lo kelci ke xarpre ja co'e cu morsi ja cu co'e gi ko'a me'oi .\AgdaInductiveConstructor{just}.\ zo'e poi tu'a ke'a .indika ko'e
+
+\begin{code}
+fanmo? : ∀ {a} → GameData → Maybe $ IO {a} ⊤
+fanmo? = firstJust ∘ Data.List.map mapti? ∘ fancu
+  where
+  firstJust : ∀ {a} → {A : Set a} → List $ Maybe A → Maybe A
+  firstJust = Data.List.head ∘ Data.List.mapMaybe id
+  mapti? = Data.Maybe.map $ putStrLn ∘ proj₁
+  fancu : GameData → List COut
+  fancu q = zmimrobi'o q ∷
+            epicwin? winmsg q ∷
+            []
+\end{code}
+
 \section{la'oi .\F{main}.}
 
 \begin{code}
 {-# NON_TERMINATING #-}
 main : Main
-main = run $ snurytcati >>ᵢₒ lupe initialD
+main = run $ IO.lift nurtcati >>ᵢₒ lupe initialD
   where
-  snurytcati = IO.lift univak >>ᵢₒ IO.lift pegleg
-    where
-    postulate
-      univak : ABIO.IO ABU.⊤
-      pegleg : ABIO.IO ABU.⊤
-    {-# FOREIGN GHC import System.OpenBSD.Plegg #-}
-    {-# COMPILE GHC pegleg = plegg [Stdio] #-}
-    {-# COMPILE GHC univak = univac [] #-}
+  postulate nurtcati : ABIO.IO ABU.⊤
+  {-# FOREIGN GHC import System.OpenBSD.Plegg #-}
+  {-# COMPILE GHC nurtcati = plegg [Stdio] >> univac [] #-}
 
-  lupe = λ q → prompt >>ᵢₒ ree >>=ᵢₒ crock q
+  lupe = λ q → fromMaybe (interact q) $ fanmo? q
     where
-    prompt = putStrLn "What do you do?"
-    ree = words ∘ map toUpper <$> getLine
-    crock : GameData → List String → IO ⊤
-    crock gd s = chews np $ putStrLn m >>ᵢₒ lupe gd
+    interact : GameData → IO ⊤
+    interact = λ q → prompt >>ᵢₒ ree >>=ᵢₒ crock q
       where
-      m = "I don't understand a word you just said."
-      chews : List $ COut × (GameData → IO ⊤) → IO ⊤ → IO ⊤
-      chews ((just (a , b) , f) ∷ _) _ = putStrLn a >>ᵢₒ f b
-      chews ((nothing , _) ∷ xs) d = chews xs d
-      chews [] d = d
-      np = (epicwin? winmsg gd , boob) ∷
-           map (λ f → f s gd , lupe) std
+      prompt = putStrLn "What do you do?"
+      ree = words ∘ map toUpper <$> getLine
+      crock : GameData → List String → IO ⊤
+      crock gd s = proj₂ $ chews np $ ("" , gd) , mis naj gd
         where
-        boob = const $ return $ Level.lift ABU.tt
-        std = sazycimde ++ gasnu
+        mis = λ a b → putStrLn a >>ᵢₒ lupe b
+        naj = "I don't understand a word you just said."
+        chews : ∀ {a b} → {A : Set a} → {B : A → Set b}
+              → List $ Maybe A × ((x : A) → B x)
+              → Op₁ $ ∃ B
+        chews [] = id
+        chews ((nothing , _) ∷ xs) = chews xs
+        chews ((just b , f) ∷ _) _ = b , f b
+        np : List $ COut × (String × GameData → IO ⊤)
+        np = map (λ f → f s gd , uncurry mis) std
           where
-          sazycimde = scream? ∷
-                      sayless? ∷
-                      inspect? ∷
-                      lp? ∷
-                      kumski? ∷
-                      invent? ∷
-                      []
-          gasnu = travel? ∷
-                  wield? ∷
-                  smash? ∷
-                  []
+          std = sazycimde ++ gasnu
+            where
+            sazycimde = scream? ∷
+                        sayless? ∷
+                        inspect? ∷
+                        lp? ∷
+                        kumski? ∷
+                        invent? ∷
+                        []
+            gasnu = travel? ∷
+                    wield? ∷
+                    hitme? ∷
+                    smash? ∷
+                    []
 \end{code}
 \end{document}

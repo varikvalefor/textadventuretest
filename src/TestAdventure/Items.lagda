@@ -15,9 +15,9 @@
 \newcommand\F\AgdaFunction
 \newcommand\B\AgdaBound
 
-\newcommand\kulmodis{\textttt{TestAdventure.Items}}
+\newcommand\kulmodis{\texttt{TestAdventure.Items}}
 
-\title{la'o zoi.\ \texttt{\cmene} .zoi.}
+\title{la'o zoi.\ \texttt{\kulmodis} .zoi.}
 \author{la .varik.\ .VALefor.}
 \begin{document}
 \maketitle
@@ -49,9 +49,10 @@ open import Relation.Binary.PropositionalEquality
   )
 \end{code}
 
-\section{le ctaipe be la'oi .\F{Item}.
+\section{le ctaipe be la'oi .\F{Item}.}
 
 \subsection{la'oi .\F{colorfun}.}
+ni'o zo'oi .COLOUR.\ selneimau fi la .varik.\ldots jenai ku'i cu cmene le samselkei\ldots pe'a sai noi ke'a selcme zoi glibau.\ Color Fun .glibau.
 
 \begin{code}
 colorfun : Item
@@ -69,7 +70,7 @@ colorfun = record {
 \end{code}
 
 \subsection{la'oi .\F{defstick}.}
-ni'o ko'a goi la'oi .\F{defstick}.\ grana  .i ca le nu tolsti kei ko'a selvau le me'oi .inventory.\ be le kelci ke xarpre ja co'e pe la'oi .TestAventure.
+ni'o grana fa ko'a goi la'oi .\F{defstick}.  .i ca lo nu tolsti kei ko'a selvau le me'oi .inventory.\ be le kelci ke xarpre ja co'e pe la'oi .TestAventure.
 
 \begin{code}
 defstick : Item
@@ -90,7 +91,7 @@ defstick = record {
       \reason, you absolutely refuse to let go of \
       \this stick.  You insist that this stick shall \
       \SOMEDAY be useful.  But I'll be honest.  \
-      \Everyone in a 100-yard radius doubts your \
+      \Everyone within a 100-yard radius doubts your \
       \inane claim... but welcomes that you \
       \demonstrate that we are wrong."
 \end{code}
@@ -113,7 +114,7 @@ macguffin = record {
   where
   m = "You hold a coupon for a \"super-bitchin' XL \
       \DAX and BLEXER High-Throughput Leafblower \
-      \476.5: Beefcake Edition\".  Most men whom \
+      \476.5: Beefcake Edition\".  Most prenu whom \
       \you know insist that the naming scheme is a \
       \bit ridiculous... but can still respect the \
       \perceived quality of DAX AND BLEXER's \
