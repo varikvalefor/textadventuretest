@@ -553,8 +553,8 @@ smashGeneric q k x j = q' , kuslendus , xindus , itemstedus
       k₁ = toℕ k ↑ rooms
       k₃ = suc (toℕ k) ↓ rooms
       k' = mink k kuslendus
-      k₁'' = flip _↑_ kus $ toℕ k'
-      k₃'' = flip _↓_ kus $ suc $ toℕ k'
+      k₁'' = _↑ kus $ toℕ k'
+      k₃'' = _↓ kus $ suc $ toℕ k'
       midun : ∀ {a} → {A : Set a}
             → (x : List A)
             → (n : Fin $ length x)
