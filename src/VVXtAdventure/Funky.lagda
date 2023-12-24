@@ -448,7 +448,7 @@ smashGeneric : (q : GameData)
                      (toℕ x ↑ itstes)
                      (_∷_
                        (proj₂ $ Data.Maybe.to-witness j)
-                       (ℕ.suc (toℕ x) ↓ itstes))))
+                       (suc (toℕ x) ↓ itstes))))
 smashGeneric q k x j = q' , kuslendus , xindus , itemstedus
   where
   teikdrop : ∀ {a} → {A : Set a}
@@ -458,15 +458,15 @@ smashGeneric q k x j = q' , kuslendus , xindus , itemstedus
            → let n' = toℕ n in
              ((_≡_ on length)
                x
-               (n' ↑ x ++ z ∷ ℕ.suc n' ↓ x))
+               (n' ↑ x ++ z ∷ suc n' ↓ x))
   teikdrop (_ ∷ _) zero = refl
-  teikdrop (_ ∷ xs) (suc n) = cong ℕ.suc $ teikdrop xs n
+  teikdrop (_ ∷ xs) (suc n) = cong suc $ teikdrop xs n
   rooms = GameData.rooms q
   j' = proj₂ $ Data.Maybe.to-witness j
   snikerz = record (rooms ! k) {items = itste₂}
     where
     itste₂ = proj₁ $ ual (Room.items $ rooms ! k) x $ const j'
-  kus = toℕ k ↑ rooms ++ snikerz ∷ ℕ.suc (toℕ k) ↓ rooms
+  kus = toℕ k ↑ rooms ++ snikerz ∷ suc (toℕ k) ↓ rooms
   kuslendus = teikdrop rooms k
   upgrayedd : Character rooms → Character kus
   upgrayedd t = record {
@@ -491,7 +491,7 @@ smashGeneric q k x j = q' , kuslendus , xindus , itemstedus
              (_≡_
                (f $ x ! n)
                (_!_
-                 (n' ↑ x ++ f (x ! n) ∷ ℕ.suc n' ↓ x)
+                 (n' ↑ x ++ f (x ! n) ∷ suc n' ↓ x)
                  (mink n $ teikdrop x n)))
     intend p n f = DMP.just-injective $ begin
       just (f $ p ! n) ≡⟨ cong just $ sym $ lum p f n ⟩
@@ -504,7 +504,7 @@ smashGeneric q k x j = q' , kuslendus , xindus , itemstedus
       where
       _¨_ = Data.List.map
       ⊃ = Data.List.head
-      konk = toℕ n ↑ p ++ f (p ! n) ∷ ℕ.suc (toℕ n) ↓ p
+      konk = toℕ n ↑ p ++ f (p ! n) ∷ suc (toℕ n) ↓ p
       n' = mink n $ teikdrop p n
       n'' = mink n $ sym $ DLP.length-map f p
       flidir = ⊃ ∘₂ flip _↓_
@@ -520,7 +520,7 @@ smashGeneric q k x j = q' , kuslendus , xindus , itemstedus
                 → (x : List A)
                 → (n : Fin $ length x)
                 → (f : A → A)
-                → let k₃ = ℕ.suc (toℕ n) ↓ x in
+                → let k₃ = suc (toℕ n) ↓ x in
                   let k = (toℕ n ↑ x) ++ f (x ! n) ∷ k₃ in
                   ⊃ (toℕ n ↓ _¨_ f x) ≡ ⊃ (toℕ n ↓ k)
       teikapdus (_ ∷ _) zero _ = refl
@@ -553,15 +553,15 @@ smashGeneric q k x j = q' , kuslendus , xindus , itemstedus
       c = Room.cname
       _¨_ = Data.List.map
       k₁ = toℕ k ↑ rooms
-      k₃ = ℕ.suc (toℕ k) ↓ rooms
+      k₃ = suc (toℕ k) ↓ rooms
       k' = mink k kuslendus
       k₁'' = flip _↑_ kus $ toℕ k'
-      k₃'' = flip _↓_ kus $ ℕ.suc $ toℕ k'
+      k₃'' = flip _↓_ kus $ suc $ toℕ k'
       -- | "Stick together, team."
       gogogo : ∀ {a} → {A : Set a}
              → (x : List A)
              → (n : Fin $ length x)
-             → x ≡ toℕ n ↑ x ++ x ! n ∷ ℕ.suc (toℕ n) ↓ x
+             → x ≡ toℕ n ↑ x ++ x ! n ∷ suc (toℕ n) ↓ x
       gogogo (_ ∷ _) zero = refl
       gogogo (x ∷ xs) (suc n) = cong (_∷_ x) $ gogogo xs n
       zunbas = subst (_≡_ _) zunbas₂ $ cong p $ teikteikdrop rooms k
@@ -581,7 +581,7 @@ smashGeneric q k x j = q' , kuslendus , xindus , itemstedus
                            (toℕ n)
                            (_++_
                              (toℕ n ↑ x)
-                             (z ∷ ℕ.suc (toℕ n) ↓ x))))
+                             (z ∷ suc (toℕ n) ↓ x))))
         teikteikdrop (_ ∷ _) zero = refl
         teikteikdrop (x ∷ xs) (suc n) = cong (_∷_ x) $ teikteikdrop xs n
       pribas = subst (_≡_ _) pribas₂ $ cong p $ dropteikdrop rooms k
@@ -590,12 +590,12 @@ smashGeneric q k x j = q' , kuslendus , xindus , itemstedus
         pribas₂ = cong (λ x → _¨_ c $ k₁'' ++ kus ! k' ∷ dropsuk x) tom
           where
           tom = tomindus k $ teikdrop rooms k
-          dropsuk = flip _↓_ kus ∘ ℕ.suc
+          dropsuk = flip _↓_ kus ∘ suc
         dropteikdrop : ∀ {a} → {A : Set a}
                      → (x : List A)
                      → (n : Fin $ length x)
                      → {z : A}
-                     → let n' = ℕ.suc (toℕ n) in
+                     → let n' = suc (toℕ n) in
                        n' ↓ x ≡ n' ↓ (toℕ n ↑ x ++ z ∷ n' ↓ x)
         dropteikdrop (_ ∷ _) zero = refl
         dropteikdrop (_ ∷ xs) (suc n) = dropteikdrop xs n
@@ -603,7 +603,7 @@ smashGeneric q k x j = q' , kuslendus , xindus , itemstedus
   itemstedus = begin
     Room.items ni'oku'a ≡⟨ sym $ cong Room.items snidus ⟩
     Room.items snikerz ≡⟨ ualkonk itstes x $ const j' ⟩
-    toℕ x ↑ itstes ++ j' ∷ ℕ.suc (toℕ x) ↓ itstes ∎
+    toℕ x ↑ itstes ++ j' ∷ suc (toℕ x) ↓ itstes ∎
     where
     itstes = Room.items $ rooms ! k
     ni'oku'a = GameData.rooms q' ! mink k kuslendus
@@ -619,7 +619,7 @@ smashGeneric q k x j = q' , kuslendus , xindus , itemstedus
     where
     i = Room.items $ rooms ! k
     d₁ = toℕ x ↑ i
-    d₃ = ℕ.suc (toℕ x) ↓ i
+    d₃ = suc (toℕ x) ↓ i
 \end{code}
 
 \chapter{le mu'oi glibau.\ high-level .glibau.}
