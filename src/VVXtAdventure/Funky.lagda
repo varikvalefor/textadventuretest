@@ -431,9 +431,9 @@ ni'o ga jo la'o zoi.\ \B S\ .zoi.\ du la'o zoi.\ \F{smashGeneric}\ \B q \B k \B 
 % ni'o xu cadga fa ko'a goi lo nu jmina lo me'oi .newline. lerfu je cu jdikygau fi le ka me'oi .indent. ce'u  .i cumki fa lo nu ko'a filri'a lo nu zabna me'oi .typeset.
 \begin{code}
 smashGeneric : (q : GameData)
+             → (k : Fin $ length $ GameData.rooms q)
              → let lir = length ∘ Room.items in
-               (k : Fin $ length $ GameData.rooms q)
-             → (x : Fin $ lir $ GameData.rooms q ! k)
+               (x : Fin $ lir $ GameData.rooms q ! k)
              → let item = Room.items (GameData.rooms q ! k) ! x in
                (j : Data.Maybe.Is-just $ Item.smashInfo item)
              → Σ GameData $ λ q'
