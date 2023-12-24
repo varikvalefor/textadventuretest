@@ -338,38 +338,39 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
             → just (xs ! n) ≡ ⊃ (toℕ n ↓ xs)
     dropind (_ ∷ _) zero = refl
     dropind (_ ∷ xs) (suc n) = dropind xs n
-    jelis : toℕ j ≤ 𝓁 xen
-    jelis = subst₂ _≤_ mijd kix $ DNP.≤-step j'
-      where
-      lisuc : ∀ {a} → {A : Set a}
-            → (xs : List A)
-            → Fin $ 𝓁 xs
-            → ∃ $ _∘ suc $ 𝓁 xs ≡_
-      lisuc (_ ∷ xs) _ = 𝓁 xs , refl
-      j' = DFP.≤fromℕ $ mink j $ proj₂ $ lisuc xen j
-      mijd = sym $ tomindus j $ proj₂ $ lisuc xen j
-      kix : suc (toℕ $ Data.Fin.fromℕ _) ≡ 𝓁 xen
-      kix = tondus $ sym $ proj₂ $ lisuc xen j
-        where
-        tondus : {m n : ℕ}
-               → m ≡ n
-               → _≡ n $ toℕ $ Data.Fin.fromℕ m
-        tondus x = subst (_≡_ _) x $ DFP.toℕ-fromℕ _
-    xil = begin
-      toℕ (mink j xenlen) ≡⟨ sym $ tomindus j xenlen ⟩
-      toℕ j ≡⟨ teiklendus xen (toℕ j) jelis ⟩
-      𝓁 x₁ ∎
-      where
-      teiklendus : ∀ {a} → {A : Set a}
-                 → (xs : List A)
-                 → (n : ℕ)
-                 → n ≤ 𝓁 xs
-                 → n ≡ 𝓁 (n ↑ xs)
-      teiklendus _ 0 _ = refl
-      teiklendus (_ ∷ xs) (suc n) (Data.Nat.s≤s q) = ret
-        where
-        ret = cong suc $ teiklendus xs n q
     subkon = subst (_≡_ _) $ cong (⊃ ∘ _↓ xen') xil
+      where
+      jelis : toℕ j ≤ 𝓁 xen
+      jelis = subst₂ _≤_ mijd kix $ DNP.≤-step j'
+        where
+        lisuc : ∀ {a} → {A : Set a}
+              → (xs : List A)
+              → Fin $ 𝓁 xs
+              → ∃ $ _∘ suc $ 𝓁 xs ≡_
+        lisuc (_ ∷ xs) _ = 𝓁 xs , refl
+        j' = DFP.≤fromℕ $ mink j $ proj₂ $ lisuc xen j
+        mijd = sym $ tomindus j $ proj₂ $ lisuc xen j
+        kix : suc (toℕ $ Data.Fin.fromℕ _) ≡ 𝓁 xen
+        kix = tondus $ sym $ proj₂ $ lisuc xen j
+          where
+          tondus : {m n : ℕ}
+                 → m ≡ n
+                 → _≡ n $ toℕ $ Data.Fin.fromℕ m
+          tondus x = subst (_≡_ _) x $ DFP.toℕ-fromℕ _
+      xil = begin
+        toℕ (mink j xenlen) ≡⟨ sym $ tomindus j xenlen ⟩
+        toℕ j ≡⟨ teiklendus xen (toℕ j) jelis ⟩
+        𝓁 x₁ ∎
+        where
+        teiklendus : ∀ {a} → {A : Set a}
+                   → (xs : List A)
+                   → (n : ℕ)
+                   → n ≤ 𝓁 xs
+                   → n ≡ 𝓁 (n ↑ xs)
+        teiklendus _ 0 _ = refl
+        teiklendus (_ ∷ xs) (suc n) (Data.Nat.s≤s q) = ret
+          where
+          ret = cong suc $ teiklendus xs n q
 
   xendj : let iv = Character.inventory in
           iv (xen ! j) ≡ iv (xen' ! mink j xenlen)
