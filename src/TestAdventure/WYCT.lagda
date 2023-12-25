@@ -21,8 +21,8 @@
 \newunicodechar{⊤}{\ensuremath{\mathnormal{\top}}}
 \newunicodechar{λ}{\ensuremath{\mathnormal{\lambda}}}
 \newunicodechar{→}{\ensuremath{\mathnormal{\rightarrow}}}
-\newunicodechar{ᵢ}{\ensuremath{\mathnormal{_i}}}
-\newunicodechar{ₒ}{\ensuremath{\mathnormal{_o}}}
+\newunicodechar{ᵢ}{\ensuremath{\mathnormal{_\AgdaFontStyle{i}}}}
+\newunicodechar{ₒ}{\ensuremath{\mathnormal{_\AgdaFontStyle{o}}}}
 
 \newcommand\Sym\AgdaSymbol
 \newcommand\D\AgdaDatatype
