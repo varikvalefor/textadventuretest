@@ -589,7 +589,7 @@ smashGeneric q k x j = q' , kuslendus , xindus , itemstedus
       pribas = subst (_≡_ _) pribas₂ $ cong p $ dropteikdrop rooms k
         where
         p = λ x → _¨_ c $ k₁'' ++ kus ! k' ∷ x
-        pribas₂ = cong (λ x → _¨_ c $ k₁'' ++ kus ! k' ∷ dropsuk x) tom
+        pribas₂ = cong (p ∘ dropsuk) tom
           where
           tom = tomindus k $ teikdrop rooms k
           dropsuk = flip _↓_ kus ∘ suc
