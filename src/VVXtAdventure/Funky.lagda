@@ -427,7 +427,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
 \end{code}
 
 \section{la'oi .\F{smashGeneric}.}
-ni'o ga jo la'o zoi.\ \B S\ .zoi.\ du la'o zoi.\ \F{smashGeneric}\ \B q \B k \B x \B j\ .zoi.\ gi ga je la'o zoi.\ \F{proj₁}\ \B S\ .zoi.\ smimlu la'o zoi.\ \B q\ .zoi.\ gi ku'i la'o zoi.\ \F{Room.items}\ \Sym(\F{GameData.rooms}\ \Sym(\F{proj₁}\ \B S\Sym) \OpF !\ \F{mink}\ \B k\ \Sym(\F{proj₁}\ \OpF \$\ \F{proj₂}\ \B S\Sym)\Sym) \OpF !\ \F{mink}\ \B x\ \Sym(\F{proj₁} \OpF \$\ \F{proj₂}\ \OpF \$\ \F{proj₂}\ \B S\Sym) .zoi.\ du lo selvau pe'a be la'o zoi.\ \F{Data.Maybe.map}\ \F{proj₂}\ \OpF \$\ \F{Item.smashInfo}\ \OpF \$\ \F{Room.items}\ \Sym(\F{GameData.rooms} \B q\ \OpF !\ \B k\Sym) \OpF !\ \B x\ .zoi.
+ni'o ga jo la'o zoi.\ \B S\ .zoi.\ du la'o zoi.\ \F{smashGeneric}\ \B q \B k \B x \B j\ .zoi.\ gi ga je la'o zoi.\ \F{proj₁}\ \B S\ .zoi.\ smimlu la'o zoi.\ \B q\ .zoi.\ gi ku'i la'o zoi.\ \AgdaField{Room.items}\ \Sym(\AgdaField{GameData.rooms}\ \Sym(\AgdaField{proj₁}\ \B S\Sym) \OpF !\ \F{mink}\ \B k\ \Sym(\AgdaField{proj₁}\ \OpF \$\ \AgdaField{proj₂}\ \B S\Sym)\Sym) \OpF !\ \F{mink}\ \B x\ \Sym(\AgdaField{proj₁} \OpF \$\ \AgdaField{proj₂}\ \OpF \$\ \AgdaField{proj₂}\ \B S\Sym) .zoi.\ du lo selvau pe'a be la'o zoi.\ \F{Data.Maybe.map}\ \AgdaField{proj₂}\ \OpF \$\ \AgdaField{Item.smashInfo}\ \OpF \$\ \AgdaField{Room.items}\ \Sym(\AgdaField{GameData.rooms} \B q\ \OpF !\ \B k\Sym) \OpF !\ \B x\ .zoi.
 
 % ni'o xu cadga fa ko'a goi lo nu jmina lo me'oi .newline. lerfu je cu jdikygau fi le ka me'oi .indent. ce'u  .i cumki fa lo nu ko'a filri'a lo nu zabna me'oi .typeset.
 \begin{code}
