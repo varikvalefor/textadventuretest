@@ -569,7 +569,7 @@ smashGeneric q k x j = q' , kuslendus , xindus , itemstedus
             → x ≡ toℕ n ↑ x ++ x ! n ∷ suc (toℕ n) ↓ x
       midun (_ ∷ _) zero = refl
       midun (x ∷ xs) (suc n) = cong (_∷_ x) $ midun xs n
-      zunbas = subst (_≡_ _) zunbas₂ $ cong p $ teikteikdrop rooms k
+      zunbas = subst (_≡_ _) zunbas₂ $ cong p $ teikteikdrop rooms _ k
         where
         p = λ x → _¨_ c $ x ++ kus ! k' ∷ k₃
         zunbas₂ = cong (p ∘ teik) tom
@@ -577,18 +577,17 @@ smashGeneric q k x j = q' , kuslendus , xindus , itemstedus
           teik = flip _↑_ kus
           tom = tomindus k $ teikdrop rooms k
         teikteikdrop : ∀ {a} → {A : Set a}
-                     → (x : List A)
+                     → (x z : List A)
                      → (n : Fin $ length x)
-                     → {z : A}
                      → (_≡_
                          (toℕ n ↑ x)
                          (_↑_
                            (toℕ n)
                            (_++_
                              (toℕ n ↑ x)
-                             (z ∷ suc (toℕ n) ↓ x))))
-        teikteikdrop (_ ∷ _) zero = refl
-        teikteikdrop (x ∷ xs) (suc n) = cong (_∷_ x) $ teikteikdrop xs n
+                             z)))
+        teikteikdrop (_ ∷ _) _ zero = refl
+        teikteikdrop (x ∷ xs) z (suc n) = cong (x ∷_) $ teikteikdrop xs z n
       pribas = subst (_≡_ _) pribas₂ $ cong p $ dropteikdrop rooms k
         where
         p = λ x → _¨_ c $ k₁'' ++ kus ! k' ∷ x
