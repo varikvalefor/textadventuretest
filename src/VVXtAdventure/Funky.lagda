@@ -572,10 +572,9 @@ smashGeneric q k x j = q' , kuslendus , xindus , itemstedus
       zunbas = subst (_≡_ _) zunbas₂ $ cong p $ teikteikdrop rooms _ k
         where
         p = λ x → _¨_ c $ x ++ kus ! k' ∷ k₃
-        zunbas₂ = cong (p ∘ teik) tom
+        zunbas₂ = cong (p ∘ teik) $ tomindus k $ teikdrop rooms k
           where
           teik = flip _↑_ kus
-          tom = tomindus k $ teikdrop rooms k
         teikteikdrop : ∀ {a} → {A : Set a}
                      → (x z : List A)
                      → (n : Fin $ length x)
