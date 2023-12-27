@@ -578,9 +578,7 @@ smashGeneric q k x j = q' , kuslendus , xindus , itemstedus
         teikteikdrop : ∀ {a} → {A : Set a}
                      → (x z : List A)
                      → (n : Fin $ length x)
-                     → (_≡_
-                         (toℕ n ↑ x)
-                         (toℕ n ↑_ $ toℕ n ↑ x ++ z))
+                     → toℕ n ↑ x ≡_ $ toℕ n ↑_ $ toℕ n ↑ x ++ z
         teikteikdrop (_ ∷ _) _ zero = refl
         teikteikdrop (x ∷ xs) z (suc n) = cong (x ∷_) $ teikteikdrop xs z n
       pribas = subst (_≡_ _) pribas₂ $ cong p $ dropteikdrop rooms k
