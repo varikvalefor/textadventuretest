@@ -90,9 +90,6 @@ open import Data.Rational
   using (
     ℚ
   )
-open import Truthbrary.Record.Eq
-  using (
-  )
 open import Truthbrary.Record.LLC
   using (
     nu,iork;
@@ -103,6 +100,8 @@ open import Relation.Binary.PropositionalEquality
     refl;
     _≡_
   )
+
+import Truthbrary.Record.Eq
 \end{code}
 
 \section{le me'oi .\AgdaKeyword{record}.}
