@@ -32,7 +32,7 @@
 \newcommand\F\AgdaFunction
 \newcommand\B\AgdaBound
 
-\title{le me'oi .Agda.\ versiio be la .tat.\ noi ke'a samselkei je cu frafi'a le bebna}
+\title{le me'oi .Agda.\ velcki be la .tat.\ noi ke'a samselkei je cu frafi'a le bebna}
 \author{la .varik.\ .VALefor.}
 
 \begin{document}
