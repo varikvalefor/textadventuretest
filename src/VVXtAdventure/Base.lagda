@@ -125,7 +125,7 @@ ni'o ga jo ko'a goi la'o zoi.\ \B a .zoi.\ ctaipe la'oi .\AgdaRecord{Item}.\ gi\
 \begin{itemize}
 	\item ga je la'o zoi.\ \AgdaField{Item.name} \B a .zoi.\ mu'oi glibau.\ display name .glibau.\ ko'a gi
 	\item ga je ga je ko'e goi la'o zoi.\ \AgdaField{Item.cname} \B a .zoi.\ cmene ko'a gi cadga fa lo nu lo kelci cu pilno ko'e tu'a ko'a gi
-        \item ga je ga jonai ga je ko'a sinxa lo me'oi .weapon.\ gi ko'e goi la'o zoi.\ \F{weapwn} \B a .zoi.\ me'oi .\AgdaInductiveConstructor{just}.\ lo velski be ko'a gi ko'e du la'oi .\AgdaInductiveConstructor{nothing}.\ gi
+        \item ga je ga jonai ga je ko'a sinxa lo me'oi .weapon.\ gi ko'e goi la'o zoi.\ \F{Item.weapwn} \B a .zoi.\ me'oi .\AgdaInductiveConstructor{just}.\ lo velski be ko'a gi ko'e du la'oi .\AgdaInductiveConstructor{nothing}.\ gi
         \item ga je ga jo la'o zoi.\ \B s\ .zoi.\ du la'o zoi.\ \F{Item.smashInfo}\ \B a\ .zoi.\ gi ga jonai ga je na curmi lo nu spogau ja co'e fi lo selsni be ko'a gi ko'a goi la'o zoi.\ \B s\ .zoi.\ cu du la'oi .\F{nothing}.\ gi\ldots
         \begin{itemize}
 		\item ga je ga jonai ga je ko'e goi la'o zoi.\ \F{proj₁}\ \B s\ .zoi.\ du la'oi .\AgdaInductiveConstructor{nothing}.\ gi cadga fa lo nu ko'i goi lo nu daspo ja co'e fi lo selsni be ko'a cu rinka lo nu cusku lo me'oi .default.\ gi cadga fa lo nu ko'i rinka lo nu ko'i rinka lo nu cusku lo selvau ja co'e be ko'e gi
