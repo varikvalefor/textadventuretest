@@ -11,15 +11,15 @@
 \usepackage{newunicodechar}
 
 \newunicodechar{∷}{\ensuremath{\mathnormal\Colon}}
-\newunicodechar{ℕ}{\ensuremath{\mathnormal{\mathbb{N}}}}
-\newunicodechar{ℤ}{\ensuremath{\mathnormal{\mathbb{Z}}}}
-\newunicodechar{ℚ}{\ensuremath{\mathnormal{\mathbb{Q}}}}
-\newunicodechar{∘}{\ensuremath{\mathnormal{\circ}}}
-\newunicodechar{∀}{\ensuremath{\mathnormal{\forall}}}
-\newunicodechar{⊤}{\ensuremath{\mathnormal{\top}}}
-\newunicodechar{λ}{\ensuremath{\mathnormal{\lambda}}}
-\newunicodechar{→}{\ensuremath{\mathnormal{\rightarrow}}}
-\newunicodechar{∃}{\ensuremath{\mathnormal{\exists}}}
+\newunicodechar{ℕ}{\ensuremath{\mathnormal{\mathbb N}}}
+\newunicodechar{ℤ}{\ensuremath{\mathnormal{\mathbb Z}}}
+\newunicodechar{ℚ}{\ensuremath{\mathnormal{\mathbb Q}}}
+\newunicodechar{∘}{\ensuremath{\mathnormal\circ}}
+\newunicodechar{∀}{\ensuremath{\mathnormal\forall}}
+\newunicodechar{⊤}{\ensuremath{\mathnormal\top}}
+\newunicodechar{λ}{\ensuremath{\mathnormal\lambda}}
+\newunicodechar{→}{\ensuremath{\mathnormal\rightarrow}}
+\newunicodechar{∃}{\ensuremath{\mathnormal\exists}}
 \newunicodechar{⦃}{\ensuremath{\mathnormal{\lbrace\hspace{-0.3em}|}}}
 \newunicodechar{⦄}{\ensuremath{\mathnormal{|\hspace{-0.3em}\rbrace}}}
 \newunicodechar{ᵢ}{\ensuremath{\mathnormal{_\AgdaFontStyle{i}}}}
@@ -43,7 +43,7 @@
 \newunicodechar{∎}{\ensuremath{\mathnormal{\blacksquare}}}
 \newunicodechar{⟨}{\ensuremath{\mathnormal{\langle}}}
 \newunicodechar{⟩}{\ensuremath{\mathnormal{\rangle}}}
-\newunicodechar{𝓁}{\ensuremath{\mathnormal{\mathcal{l}}}}
+\newunicodechar{𝓁}{\ensuremath{\mathnormal{\mathcal l}}}
 \newunicodechar{ℓ}{\ensuremath{\mathnormal{\ell}}}
 \newunicodechar{⊃}{\ensuremath{\mathnormal{\supset}}}
 \newunicodechar{▹}{\ensuremath{\mathnormal{\triangleright}}}
