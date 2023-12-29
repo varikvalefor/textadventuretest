@@ -14,13 +14,13 @@
 \newunicodechar{λ}{\ensuremath{\mathnormal\lambda}}
 \newunicodechar{≟}{\ensuremath{\stackrel{?}{=}}}
 \newunicodechar{∷}{\ensuremath{\mathnormal\Colon}}
-\newunicodechar{→}{\ensuremath{\mathnormal{\rightarrow}}}
+\newunicodechar{→}{\ensuremath{\mathnormal\rightarrow}}
 \newunicodechar{₁}{\ensuremath{\mathnormal{_1}}}
-\newunicodechar{∘}{\ensuremath{\mathnormal{\circ}}}
-\newunicodechar{≡}{\ensuremath{\mathnormal{\equiv}}}
+\newunicodechar{∘}{\ensuremath{\mathnormal\circ}}
+\newunicodechar{≡}{\ensuremath{\mathnormal\equiv}}
 \newunicodechar{ₗ}{\ensuremath{\mathnormal{_l}}}
-\newunicodechar{∈}{\ensuremath{\mathnormal{\in}}}
-\newunicodechar{∃}{\ensuremath{\mathnormal{\exists}}}
+\newunicodechar{∈}{\ensuremath{\mathnormal\in}}
+\newunicodechar{∃}{\ensuremath{\mathnormal\exists}}
 \newunicodechar{ℚ}{\ensuremath{\mathnormal{\mathbb Q}}}
 
 \newcommand\Sym\AgdaSymbol
