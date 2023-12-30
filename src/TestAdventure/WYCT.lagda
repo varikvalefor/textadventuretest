@@ -69,7 +69,6 @@ open import Data.String
   )
 open import Data.Product
   using (
-    _×_;
     _,_
   )
 open import VVXtAdventure.Base
