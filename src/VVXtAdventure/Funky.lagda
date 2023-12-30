@@ -45,6 +45,7 @@
 \newunicodechar{⟩}{\ensuremath{\mathnormal{\rangle}}}
 \newunicodechar{𝓁}{\ensuremath{\mathnormal{\mathcal l}}}
 \newunicodechar{ℓ}{\ensuremath{\mathnormal{\ell}}}
+\newunicodechar{χ}{\ensuremath{\mathnormal{\chi}}}
 \newunicodechar{⊃}{\ensuremath{\mathnormal{\supset}}}
 \newunicodechar{▹}{\ensuremath{\mathnormal{\triangleright}}}
 
