@@ -18,11 +18,13 @@
 \newunicodechar{∷}{\ensuremath{\mathnormal\Colon}}
 \newunicodechar{∘}{\ensuremath{\mathnormal{\circ}}}
 \newunicodechar{∀}{\ensuremath{\mathnormal{\forall}}}
+\newunicodechar{∃}{\ensuremath{\mathnormal{\exists}}}
 \newunicodechar{⊤}{\ensuremath{\mathnormal{\top}}}
 \newunicodechar{λ}{\ensuremath{\mathnormal{\lambda}}}
 \newunicodechar{→}{\ensuremath{\mathnormal{\rightarrow}}}
 \newunicodechar{ᵢ}{\ensuremath{\mathnormal{_i}}}
 \newunicodechar{ₒ}{\ensuremath{\mathnormal{_o}}}
+\newunicodechar{₁}{\ensuremath{\mathnormal{_1}}}
 \newunicodechar{₂}{\ensuremath{\mathnormal{_2}}}
 
 \newcommand\Sym\AgdaSymbol
@@ -30,7 +32,7 @@
 \newcommand\F\AgdaFunction
 \newcommand\B\AgdaBound
 
-\title{le me'oi .Agda.\ versiio be la .tat.\ noi ke'a samselkei je cu frafi'a le bebna}
+\title{le me'oi .Agda.\ velcki be la .tat.\ noi ke'a samselkei je cu frafi'a le bebna}
 \author{la .varik.\ .VALefor.}
 
 \begin{document}
@@ -52,6 +54,11 @@ open import IO
     _>>=_ to _>>=ᵢₒ_
   )
 open import Function
+  using (
+    _∘_;
+    _$_;
+    id
+  )
 open import Data.Char
   using (
     toUpper
@@ -76,15 +83,24 @@ open import Data.String
   )
 open import Data.Product
   using (
+    uncurry;
+    proj₂;
     proj₁;
     _×_;
-    _,_
+    _,_;
+    ∃
+  )
+open import Algebra.Core
+  using (
+    Op₁
   )
 open import TestAdventure.WYCT
 open import VVXtAdventure.Base
 open import VVXtAdventure.Funky
-open import Truthbrary.Record.Eq
 open import Data.Unit.Polymorphic
+  using (
+    ⊤
+  )
 open import Truthbrary.Record.LLC
   using (
     _++_;
@@ -94,6 +110,22 @@ open import Relation.Binary.PropositionalEquality
   using (
     refl
   )
+\end{code}
+
+\section{la'o zoi.\ \F{fanmo?}\ .zoi.}
+ni'o ga jonai la'oi .\AgdaInductiveConstructor{nothing}.\ du ko'a goi la'o zoi.\ \F{fanmo?}\ \B x .zoi.\ gi ga je .indika ko'e goi le du'u lo kelci ke xarpre ja co'e cu morsi ja cu co'e gi ko'a me'oi .\AgdaInductiveConstructor{just}.\ zo'e poi tu'a ke'a .indika ko'e
+
+\begin{code}
+fanmo? : ∀ {a} → GameData → Maybe $ IO {a} ⊤
+fanmo? = firstJust ∘ Data.List.map mapti? ∘ fancu
+  where
+  firstJust : ∀ {a} → {A : Set a} → List $ Maybe A → Maybe A
+  firstJust = Data.List.head ∘ Data.List.mapMaybe id
+  mapti? = Data.Maybe.map $ putStrLn ∘ proj₁
+  fancu : GameData → List COut
+  fancu q = zmimrobi'o q ∷
+            epicwin? winmsg q ∷
+            []
 \end{code}
 
 \section{la'oi .\F{main}.}
@@ -109,34 +141,24 @@ main = run $ IO.lift nurtcati >>ᵢₒ lupe initialD
 
   lupe = λ q → fromMaybe (interact q) $ fanmo? q
     where
-    fanmo? : GameData → Maybe $ IO ⊤
-    fanmo? q = firstJust $ Data.List.map mapti? fancu
-      where
-      firstJust : ∀ {a} → {A : Set a} → List $ Maybe A → Maybe A
-      firstJust = Data.List.head ∘ Data.List.mapMaybe id
-      mapti? = Data.Maybe.map $ putStrLn ∘ proj₁
-      fancu = zmimrobi'o q ∷
-              epicwin? winmsg q ∷
-              []
-
     interact : GameData → IO ⊤
     interact = λ q → prompt >>ᵢₒ ree >>=ᵢₒ crock q
       where
       prompt = putStrLn "What do you do?"
       ree = words ∘ map toUpper <$> getLine
       crock : GameData → List String → IO ⊤
-      crock gd s = chews np $ mis m gd
+      crock gd s = proj₂ $ chews np $ ("" , gd) , mis naj gd
         where
         mis = λ a b → putStrLn a >>ᵢₒ lupe b
-        m = "I don't understand a word you just said."
-        chews : List $ COut × (String → GameData → IO ⊤)
-              → IO ⊤
-              → IO ⊤
-        chews ((just (a , b) , f) ∷ _) _ = f a b
-        chews ((nothing , _) ∷ xs) = chews xs
+        naj = "I don't understand a word you just said."
+        chews : ∀ {a b} → {A : Set a} → {B : A → Set b}
+              → List $ Maybe A × ((x : A) → B x)
+              → Op₁ $ ∃ B
         chews [] = id
-        np : List $ COut × (String → GameData → IO ⊤)
-        np = map (λ f → f s gd , λ a b → putStrLn a >>ᵢₒ lupe b) std
+        chews ((nothing , _) ∷ xs) = chews xs
+        chews ((just b , f) ∷ _) _ = b , f b
+        np : List $ COut × (String × GameData → IO ⊤)
+        np = map (λ f → f s gd , uncurry mis) std
           where
           std = sazycimde ++ gasnu
             where
@@ -150,6 +172,7 @@ main = run $ IO.lift nurtcati >>ᵢₒ lupe initialD
             gasnu = travel? ∷
                     wield? ∷
                     hitme? ∷
+                    smash? ∷
                     []
 \end{code}
 \end{document}
