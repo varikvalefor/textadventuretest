@@ -23,7 +23,7 @@
 \maketitle
 
 \section{le me'oi .abstract.}
-ni'o la'o zoi.\ \kulmodis\ .zoi.\ vasru le velcki be le ctaipe be la'oi .\F{Item}.\ be'o poi ke'a srana la'oi .TestAdventure.
+ni'o la'o zoi.\ \kulmodis\ .zoi.\ vasru le velcki be le ctaipe be la'oi .\AgdaRecord{Item}.\ be'o poi ke'a srana la'oi .TestAdventure.
 
 \section{le vrici}
 
@@ -49,7 +49,7 @@ open import Relation.Binary.PropositionalEquality
   )
 \end{code}
 
-\section{le ctaipe be la'oi .\F{Item}.}
+\section{le ctaipe be la'oi .\AgdaRecord{Item}.}
 
 \subsection{la'oi .\F{colorfun}.}
 ni'o zo'oi .COLOUR.\ selneimau fi la .varik.\ldots jenai ku'i cu cmene le samselkei\ldots pe'a sai\ldots noi ke'a selcme zoi glibau.\ Color Fun .glibau.
