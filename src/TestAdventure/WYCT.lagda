@@ -73,7 +73,6 @@ open import Data.Product
     _,_
   )
 open import VVXtAdventure.Base
-open import VVXtAdventure.Funky
 open import TestAdventure.Items
 open import Relation.Binary.PropositionalEquality
   using (
