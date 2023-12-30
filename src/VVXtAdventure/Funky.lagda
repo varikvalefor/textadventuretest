@@ -619,6 +619,83 @@ smashGeneric q k x j = q' , kuslendus , xindus , itemstedus
     d₃ = suc (toℕ x) ↓ i
 \end{code}
 
+\section{la'oi .\F{dropPawn}.}
+
+\begin{code}
+private
+  kumfybi'o : (q q' : GameData)
+            → let rooms = GameData.rooms in
+              length (rooms q) ≡ length (rooms q')
+            → Character $ rooms q
+            → Character $ rooms q'
+  kumfybi'o _ _ g x = record {
+    room = mink (Character.room x) g;
+    forename = Character.forename x;
+    surname = Character.surname x;
+    cname = Character.cname x;
+    nicknames = Character.nicknames x;
+    inventory = Character.inventory x;
+    health = Character.health x;
+    wieldedct =  Character.wieldedct x;
+    yourfloorisnowclean = Character.yourfloorisnowclean x}
+
+dropPawn : (q : GameData)
+         → let χ = GameData.haters in
+           (x : Fin $ length $ χ q)
+         → let x' = χ q ! x in
+           (i : Fin $ length $ Character.inventory x')
+         → Σ GameData $ λ q'
+           → Σ ((_≡_ on (length ∘ GameData.rooms)) q q') $ λ ℓ
+           → Σ (length (χ q) ≡ length (χ q')) $ λ ℓ₂
+           → (_≡_
+               q'
+               record q {
+                 rooms = GameData.rooms q';
+                 haters = GameData.haters q';
+                 player' = mink (GameData.player' q) ℓ₂;
+                 yourfloorisnowclean = GameData.yourfloorisnowclean q'
+                 })
+           -- ni'o le pluja cu jicfo
+           × (let χq' = GameData.haters q' in
+              let χq'' = Data.List.map (kumfybi'o q' q $ sym ℓ) χq' in
+              (_×_
+                (_≡_
+                  ((toℕ x ∸ 1) ↑ χ q ++ toℕ x ↓ χ q)
+                  ((toℕ x ∸ 1) ↑ χq'' ++ toℕ x ↓ χq''))
+                (let I = Character.inventory x' in
+                 (_≡_
+                   (record x' {
+                     inventory = (toℕ i ∸ 1) ↑ I ++ toℕ i ↓ I;
+                     yourfloorisnowclean = {!!};
+                     wieldedct = {!!}
+                     })
+                   (_!_
+                     χq''
+                     (mink
+                       x
+                       (step-≡
+                         _
+                         (sym $ DLP.length-map
+                           (kumfybi'o q' q $ sym ℓ)
+                           χq')
+                         ℓ₂)))))))
+           × (let k = GameData.rooms in
+              let kq = GameData.rooms q in
+              let xk = Character.room x' in
+              let xk' = mink xk ℓ in
+              (_×_
+                (_≡_
+                  ((toℕ xk ∸ 1) ↑ kq ++ toℕ xk ↓ kq)
+                  ((toℕ xk' ∸ 1) ↑ k q' ++ toℕ xk' ↓ k q'))
+                (let t = Character.inventory x' ! i in
+                 (_≡_
+                   (k q' ! xk')
+                   (record (kq ! xk) {
+                     items = t ∷ Room.items (kq ! xk)
+                     })))))
+dropPawn = {!!}           
+\end{code}
+
 \chapter{le mu'oi glibau.\ high-level .glibau.}
 ni'o la'au le mu'oi glibau.\ high-level .glibau.\ li'u vasru lo velcki be lo fancu poi la'oi .\F{Com}.\ smimlu lo se ctaipe be ke'a
 
