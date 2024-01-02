@@ -32,21 +32,21 @@
 \newunicodechar{₁}{\ensuremath{\mathnormal{_1}}}
 \newunicodechar{₂}{\ensuremath{\mathnormal{_2}}}
 \newunicodechar{₃}{\ensuremath{\mathnormal{_3}}}
-\newunicodechar{⊎}{\ensuremath{\mathnormal{\uplus}}}
-\newunicodechar{≡}{\ensuremath{\mathnormal{\equiv}}}
-\newunicodechar{∧}{\ensuremath{\mathnormal{\land}}}
-\newunicodechar{≤}{\ensuremath{\mathnormal{\leq}}}
-\newunicodechar{≥}{\ensuremath{\mathnormal{\geq}}}
+\newunicodechar{⊎}{\ensuremath{\mathnormal\uplus}}
+\newunicodechar{≡}{\ensuremath{\mathnormal\equiv}}
+\newunicodechar{∧}{\ensuremath{\mathnormal\land}}
+\newunicodechar{≤}{\ensuremath{\mathnormal\leq}}
+\newunicodechar{≥}{\ensuremath{\mathnormal\geq}}
 \newunicodechar{ₘ}{\ensuremath{\mathnormal{_m}}}
 \newunicodechar{≟}{\ensuremath{\mathnormal{\stackrel{?}{=}}}}
-\newunicodechar{∸}{\ensuremath{\mathnormal{\divdot}}}
-\newunicodechar{∎}{\ensuremath{\mathnormal{\blacksquare}}}
-\newunicodechar{⟨}{\ensuremath{\mathnormal{\langle}}}
-\newunicodechar{⟩}{\ensuremath{\mathnormal{\rangle}}}
+\newunicodechar{∸}{\ensuremath{\mathnormal\divdot}}
+\newunicodechar{∎}{\ensuremath{\mathnormal\blacksquare}}
+\newunicodechar{⟨}{\ensuremath{\mathnormal\langle}}
+\newunicodechar{⟩}{\ensuremath{\mathnormal\rangle}}
 \newunicodechar{𝓁}{\ensuremath{\mathnormal{\mathcal l}}}
-\newunicodechar{ℓ}{\ensuremath{\mathnormal{\ell}}}
-\newunicodechar{⊃}{\ensuremath{\mathnormal{\supset}}}
-\newunicodechar{▹}{\ensuremath{\mathnormal{\triangleright}}}
+\newunicodechar{ℓ}{\ensuremath{\mathnormal\ell}}
+\newunicodechar{⊃}{\ensuremath{\mathnormal\supset}}
+\newunicodechar{▹}{\ensuremath{\mathnormal\triangleright}}
 
 \newcommand\Sym\AgdaSymbol
 \newcommand\D\AgdaDatatype
