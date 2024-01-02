@@ -874,7 +874,7 @@ wield? (x ∷ xs) dang = if (realShit x) (troci xs) nothing
 \end{code}
 
 \subsection{la'oi .\F{smash?}.}
-ni'o ro da poi ke'a co'e zo'u ga jonai ga je djuno pe'a ru'e lo du'u tu'a la'o zoi.\ \B s\ .zoi.\ .indika lo du'u lo kelci cu djica lo nu marxa da gi ga jonai ga je curmi lo nu marxa da gi ga je tu'a la'o zoi.\ \B x\ .zoi.\ lu'u je tu'a je la'o zoi.\ \B z .zoi.\ cu .indika lo du'u marxa da gi ko'a goi la'o zoi.\ \F{smash?} \B s \B g\ .zoi.\ du la'o zoi.\ \F{just} \F \$ \B x \F , \B z\ .zoi.\ gi ga je la'o zoi.\ \B x\ .zoi.\ se skuxai ja co'e gi ko'a du la'o zoi.\ \F{just} \F \$ \B x \F , \B g\ .zoi.\ gi ko'a du la'oi .\F{nothing}.
+ni'o ro da poi ke'a co'e zo'u ga jonai ga je djuno pe'a ru'e lo du'u tu'a la'o zoi.\ \B s\ .zoi.\ .indika lo du'u lo kelci cu djica lo nu marxa da gi ga jonai ga je curmi lo nu marxa da gi ga je tu'a la'o zoi.\ \B x\ .zoi.\ lu'u je tu'a la'o zoi.\ \B z .zoi.\ cu .indika lo du'u marxa da gi ko'a goi la'o zoi.\ \F{smash?} \B s \B g\ .zoi.\ du la'o zoi.\ \F{just} \F \$ \B x \F , \B z\ .zoi.\ gi ga je la'o zoi.\ \B x\ .zoi.\ se skuxai ja co'e gi ko'a du la'o zoi.\ \F{just} \F \$ \B x \F , \B g\ .zoi.\ gi ko'a du la'oi .\F{nothing}.
 
 \begin{code}
 smash? : Com
