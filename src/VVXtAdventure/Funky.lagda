@@ -663,8 +663,8 @@ dropPawn : (q : GameData)
               let χq'' = Data.List.map (kumfybi'o q' q $ sym ℓ) χq' in
               (_×_
                 (_≡_
-                  ((toℕ x ∸ 1) ↑ χ q ++ toℕ x ↓ χ q)
-                  ((toℕ x ∸ 1) ↑ χq'' ++ toℕ x ↓ χq''))
+                  (toℕ x ↑ χ q ++ suc (toℕ x) ↓ χ q)
+                  (toℕ x ↑ χq'' ++ suc (toℕ x) ↓ χq''))
                 (let I = Character.inventory x' in
                  (_≡_
                    (record x' {
@@ -688,8 +688,8 @@ dropPawn : (q : GameData)
               let xk' = mink xk ℓ in
               (_×_
                 (_≡_
-                  ((toℕ xk ∸ 1) ↑ kq ++ toℕ xk ↓ kq)
-                  ((toℕ xk' ∸ 1) ↑ k q' ++ toℕ xk' ↓ k q'))
+                  (toℕ xk ↑ kq ++ suc (toℕ xk) ↓ kq)
+                  (toℕ xk' ↑ k q' ++ suc (toℕ xk') ↓ k q'))
                 (let t = Character.inventory x' ! i in
                  (_≡_
                    (k q' ! xk')
