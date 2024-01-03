@@ -739,11 +739,11 @@ dropPawn q x i = q' , (proj₁ $ proj₂ kumfa') , proj₁ (proj₂ xeb') , brak
     player' = mink (GameData.player' q) $ proj₁ $ proj₂ xeb'
     }
 
-  braks = kybus , kumfyctaipe , xebnyctaipe
+  braks = kybus , xebnyctaipe , kumfyctaipe
     where
     kybus = {!!}
-    kumfyctaipe = {!!}
     xebnyctaipe = {!!}
+    kumfyctaipe = {!!}
 \end{code}
 
 \chapter{le mu'oi glibau.\ high-level .glibau.}
