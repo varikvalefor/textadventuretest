@@ -192,6 +192,7 @@ open import Truthbrary.Category.Monad
 open import Truthbrary.Data.List.Loom
   using (
     ualkonk;
+    ualmap;
     lum;
     ual
   )
@@ -695,7 +696,53 @@ dropPawn : (q : GameData)
                    (record (kq ! xk) {
                      items = t ∷ Room.items (kq ! xk)
                      })))))
-dropPawn = {!!}           
+dropPawn q x i = q' , (proj₁ $ proj₂ kumfa') , proj₁ (proj₂ xeb') , braks
+  where
+  xq = GameData.haters q ! x
+  cninv = (toℕ i ∸ 1) ↓ ix ++ toℕ i ↑ ix
+    where
+    ix = Character.inventory xq
+  kumfa' = ual (GameData.rooms q) (Character.room xq) v
+    where
+    x' = GameData.haters q ! x
+    v = {!!}
+  xeb' = ualmap (GameData.haters q) luuis cninf x
+    where
+    -- | ni'o mabla klamburi  .i racli fa lo nu ci'au .ue nai
+    -- le su'u la .varik. cu cusku
+    luuis = λ x → record {
+      forename = Character.forename x;
+      surname = Character.surname x;
+      cname = Character.cname x;
+      nicknames = Character.nicknames x;
+      inventory = Character.inventory x;
+      health = Character.health x;
+      wieldedct = Character.wieldedct x;
+      room = mink (Character.room x) $ proj₁ $ proj₂ kumfa';
+      yourfloorisnowclean = Character.yourfloorisnowclean x
+      }
+    cninf = const $ record {
+      forename = Character.forename xq;
+      surname = Character.surname xq;
+      nicknames = Character.nicknames xq;
+      cname = Character.cname xq;
+      health = Character.health xq;
+      inventory = cninv;
+      wieldedct = {!!};
+      room = mink (Character.room xq) $ proj₁ $ proj₂ kumfa';
+      yourfloorisnowclean = {!!}}
+  q' = record {
+    rooms = proj₁ kumfa';
+    haters = proj₁ xeb';
+    epicwin = GameData.epicwin q;
+    yourfloorisnowclean = {!!};
+    player' = mink (GameData.player' q) $ proj₁ $ proj₂ xeb'
+    }
+
+  braks = kumfyctaipe , xebnyctaipe
+    where
+    kumfyctaipe = {!!}
+    xebnyctaipe = {!!}
 \end{code}
 
 \chapter{le mu'oi glibau.\ high-level .glibau.}
