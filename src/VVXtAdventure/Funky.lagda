@@ -55,6 +55,7 @@
 \newcommand\OpF[1]{\AgdaOperator{\F{#1}}}
 
 \newcommand\cmene{VVXtAdventure.Funky}
+\newcommand\modycme\texttt
 
 \title{la'o zoi.\ \texttt{\cmene}\ .zoi.}
 \author{la .varik.\ .VALefor.}
@@ -63,7 +64,7 @@
 \maketitle
 
 \begin{abstract}
-	\noindent ni'o la'o zoi.\ \texttt{\cmene}\ .zoi.\ vasru le velcki be lo fancu be fi la'oi .\F{GameData}.\ ja zo'e
+	\noindent ni'o la'o zoi.\ \modycme{\cmene}\ .zoi.\ vasru le velcki be lo fancu be fi la'oi .\F{GameData}.\ ja zo'e
 \end{abstract}
 
 \section{le me'oi .preamble.\ ja co'e}
