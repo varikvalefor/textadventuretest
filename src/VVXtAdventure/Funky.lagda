@@ -739,8 +739,9 @@ dropPawn q x i = q' , (proj₁ $ proj₂ kumfa') , proj₁ (proj₂ xeb') , brak
     player' = mink (GameData.player' q) $ proj₁ $ proj₂ xeb'
     }
 
-  braks = kumfyctaipe , xebnyctaipe
+  braks = kybus , kumfyctaipe , xebnyctaipe
     where
+    kybus = {!!}
     kumfyctaipe = {!!}
     xebnyctaipe = {!!}
 \end{code}
