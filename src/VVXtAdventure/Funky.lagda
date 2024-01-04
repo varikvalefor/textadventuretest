@@ -687,9 +687,20 @@ dropPawn : (q : GameData)
               let xk = Character.room x' in
               let xk' = mink xk ℓ in
               (_×_
-                (_≡_
-                  (toℕ xk ↑ kq ++ suc (toℕ xk) ↓ kq)
-                  (toℕ xk' ↑ k q' ++ suc (toℕ xk') ↓ k q'))
+                (Σ
+                  Room
+                  (λ r →
+                    (_≡_
+                      (proj₁
+                        (ual
+                          (GameData.rooms q)
+                          (Character.room x')
+                          (const r) ))
+                      (_++_
+                        (toℕ xk ↑ kq)
+                        (_∷_
+                          r
+                          (suc (toℕ xk) ↓ kq))))))
                 (let t = Character.inventory x' ! i in
                  (_≡_
                    (k q' ! xk')
