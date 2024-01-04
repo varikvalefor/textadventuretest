@@ -32,22 +32,22 @@
 \newunicodechar{₁}{\ensuremath{\mathnormal{_1}}}
 \newunicodechar{₂}{\ensuremath{\mathnormal{_2}}}
 \newunicodechar{₃}{\ensuremath{\mathnormal{_3}}}
-\newunicodechar{⊎}{\ensuremath{\mathnormal{\uplus}}}
-\newunicodechar{≡}{\ensuremath{\mathnormal{\equiv}}}
-\newunicodechar{∧}{\ensuremath{\mathnormal{\land}}}
-\newunicodechar{≤}{\ensuremath{\mathnormal{\leq}}}
-\newunicodechar{≥}{\ensuremath{\mathnormal{\geq}}}
+\newunicodechar{⊎}{\ensuremath{\mathnormal\uplus}}
+\newunicodechar{≡}{\ensuremath{\mathnormal\equiv}}
+\newunicodechar{∧}{\ensuremath{\mathnormal\land}}
+\newunicodechar{≤}{\ensuremath{\mathnormal\leq}}
+\newunicodechar{≥}{\ensuremath{\mathnormal\geq}}
 \newunicodechar{ₘ}{\ensuremath{\mathnormal{_m}}}
 \newunicodechar{≟}{\ensuremath{\mathnormal{\stackrel{?}{=}}}}
-\newunicodechar{∸}{\ensuremath{\mathnormal{\divdot}}}
-\newunicodechar{∎}{\ensuremath{\mathnormal{\blacksquare}}}
-\newunicodechar{⟨}{\ensuremath{\mathnormal{\langle}}}
-\newunicodechar{⟩}{\ensuremath{\mathnormal{\rangle}}}
+\newunicodechar{∸}{\ensuremath{\mathnormal\divdot}}
+\newunicodechar{∎}{\ensuremath{\mathnormal\blacksquare}}
+\newunicodechar{⟨}{\ensuremath{\mathnormal\langle}}
+\newunicodechar{⟩}{\ensuremath{\mathnormal\rangle}}
 \newunicodechar{𝓁}{\ensuremath{\mathnormal{\mathcal l}}}
-\newunicodechar{ℓ}{\ensuremath{\mathnormal{\ell}}}
-\newunicodechar{χ}{\ensuremath{\mathnormal{\chi}}}
-\newunicodechar{⊃}{\ensuremath{\mathnormal{\supset}}}
-\newunicodechar{▹}{\ensuremath{\mathnormal{\triangleright}}}
+\newunicodechar{ℓ}{\ensuremath{\mathnormal\ell}}
+\newunicodechar{χ}{\ensuremath{\mathnormal\chi}}
+\newunicodechar{⊃}{\ensuremath{\mathnormal\supset}}
+\newunicodechar{▹}{\ensuremath{\mathnormal\triangleright}}
 
 \newcommand\Sym\AgdaSymbol
 \newcommand\D\AgdaDatatype
@@ -56,6 +56,7 @@
 \newcommand\OpF[1]{\AgdaOperator{\F{#1}}}
 
 \newcommand\cmene{VVXtAdventure.Funky}
+\newcommand\modycme\texttt
 
 \title{la'o zoi.\ \texttt{\cmene}\ .zoi.}
 \author{la .varik.\ .VALefor.}
@@ -64,7 +65,7 @@
 \maketitle
 
 \begin{abstract}
-	\noindent ni'o la'o zoi.\ \texttt{\cmene}\ .zoi.\ vasru le velcki be lo fancu be fi la'oi .\F{GameData}.\ ja zo'e
+	\noindent ni'o la'o zoi.\ \modycme{\cmene}\ .zoi.\ vasru le velcki be lo fancu be fi la'oi .\F{GameData}.\ ja zo'e
 \end{abstract}
 
 \section{le me'oi .preamble.\ ja co'e}
@@ -1001,7 +1002,7 @@ wield? (x ∷ xs) dang = if (realShit x) (troci xs) nothing
 \end{code}
 
 \subsection{la'oi .\F{smash?}.}
-ni'o ro da poi ke'a co'e zo'u ga jonai ga je djuno pe'a ru'e lo du'u tu'a la'o zoi.\ \B s\ .zoi.\ .indika lo du'u lo kelci cu djica lo nu marxa da gi ga jonai ga je curmi lo nu marxa da gi ga je tu'a la'o zoi.\ \B x\ .zoi.\ lu'u je tu'a je la'o zoi.\ \B z .zoi.\ cu .indika lo du'u marxa da gi ko'a goi la'o zoi.\ \F{smash?} \B s \B g\ .zoi.\ du la'o zoi.\ \F{just} \F \$ \B x \F , \B z\ .zoi.\ gi ga je la'o zoi.\ \B x\ .zoi.\ se skuxai ja co'e gi ko'a du la'o zoi.\ \F{just} \F \$ \B x \F , \B g\ .zoi.\ gi ko'a du la'oi .\F{nothing}.
+ni'o ro da poi ke'a co'e zo'u ga jonai ga je djuno pe'a ru'e lo du'u tu'a la'o zoi.\ \B s\ .zoi.\ .indika lo du'u lo kelci cu djica lo nu marxa da gi ga jonai ga je curmi lo nu marxa da gi ga je tu'a la'o zoi.\ \B x\ .zoi.\ lu'u je tu'a la'o zoi.\ \B z .zoi.\ cu .indika lo du'u marxa da gi ko'a goi la'o zoi.\ \F{smash?} \B s \B g\ .zoi.\ du la'o zoi.\ \F{just} \F \$ \B x \F , \B z\ .zoi.\ gi ga je la'o zoi.\ \B x\ .zoi.\ se skuxai ja co'e gi ko'a du la'o zoi.\ \F{just} \F \$ \B x \F , \B g\ .zoi.\ gi ko'a du la'oi .\F{nothing}.
 
 \begin{code}
 smash? : Com
@@ -1051,7 +1052,7 @@ hitme? _ _ = nothing
 \end{code}
 
 \chapter{le zmiku}
-ni'o la'au le zmiku li'u vasru le velcki be le ctaipe be lo smimlu be la'o zoi.\ \F{GameData} \Sym → \F{Maybe} \OpF \$ \F{String} \OpF × \F{GameData}\ .zoi.\ be'o be'o poi tu'a ke'a na se sarcu lo nu midnoi fi lo kelci
+ni'o la'au le zmiku li'u vasru le velcki be le ctaipe be le smimlu be la'o zoi.\ \AgdaRecord{GameData} \Sym → \F{Maybe} \OpF \$ \F{String} \OpF × \AgdaRecord{GameData}\ .zoi.\ be'o be'o poi tu'a ke'a na se sarcu lo nu midnoi fi lo kelci
 
 \section{la .\F{zmimrobi'o}.}
 ni'o ga jonai la'oi .\AgdaInductiveConstructor{nothing}.\ du ko'a goi la'o zoi.\ \F{zmimrobi'o} \B t\ .zoi.\ gi ga je tu'a la'oi .\B{t}.\ .indika ko'e goi lo du'u morsi fa lo kelci ke xarpre ja co'e gi ga je tu'a la'oi .\B{s}.\ .indika ko'e gi ko'a du la'o zoi.\ \AgdaInductiveConstructor{just} \OpF \$ \B s \OpF , \B t\ .zoi.
