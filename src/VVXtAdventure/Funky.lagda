@@ -695,7 +695,7 @@ dropPawn : (q : GameData)
                         (ual
                           (GameData.rooms q)
                           (Character.room x')
-                          (const r) ))
+                          (const r)))
                       (_++_
                         (toℕ xk ↑ kq)
                         (r ∷ suc (toℕ xk) ↓ kq)))))
