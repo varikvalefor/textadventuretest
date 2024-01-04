@@ -698,9 +698,7 @@ dropPawn : (q : GameData)
                           (const r) ))
                       (_++_
                         (toℕ xk ↑ kq)
-                        (_∷_
-                          r
-                          (suc (toℕ xk) ↓ kq))))))
+                        (r ∷ suc (toℕ xk) ↓ kq)))))
                 (let t = Character.inventory x' ! i in
                  (_≡_
                    (k q' ! xk')
