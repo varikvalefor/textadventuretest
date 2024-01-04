@@ -696,7 +696,7 @@ dropPawn : (q : GameData)
                    (record (kq ! xk) {
                      items = t ∷ Room.items (kq ! xk)
                      })))))
-dropPawn q x i = q' , (proj₁ $ proj₂ kumfa') , proj₁ (proj₂ xeb') , braks
+dropPawn q x i = q' , (proj₁ $ proj₂ kumfa') , proj₁ (proj₂ xen') , braks
   where
   xq = GameData.haters q ! x
   cninv = (toℕ i ∸ 1) ↓ ix ++ toℕ i ↑ ix
@@ -706,7 +706,7 @@ dropPawn q x i = q' , (proj₁ $ proj₂ kumfa') , proj₁ (proj₂ xeb') , brak
     where
     x' = GameData.haters q ! x
     v = {!!}
-  xeb' = ualmap (GameData.haters q) luuis cninf x
+  xen' = ualmap (GameData.haters q) luuis cninf x
     where
     -- | ni'o mabla klamburi  .i racli fa lo nu ci'au .ue nai
     -- le su'u la .varik. cu cusku
@@ -733,10 +733,10 @@ dropPawn q x i = q' , (proj₁ $ proj₂ kumfa') , proj₁ (proj₂ xeb') , brak
       yourfloorisnowclean = {!!}}
   q' = record {
     rooms = proj₁ kumfa';
-    haters = proj₁ xeb';
+    haters = proj₁ xen';
     epicwin = GameData.epicwin q;
     yourfloorisnowclean = {!!};
-    player' = mink (GameData.player' q) $ proj₁ $ proj₂ xeb'
+    player' = mink (GameData.player' q) $ proj₁ $ proj₂ xen'
     }
 
   braks = kybus , xebnyctaipe , kumfyctaipe
