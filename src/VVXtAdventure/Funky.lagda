@@ -742,7 +742,7 @@ dropPawn q x i = q' , (proj₁ $ proj₂ kumfa') , proj₁ (proj₂ xen') , brak
 
   braks = kybus , xebnyctaipe , kumfyctaipe
     where
-    kybus = {!!}
+    kybus = refl
     xebnyctaipe = {!!}
     kumfyctaipe = {!!}
 \end{code}
