@@ -705,7 +705,9 @@ dropPawn q x i = q' , (proj₁ $ proj₂ kumfa') , proj₁ (proj₂ xen') , brak
     ix = Character.inventory xq
   kumfa' = ual (GameData.rooms q) (Character.room xq) v
     where
-    v = {!!}
+    v = λ k → record k {
+      items = Character.inventory xq ! i ∷ Room.items k
+      }
   xen' = ualmap (GameData.haters q) luuis cninf x
     where
     -- | ni'o mabla klamburi  .i racli fa lo nu ci'au .ue nai
