@@ -72,6 +72,7 @@
 
 \begin{code}
 {-# OPTIONS --safe #-}
+{-# OPTIONS --overlapping-instances #-}
 
 module VVXtAdventure.Funky where
 
@@ -204,6 +205,7 @@ open import Data.List.Relation.Unary.Any
 open import Relation.Binary.PropositionalEquality
 
 import Agda.Builtin.Unit
+import Data.Maybe.Instances
 
 import Data.Fin.Properties as DFP
 import Data.Nat.Properties as DNP
@@ -730,9 +732,17 @@ dropPawn q x i = q' , (proj₁ $ proj₂ kumfa') , proj₁ (proj₂ xen') , brak
       cname = Character.cname xq;
       health = Character.health xq;
       inventory = cninv;
-      wieldedct = {!!};
+      wieldedct = uit >>= f;
       room = mink (Character.room xq) $ proj₁ $ proj₂ kumfa';
       yourfloorisnowclean = {!!}}
+      where
+      uit = Character.wieldedct xq
+      f : _
+      f j with proj₁ j ≟ i
+      ... | yes d = nothing
+      ... | no el with proj₁ j Data.Fin.<? i
+      ... | yes m = just $ Data.Fin.fromℕ< {toℕ $ proj₁ j} {!!} , {!!}
+      ... | no z = just $ Data.Fin.fromℕ< {toℕ (proj₁ j) ∸ 1} {!!} , {!!}
   q' = record {
     rooms = proj₁ kumfa';
     haters = proj₁ xen';
