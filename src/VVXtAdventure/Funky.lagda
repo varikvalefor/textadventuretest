@@ -78,6 +78,7 @@ module VVXtAdventure.Funky where
 
 open import Data.Fin
   using (
+    fromℕ<;
     zero;
     toℕ;
     Fin;
@@ -741,8 +742,8 @@ dropPawn q x i = q' , (proj₁ $ proj₂ kumfa') , proj₁ (proj₂ xen') , brak
       f (j₁ , _) with j₁ ≟ i
       ... | yes d = nothing
       ... | no el with j₁ Data.Fin.<? i
-      ... | yes m = just $ Data.Fin.fromℕ< {toℕ j₁} {!!} , {!!}
-      ... | no z = just $ Data.Fin.fromℕ< {toℕ j₁ ∸ 1} {!!} , {!!}
+      ... | yes m = just $ fromℕ< {toℕ j₁} {!!} , {!!}
+      ... | no z = just $ fromℕ< {toℕ j₁ ∸ 1} {!!} , {!!}
   q' = record {
     rooms = proj₁ kumfa';
     haters = proj₁ xen';
