@@ -738,11 +738,11 @@ dropPawn q x i = q' , (proj₁ $ proj₂ kumfa') , proj₁ (proj₂ xen') , brak
       where
       uit = Character.wieldedct xq
       f : _
-      f j with proj₁ j ≟ i
+      f (j₁ , _) with j₁ ≟ i
       ... | yes d = nothing
-      ... | no el with proj₁ j Data.Fin.<? i
-      ... | yes m = just $ Data.Fin.fromℕ< {toℕ $ proj₁ j} {!!} , {!!}
-      ... | no z = just $ Data.Fin.fromℕ< {toℕ (proj₁ j) ∸ 1} {!!} , {!!}
+      ... | no el with j₁ Data.Fin.<? i
+      ... | yes m = just $ Data.Fin.fromℕ< {toℕ j₁} {!!} , {!!}
+      ... | no z = just $ Data.Fin.fromℕ< {toℕ j₁ ∸ 1} {!!} , {!!}
   q' = record {
     rooms = proj₁ kumfa';
     haters = proj₁ xen';
