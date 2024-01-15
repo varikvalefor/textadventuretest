@@ -774,8 +774,8 @@ ni'o ga jonai\ldots
 	\item la'oi .\AgdaInductiveConstructor{nothing}.\ du ko'a goi la'o zoi.\ \F{travel?} \B r \B g .zoi.\ gi
 	\item ga je la'o zoi.\ \F{travel?} .zoi.\ djuno ja co'e lo du'u tu'a ko'a goi la'o zoi.\ \F{travel?} \B r \B g .zoi.\ cu nu cpedu lo nu ko'e goi lo kelci ke xarpre ja co'e cu klama lo kumfa poi la'oi .\B K.\ sinxa ke'a gi\ldots
 	\begin{itemize}
-		\item ga jonai ko'a me'oi .product.\ lo te skuxai ja zo'e la'oi .\B g.\ gi
-		\item ga je la'o zoi.\ \AgdaField{Room.travis} \OpF \$ \AgdaField{Character.room} \OpF \$ \AgdaField{GameData.player} \B g .zoi.\ vasru lo mu'oi glibau.\ \AgdaField{Room.cname}\ .glibau.\ be la'oi .\B K.\ gi ko'a me'oi .product.\ lo velski be lo nu klama kei zo'e poi tu'a ke'a .indika lo du'u ko'e zvati zo'e poi djica lo nu zvati ke'a xi re
+		\item ga jonai ko'a .orsi li re lo te skuxai ja zo'e la'oi .\B g.\ gi
+		\item ga je la'o zoi.\ \AgdaField{Room.travis} \OpF \$ \AgdaField{Character.room} \OpF \$ \AgdaField{GameData.player} \B g .zoi.\ vasru lo mu'oi glibau.\ \AgdaField{Room.cname}\ .glibau.\ be la'oi .\B K.\ gi ko'a .orsi li re lo velski be lo nu klama kei zo'e poi tu'a ke'a .indika lo du'u ko'e zvati zo'e poi djica lo nu zvati ke'a xi re
 	\end{itemize}
 \end{itemize}
 
