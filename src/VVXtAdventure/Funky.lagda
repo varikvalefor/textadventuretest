@@ -210,7 +210,6 @@ import Data.Maybe.Properties as DMP
 
 import Data.Maybe.Relation.Unary.Any as DMA
 
-
 open ≡-Reasoning
 \end{code}
 
