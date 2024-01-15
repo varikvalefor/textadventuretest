@@ -769,14 +769,14 @@ lp? _ _ = nothing
 ni'o la .varik.\ cu jinvi le du'u zabna fa le su'u cmene ko'a goi la'u le fancu poi cumki fa lo nu ke'a co'e ja pruce zo'e je ko'a goi lo ctaipe be la'oi .GameData.\ zo'e je lo na du be ko'a li'u kei kei je le du'u tu'a ko'a filri'a lo nu jimpe fi ko'e goi le se cmene be ko'a  .i ku'i ga naja na jimpe fi ko'e gi cumki fa lo nu filri'a lo nu jimpe fi ko'e kei fa tu'a le se du'u ko'e vasru le velcki be le fancu poi lo nu zabna fa lo se pruce be ke'a cu se cumki lo nu tu'a lo co'e ja te pruce be ke'a cu .indika lo na se .indika tu'a lo se pruce be ke'a
 
 \subsection{la'oi .\F{travel?}.}
-ni'o ga jonai ga je la'o zoi.\ \F{travel?} .zoi.\ djuno ja co'e lo du'u tu'a ko'a goi la'o zoi.\ \F{travel?} \B r \B g .zoi.\ cu nu cpedu lo nu ko'e goi lo kelci ke xarpre ja co'e cu klama lo kumfa poi la'oi .\B K.\ sinxa ke'a gi\ldots
+ni'o ga jonai\ldots
 \begin{itemize}
-	\item ga jonai ga je la'o zoi.\ \AgdaField{Room.travis} \OpF \$ \AgdaField{Character.room} \OpF \$ \AgdaField{GameData.player} \B g .zoi.\ vasru lo mu'oi glibau.\ \AgdaField{Room.cname}\ .glibau.\ be la'oi .\B K.\ gi\ldots
+	\item la'oi .\AgdaInductiveConstructor{nothing}.\ du ko'a goi la'o zoi.\ \F{travel?} \B r \B g .zoi.\ gi
+	\item ga je la'o zoi.\ \F{travel?} .zoi.\ djuno ja co'e lo du'u tu'a ko'a goi la'o zoi.\ \F{travel?} \B r \B g .zoi.\ cu nu cpedu lo nu ko'e goi lo kelci ke xarpre ja co'e cu klama lo kumfa poi la'oi .\B K.\ sinxa ke'a gi\ldots
 	\begin{itemize}
-		\item ko'a me'oi .product.\ lo velski be lo nu klama kei zo'e poi tu'a ke'a .indika lo du'u ko'e zvati zo'e poi djica lo nu zvati ke'a xi re gi
-		\item ko'a me'oi .product.\ lo te skuxai ja zo'e la'oi .\B g.\ gi
+		\item ga jonai ko'a me'oi .product.\ lo te skuxai ja zo'e la'oi .\B g.\ gi
+		\item ga je la'o zoi.\ \AgdaField{Room.travis} \OpF \$ \AgdaField{Character.room} \OpF \$ \AgdaField{GameData.player} \B g .zoi.\ vasru lo mu'oi glibau.\ \AgdaField{Room.cname}\ .glibau.\ be la'oi .\B K.\ gi ko'a me'oi .product.\ lo velski be lo nu klama kei zo'e poi tu'a ke'a .indika lo du'u ko'e zvati zo'e poi djica lo nu zvati ke'a xi re
 	\end{itemize}
-	\item gi ko'a du la'oi .\AgdaInductiveConstructor{nothing}.
 \end{itemize}
 
 \begin{code}
