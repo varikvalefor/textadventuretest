@@ -739,11 +739,25 @@ dropPawn q x i = q' , (proj₁ $ proj₂ kumfa') , proj₁ (proj₂ xen') , brak
       where
       uit = Character.wieldedct xq
       f : _
-      f (j₁ , _) with j₁ ≟ i
+      f (j₁ , j₂) with j₁ ≟ i
       ... | yes d = nothing
       ... | no el with j₁ Data.Fin.<? i
-      ... | yes m = just $ fromℕ< {toℕ j₁} {!!} , {!!}
-      ... | no z = just $ fromℕ< {toℕ j₁ ∸ 1} {!!} , {!!}
+      ... | yes m = just $ _ , d
+        where
+        d = begin
+          true ≡⟨ j₂ ⟩
+          uij (Character.inventory xq ! j₁) ≡⟨ {!!} ⟩
+          uij (cninv ! fromℕ< {toℕ j₁} {!!}) ∎
+          where
+          uij = is-just ∘ Item.weapwn
+      ... | no z = just $ _ , d
+        where
+        d = begin
+          true ≡⟨ j₂ ⟩
+          uij (Character.inventory xq ! j₁) ≡⟨ {!!} ⟩
+          uij (cninv ! fromℕ< {toℕ j₁ ∸ 1} {!!}) ∎
+          where
+          uij = is-just ∘ Item.weapwn
   q' = record {
     rooms = proj₁ kumfa';
     haters = proj₁ xen';
