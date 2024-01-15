@@ -623,7 +623,7 @@ smashGeneric q k x j = q' , kuslendus , xindus , itemstedus
 \end{code}
 
 \section{la'oi .\F{dropPawn}.}
-ni'o la'o zoi.\ \F{dropPawn} \B q \B x \B i\ .zoi.\ .orsi fi lo smimlu be la'oi .\B q.\ldots be'o poi ku'i tu'a ke'a .indika le du'u ga je lo mapti be ko'a goi le meirmoi be la'o zoi.\ \B x\ .zoi.\ bei fo le'i xarpre ja co'e cu se me'oi .inventory.\ lo no vasru be ko'e goi le meirmoi be la'oi .\B x.\ bei fo lo me'oi .\B q.\ me'oi .inventory.\ be ko'a gi lo kumfa ja co'e poi ke'a se zvati lo mapti be ko'a cu vastu ko'e  .i la .varik. cu mutce le ka ce'u stidi lo nu tcidu le velcki be bau la'oi .Agda.\ bei fe le se ctaipe be la'oi .\F{dropPawn}.\
+ni'o la'o zoi.\ \F{dropPawn} \B q \B x \B i\ .zoi.\ .orsi fi lo smimlu be la'oi .\B q.\ldots be'o poi ku'i tu'a ke'a .indika le du'u ga je lo mapti be ko'a goi le meirmoi be la'o zoi.\ \B x\ .zoi.\ bei fo le'i xarpre ja co'e cu se me'oi .inventory.\ lo no vasru be ko'e goi le meirmoi be la'oi .\B x.\ bei fo lo me'oi .\B q.\ me'oi .inventory.\ be ko'a gi lo kumfa ja co'e poi ke'a se zvati lo mapti be ko'a cu vastu ko'e  .i la .varik.\ cu mutce le ka ce'u stidi lo nu tcidu le velcki be bau la'oi .Agda.\ bei fe le se ctaipe be la'oi .\F{dropPawn}.\
 
 \begin{code}
 private
