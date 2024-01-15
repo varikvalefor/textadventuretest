@@ -215,7 +215,7 @@ open ≡-Reasoning
 \end{code}
 
 \chapter{le mu'oi glibau.\ low-level .glibau.}
-ni'o la'au le mu'oi glibau.\ low-level .glibau.\ li'u vasru le velcki be le fancu poi ke'a pruce ja co'e zo'e je lo ctaipe be la'oi .\F{GameData}.\ lo ctaipe be la'oi .\F{GameData}.\ je lo ctaipe be zo'e ja lo su'u dunli
+ni'o la'au le mu'oi glibau.\ low-level .glibau.\ li'u vasru le velcki be le fancu poi ke'a co'e ja pruce zo'e je lo ctaipe be la'oi .\F{GameData}.\ lo ctaipe be la'oi .\F{GameData}.\ je lo ctaipe be zo'e ja lo su'u dunli
 
 \section{la'o zoi.\ \F{movePawn} .zoi.}
 ni'o tu'a la'o zoi.\ \F{movePawn} \B q \B m \B n .zoi.\ .indika lo du'u lo selsni be la'o zoi.\ \AgdaField{GameData.haters} \B q \OpF !\ \B h .zoi.\ cu zvati ko'a goi lo selsni be la'o zoi.\ \AgdaField{GameData.rooms} \B q) \OpF !\ \B n .zoi.
@@ -623,7 +623,7 @@ smashGeneric q k x j = q' , kuslendus , xindus , itemstedus
 \chapter{le mu'oi glibau.\ high-level .glibau.}
 ni'o la'au le mu'oi glibau.\ high-level .glibau.\ li'u vasru lo velcki be lo fancu poi la'oi .\F{Com}.\ smimlu lo se ctaipe be ke'a
 
-\section{le fancu poi ke'a pruce ja co'e zo'e je ko'a goi lo ctaipe be la'oi .GameData.\ ko'a je zo'e}
+\section{le fancu poi ke'a co'e ja pruce zo'e je ko'a goi lo ctaipe be la'oi .GameData.\ ko'a je zo'e}
 
 \subsection{la'oi .\F{epicwin?}.}
 ni'o ga jonai la'oi .\AgdaInductiveConstructor{nothing}.\ du ko'a goi la'o zoi.\ \F{epicwin?} \B m \B a .zoi.\ gi ga je tu'a la'oi .\B a.\ .indika lo du'u lo kelci cu jinga gi ko'a du la'o zoi.\ \AgdaInductiveConstructor{just} \OpF \$ \B m \OpF , \B a .zoi.
@@ -765,8 +765,8 @@ lp? ("I'M" ∷ "A" ∷ "WINNER" ∷ []) = just ∘ < m , id >
 lp? _ _ = nothing
 \end{code}
 
-\section{le fancu poi cumki fa lo nu ke'a pruce ja co'e zo'e je ko'a goi lo ctaipe be la'oi .GameData.\ zo'e je lo na du be ko'a}
-ni'o la .varik.\ cu jinvi le du'u zabna fa le su'u cmene ko'a goi la'u le fancu poi cumki fa lo nu ke'a pruce ja co'e zo'e je ko'a goi lo ctaipe be la'oi .GameData.\ zo'e je lo na du be ko'a li'u kei kei je le du'u tu'a ko'a filri'a lo nu jimpe fi ko'e goi le se cmene be ko'a  .i ku'i ga naja na jimpe fi ko'e gi cumki fa lo nu filri'a lo nu jimpe fi ko'e kei fa tu'a le se du'u ko'e vasru le velcki be le fancu poi lo nu zabna fa lo se pruce be ke'a cu se cumki lo nu tu'a lo te pruce ja co'e be ke'a cu .indika lo na se .indika tu'a lo se pruce be ke'a
+\section{le fancu poi cumki fa lo nu ke'a co'e ja pruce zo'e je ko'a goi lo ctaipe be la'oi .GameData.\ zo'e je lo na du be ko'a}
+ni'o la .varik.\ cu jinvi le du'u zabna fa le su'u cmene ko'a goi la'u le fancu poi cumki fa lo nu ke'a co'e ja pruce zo'e je ko'a goi lo ctaipe be la'oi .GameData.\ zo'e je lo na du be ko'a li'u kei kei je le du'u tu'a ko'a filri'a lo nu jimpe fi ko'e goi le se cmene be ko'a  .i ku'i ga naja na jimpe fi ko'e gi cumki fa lo nu filri'a lo nu jimpe fi ko'e kei fa tu'a le se du'u ko'e vasru le velcki be le fancu poi lo nu zabna fa lo se pruce be ke'a cu se cumki lo nu tu'a lo co'e ja te pruce be ke'a cu .indika lo na se .indika tu'a lo se pruce be ke'a
 
 \subsection{la'oi .\F{travel?}.}
 ni'o ga jonai ga je la'o zoi.\ \F{travel?} .zoi.\ djuno ja co'e lo du'u tu'a ko'a goi la'o zoi.\ \F{travel?} \B r \B g .zoi.\ cu nu cpedu lo nu ko'e goi lo kelci ke xarpre ja co'e cu klama lo kumfa poi la'oi .\B K.\ sinxa ke'a gi\ldots
