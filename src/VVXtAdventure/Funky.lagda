@@ -753,10 +753,12 @@ dropPawn q x i = q' , (proj₁ $ proj₂ kumfa') , proj₁ (proj₂ xen') , brak
         where
         d = begin
           true ≡⟨ j₂ ⟩
-          uij (Character.inventory xq ! j₁) ≡⟨ {!!} ⟩
+          uij (Character.inventory xq ! j₁) ≡⟨ cong uij invydun ⟩
           uij (cninv ! fromℕ< {toℕ j₁ ∸ 1} {!!}) ∎
           where
           uij = is-just ∘ Item.weapwn
+          invydun : Character.inventory xq ! j₁ ≡ cninv ! _
+          invydun = {!!}
   q' = record {
     rooms = proj₁ kumfa';
     haters = proj₁ xen';
