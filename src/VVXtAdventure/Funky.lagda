@@ -410,7 +410,7 @@ wieldPawn gd j i t = gd' , xenlen , xendj , refl , sym uidus , refl , skrud
             → let n' = toℕ n in
               n' ↑ a ≡ n' ↑ (_++ b $ n' ↑ a)
     takedus (_ ∷ xs) zero = refl
-    takedus (x ∷ xs) (suc n) = cong (_∷_ x) $ takedus xs n
+    takedus (x ∷ xs) (suc n) = cong (x ∷_) $ takedus xs n
     dropydus : ∀ {a} → {A : Set a}
              → (a b : List A)
              → {x : A}
@@ -535,7 +535,7 @@ smashGeneric q k x j = q' , kuslendus , xindus , itemstedus
     plaid = DLP.length-map upgrayedd $ GameData.haters q
     cnastedus = begin
       c ¨ rooms
-        ≡⟨ cong (_¨_ c) $ midun rooms k ⟩
+        ≡⟨ cong (c ¨_) $ midun rooms k ⟩
       c ¨ (k₁ ++ rooms ! k ∷ k₃)
         ≡⟨ DLP.map-++-commute c k₁ $ rooms ! k ∷ k₃ ⟩
       (c ¨ k₁) ++ c (rooms ! k) ∷ (c ¨ k₃)
@@ -549,7 +549,7 @@ smashGeneric q k x j = q' , kuslendus , xindus , itemstedus
       c ¨ (k₁'' ++ kus ! k' ∷ k₃)
         ≡⟨ pribas ⟩
       c ¨ (k₁'' ++ kus ! k' ∷ k₃'')
-        ≡⟨ sym $ cong (_¨_ c) $ midun kus k' ⟩
+        ≡⟨ sym $ cong (c ¨_) $ midun kus k' ⟩
       c ¨ kus ∎
       where
       c = Room.cname
@@ -568,7 +568,7 @@ smashGeneric q k x j = q' , kuslendus , xindus , itemstedus
             → (n : Fin $ length x)
             → x ≡ toℕ n ↑ x ++ x ! n ∷ suc (toℕ n) ↓ x
       midun (_ ∷ _) zero = refl
-      midun (x ∷ xs) (suc n) = cong (_∷_ x) $ midun xs n
+      midun (x ∷ xs) (suc n) = cong (x ∷_) $ midun xs n
       zunbas = subst (_≡_ _) zunbas₂ $ cong p $ teikteikdrop rooms _ k
         where
         p = λ x → _¨_ c $ x ++ kus ! k' ∷ k₃
