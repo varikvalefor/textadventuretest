@@ -768,7 +768,7 @@ dropPawn q x i = q' , (proj₁ $ proj₂ kumfa') , proj₁ (proj₂ xen') , brak
   braks = kybus , xebnyctaipe , kumfyctaipe
     where
     kybus = refl
-    xebnyctaipe = {!!}
+    xebnyctaipe = {!!} , {!!}
     kumfyctaipe = konkydus , proj₂ (proj₂ kumfa')
       where
       konkydus = begin
