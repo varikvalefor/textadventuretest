@@ -687,18 +687,17 @@ dropPawn : (q : GameData)
                            χq')
                          ℓ₂)))))))
            × (let k = GameData.rooms in
-              let kq = GameData.rooms q in
               let xk = Character.room x' in
               let xk' = mink xk ℓ in
               (_×_
                 (_≡_
-                  (toℕ xk ↑ kq ++ suc (toℕ xk) ↓ kq)
+                  (toℕ xk ↑ k q ++ suc (toℕ xk) ↓ k q)
                   (toℕ xk' ↑ k q' ++ suc (toℕ xk') ↓ k q'))
                 (let t = Character.inventory x' ! i in
                  (_≡_
                    (k q' ! xk')
-                   (record (kq ! xk) {
-                     items = t ∷ Room.items (kq ! xk)
+                   (record (k q ! xk) {
+                     items = t ∷ Room.items (k q ! xk)
                      })))))
 dropPawn q x i = q' , (proj₁ $ proj₂ kumfa') , proj₁ (proj₂ xen') , braks
   where
