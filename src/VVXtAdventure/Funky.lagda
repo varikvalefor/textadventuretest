@@ -770,7 +770,16 @@ dropPawn q x i = q' , (proj₁ $ proj₂ kumfa') , proj₁ (proj₂ xen') , brak
     where
     kybus = refl
     xebnyctaipe = {!!}
-    kumfyctaipe = {!!}
+    kumfyctaipe = konkydus , {!!}
+      where
+      konkydus = begin
+        toℕ xk ↑ k q ++ suc (toℕ xk) ↓ k q ≡⟨ {!!} ⟩
+        toℕ xk' ↑ k q' ++ suc (toℕ xk') ↓ k q' ∎
+        where
+        xk = Character.room xq
+        xk' = mink xk $ proj₁ $ proj₂ kumfa'
+        k : GameData → List Room
+        k = GameData.rooms
 \end{code}
 
 \chapter{le mu'oi glibau.\ high-level .glibau.}
