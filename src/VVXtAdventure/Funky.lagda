@@ -605,15 +605,16 @@ smashGeneric q k x j = q' , kuslendus , xindus , itemstedus
     itstes = Room.items $ rooms ! k
     ni'oku'a = GameData.rooms q' ! mink k kuslendus
   xindus = begin
-    length (Room.items $ rooms ! k) ≡⟨ refl ⟩
-    length i ≡⟨ cong length $ teikdrop i x ⟩
-    length (d₁ ++ i ! x ∷ d₃) ≡⟨ DLP.length-++ d₁ ⟩
-    length d₁ + length (i ! x ∷ d₃) ≡⟨ refl ⟩
-    length d₁ + length (j' ∷ d₃) ≡⟨ sym $ DLP.length-++ d₁ ⟩
-    length (d₁ ++ j' ∷ d₃) ≡⟨ cong length $ sym $ ualkonk i x $ const j' ⟩
-    length (Room.items snikerz) ≡⟨ cong (length ∘ Room.items) snidus ⟩
-    length (Room.items $ GameData.rooms q' ! mink k kuslendus) ∎
+    𝓁 (Room.items $ rooms ! k) ≡⟨ refl ⟩
+    𝓁 i ≡⟨ cong length $ teikdrop i x ⟩
+    𝓁 (d₁ ++ i ! x ∷ d₃) ≡⟨ DLP.length-++ d₁ ⟩
+    𝓁 d₁ + length (i ! x ∷ d₃) ≡⟨ refl ⟩
+    𝓁 d₁ + length (j' ∷ d₃) ≡⟨ sym $ DLP.length-++ d₁ ⟩
+    𝓁 (d₁ ++ j' ∷ d₃) ≡⟨ cong length $ sym $ ualkonk i x $ const j' ⟩
+    𝓁 (Room.items snikerz) ≡⟨ cong (length ∘ Room.items) snidus ⟩
+    𝓁 (Room.items $ GameData.rooms q' ! mink k kuslendus) ∎
     where
+    𝓁 = length
     i = Room.items $ rooms ! k
     d₁ = toℕ x ↑ i
     d₃ = suc (toℕ x) ↓ i
