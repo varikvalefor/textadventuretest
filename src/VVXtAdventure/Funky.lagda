@@ -1103,7 +1103,6 @@ drop? ("DROP" ∷ c ∷ []) gd = just $ maybe pilno srera gd'
     where
     m = "I can pack what you might lack.  Get out \
         \my way, punk, lest you get the smack."
-  gd' : Maybe GameData
   gd' = Data.Maybe.map (proj₁ ∘ dropPawn gd pl) namcu?
     where
     pl = GameData.player' gd
