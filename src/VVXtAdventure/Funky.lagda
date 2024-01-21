@@ -1087,6 +1087,35 @@ hitme? ("HIT" ∷ "ME!" ∷ []) g = just $ "BOOM!" , record g {
 hitme? _ _ = nothing
 \end{code}
 
+\section{la'oi .\F{drop?}.}
+ni'o ro da zo'u ga jonai la'oi .\AgdaInductiveConstructor{nothing}.\ du ko'a goi la'o zoi.\ \F{drop?}\ \B{gd} \B s\ .zoi.\ gi\ldots
+\begin{itemize}
+	\item ga jonai ga je djuno pe'a ru'e tu'a la'oi .\B{s}.\ mabla gi ko'e me'oi .\AgdaInductiveConstructor{just}.\ li re lo se skuxai la'oi .\B{gd}.\ gi
+	\item ga je djuno pe'a ru'e lo du'u tu'a la'oi .\B{s}.\ .indika lo du'u djica fo'a goi lo nu muvgau da lo kumfa poi ke'a se zvati lo kelci ke xarpre ja co'e ku'o lo me'oi .inventory.\ be ko'e gi ko'a me'oi .\AgdaInductiveConstructor{just}.\ lo .orsi be li re bei zo'e poi tu'a ke'a .indika lo du'u muvgau da ku'o lo co'e ja jalge be fo'a
+\end{itemize}
+
+\begin{code}
+drop? : Com
+drop? ("DROP" ∷ c ∷ []) gd = just $ maybe pilno srera gd'
+  where
+  pilno = λ x → "You free an inventory space." , x
+  srera = m , gd
+    where
+    m = "I can pack what you might lack.  Get out \
+        \my way, punk, lest you get the smack."
+  gd' : Maybe GameData
+  gd' = Data.Maybe.map (proj₁ ∘ dropPawn gd pl) namcu?
+    where
+    pl = GameData.player' gd
+    namcu? = Data.List.head $ map proj₁ $ Data.List.filter du inv
+      where
+      du = _≟_ c ∘ Item.cname ∘ proj₂
+      inv = indice $ Character.inventory $ GameData.player gd
+        where
+        indice = Data.List.zip $ allFin _
+drop? _ _ = nothing
+\end{code}
+
 \chapter{le zmiku}
 ni'o la'au le zmiku li'u vasru le velcki be le ctaipe be le smimlu be la'o zoi.\ \AgdaRecord{GameData} \Sym → \F{Maybe} \OpF \$ \F{String} \OpF × \AgdaRecord{GameData}\ .zoi.\ be'o be'o poi tu'a ke'a na se sarcu lo nu midnoi fi lo kelci
 
