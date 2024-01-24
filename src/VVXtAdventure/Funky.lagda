@@ -740,9 +740,7 @@ ni'o ga jonai la'oi .\AgdaInductiveConstructor{nothing}.\ du ko'a goi la'o zoi.\
 \begin{code}
 sayless? : List String → GameData → COut
 sayless? [] = just ∘ _,_ "The silent treatment won't work here."
-sayless? ("" ∷ "" ∷ "" ∷ "" ∷ []) = just ∘ _,_ m
-  where
-  m = "Man, what the fuck?"
+sayless? ("" ∷ "" ∷ "" ∷ "" ∷ []) = just ∘ _,_ "Man, what the fuck?"
 sayless? _ _ = nothing
 \end{code}
 
