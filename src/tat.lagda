@@ -49,6 +49,14 @@ import Agda.Builtin.IO as ABIO
 import Agda.Builtin.Unit as ABU
 
 open import IO
+  using (
+    putStrLn;
+    getLine;
+    _<$>_;
+    Main;
+    run;
+    IO
+  )
   renaming (
     _>>_ to _>>ᵢₒ_;
     _>>=_ to _>>=ᵢₒ_
