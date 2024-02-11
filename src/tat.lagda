@@ -77,6 +77,9 @@ open import Data.List
     _∷_;
     []
   )
+  renaming (
+    map to mapₗ
+  )
 open import Data.Maybe
   using (
     fromMaybe;
@@ -153,7 +156,11 @@ main = run $ IO.lift nurtcati >>ᵢₒ lupe initialD
     interact = λ q → prompt >>ᵢₒ ree >>=ᵢₒ crock q
       where
       prompt = putStrLn "What do you do?"
-      ree = words ∘ map toUpper <$> getLine
+      ree = words ∘ maps toUpper <$> getLine
+        where
+        maps = map ⦃ liliString ⦄ ⦃ liliString ⦄
+          where
+          liliString = Truthbrary.Record.LLC.liliString
       crock : GameData → List String → IO ⊤
       crock gd s = proj₂ $ chews np $ ("" , gd) , mis naj gd
         where
@@ -166,7 +173,7 @@ main = run $ IO.lift nurtcati >>ᵢₒ lupe initialD
         chews ((nothing , _) ∷ xs) = chews xs
         chews ((just b , f) ∷ _) _ = b , f b
         np : List $ COut × (String × GameData → IO ⊤)
-        np = map (λ f → f s gd , uncurry mis) std
+        np = mapₗ (λ f → f s gd , uncurry mis) std
           where
           std = sazycimde ++ gasnu
             where

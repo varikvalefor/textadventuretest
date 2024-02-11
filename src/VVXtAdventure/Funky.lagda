@@ -126,6 +126,7 @@ open import Data.List
     []
   )
   renaming (
+    map to mapₗ;
     take to _↑_;
     drop to _↓_;
     lookup to _!_;
@@ -689,7 +690,7 @@ ni'o ga jonai la'oi .\AgdaInductiveConstructor{nothing}.\ du ko'e goi la'o zoi.\
 invent? : Com
 invent? ("LIST" ∷ "INVENTORY" ∷ []) g = just $ desks , g
   where
-  desks = concat $ intersperse "\n\n" $ map desk items
+  desks = concat $ intersperse "\n\n" $ mapₗ desk items
     where
     items = Character.inventory $ GameData.player g
     desk = λ a → Item.cname a ++ ": " ++ Item.hlDescr a
@@ -709,7 +710,7 @@ kumski? m g = if mapti (just $ le'i-velski , g) nothing
     where
     kumfa = GameData.rooms g ! Character.room (GameData.player g)
     concatₛ = Data.String.concat
-    le'i-lerpinsle = jaiv ∷ map velski (Room.items kumfa)
+    le'i-lerpinsle = jaiv ∷ mapₗ velski (Room.items kumfa)
       where
       velski : Item → String
       velski z with filterₗ methch $ Item.rmDescr z
@@ -821,7 +822,7 @@ travel? (x₁ ∷ xs₁) = if realShit (travel' xs₁) $ const nothing
         where
         m = "Did you take your pills this morning?  \
             \I don't think that that room exists."
-      ... | p@(_ ∷ _) = inj₂ $ map proj₁ $ filterₗ tr p
+      ... | p@(_ ∷ _) = inj₂ $ mapₗ proj₁ $ filterₗ tr p
         where
         tr = flip any? (Room.travis cur) ∘ _≟_ ∘ Room.cname ∘ proj₂
 \end{code}
