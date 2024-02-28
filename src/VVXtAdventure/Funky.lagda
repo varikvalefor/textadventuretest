@@ -514,7 +514,7 @@ smashGeneric q k x j = q' , kuslendus , xindus , itemstedus
              → (n : Fin $ length x)
              → just (x ! n) ≡ ⊃ (toℕ n ↓ x)
       xedrop (_ ∷ _) zero = refl
-      xedrop (x ∷ xs) (suc n) = xedrop xs n
+      xedrop (_ ∷ xs) (suc n) = xedrop xs n
       teikapdus : ∀ {a} → {A : Set a}
                 → (x : List A)
                 → (n : Fin $ length x)
