@@ -555,8 +555,8 @@ smashGeneric q k x j = q' , kuslendus , xindus , itemstedus
       where
       c = Room.cname
       _¨_ = Data.List.map
-      k₁ = toℕ k ↑ rooms
-      k₃ = suc (toℕ k) ↓ rooms
+      k₁ = _↑ rooms $ toℕ k
+      k₃ = _↓ rooms $ suc $ toℕ k
       k' = mink k kuslendus
       -- | ni'o pilno le re broda cei me'oi .apostrophe. ki'u
       -- le su'u pilno le pa broda tu'a la'o zoi. k' .zoi.
