@@ -114,6 +114,7 @@ open import Data.Unit.Polymorphic
   )
 open import Truthbrary.Record.LLC
   using (
+    liliString;
     _++_;
     map
   )
@@ -159,8 +160,6 @@ main = run $ IO.lift nurtcati >>ᵢₒ lupe initialD
       ree = words ∘ maps toUpper <$> getLine
         where
         maps = map ⦃ liliString ⦄ ⦃ liliString ⦄
-          where
-          liliString = Truthbrary.Record.LLC.liliString
       crock : GameData → List String → IO ⊤
       crock gd s = proj₂ $ chews np $ ("" , gd) , mis naj gd
         where
